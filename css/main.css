@@ -63,11 +63,10 @@ background-image: url(../images/hero1.jpg);
 
 @media only screen and (max-width: 500px) {
 .description { padding: 0px 0px; padding-top: 70px; }
-/* .description img{ height: auto; width: auto; max-width: 400px; max-height: 400px; display: block; margin-left: auto; margin-right: auto; padding: 0px; } */
-.description img{ margin-left: auto; margin-right: auto; display: block; height: auto; width: auto; max-width: 400px; }
+/* .description img{ height: auto; width: auto; max-width: 400px;
+max-height: 400px; display: block; margin-left: auto; margin-right: auto; padding: 0px; } */
 .description .col-lg-6 { padding-bottom: 50px; }
 }
-
 
 /* ================ WHY? WHAT DRIVES ME ================ */
 .drives { background-color: #DFDCE3 !important; } /* DFDCE3,  4ce6ff, 666 */
