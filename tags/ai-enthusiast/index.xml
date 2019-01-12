@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ai Enthusiast on take a wild guess</title>
+    <link>https://takeawildguess.github.io/pws/tags/ai-enthusiast/</link>
+    <description>Recent content in Ai Enthusiast on take a wild guess</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://takeawildguess.github.io/pws/tags/ai-enthusiast/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About me</title>
+      <link>https://takeawildguess.github.io/pws/about/me/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/me/</guid>
+      <description>I am passionate about AI. In 2015, I got a PhD degree in Energetics at Politecnico di Torino. My work mainly focused on developing a simulation environment for Plug-in Hybrid Electric Vehicles and Hybrid Powertrain Optimal Control. As post-doc researcher at Polito, my current goal is to develop machine learning algorithms for advance vehicle control, exploiting Vehicle-to-Infrastructure data.
+My focus is on the study of energy consumption, CO2 emissions and costs of Plug-in Hybrid Electric vehicles and Full Electric Vehicles.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>take a wild guess</title>
+    <link>https://takeawildguess.github.io/pws/</link>
+    <description>Recent content on take a wild guess</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://takeawildguess.github.io/pws/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Publications</title>
+      <link>https://takeawildguess.github.io/pws/about/about_publications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/about_publications/</guid>
+      <description>Here I list my main publications during my PhD and post-doc research.</description>
+    </item>
+    
+    <item>
+      <title>Project 1</title>
+      <link>https://takeawildguess.github.io/pws/project/project1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/project/project1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Talks</title>
+      <link>https://takeawildguess.github.io/pws/about/about_talks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/about_talks/</guid>
+      <description>Here I list my main talks at the Machine-Learning meetup in Torino, Italy.</description>
+    </item>
+    
+    <item>
+      <title>About me!</title>
+      <link>https://takeawildguess.github.io/pws/about/about_me/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/about_me/</guid>
+      <description>ciao me. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ip</description>
+    </item>
+    
+    <item>
+      <title>Project 2</title>
+      <link>https://takeawildguess.github.io/pws/project/project2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/project/project2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Experience and education</title>
+      <link>https://takeawildguess.github.io/pws/about/about_workeducation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/about_workeducation/</guid>
+      <description>ciao me.</description>
+    </item>
+    
+    <item>
+      <title>Project 3</title>
+      <link>https://takeawildguess.github.io/pws/project/project3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/project/project3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Project 4</title>
+      <link>https://takeawildguess.github.io/pws/project/project4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/project/project4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hello world example for Machine learning</title>
+      <link>https://takeawildguess.github.io/pws/blog/linearregression/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/blog/linearregression/</guid>
+      <description>Multi Linear regression import numpy as np import matplotlib.pyplot as plt %matplotlib inline import pandas as pd  Gradient field The figure compares the gradient (vector field) to the isolines of the J function. The isolines are shown using the contourf command, while the gradient field with quiver command provided by the Matplotlib library.
+w1s = np.linspace(-10, 10, 50+1); w2s = np.linspace(-5, 5, 25+1); w1mg, w2mg = np.meshgrid(w1s, w2s) J = w1mg**2 + w2mg**2  X = np.</description>
+    </item>
+    
+    <item>
+      <title>Full post</title>
+      <link>https://takeawildguess.github.io/pws/blog/fullpost/</link>
+      <pubDate>Mon, 02 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/blog/fullpost/</guid>
+      <description>Ciao, (x) and x_2 and $x_2$ is my var.
+$$ y = x^2 + \frac{x}{x+1} $$ $$ y = x^2 + \frac{x}{x+1} $$
+now some super code
+anima = [xx**2 for xx in range(22) if xx%2] if 3&amp;gt;2: print(anima)  bye</description>
+    </item>
+    
+    <item>
+      <title>Creating a New Theme</title>
+      <link>https://takeawildguess.github.io/pws/blog/creating-a-new-theme/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/blog/creating-a-new-theme/</guid>
+      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
+We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Hugo</title>
+      <link>https://takeawildguess.github.io/pws/blog/hugoisforlovers/</link>
+      <pubDate>Fri, 04 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/blog/hugoisforlovers/</guid>
+      <description>Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
+Save it somewhere specific as we will be using it in the next step.
+More complete instructions are available at installing hugo
+Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
+Follow the following steps:
+ Clone the hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</description>
+    </item>
+    
+    <item>
+      <title>(Hu)go Template Primer</title>
+      <link>https://takeawildguess.github.io/pws/blog/goisforlovers/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/blog/goisforlovers/</guid>
+      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
+This document is a brief primer on using go templates.</description>
+    </item>
+    
+    <item>
+      <title>Migrate from Jekyll</title>
+      <link>https://takeawildguess.github.io/pws/blog/migrate-from-jekyll/</link>
+      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/blog/migrate-from-jekyll/</guid>
+      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
+▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png  should become
+▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
+    </item>
+    
+    <item>
+      <title>About me</title>
+      <link>https://takeawildguess.github.io/pws/about/me/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/me/</guid>
+      <description>I am passionate about AI. In 2015, I got a PhD degree in Energetics at Politecnico di Torino. My work mainly focused on developing a simulation environment for Plug-in Hybrid Electric Vehicles and Hybrid Powertrain Optimal Control. As post-doc researcher at Polito, my current goal is to develop machine learning algorithms for advance vehicle control, exploiting Vehicle-to-Infrastructure data.
+My focus is on the study of energy consumption, CO2 emissions and costs of Plug-in Hybrid Electric vehicles and Full Electric Vehicles.</description>
+    </item>
+    
+    <item>
+      <title>About the TWG project</title>
+      <link>https://takeawildguess.github.io/pws/about/about_twg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/about_twg/</guid>
+      <description>This is my personal website where I will be publishing the main findings and outcomes of some small side-projects that I develop in my spare time. The overall scope of this project is to develop and describe what it could be necessary to create some “smart agents”. As agent, I literally mean someone/something that is capable of performing a task in a particular environment. Being smart entails to achieve the final goal in a remarkable way.</description>
+    </item>
+    
+    <item>
+      <title>Skills</title>
+      <link>https://takeawildguess.github.io/pws/about/about_skills/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/about_skills/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

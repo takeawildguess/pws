@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Abouts on take a wild guess</title>
+    <link>https://takeawildguess.github.io/pws/about/</link>
+    <description>Recent content in Abouts on take a wild guess</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://takeawildguess.github.io/pws/about/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Publications</title>
+      <link>https://takeawildguess.github.io/pws/about/about_publications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/about_publications/</guid>
+      <description>Here I list my main publications during my PhD and post-doc research.</description>
+    </item>
+    
+    <item>
+      <title>Talks</title>
+      <link>https://takeawildguess.github.io/pws/about/about_talks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/about_talks/</guid>
+      <description>Here I list my main talks at the Machine-Learning meetup in Torino, Italy.</description>
+    </item>
+    
+    <item>
+      <title>About me!</title>
+      <link>https://takeawildguess.github.io/pws/about/about_me/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/about_me/</guid>
+      <description>ciao me. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ip</description>
+    </item>
+    
+    <item>
+      <title>Experience and education</title>
+      <link>https://takeawildguess.github.io/pws/about/about_workeducation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/about_workeducation/</guid>
+      <description>ciao me.</description>
+    </item>
+    
+    <item>
+      <title>About me</title>
+      <link>https://takeawildguess.github.io/pws/about/me/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/me/</guid>
+      <description>I am passionate about AI. In 2015, I got a PhD degree in Energetics at Politecnico di Torino. My work mainly focused on developing a simulation environment for Plug-in Hybrid Electric Vehicles and Hybrid Powertrain Optimal Control. As post-doc researcher at Polito, my current goal is to develop machine learning algorithms for advance vehicle control, exploiting Vehicle-to-Infrastructure data.
+My focus is on the study of energy consumption, CO2 emissions and costs of Plug-in Hybrid Electric vehicles and Full Electric Vehicles.</description>
+    </item>
+    
+    <item>
+      <title>About the TWG project</title>
+      <link>https://takeawildguess.github.io/pws/about/about_twg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/about_twg/</guid>
+      <description>This is my personal website where I will be publishing the main findings and outcomes of some small side-projects that I develop in my spare time. The overall scope of this project is to develop and describe what it could be necessary to create some “smart agents”. As agent, I literally mean someone/something that is capable of performing a task in a particular environment. Being smart entails to achieve the final goal in a remarkable way.</description>
+    </item>
+    
+    <item>
+      <title>Skills</title>
+      <link>https://takeawildguess.github.io/pws/about/about_skills/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.github.io/pws/about/about_skills/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

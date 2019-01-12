@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.49" />
+  <title>take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+ <link rel="stylesheet" href="https://takeawildguess.github.io/pws/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.github.io/pws/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+
+  
+  
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  
+
+</head>
+
+  <body>
+    <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.github.io/pws/">
+      <img src="https://takeawildguess.github.io/pws/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="take a wild guess">
+    </a>
+  
+  <a class="navbar-brand" href="/pws/" style="font-size: 16px; "></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.github.io/pws/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.github.io/pws/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.github.io/pws/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.github.io/pws/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.github.io/pws/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.github.io/pws/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.github.io/pws/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.github.io/pws/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.github.io/pws/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.github.io/pws/resume/">Resume</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/project/">Prevision</a>
+            <a class="dropdown-item" href="/project/">Avenew</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/project/">Treecky</a>
+          </div>
+        </li>
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="mailto:mattia.venditti@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/username/"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/username/"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+    <!-- Hero -->
+<header class="myHero" id="hero">
+  <div class="container overlay">
+    <div class="description">
+      <div class="row">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-6">
+          <img src="https://takeawildguess.github.io/pws/images/logo/twgLogo.png" class="img-fluid" alt="take a wild guess">
+        </div>
+        <div class="col-lg-6">
+          <h2 class="text-right">Data is the new oil <br> Machine learning is the new combustion engine</h2>
+          <p class="text-right">A journey to understand what is behind that sentence. This site wants to tackle this challenging trip with you to investigate the main and most successful ideas and concepts in that field and how to apply them to the most interesting applications I am currently working on. Society-wise, I see a lots of opportunities for us to impact in the near future. That&rsquo;s what this website is about.</p>
+        </div>
+        <div class="col-lg-6"></div>
+        <div class="col-lg-6" id="lmbtn">
+          <a href="#why" class="btn btn-primary btn-lg" role="button">Learn more</a>
+        </div>
+        <div class="col-lg-6">
+          <h4 class="text-left">What inspires me and expresses what I would like to develop</h4>
+          
+          <h6 class="text-center" style="color: #4abdacff">Science is what we understand well enough to explain to a computer. Art is everything else we do. - Donald Knuth</h6>
+          
+          
+          <h6 class="text-center" style="color: #F7B733">Intelligence is the ability to adapt to change. - Stephen Hawking</h6>
+          
+          
+          <h6 class="text-center" style="color: #4abdacff">My ideal role would be a baddie in a James Bond film. I think the wheelchair and the computer voice would fit the part. - Stephen Hawking</h6>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+    <section class="" id="why">
+  <div class="drives">
+    <div class="row">
+      <hr style="border: 5px solid #4ABDAC; min-width: 250px; border-radius: 5px; " />
+      <div class="col-lg-12 text-center">
+        <h2>What drives me</h2>
+        <h4>What drives me to run this platform and to embark on this new adventure</h4>
+      </div>
+    </div>
+    <div class="row text-center">
+      
+        <div class="col-md-6 item">
+          <img src="https://takeawildguess.github.io/pws/images/home/understanding.png" alt="__">
+          <h3>Understanding</h3>
+          <p>My passion for understanding dynamics of complex systems and current technology</p>
+        </div>
+      
+        <div class="col-md-6 item">
+          <img src="https://takeawildguess.github.io/pws/images/home/learning.png" alt="__">
+          <h3>Learning</h3>
+          <p>My internal drive to keep learning and growing up by exploring new concepts</p>
+        </div>
+      
+        <div class="col-md-6 item">
+          <img src="https://takeawildguess.github.io/pws/images/home/solution.png" alt="__">
+          <h3>Solutions</h3>
+          <p>My personal belief that a multitude of different, advanced but affordable tools lets us take challenging but tempting real-word problems and convert to society-oriented applications.</p>
+        </div>
+      
+        <div class="col-md-6 item">
+          <img src="https://takeawildguess.github.io/pws/images/home/share.png" alt="__">
+          <h3>Community sharing</h3>
+          <p>I have learnt a lot from a vast community of people that share ideas, algorithms and code solutions everywhere. I would like to give my contribution back to a growing community of passionate developers and innovation-driven entrepreneurs. It will also be a great opportunity for me to improve and deeply understand the topics I care about.</p>
+        </div>
+      
+    </div>
+  </div>
+</section>
+<div class="container"></div>
+
+    <section class="what">
+  <div class="row">
+    <hr style="border: 5px solid #4ABDAC; min-width: 250px; border-radius: 5px; " />
+    <div class="col-lg-12 text-center">
+      <h2>What is it about?</h2>
+      <h4></h4>
+    </div>
+  </div>
+  
+  <div class="landing-wrap">
+    <div class="landing-row">
+      <div class="landing-content">
+        <div class="landing-text col-lg-6">
+          <h2>Mobility</h2>
+          <p>Our entire human race is built on top of transportation, either of people and of freight. But we are facing tough challenges due to air pollution and climate change. We need to keeping innovating to build new vehicle and infrastructure concepts.
+</p>
+        </div>
+        <div class="landing-image col-lg-6">
+          <img src="https://takeawildguess.github.io/pws/images/home/mobility.jpeg" alt="__">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="landing-wrap">
+    <div class="landing-row">
+      <div class="landing-content">
+        <div class="landing-text col-lg-6">
+          <h2>Natural language understanding</h2>
+          <p>Machine are achieving great results in several compelling tasks, even with greater accuracy than the human counterpart. But they are still far away from being able of fully understanding the semantics behind our natural language that we daily speak.
+</p>
+        </div>
+        <div class="landing-image col-lg-6">
+          <img src="https://takeawildguess.github.io/pws/images/home/chatbot.png" alt="__">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="landing-wrap">
+    <div class="landing-row">
+      <div class="landing-content">
+        <div class="landing-text col-lg-6">
+          <h2>Human-machine interaction</h2>
+          <p>We say that machines will take place of currently human-held job positions. But a different point of view could be that machine will take over some tasks that we care less about and we create new ways of communicating to and interacting with.
+</p>
+        </div>
+        <div class="landing-image col-lg-6">
+          <img src="https://takeawildguess.github.io/pws/images/home/human_machine.jpeg" alt="__">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="landing-wrap">
+    <div class="landing-row">
+      <div class="landing-content">
+        <div class="landing-text col-lg-6">
+          <h2>Knowledge extraction</h2>
+          <p>There is huge amount of human-generated content out there. Just think about Wikipedia. One major issue with that content is how it is organized and structured. There is no schema. Structured knowledge is mandatory when deep and extensive analysis are needed to be run at large scale.
+</p>
+        </div>
+        <div class="landing-image col-lg-6">
+          <img src="https://takeawildguess.github.io/pws/images/home/knowledge.jpg" alt="__">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="landing-wrap">
+    <div class="landing-row">
+      <div class="landing-content">
+        <div class="landing-text col-lg-6">
+          <h2>Algorithm development (machine learning)</h2>
+          <p>How can a machine perform tough tasks with great accuracy? It employs an algorithm (a bunch of operations over some data). Where does this algorithm come from? Can we write down high-complexity and nested algorithms? Of course we can, but what about a machine that can figure it out by itself? A machine that can learn how to write that algorithm to become great at a specific task. Then we only need to give the general instructions to the machine to learn, we need to write the algorithm that helps the machine to learn its own algorithm to perform one or more tasks. Amazing, isn&#39;t it?
+</p>
+        </div>
+        <div class="landing-image col-lg-6">
+          <img src="https://takeawildguess.github.io/pws/images/home/algorithm.jpg" alt="__">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="landing-wrap">
+    <div class="landing-row">
+      <div class="landing-content">
+        <div class="landing-text col-lg-6">
+          <h2>Coding</h2>
+          <p>Two steps are required to develop everything in this site. Concept development and coding. Coding is about defining the set of instructions we want to give to the machine with a machine/readable language, i.e., a programming language. When we code, we should always have in mind that first we want to achieve the final target and then we want to do it in an efficient way. The machine will execute your instructions, but it will require time and space. We do not want to wait for the machine to translate your sentence to English in one minute, we do not want our laptop or smartphone to freeze when we search for the closest restaurant. Whenever there is a better way to accomplish one task, implement that one.
+</p>
+        </div>
+        <div class="landing-image col-lg-6">
+          <img src="https://takeawildguess.github.io/pws/images/home/coding.png" alt="__">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="landing-wrap">
+    <div class="landing-row">
+      <div class="landing-content">
+        <div class="landing-text col-lg-6">
+          <h2>Data visualization</h2>
+          <p>Data is the new oil. It means there is some huge potential inside that we might wish to extract. But data is impossible to digest for humans, even when it is stored in a human-readable format. We want to see through the data, capture insights that could help us take the right decision. We want to transform our data and visualize it.
+</p>
+        </div>
+        <div class="landing-image col-lg-6">
+          <img src="https://takeawildguess.github.io/pws/images/home/data_viz.jpeg" alt="__">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+</section>
+
+
+    
+
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="mailto:mattia.venditti@gmail.com"><i class="fa fa-envelope-o"></i></a><a href="https://github.com/username/"><i class="fa fa-github"></i></a><a href="https://twitter.com/username/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.github.io/pws/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.github.io/pws/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>
