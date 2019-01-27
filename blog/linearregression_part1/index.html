@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.49" />
+  <title>Hello world example for Machine learning - part 1 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+
+  
+  
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Hello world example for Machine learning - part 1">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/linearregression_part1/" style="font-size: 16px; ">Hello world</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/project/">Prevision</a>
+            <a class="dropdown-item" href="/project/">Avenew</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/project/">Treecky</a>
+          </div>
+        </li>
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="mailto:mattia.venditti@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/username/"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/username/"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/images/blog/linearRegression/hello.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Hello world example for Machine learning - part 1</h1>
+          <h6 class="card-text text-center">January 25, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 9 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/linear-regression"><kbd class="item-tag">linear regression</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">Python</kbd></a> <a href="https://takeawildguess.net/tags/numpy"><kbd class="item-tag">Numpy</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-problem-formulation">1. Problem formulation</h2>
+
+<p>We want to create a simplified representation (model) of real/world from available data.
+The model architecture can be seen as a box that takes some quantities as input, performs some internal computation and returns some other quantities as output. The inputs are also referred to as <em>features</em> or <em>predictors</em> of the problem to solve, since they contain valuable information that the model should exploit to come up with the correct outcome.
+Two major problems are present, according to the output format:
+1.  <strong>Classification</strong>: the output is a discrete variable that can assume integer values within a pre-defined limited set, where the set dimension is the number of classes. If the number of classes is two, it is a binary classification problem, where the outcome can belong to either one class or the other one. One example is <em>spam detection</em>, where the outcome can belong to either the “spam” class or the “ham”. If more than two classes are present, it is a multinomial (or multi-class) classification problem. Some examples are <em>object recognition</em>, where the outcome gives the probability that the input (an image) contains a specific object which the model has been trained for, <em>topic identification</em>, where the model selects the topic of the input text within a defined list.
+2.  <strong>Regression</strong>: the output is a continuous variable that can assume real values. Some examples are <em>house price prediction</em>, <em>electricity price estimation</em> and <em>Flight delay forecast</em>.</p>
+
+<h2 id="2-the-hello-world-case-for-machine-learning">2. The hello-world case for Machine Learning</h2>
+
+<p>The problem we are going to study and analyze in this post is the very introductive example of the Machine Learning algorithm field. I would say it is the <em>Hello world</em> of ML. I chose to get started talking about ML with this very easy problem so the it would be easier for you to focus on the ML implementation and analysis.</p>
+
+<p>We (in this contest <em>we</em> refers to the human designers) need to define the architecture and give some boundaries to it (<strong>model structure</strong>, see Fig. 1). The model structure reduces the searching space to the machine. The machine is going to adopt the degrees of freedom we assign. It will then choose the <strong>optimal</strong> configuration within the assigned boundaries.
+We are both meta-designers and teachers. The machine can only generate some instances that belong to the family structure we have defined. If our design concept is internally flawless and robust, the machine will always be finding something useful.
+We are also teachers. We say the machine how well/bad it is performing within the assigned task. That’s why we need a <strong>loss function</strong> (see Fig. 1). The machine can use that function at any time to measure its performance. Its specific goal is to minimize that loss function as much as possible by changing its parameters, i.e., what we set as degrees of freedom to the machine. Saying that the machine aims at improving its score or performance is equivalent to saying it aims at minimizing the loss function.
+How can the machine change its parameters to minimize the loss function? That is the <strong>learning algorithm</strong> that we need to state to guide the learning process (see Fig. 1). In other words, the learning recipe guides the machine to change to improve its score.</p>
+
+<p>Figure 1 shows the scheme of the main points of a Machine-learning framework. The top chart illustrates the interaction between data collected from the real-world, the designer and the machine. The designer takes care about three tasks: model structure, score (loss function) and the learning recipe.
+The <em>machine</em> uses the tools provided by the designer to improve its performance to represent the real-word scenario.</p>
+
+<h2 id="3-loss-function">3. Loss function</h2>
+
+<p>We present three ways to define the same loss function:
+1.  Energy-based definition, where the energy equilibrium of a mechanical system that consists of several mass-concentrated points are connected to a rigid bar by means of a spring.
+2.  Maximum likelihood estimation, where a statistical approach is used.
+3.  Least-squared error, where the residual definition is adopted.</p>
+
+<h3 id="3-1-energy-based-loss-function">3.1 Energy-based loss function</h3>
+
+<p>For the sake of visualization, we use a 2D plot to show the correlation of a 1D input, x, and the continuous output, y. Let assume the model output shape (a line) represents a bar and each data point is a mass connected to the bar via a vertical spring. The energy stored in the spring is proportional to the spring stiffness and the squared displacement:</p>
+
+<p>$ E_j = \frac{1}{2}\cdot k_j\cdot \delta x_j^2 $</p>
+
+<p>where the displacement is the vertical distance between the mass (data point) and its projection to the bar (see Fig.2).</p>
+
+<p>Figure 2 – Energy-based loss function scheme.</p>
+
+<p>The overall energy content of the system is the sum of the contribution of each spring. The system tends to reach the equilibrium by minimizing its energy content. The equilibrium is identified by the least energy possible configuration. If every point is equally relevant, the stiffness value is constant for every spring (for simplicity we can set $ k_j = 1 $ for each $ j $). Otherwise we can force the system either to be extremely precise to represent one point by increasing its associated spring’s stiffness or to ignore one point by reducing the stiffness down to 0.</p>
+
+<h3 id="3-2-mle-based-loss-function-and-lsme">3.2 MLE-based loss function and LSME</h3>
+
+<p>The correlation between the output $ y_j $ and the input $ x_j $ can be formulated as follows:</p>
+
+<p>$ y_j = \theta^T \cdot x_j + \epsilon_j $</p>
+
+<p>where $ \epsilon_j $ is the error related to point $P_j$ that includes either random noise or effects that are not captured by the selected predictors in the <em>x</em> term. If the error values are independently and identically distributed with a normal distribution ($ \epsilon_j \mathtt{\sim} N(0, \sigma^2) $), we can state that the density distribution is as follows:</p>
+
+<p>$ p(\epsilon_j) = \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{\epsilon_j^2}{2\cdot\sigma^2}} $</p>
+
+<p>Figure 3 – Likelihood-based loss function scheme.</p>
+
+<p>By combining the latter equation with the error-based linear regression expression (1), the output density given inputs and parameter estimation for point $P_j$ is:</p>
+
+<p>$ p(y_j | x_j; \theta) = \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}} $</p>
+
+<p>The probability of the dataset is given by the combined contributions of every data point. Since inputs and outputs are fixed, we can select the best values of parameter vector $\theta$ that <strong>maximize the likelihood</strong> of the dataset:</p>
+
+<p>$ max<em>{\theta} L(\theta) = max</em>{\theta} p(\hat{y} | \hat{x}; \theta) $</p>
+
+<p>where $ \hat{x} \in R^{m, n}$ and $ \hat{y} \in R^{m, 1}$ are the matrix and the vector containing the dataset inputs and outputs, <em>m</em> is the number of data points, <em>n</em> is the dimension of the predictors. Since the data points are independent each other, the likelihood function can be re-written as:</p>
+
+<p>$ L(\theta) = \Pi_{j=1}^{m} p(y_j | x_j; \theta) $</p>
+
+<p>$ L(\theta) = \Pi_{j=1}^{m} \frac{1}{\sqrt(2\pi)\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}} $</p>
+
+<p>Maximizing <em>L</em> is equivalent to maximizing $ l(\theta) = log(L(\theta)) $ due to the strictly increasing behavior of the <em>log</em> function.</p>
+
+<p>$ l(\theta) = log \Pi_{j=1}^{m} \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x<em>j)^2}{2\cdot\sigma^2}} = \sum</em>{j=1}^{m} \log \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x<em>j)^2}{2\cdot\sigma^2}} = m\cdot\log\frac{1}{\sqrt{2\pi}\cdot \sigma} - \frac{1}{2\cdot\sigma^2}\sum</em>{j=1}^{m} (y_j-\theta^T \cdot x_j)^2 $</p>
+
+<p>Maximizing <em>l</em> is equivalent to minimizing the loss function obtained with the least-squared error:</p>
+
+<p>$ LSE = \frac{1}{2}\sum_{j=1}^{m} (y_j-\theta^T \cdot x_j)^2$</p>
+
+<p>Under the previous probabilistic assumptions on the data, least-squared error minimization corresponds to finding the maximum likelihood estimate of $\theta$.</p>
+
+<h3 id="3-3-least-squared-error">3.3 Least squared error</h3>
+
+<p>This method aims at finding the curve that represent a set of points at best by minimizing the sum of the squares of the residuals, where the residual is the difference between the data point and the corresponding projection on the identified curve. The error is squared to obtain a continuous differentiable loss function. This property however could lead to undesirable fitting results due to the presence of outliers (points that are far away from the major concentration of data points). The residual is calculated using the vertical projection of the data point to the curve, in order to simplify the formulation.</p>
+
+<h2 id="4-gradient-descent-algorithm">4. Gradient descent algorithm</h2>
+
+<p>Gradient descent algorithm is used to optimize the loss function, i.e., to find the parameter values that minimize it. From calculus theory, we exploit that the minimum of a continuous function can be identified by solving the following problem $\nabla_\theta J = 0$. In other words, we need to find the parameter values $\theta$ that let the gradient of the function J to be 0. The gradient is the vector perpendicular to the isolines of the surface described by J. The gradient is the 0-vector at every minimum, maximum or saddle point of the surface. Let us analyse the following example:</p>
+
+<p>$ J = \omega_1^2 + \omega_2^2 + 5$</p>
+
+<p>This is a paraboloid in a 3D space, or an infinite <em>collection</em> of circles centred in the origin and whose radius is $ \sqrt{J-5} $. That implies that the smallest circle has 0 radius for $J=5$.
+Every circle is obtained by slicing the 3D space with a horizontal plane $J = k$, where <em>k</em> is the height of the plane. The gradient of that function is a vector where every element is the variation of the function with respect to the corresponding parameter, as follows:</p>
+
+<p>$ \nabla_{\theta} J = (\frac{\partial J}{\partial \omega_1}, \frac{\partial J}{\partial \omega_2}) $.</p>
+
+<p>In our example, $ \nabla J = 2\cdot(\omega_1, \omega_2) $.</p>
+
+<p>We draw this vector field in conjunction with the isolines. It is 0 if and only if $ (\omega_1, \omega_2) = (0, 0) $. Since any point in the neighbouring area of $(0, 0)$ leads to higher J values, we conclude it is a minimum. Since machine-learning problems cannot be analytically solved, we need to iterate to gradually get closer to the minimum point by changing the parameters.</p>
+
+<p>The <em>gradient descent algorithm</em> changes the parameter vector values at each epoch, k (or iteration), using the gradient direction and magnitude. The actual change in $\theta$ is controlled also by the learning rate $\alpha$, as follows:</p>
+
+<p>$ \theta^{k+1} = \theta^k - \alpha \nabla_{\theta} J(\theta)$</p>
+
+<p>The parameter update rule can be expliticily written for each element as follows:</p>
+
+<p>$ \theta_j^{k+1} = \theta_j^k - \alpha \frac{\partial J(\theta)}{\partial \theta_j} $</p>
+
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+</code></pre>
+
+<h3 id="4-1-gradient-field-of-a-2d-surface-function">4.1 Gradient field of a 2D surface function</h3>
+
+<p>The figure compares the gradient (vector field) to the isolines of the J function. In any point of the chart, the color gives the intensity of the J function, so that the colder it is, the lower the J value is (see the colorbar in the right-hand side of the chart).
+The arrow in the same point instead shows the direction of the gradient on which the function increases. The arrow length is related to the J increment, which means a longer arrow indicates a steeper increment of the J surface.</p>
+
+<p>The isolines are shown using the <em>contourf</em> command, while the gradient field with <em>quiver</em> command provided by the <strong>Matplotlib</strong> library.</p>
+
+<pre><code class="language-python">w1s = np.linspace(-10, 10, 50+1)
+w2s = np.linspace(-5, 5, 25+1)
+w1mg, w2mg = np.meshgrid(w1s, w2s)
+J = w1mg**2 + w2mg**2 + 5
+
+plt.figure(figsize=(15, 6))
+plt.contourf(w1mg, w2mg, J, alpha=0.75)
+plt.colorbar()
+qq = plt.quiver(w1s, w2s, 2*w1mg, 2*w2mg)
+plt.xlabel(&quot;$\omega_1$&quot;)
+plt.ylabel(&quot;$\omega_2$&quot;)
+plt.axis('equal')
+plt.show()
+</code></pre>
+
+<p><img src="/blog/images/output_8_0.png" alt="png" /></p>
+
+<pre><code class="language-python">
+</code></pre>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p><a class="" href="/blog/linearregression/" style="color: #4ABDAC; font-size: 18px; "> &laquo; Hello world example for Machine learning</a>
+          |
+          <a class="" href="/project/project4/" style="color: #4ABDAC; font-size: 18px; ">Project 4 &raquo;</a></p>
+          </span>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="mailto:mattia.venditti@gmail.com"><i class="fa fa-envelope-o"></i></a><a href="https://github.com/username/"><i class="fa fa-github"></i></a><a href="https://twitter.com/username/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

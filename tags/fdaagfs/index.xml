@@ -2,51 +2,51 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fdaagfs on take a wild guess</title>
-    <link>https://takeawildguess.github.io/pws/tags/fdaagfs/</link>
+    <link>https://takeawildguess.net/tags/fdaagfs/</link>
     <description>Recent content in Fdaagfs on take a wild guess</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://takeawildguess.github.io/pws/tags/fdaagfs/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://takeawildguess.net/tags/fdaagfs/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hello world example for Machine learning</title>
-      <link>https://takeawildguess.github.io/pws/blog/linearregression/</link>
+      <link>https://takeawildguess.net/blog/linearregression/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.github.io/pws/blog/linearregression/</guid>
+      <guid>https://takeawildguess.net/blog/linearregression/</guid>
       <description>Multi Linear regression import numpy as np import matplotlib.pyplot as plt %matplotlib inline import pandas as pd  Gradient field The figure compares the gradient (vector field) to the isolines of the J function. The isolines are shown using the contourf command, while the gradient field with quiver command provided by the Matplotlib library.
 w1s = np.linspace(-10, 10, 50+1); w2s = np.linspace(-5, 5, 25+1); w1mg, w2mg = np.meshgrid(w1s, w2s) J = w1mg**2 + w2mg**2  X = np.</description>
     </item>
     
     <item>
       <title>Hello world example for Machine learning</title>
-      <link>https://takeawildguess.github.io/pws/blog/linearregression/</link>
+      <link>https://takeawildguess.net/blog/linearregression/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.github.io/pws/blog/linearregression/</guid>
+      <guid>https://takeawildguess.net/blog/linearregression/</guid>
       <description>Multi Linear regression import numpy as np import matplotlib.pyplot as plt %matplotlib inline import pandas as pd  Gradient field The figure compares the gradient (vector field) to the isolines of the J function. The isolines are shown using the contourf command, while the gradient field with quiver command provided by the Matplotlib library.
 w1s = np.linspace(-10, 10, 50+1); w2s = np.linspace(-5, 5, 25+1); w1mg, w2mg = np.meshgrid(w1s, w2s) J = w1mg**2 + w2mg**2  X = np.</description>
     </item>
     
     <item>
       <title>Hello world example for Machine learning</title>
-      <link>https://takeawildguess.github.io/pws/blog/linearregression/</link>
+      <link>https://takeawildguess.net/blog/linearregression/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.github.io/pws/blog/linearregression/</guid>
+      <guid>https://takeawildguess.net/blog/linearregression/</guid>
       <description>Multi Linear regression import numpy as np import matplotlib.pyplot as plt %matplotlib inline import pandas as pd  Gradient field The figure compares the gradient (vector field) to the isolines of the J function. The isolines are shown using the contourf command, while the gradient field with quiver command provided by the Matplotlib library.
 w1s = np.linspace(-10, 10, 50+1); w2s = np.linspace(-5, 5, 25+1); w1mg, w2mg = np.meshgrid(w1s, w2s) J = w1mg**2 + w2mg**2  X = np.</description>
     </item>
     
     <item>
       <title>Hello world example for Machine learning</title>
-      <link>https://takeawildguess.github.io/pws/blog/linearregression/</link>
+      <link>https://takeawildguess.net/blog/linearregression/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.github.io/pws/blog/linearregression/</guid>
+      <guid>https://takeawildguess.net/blog/linearregression/</guid>
       <description>Multi Linear regression import numpy as np import matplotlib.pyplot as plt %matplotlib inline import pandas as pd  Gradient field The figure compares the gradient (vector field) to the isolines of the J function. The isolines are shown using the contourf command, while the gradient field with quiver command provided by the Matplotlib library.
 w1s = np.linspace(-10, 10, 50+1); w2s = np.linspace(-5, 5, 25+1); w1mg, w2mg = np.meshgrid(w1s, w2s) J = w1mg**2 + w2mg**2  X = np.</description>
     </item>

@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>take a wild guess</title>
-    <link>https://takeawildguess.github.io/pws/resume/</link>
+    <link>https://takeawildguess.net/resume/</link>
     <description>Recent content on take a wild guess</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="https://takeawildguess.github.io/pws/resume/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://takeawildguess.net/resume/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

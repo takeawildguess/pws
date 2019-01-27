@@ -3,239 +3,262 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/about/about_publications/</loc>
+    <loc>https://takeawildguess.net/about/about_publications/</loc>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/project/project1/</loc>
+    <loc>https://takeawildguess.net/project/project1/</loc>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/about/about_talks/</loc>
+    <loc>https://takeawildguess.net/about/about_talks/</loc>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/about/about_me/</loc>
+    <loc>https://takeawildguess.net/about/about_me/</loc>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/project/project2/</loc>
+    <loc>https://takeawildguess.net/project/project2/</loc>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/about/about_workeducation/</loc>
+    <loc>https://takeawildguess.net/about/about_workeducation/</loc>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/project/project3/</loc>
+    <loc>https://takeawildguess.net/project/project3/</loc>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/project/project4/</loc>
+    <loc>https://takeawildguess.net/project/project4/</loc>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/blog/linearregression/</loc>
+    <loc>https://takeawildguess.net/blog/linearregression_part1/</loc>
+    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/linearregression/</loc>
     <lastmod>2018-12-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/blog/fullpost/</loc>
+    <loc>https://takeawildguess.net/blog/fullpost/</loc>
     <lastmod>2018-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/blog/creating-a-new-theme/</loc>
+    <loc>https://takeawildguess.net/blog/creating-a-new-theme/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/blog/hugoisforlovers/</loc>
+    <loc>https://takeawildguess.net/blog/hugoisforlovers/</loc>
     <lastmod>2014-04-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/blog/goisforlovers/</loc>
+    <loc>https://takeawildguess.net/blog/goisforlovers/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/blog/migrate-from-jekyll/</loc>
+    <loc>https://takeawildguess.net/blog/migrate-from-jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/resume/</loc>
+    <loc>https://takeawildguess.net/resume/</loc>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/about/me/</loc>
+    <loc>https://takeawildguess.net/about/me/</loc>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/about/about_twg/</loc>
+    <loc>https://takeawildguess.net/about/about_twg/</loc>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/about/</loc>
+    <loc>https://takeawildguess.net/about/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/ai-enthusiast/</loc>
+    <loc>https://takeawildguess.net/tags/ai-enthusiast/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/algorithm/</loc>
+    <loc>https://takeawildguess.net/tags/algorithm/</loc>
     <lastmod>2018-12-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/blogger/</loc>
+    <loc>https://takeawildguess.net/tags/blogger/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/blog/</loc>
-    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
+    <loc>https://takeawildguess.net/blog/</loc>
+    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/bootstrap/</loc>
+    <loc>https://takeawildguess.net/tags/bootstrap/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/categories/</loc>
+    <loc>https://takeawildguess.net/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/css/</loc>
+    <loc>https://takeawildguess.net/tags/css/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/development/</loc>
+    <loc>https://takeawildguess.net/tags/development/</loc>
     <lastmod>2014-04-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/development-engineer/</loc>
+    <loc>https://takeawildguess.net/tags/development-engineer/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/fdaagfs/</loc>
+    <loc>https://takeawildguess.net/tags/fdaagfs/</loc>
     <lastmod>2018-12-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/go/</loc>
+    <loc>https://takeawildguess.net/tags/go/</loc>
     <lastmod>2018-12-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/golang/</loc>
+    <loc>https://takeawildguess.net/tags/golang/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/highlight-js/</loc>
+    <loc>https://takeawildguess.net/tags/highlight-js/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/html/</loc>
+    <loc>https://takeawildguess.net/tags/html/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/hugo/</loc>
+    <loc>https://takeawildguess.net/tags/hugo/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/jekyll/</loc>
+    <loc>https://takeawildguess.net/tags/jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/js/</loc>
+    <loc>https://takeawildguess.net/tags/js/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/meetup-speaker/</loc>
+    <loc>https://takeawildguess.net/tags/linear-regression/</loc>
+    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/project/</loc>
+    <loc>https://takeawildguess.net/tags/machine-learning/</loc>
+    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/python/</loc>
-    <lastmod>2018-04-02T00:00:00+00:00</lastmod>
+    <loc>https://takeawildguess.net/tags/meetup-speaker/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/responsive/</loc>
+    <loc>https://takeawildguess.net/tags/numpy/</loc>
+    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/about/about_skills/</loc>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.github.io/pws/tags/software-developer/</loc>
+    <loc>https://takeawildguess.net/project/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/static-site-generator/</loc>
+    <loc>https://takeawildguess.net/tags/python/</loc>
+    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/responsive/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/about/about_skills/</loc>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/software-developer/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/static-site-generator/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/syntax-highlighting/</loc>
+    <loc>https://takeawildguess.net/tags/syntax-highlighting/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/</loc>
+    <loc>https://takeawildguess.net/tags/</loc>
     <lastmod>2018-12-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/template/</loc>
+    <loc>https://takeawildguess.net/tags/template/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/tags/themes/</loc>
+    <loc>https://takeawildguess.net/tags/themes/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.github.io/pws/</loc>
-    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
+    <loc>https://takeawildguess.net/</loc>
+    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>

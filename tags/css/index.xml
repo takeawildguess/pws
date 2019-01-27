@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Css on take a wild guess</title>
-    <link>https://takeawildguess.github.io/pws/tags/css/</link>
+    <link>https://takeawildguess.net/tags/css/</link>
     <description>Recent content in Css on take a wild guess</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="https://takeawildguess.github.io/pws/tags/css/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://takeawildguess.net/tags/css/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Project 2</title>
-      <link>https://takeawildguess.github.io/pws/project/project2/</link>
+      <link>https://takeawildguess.net/project/project2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.github.io/pws/project/project2/</guid>
+      <guid>https://takeawildguess.net/project/project2/</guid>
       <description></description>
     </item>
     
