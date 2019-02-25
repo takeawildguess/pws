@@ -29,15 +29,6 @@
     </item>
     
     <item>
-      <title>About me!</title>
-      <link>https://takeawildguess.net/about/about_me/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/about/about_me/</guid>
-      <description>ciao me. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ip</description>
-    </item>
-    
-    <item>
       <title>Experience and education</title>
       <link>https://takeawildguess.net/about/about_workeducation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -52,8 +43,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/about/me/</guid>
-      <description>I am passionate about AI. In 2015, I got a PhD degree in Energetics at Politecnico di Torino. My work mainly focused on developing a simulation environment for Plug-in Hybrid Electric Vehicles and Hybrid Powertrain Optimal Control. As post-doc researcher at Polito, my current goal is to develop machine learning algorithms for advance vehicle control, exploiting Vehicle-to-Infrastructure data.
-My focus is on the study of energy consumption, CO2 emissions and costs of Plug-in Hybrid Electric vehicles and Full Electric Vehicles.</description>
+      <description>I am passionate about AI and I have been developing some applications that could benefit from this new technique.
+One of the first areas I started investigating the AI potential was my PhD research field. My work mainly focused on developing a simulation environment for Plug-in Hybrid Electric Vehicles and Hybrid Powertrain Optimal Control. After completing it in 2015, my goal as post-doc researcher was to develop machine learning algorithms for advance vehicle control, exploiting Vehicle-to-Infrastructure data.</description>
     </item>
     
     <item>
@@ -62,7 +53,7 @@ My focus is on the study of energy consumption, CO2 emissions and costs of Plug-
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/about/about_twg/</guid>
-      <description>This is my personal website where I will be publishing the main findings and outcomes of some small side-projects that I develop in my spare time. The overall scope of this project is to develop and describe what it could be necessary to create some “smart agents”. As agent, I literally mean someone/something that is capable of performing a task in a particular environment. Being smart entails to achieve the final goal in a remarkable way.</description>
+      <description>This is my personal website where I will be publishing the main findings and outcomes of some research side-projects that I develop in my spare time. The overall scope of this project is to develop and describe what could be necessary to create some “smart agents”. As an agent, I literally mean someone/something that is capable of performing a task in a particular environment. Being smart entails achieving the final goal in a remarkable way.</description>
     </item>
     
     <item>

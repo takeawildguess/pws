@@ -15,10 +15,6 @@
   </url>
   
   <url>
-    <loc>https://takeawildguess.net/about/about_me/</loc>
-  </url>
-  
-  <url>
     <loc>https://takeawildguess.net/project/project2/</loc>
   </url>
   
@@ -35,38 +31,43 @@
   </url>
   
   <url>
+    <loc>https://takeawildguess.net/blog/logisticregression_part4/</loc>
+    <lastmod>2019-02-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/logisticregression_part3/</loc>
+    <lastmod>2019-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/logisticregression_part2/</loc>
+    <lastmod>2019-02-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/logisticregression_part1/</loc>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/linearregression_part4/</loc>
+    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/linearregression_part3/</loc>
+    <lastmod>2019-01-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/linearregression_part2/</loc>
+    <lastmod>2019-01-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://takeawildguess.net/blog/linearregression_part1/</loc>
-    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/blog/linearregression/</loc>
-    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/blog/fullpost/</loc>
-    <lastmod>2018-04-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/blog/creating-a-new-theme/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/blog/hugoisforlovers/</loc>
-    <lastmod>2014-04-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/blog/goisforlovers/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/blog/migrate-from-jekyll/</loc>
-    <lastmod>2014-03-10T00:00:00+00:00</lastmod>
+    <lastmod>2019-01-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -93,7 +94,7 @@
   
   <url>
     <loc>https://takeawildguess.net/tags/algorithm/</loc>
-    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -104,7 +105,7 @@
   
   <url>
     <loc>https://takeawildguess.net/blog/</loc>
-    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -124,31 +125,23 @@
   </url>
   
   <url>
-    <loc>https://takeawildguess.net/tags/development/</loc>
-    <lastmod>2014-04-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://takeawildguess.net/tags/development-engineer/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.net/tags/fdaagfs/</loc>
-    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://takeawildguess.net/tags/go/</loc>
-    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/golang/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/gradient-descent/</loc>
+    <lastmod>2019-01-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -164,13 +157,6 @@
   
   <url>
     <loc>https://takeawildguess.net/tags/hugo/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/tags/jekyll/</loc>
-    <lastmod>2014-03-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -181,13 +167,25 @@
   
   <url>
     <loc>https://takeawildguess.net/tags/linear-regression/</loc>
-    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/logistic-regression/</loc>
+    <lastmod>2019-02-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/machine-learning/</loc>
-    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/maximum-likelihood/</loc>
+    <lastmod>2019-01-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -198,7 +196,7 @@
   
   <url>
     <loc>https://takeawildguess.net/tags/numpy/</loc>
-    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-01-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -209,12 +207,18 @@
   
   <url>
     <loc>https://takeawildguess.net/tags/python/</loc>
-    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/responsive/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/scikit-learn/</loc>
+    <lastmod>2019-02-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -228,37 +232,25 @@
   </url>
   
   <url>
-    <loc>https://takeawildguess.net/tags/static-site-generator/</loc>
-    <lastmod>2014-03-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://takeawildguess.net/tags/syntax-highlighting/</loc>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/</loc>
-    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://takeawildguess.net/tags/template/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/tags/themes/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+    <loc>https://takeawildguess.net/tags/tensorflow/</loc>
+    <lastmod>2019-02-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/</loc>
-    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-24T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>

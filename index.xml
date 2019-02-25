@@ -6,7 +6,7 @@
     <description>Recent content on take a wild guess</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 24 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://takeawildguess.net/index.xml" rel="self" type="application/rss+xml" />
     
@@ -36,15 +36,6 @@
       
       <guid>https://takeawildguess.net/about/about_talks/</guid>
       <description>Here I list my main talks at the Machine-Learning meetup in Torino, Italy.</description>
-    </item>
-    
-    <item>
-      <title>About me!</title>
-      <link>https://takeawildguess.net/about/about_me/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/about/about_me/</guid>
-      <description>ciao me. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ip</description>
     </item>
     
     <item>
@@ -84,79 +75,80 @@
     </item>
     
     <item>
-      <title>Hello world example for Machine learning - part 1</title>
-      <link>https://takeawildguess.net/blog/linearregression_part1/</link>
-      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+      <title>How to learn to classify - Part 4</title>
+      <link>https://takeawildguess.net/blog/logisticregression_part4/</link>
+      <pubDate>Sun, 24 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.net/blog/linearregression_part1/</guid>
+      <guid>https://takeawildguess.net/blog/logisticregression_part4/</guid>
+      <description>1. Introduction and assumptions In this post-series, we are going to study the very basic modeling for classification problems, the logistic regression. Classification entails that the output is a discrete variable taking values on a pre-defined limited set, where the set dimension is the number of classes. Some examples are spam detection, object recognition and topic identification.
+We focus on the input/output space, the predictor structure, the learning algorithm and on applying the method to different datasets.</description>
+    </item>
+    
+    <item>
+      <title>How to learn to classify - Part 3</title>
+      <link>https://takeawildguess.net/blog/logisticregression_part3/</link>
+      <pubDate>Sun, 17 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/logisticregression_part3/</guid>
+      <description>1. Introduction and assumptions In this post-series, we are going to study the very basic modeling for classification problems, the logistic regression. Classification entails that the output is a discrete variable taking values on a pre-defined limited set, where the set dimension is the number of classes. Some examples are spam detection, object recognition and topic identification.
+We focus on the input/output space, the predictor structure, the learning algorithm and on applying the method to different datasets.</description>
+    </item>
+    
+    <item>
+      <title>How to learn to classify - Part 2</title>
+      <link>https://takeawildguess.net/blog/logisticregression_part2/</link>
+      <pubDate>Sun, 10 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/logisticregression_part2/</guid>
+      <description>1. Introduction and assumptions In this post-series, we are going to study the very basic modeling for classification problems, the logistic regression. Classification entails that the output is a discrete variable taking values on a pre-defined limited set, where the set dimension is the number of classes. Some examples are spam detection, object recognition and topic identification.
+We focus on the input/output space, the predictor structure, the learning algorithm and on applying the method to different datasets.</description>
+    </item>
+    
+    <item>
+      <title>How to learn to classify - Part 1</title>
+      <link>https://takeawildguess.net/blog/logisticregression_part1/</link>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/logisticregression_part1/</guid>
       <description>1. Problem formulation We want to create a simplified representation (model) of real/world from available data. The model architecture can be seen as a box that takes some quantities as input, performs some internal computation and returns some other quantities as output. The inputs are also referred to as features or predictors of the problem to solve, since they contain valuable information that the model should exploit to come up with the correct outcome.</description>
     </item>
     
     <item>
-      <title>Hello world example for Machine learning</title>
-      <link>https://takeawildguess.net/blog/linearregression/</link>
-      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      <title>Hello world example for Machine learning - Part 4</title>
+      <link>https://takeawildguess.net/blog/linearregression_part4/</link>
+      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.net/blog/linearregression/</guid>
-      <description>Multi Linear regression import numpy as np import matplotlib.pyplot as plt %matplotlib inline import pandas as pd  Gradient field The figure compares the gradient (vector field) to the isolines of the J function. The isolines are shown using the contourf command, while the gradient field with quiver command provided by the Matplotlib library.
-w1s = np.linspace(-10, 10, 50+1); w2s = np.linspace(-5, 5, 25+1); w1mg, w2mg = np.meshgrid(w1s, w2s) J = w1mg**2 + w2mg**2  X = np.</description>
+      <guid>https://takeawildguess.net/blog/linearregression_part4/</guid>
+      <description>1. Introduction We have introduced the concept of the linear-regression problem and the structure to solve it in a &amp;ldquo;machine-learning&amp;rdquo; fashion in this post, while we have applied the theory to a simple but practical case of linear-behavior identification from a bunch of data that are generated in a synthetic way here and extend the analysis to a multi-linear case where more than one feature (or input) are fed to the model to predict the outcome here.</description>
     </item>
     
     <item>
-      <title>Full post</title>
-      <link>https://takeawildguess.net/blog/fullpost/</link>
-      <pubDate>Mon, 02 Apr 2018 00:00:00 +0000</pubDate>
+      <title>Hello world example for Machine learning - Part 3</title>
+      <link>https://takeawildguess.net/blog/linearregression_part3/</link>
+      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.net/blog/fullpost/</guid>
-      <description>Ciao, (x) and x_2 and $x_2$ is my var.
-$$ y = x^2 + \frac{x}{x+1} $$ $$ y = x^2 + \frac{x}{x+1} $$
-now some super code
-anima = [xx**2 for xx in range(22) if xx%2] if 3&amp;gt;2: print(anima)  bye</description>
+      <guid>https://takeawildguess.net/blog/linearregression_part3/</guid>
+      <description>1. Introduction We have introduced the concept of the linear-regression problem and the structure to solve it in a &amp;ldquo;machine-learning&amp;rdquo; fashion in this post, while we have applied the theory to a simple but practical case of linear-behavior identification from a bunch of data that are generated in a synthetic way here.
+We now extend the analysis to a multi-linear case where more than one feature (or input) are fed to the model to predict the outcome.</description>
     </item>
     
     <item>
-      <title>Creating a New Theme</title>
-      <link>https://takeawildguess.net/blog/creating-a-new-theme/</link>
-      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      <title>Hello world example for Machine learning - Part 2</title>
+      <link>https://takeawildguess.net/blog/linearregression_part2/</link>
+      <pubDate>Sun, 13 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.net/blog/creating-a-new-theme/</guid>
-      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
-We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
+      <guid>https://takeawildguess.net/blog/linearregression_part2/</guid>
+      <description>1. Introduction We have introduced in the previous post the concept of the linear-regression problem and the structure to solve it in a &amp;ldquo;machine-learning&amp;rdquo; fashion. In this post we apply the theory to a simple but practical case of linear-behavior identification from a bunch of data that are generated in a synthetic way.
+We are going to implement the logic from scratch in Python and its powerful numerical library, Numpy, by following the procedure illustrated in Fig.</description>
     </item>
     
     <item>
-      <title>Getting Started with Hugo</title>
-      <link>https://takeawildguess.net/blog/hugoisforlovers/</link>
-      <pubDate>Fri, 04 Apr 2014 00:00:00 +0000</pubDate>
+      <title>Hello world example for Machine learning - Part 1</title>
+      <link>https://takeawildguess.net/blog/linearregression_part1/</link>
+      <pubDate>Sun, 06 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.net/blog/hugoisforlovers/</guid>
-      <description>Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at installing hugo
-Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
-Follow the following steps:
- Clone the hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</description>
-    </item>
-    
-    <item>
-      <title>(Hu)go Template Primer</title>
-      <link>https://takeawildguess.net/blog/goisforlovers/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/blog/goisforlovers/</guid>
-      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
-This document is a brief primer on using go templates.</description>
-    </item>
-    
-    <item>
-      <title>Migrate from Jekyll</title>
-      <link>https://takeawildguess.net/blog/migrate-from-jekyll/</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/blog/migrate-from-jekyll/</guid>
-      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png  should become
-▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
+      <guid>https://takeawildguess.net/blog/linearregression_part1/</guid>
+      <description>1. Problem formulation We want to create a simplified representation (model) of real/world from available data. The model architecture can be seen as a box that takes some quantities as input, performs some internal computation and returns some other quantities as output. The inputs are also referred to as features or predictors of the problem to solve, since they contain valuable information that the model should exploit to come up with the correct outcome.</description>
     </item>
     
     <item>
@@ -165,8 +157,8 @@ This document is a brief primer on using go templates.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/about/me/</guid>
-      <description>I am passionate about AI. In 2015, I got a PhD degree in Energetics at Politecnico di Torino. My work mainly focused on developing a simulation environment for Plug-in Hybrid Electric Vehicles and Hybrid Powertrain Optimal Control. As post-doc researcher at Polito, my current goal is to develop machine learning algorithms for advance vehicle control, exploiting Vehicle-to-Infrastructure data.
-My focus is on the study of energy consumption, CO2 emissions and costs of Plug-in Hybrid Electric vehicles and Full Electric Vehicles.</description>
+      <description>I am passionate about AI and I have been developing some applications that could benefit from this new technique.
+One of the first areas I started investigating the AI potential was my PhD research field. My work mainly focused on developing a simulation environment for Plug-in Hybrid Electric Vehicles and Hybrid Powertrain Optimal Control. After completing it in 2015, my goal as post-doc researcher was to develop machine learning algorithms for advance vehicle control, exploiting Vehicle-to-Infrastructure data.</description>
     </item>
     
     <item>
@@ -175,7 +167,7 @@ My focus is on the study of energy consumption, CO2 emissions and costs of Plug-
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/about/about_twg/</guid>
-      <description>This is my personal website where I will be publishing the main findings and outcomes of some small side-projects that I develop in my spare time. The overall scope of this project is to develop and describe what it could be necessary to create some “smart agents”. As agent, I literally mean someone/something that is capable of performing a task in a particular environment. Being smart entails to achieve the final goal in a remarkable way.</description>
+      <description>This is my personal website where I will be publishing the main findings and outcomes of some research side-projects that I develop in my spare time. The overall scope of this project is to develop and describe what could be necessary to create some “smart agents”. As an agent, I literally mean someone/something that is capable of performing a task in a particular environment. Being smart entails achieving the final goal in a remarkable way.</description>
     </item>
     
     <item>

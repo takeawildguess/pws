@@ -12,7 +12,7 @@
   
 
   <meta name="generator" content="Hugo 0.49" />
-  <title>Hello world example for Machine learning - part 1 &middot; take a wild guess</title>
+  <title>Hello world example for Machine learning - Part 1 &middot; take a wild guess</title>
 
   
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -118,7 +118,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
   
     <a class="navbar-brand abs" href="https://takeawildguess.net/">
-      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Hello world example for Machine learning - part 1">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Hello world example for Machine learning - Part 1">
     </a>
   
   <a class="navbar-brand" href="/blog/linearregression_part1/" style="font-size: 16px; ">Hello world</a>
@@ -147,27 +147,16 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
           </div>
         </li>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/project/">Prevision</a>
-            <a class="dropdown-item" href="/project/">Avenew</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/project/">Treecky</a>
-          </div>
-        </li>
+        
       </ul>
       
       <ul class="navbar-nav navbar-right">
         
-          <li class="nav-item navbar-icon"><a href="mailto:mattia.venditti@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://github.com/username/"><i class="fa fa-github"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://twitter.com/username/"><i class="fa fa-twitter"></i></a></li>
-        
-          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
         
       </ul>
       
@@ -185,11 +174,11 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
       <img src="https://takeawildguess.net/images/blog/linearRegression/hello.jpeg" class="img-fluid" alt="__">
       <div class="card">
         <div class="card-body">
-          <h1 class="card-title text-center">Hello world example for Machine learning - part 1</h1>
-          <h6 class="card-text text-center">January 25, 2019</h6>
-          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 9 min read</h6>
+          <h1 class="card-title text-center">Hello world example for Machine learning - Part 1</h1>
+          <h6 class="card-text text-center">January 6, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 10 min read</h6>
           <h6 class="card-text text-center">
-            <a href="https://takeawildguess.net/tags/linear-regression"><kbd class="item-tag">linear regression</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">Python</kbd></a> <a href="https://takeawildguess.net/tags/numpy"><kbd class="item-tag">Numpy</kbd></a> 
+            <a href="https://takeawildguess.net/tags/linear-regression"><kbd class="item-tag">linear-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/maximum-likelihood"><kbd class="item-tag">maximum likelihood</kbd></a> <a href="https://takeawildguess.net/tags/gradient-descent"><kbd class="item-tag">gradient descent</kbd></a> 
           </h6>
         </div>
       </div>
@@ -229,12 +218,18 @@ How can the machine change its parameters to minimize the loss function? That is
 <p>Figure 1 shows the scheme of the main points of a Machine-learning framework. The top chart illustrates the interaction between data collected from the real-world, the designer and the machine. The designer takes care about three tasks: model structure, score (loss function) and the learning recipe.
 The <em>machine</em> uses the tools provided by the designer to improve its performance to represent the real-word scenario.</p>
 
-<h2 id="3-loss-function">3. Loss function</h2>
+<p><img src="/blog/linReg1/learningFramework.png" alt="png" title="Machine learning general structure" />
+<em>Figure 1 - Machine learning general structure</em></p>
 
-<p>We present three ways to define the same loss function:
-1.  Energy-based definition, where the energy equilibrium of a mechanical system that consists of several mass-concentrated points are connected to a rigid bar by means of a spring.
-2.  Maximum likelihood estimation, where a statistical approach is used.
-3.  Least-squared error, where the residual definition is adopted.</p>
+<h2 id="lossFun">3. Loss function</h2>
+
+<p>We present three ways to define the same loss function:</p>
+
+<ol>
+<li>Energy-based definition, where the energy equilibrium of a mechanical system that consists of several mass-concentrated points are connected to a rigid bar by means of a spring.</li>
+<li>Maximum likelihood estimation, where a statistical approach is used.</li>
+<li>Least-squared error, where the residual definition is adopted.</li>
+</ol>
 
 <h3 id="3-1-energy-based-loss-function">3.1 Energy-based loss function</h3>
 
@@ -242,9 +237,10 @@ The <em>machine</em> uses the tools provided by the designer to improve its perf
 
 <p>$ E_j = \frac{1}{2}\cdot k_j\cdot \delta x_j^2 $</p>
 
-<p>where the displacement is the vertical distance between the mass (data point) and its projection to the bar (see Fig.2).</p>
+<p>where the displacement is the vertical distance between the mass (data point) and its projection to the bar (see Fig. 2).</p>
 
-<p>Figure 2 – Energy-based loss function scheme.</p>
+<p><img src="/blog/linReg1/energyModel.png" alt="png" title="Energy-based loss function scheme" />
+<em>Figure 2 - Energy-based loss function scheme</em></p>
 
 <p>The overall energy content of the system is the sum of the contribution of each spring. The system tends to reach the equilibrium by minimizing its energy content. The equilibrium is identified by the least energy possible configuration. If every point is equally relevant, the stiffness value is constant for every spring (for simplicity we can set $ k_j = 1 $ for each $ j $). Otherwise we can force the system either to be extremely precise to represent one point by increasing its associated spring’s stiffness or to ignore one point by reducing the stiffness down to 0.</p>
 
@@ -258,7 +254,8 @@ The <em>machine</em> uses the tools provided by the designer to improve its perf
 
 <p>$ p(\epsilon_j) = \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{\epsilon_j^2}{2\cdot\sigma^2}} $</p>
 
-<p>Figure 3 – Likelihood-based loss function scheme.</p>
+<p><img src="/blog/linReg1/likelihoodModel.png" alt="png" title="Likelihood-based loss function scheme" />
+<em>Figure 3 – Likelihood-based loss function scheme</em></p>
 
 <p>By combining the latter equation with the error-based linear regression expression (1), the output density given inputs and parameter estimation for point $P_j$ is:</p>
 
@@ -266,7 +263,7 @@ The <em>machine</em> uses the tools provided by the designer to improve its perf
 
 <p>The probability of the dataset is given by the combined contributions of every data point. Since inputs and outputs are fixed, we can select the best values of parameter vector $\theta$ that <strong>maximize the likelihood</strong> of the dataset:</p>
 
-<p>$ max<em>{\theta} L(\theta) = max</em>{\theta} p(\hat{y} | \hat{x}; \theta) $</p>
+<p>$ max_{\theta}\quad p(\hat{y} | \hat{x}; \theta) $</p>
 
 <p>where $ \hat{x} \in R^{m, n}$ and $ \hat{y} \in R^{m, 1}$ are the matrix and the vector containing the dataset inputs and outputs, <em>m</em> is the number of data points, <em>n</em> is the dimension of the predictors. Since the data points are independent each other, the likelihood function can be re-written as:</p>
 
@@ -276,7 +273,11 @@ The <em>machine</em> uses the tools provided by the designer to improve its perf
 
 <p>Maximizing <em>L</em> is equivalent to maximizing $ l(\theta) = log(L(\theta)) $ due to the strictly increasing behavior of the <em>log</em> function.</p>
 
-<p>$ l(\theta) = log \Pi_{j=1}^{m} \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x<em>j)^2}{2\cdot\sigma^2}} = \sum</em>{j=1}^{m} \log \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x<em>j)^2}{2\cdot\sigma^2}} = m\cdot\log\frac{1}{\sqrt{2\pi}\cdot \sigma} - \frac{1}{2\cdot\sigma^2}\sum</em>{j=1}^{m} (y_j-\theta^T \cdot x_j)^2 $</p>
+<p>$ l(\theta) = log \Pi_{j=1}^{m} \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}} $</p>
+
+<p>$\rightarrow = \sum_{j=1}^{m} \log \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}}$</p>
+
+<p>$\rightarrow = m\cdot\log\frac{1}{\sqrt{2\pi}\cdot \sigma} - \frac{1}{2\cdot\sigma^2}\sum_{j=1}^{m} (y_j-\theta^T \cdot x_j)^2$</p>
 
 <p>Maximizing <em>l</em> is equivalent to minimizing the loss function obtained with the least-squared error:</p>
 
@@ -338,17 +339,30 @@ plt.axis('equal')
 plt.show()
 </code></pre>
 
-<p><img src="/blog/images/output_8_0.png" alt="png" /></p>
+<p><img src="/blog/linReg1/output_8_0.png" alt="png" /></p>
 
 <pre><code class="language-python">
 </code></pre>
 
+<h2 id="reference">Reference</h2>
+
+<ol>
+<li><a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf">CS229 notes</a></li>
+<li><a href="https://www.coursera.org/learn/machine-learning">Machine Learning at Coursera</a></li>
+<li><a href="http://people.math.gatech.edu/~ecroot/3225/maximum_likelihood.pdf">Maximum likelihood estimators and least squares</a></li>
+<li><a href="https://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf">An Introduction to Statistical Learning</a></li>
+</ol>
+
         </div>
         <div class="pgNav PageNavigation col-12 text-center">
           <span>
-          <p><a class="" href="/blog/linearregression/" style="color: #4ABDAC; font-size: 18px; "> &laquo; Hello world example for Machine learning</a>
-          |
-          <a class="" href="/project/project4/" style="color: #4ABDAC; font-size: 18px; ">Project 4 &raquo;</a></p>
+          <p>&laquo; 
+
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/linearregression_part2/" style="color: #4ABDAC; font-size: 18px; ">Hello world example for Machine learning - Part 2</a>
+          
+          &raquo;</p>
           </span>
           
         </div>
@@ -371,7 +385,7 @@ plt.show()
       <div class="col-12 text-center icons">
         
         <span>
-          <a href="mailto:mattia.venditti@gmail.com"><i class="fa fa-envelope-o"></i></a><a href="https://github.com/username/"><i class="fa fa-github"></i></a><a href="https://twitter.com/username/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
         </span>
         
       </div>

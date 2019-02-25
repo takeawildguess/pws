@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.49" />
+  <title>How to learn to classify - Part 4 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+
+  
+  
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="How to learn to classify - Part 4">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/logisticregression_part4/" style="font-size: 16px; ">Is it coffee or cappuccino?</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/coffee_cappuccino.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">How to learn to classify - Part 4</h1>
+          <h6 class="card-text text-center">February 24, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 20 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/logistic-regression"><kbd class="item-tag">logistic-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> <a href="https://takeawildguess.net/tags/tensorflow"><kbd class="item-tag">tensorflow</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction-and-assumptions">1. Introduction and assumptions</h2>
+
+<p>In this post-series, we are going to study the very basic modeling for classification problems, the logistic regression.
+<strong>Classification</strong> entails that the output is a discrete variable taking values on a pre-defined limited set, where the set dimension is the number of classes. Some examples are <em>spam detection</em>, <em>object recognition</em> and <em>topic identification</em>.</p>
+
+<p>We focus on the input/output space, the predictor structure, the learning algorithm and on applying the method to different datasets.
+In this series, we do not split the dataset into training and testing sets, but we assess every model on the training set only.
+A dedicated post on model selection, overfitting/underfitting problem and regularization will be published soon.</p>
+
+<p>Here follows the post-series steps:</p>
+
+<ol>
+<li>Probabilistic model of a classification problem and cross-entropy definition via maximum likelihood (<a href="/blog/logisticregression_part1/">Part 1</a>).</li>
+<li>Logistic regression developed from scratch with Python and Numpy (<a href="/blog/logisticregression_part1/">Part 1</a>).</li>
+<li>Logistic regression implementation in Scikit-learn and TensorFlow (<a href="/blog/logisticregression_part2/">Part 2</a>).</li>
+<li>How to model different predictor spaces, namely 1D, 2D and 3D (<a href="/blog/logisticregression_part2/">Part 2</a>).</li>
+<li>Multinomial classification, where both softmax function and one-vs-all method are applied and compared (<a href="/blog/logisticregression_part3/">Part 3</a>).</li>
+<li>Non-linear input predictors (<a href="/blog/logisticregression_part3/">Part 3</a>).</li>
+<li>Categorical and numerical predictors (Part 4).</li>
+<li>Logistic regression applied to the <strong>digits</strong> dataset (Part 4).</li>
+<li>Logistic regression applied to the <strong>MNIST</strong> dataset (Part 4).</li>
+</ol>
+
+<h2 id="2-categorical-predictors">2. Categorical predictors</h2>
+
+<p>A categorical variable can take on values from two or more categories.
+There are two types of categorical variable, <em>nominal</em> and <em>ordinal</em>.
+A nominal variable has no intrinsic ordering to its categories. Some examples are <em>gender</em> (two categories, male and female), <em>citizenship</em> (as many categories as the number of country in the dataset), <em>capitalized</em> (two categories, either a word is capitalized or it is not).</p>
+
+<p>An ordinal variable has a defined ordering. For example, temperature as a variable with three discrete levels (low, medium and high), movie rating (up to 5 stars).</p>
+
+<p>We introduce a new <a href="https://archive.ics.uci.edu/ml/datasets/Tic-Tac-Toe+Endgame">dataset</a> from <a href="https://archive.ics.uci.edu/ml/index.php">UCI Machine Learning repository</a> website to learn how to handle categorical predictors in a classification problem.</p>
+
+<p>This database encodes the complete set of possible board configurations at the end of tic-tac-toe games, where the <strong>x</strong> player is assumed to have played first.
+The target concept is <em>win for x</em>, i.e., the response variable is True when &ldquo;x&rdquo; has got one of 8 possible ways to create a &ldquo;three-in-a-row&rdquo; crosses.</p>
+
+<p>The dataset consists of 958 instances of final game board configurations (legal tic-tac-toe endgame boards), filled with 9 attributes, each corresponding to one tic-tac-toe square, as follows (x: first player, o: second player, b: blank):</p>
+
+<ol>
+<li>top-left-square</li>
+<li>top-middle-square</li>
+<li>top-right-square</li>
+<li>middle-left-square</li>
+<li>middle-middle-square</li>
+<li>middle-right-square</li>
+<li>bottom-left-square</li>
+<li>bottom-middle-square</li>
+<li>bottom-right-square</li>
+</ol>
+
+<p>Each square can take one of the following three values: <em>x</em>, <em>o</em> or <em>b</em>.</p>
+
+<p>The binary problem is slightly skewed to the positive class.
+About 65.3% are positive outcomes, i.e., wins for <em>x</em>.</p>
+
+<p>We use <a href="https://pandas.pydata.org/">Pandas</a> to read in the dataset and we provide full column schema with the <em>names</em> attribute.</p>
+
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from mpl_toolkits import mplot3d
+import pandas as pd
+import numpy as np
+</code></pre>
+
+<pre><code class="language-python">colNames = ['top-left','top-middle','top-right','middle-left','middle-middle',
+         'middle-right','bottom-left','bottom-middle','bottom-right','class']
+df = pd.read_csv('tic-tac-toe.txt', names=colNames)
+df.head()
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>top-left</th>
+<th>top-middle</th>
+<th>top-right</th>
+<th>middle-left</th>
+<th>middle-middle</th>
+<th>middle-right</th>
+<th>bottom-left</th>
+<th>bottom-middle</th>
+<th>bottom-right</th>
+<th>class</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>o</td>
+<td>o</td>
+<td>x</td>
+<td>o</td>
+<td>o</td>
+<td>positive</td>
+</tr>
+
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>o</td>
+<td>o</td>
+<td>x</td>
+<td>x</td>
+<td>o</td>
+<td>positive</td>
+</tr>
+
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>o</td>
+<td>o</td>
+<td>x</td>
+<td>o</td>
+<td>x</td>
+<td>positive</td>
+</tr>
+
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>o</td>
+<td>o</td>
+<td>x</td>
+<td>b</td>
+<td>b</td>
+<td>positive</td>
+</tr>
+
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>o</td>
+<td>o</td>
+<td>b</td>
+<td>o</td>
+<td>b</td>
+<td>positive</td>
+</tr>
+</tbody>
+</table>
+
+<!-- <div>
+<style>
+    .dataframe thead tr:only-child th { text-align: right; }
+    .dataframe thead th { text-align: left; }
+    .dataframe tbody tr th { vertical-align: top; }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>top-left</th>      <th>top-middle</th>      <th>top-right</th>      <th>middle-left</th>      <th>middle-middle</th>      <th>middle-right</th>      <th>bottom-left</th>      <th>bottom-middle</th>      <th>bottom-right</th>      <th>class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>      <td>x</td>      <td>x</td>      <td>x</td>      <td>x</td>      <td>o</td>      <td>o</td>
+      <td>x</td>      <td>o</td>      <td>o</td>      <td>positive</td>
+    </tr>
+    <tr>
+      <th>1</th>      <td>x</td>      <td>x</td>      <td>x</td>      <td>x</td>      <td>o</td>      <td>o</td>      <td>o</td>
+      <td>x</td>      <td>o</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>2</th>      <td>x</td>      <td>x</td>      <td>x</td>      <td>x</td>      <td>o</td>
+      <td>o</td>      <td>o</td>      <td>o</td>      <td>x</td>      <td>positive</td>
+    </tr>
+    <tr>
+      <th>3</th>      <td>x</td>      <td>x</td>      <td>x</td>      <td>x</td>      <td>o</td>      <td>o</td>      <td>o</td>
+      <td>b</td>      <td>b</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>4</th>      <td>x</td>      <td>x</td>      <td>x</td>      <td>x</td>      <td>o</td>      <td>o</td>
+      <td>b</td>      <td>o</td>      <td>b</td>
+      <td>positive</td>
+    </tr>
+  </tbody>
+</table>
+</div> -->
+
+<p>To have a clear and immediate view of the dataset, we rearrange the column encoding (1 for the x player, 0 for the o player, $NaN$ for blank position) to a typical tic-tac-toe board.</p>
+
+<pre><code class="language-python">encoding = {'x': 1, 'o': 0, 'b': np.nan}
+span, Nimg = 150, 6
+plt.figure(figsize=(14, 10))
+for kk, idx in enumerate(range(0, span*(Nimg-1)+1, span)):
+    example = df.iloc[idx].values
+    predictors, label = example[:-1], example[-1]
+    board = predictors.reshape(-1, 3)
+    plt.subplot(Nimg/2, 2, kk+1)
+    plt.imshow(np.array([encoding[vv] for vv in predictors]).reshape(-1, 3), cmap='Pastel1')
+    plt.title('Player {} has won the match'.format('x' if label=='positive' else 'o'))
+    for rr in range(3):
+        for cc in range(3):
+            cellLabel = board[rr, cc]
+            if cellLabel != 'b':
+                plt.annotate(str(cellLabel), xy=(cc, rr), horizontalalignment='center', verticalalignment='center', size=20)
+</code></pre>
+
+<p><img src="/blog/logReg4/output_7_0.png" alt="png" /></p>
+
+<p>We are going to use encoding functions implemented in Scikit-learn, namely <em>LabelEncoder</em> and <em>OneHotEncoder</em>.</p>
+
+<p>However, Pandas offers the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html">get_dummies</a> method, which makes the procedure to transform the categorical features into dummy variables very straight forward.
+It can be directly applied to the dataframe and the internal algorithm will recognize the categorical features.</p>
+
+<pre><code class="language-python">from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+
+XX = df.values[:,:-1]
+YY = df.values[:,-1]
+
+leX = LabelEncoder()
+
+for col in range(XX.shape[-1]):
+    XX[:, col] = leX.fit_transform(XX[:, col])
+
+leX.classes_
+</code></pre>
+
+<pre><code>array(['b', 'o', 'x'], dtype=object)
+</code></pre>
+
+<p>We transform the string-valued predictors into numerical values, ranging from 0 to 2 for the three classes.
+We take the numerical predictor array, XX, and we select a window of 50 values every 100 points and plot each window in a dedicated chart.
+This representation highlights the different board encoding that the logistic regression model will face to identify the proper winner.
+The cell color encodes whether player x (grey) or player o (blue) has played or the cell is blank (green).</p>
+
+<pre><code class="language-python">Ncol, window, span = 5, 50, 100
+plt.figure(figsize=(15,8))
+for cc in range(Ncol):
+    plt.subplot(1, Ncol, cc+1)
+    plt.imshow(XX.astype(float)[cc*span:cc*span+window,:], cmap = 'Accent')
+    if cc == Ncol-1:
+        plt.colorbar()
+</code></pre>
+
+<p><img src="/blog/logReg4/output_14_0.png" alt="png" /></p>
+
+<p>However, this encoding is still not suitable for a machine learning algorithm to digest, since this numerical encoding comes with intrinsic ordering, which is something we do not want.
+There is indeed no reason for the algorithm to <em>&ldquo;believe&rdquo;</em> that a &ldquo;o&rdquo; label should be closer to the &ldquo;x&rdquo; one than the blank position, but the numerical representation says that the distance between the &ldquo;x&rdquo; and &ldquo;o&rdquo; codes is less than that one between the &ldquo;x&rdquo; and &ldquo;b&rdquo; codes, i.e., $|1-2| &lt; |0-2|$.</p>
+
+<p>To this end, we introduce the <a href="https://en.wikipedia.org/wiki/One-hot">one-hot</a> encoding to represent the model predictors.</p>
+
+<p>One-hot encoding can be seen as an array with as many elements as the number of distinct classes. All the elements are 0, except the element whose index coincides with the class value.
+For a categorical variable that can take on 6 values from 0 to 5, the numerical value 4 is transformed into the following array:</p>
+
+<p>$ (0, 0, 0, 0, 1, 0) $</p>
+
+<pre><code class="language-python">ohe = OneHotEncoder(categorical_features = range(XX.shape[1]), sparse=False )
+
+XXohe = ohe.fit_transform(XX)
+
+XXohe.shape
+</code></pre>
+
+<pre><code>(958, 27)
+</code></pre>
+
+<p>Figure shows two charts, the left-hand side is the original numerical-labeling representation (player x is grey, player o is blue, blank is green), while the right-hand side is the one-hot encoding representation (1 is grey, 0 is green).
+The LHS representation stores the board configuration with 9 values, which are unpacked into $9*3 = 27$ columns since each categorical variable can vary over three discrete values that requires three bits each in the one-hot encoding.</p>
+
+<pre><code class="language-python">window = 10
+plt.figure(figsize=(15,8))
+plt.subplot(1, 3, 1)
+plt.imshow(XX.astype(float)[:window,:], cmap = 'Accent')
+plt.subplot(1, 2, 2)
+plt.imshow(XXohe[:window,:], cmap = 'Accent')
+</code></pre>
+
+<p><img src="/blog/logReg4/output_20_1.png" alt="png" /></p>
+
+<p>The response variable is also string-valued.
+We need to create a different instance of label encoder to transform it to a 0-1 array (1 for positive class).</p>
+
+<pre><code class="language-python">leY = LabelEncoder()
+YY = leY.fit_transform(YY) #.reshape(-1,1)
+YY[:10]
+</code></pre>
+
+<pre><code>array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1], dtype=int64)
+</code></pre>
+
+<p>We feed the one-hot encoded predictor array and the 1D array response variable to the logistic regression SKlearn module and follow the standard procedure.</p>
+
+<pre><code class="language-python">XXohe.shape, YY.shape
+</code></pre>
+
+<pre><code>((958, 27), (958,))
+</code></pre>
+
+<pre><code class="language-python">from sklearn.linear_model import LogisticRegression
+from sklearn import metrics
+
+# categorical features
+lgrCF = LogisticRegression(C=1e5) # we want to ignore regularization
+lgrCF.fit(XXohe, YY)
+Ypred = lgrCF.predict(XXohe)
+</code></pre>
+
+<pre><code class="language-python">print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(YY, Ypred)))
+print(&quot;Precision: {}&quot;.format(metrics.precision_score(YY, Ypred)))
+print(&quot;Recall: {}&quot;.format(metrics.recall_score(YY, Ypred)))
+</code></pre>
+
+<pre><code>Accuracy: 0.9832985386221295
+Precision: 0.9750778816199377
+Recall: 1.0
+</code></pre>
+
+<p>The model performance is great, which means it is able to <em>&ldquo;read&rdquo;</em> the final board and declare the winner!</p>
+
+<h2 id="3-digits-dataset">3. Digits dataset</h2>
+
+<p>The digits dataset comes with Scikit-learn directly and therefore do not require any file downloading from external websites.
+The following code will load the dataset.
+We can see that there are 1797 (8x8) images with 1797 labels from 0 to 9.</p>
+
+<pre><code class="language-python">from sklearn.datasets import load_digits
+digits = load_digits()
+</code></pre>
+
+<pre><code class="language-python">print(&quot;Image Data: {}, Label Data: {}&quot;.format(digits.data.shape, digits.target.shape))
+print(&quot;Response variable set: {}&quot;.format(np.unique(digits.target)))
+</code></pre>
+
+<pre><code>Image Data: (1797, 64), Label Data: (1797,)
+Response variable set: [0 1 2 3 4 5 6 7 8 9]
+</code></pre>
+
+<p>We extract 10 examples spanning 3 rows one to another.
+We need to reshape each (64,) sample into a (8, 8) array to get an human easy-to-read image.</p>
+
+<pre><code class="language-python">Nr, Nc, span = 2, 5, 3
+Nel = Nr*Nc
+plt.figure(figsize=(18,8))
+for idx, (image, label) in enumerate(zip(digits.data[0:Nel*span:span], digits.target[0:Nel*span:span])):
+    plt.subplot(Nr, Nc, idx + 1)
+    plt.imshow(image.reshape(-1, 8), cmap='Blues')
+    plt.title('Label %i\n' % label, fontsize = 16)
+</code></pre>
+
+<p><img src="/blog/logReg4/output_32_0.png" alt="png" /></p>
+
+<p>We also visualize how the dataset examples are distributed over the 10 response classes, by counting how many times each of the 10 response classes occurs in the dataset.
+The result confirms that the dataset is equally distributed over the different classes.</p>
+
+<pre><code class="language-python">unique, counts = np.unique(digits.target, return_counts=True)
+print(&quot;Counting how many times each of the 10 response classes occurs in the dataset\n{}&quot;.format(dict(zip(unique, counts))))
+</code></pre>
+
+<pre><code>Counting how many times each of the 10 response classes occurs in the dataset
+{0: 178, 1: 182, 2: 177, 3: 183, 4: 181, 5: 182, 6: 181, 7: 179, 8: 174, 9: 180}
+</code></pre>
+
+<p>Now we run the training step and we get the model outcome response that is compared to the ground-truth response to get the model main metrics.
+The results are close to perfection!</p>
+
+<pre><code class="language-python">XX, YY = digits.data, digits.target
+lgr = LogisticRegression(C=1e5) # we want to ignore regularization
+lgr.fit(XX, YY)
+Ypred = lgr.predict(XX)
+</code></pre>
+
+<pre><code class="language-python">print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(YY, Ypred)))
+print(&quot;Precision: {}&quot;.format(metrics.precision_score(YY, Ypred, average='weighted')))
+print(&quot;Recall: {}&quot;.format(metrics.recall_score(YY, Ypred, average='weighted')))
+</code></pre>
+
+<pre><code>Accuracy: 0.9988870339454646
+Precision: 0.9988870339454646
+Recall: 0.9988870339454646
+</code></pre>
+
+<p>We also want to understand a bit deeper which label the model has struggled the most.
+To this end we define the <a href="https://en.wikipedia.org/wiki/Confusion_matrix">confusion matrix</a>, which is a table used to describe the performance of the classifier at labelling one specific class of the response variable and to easily spot which other labels are instead picked by the model when it is wrong.</p>
+
+<pre><code class="language-python">cm = metrics.confusion_matrix(YY, Ypred)
+
+cmDisp = cm.astype(float)
+cmDisp[cmDisp==0] = np.nan
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(9,9))
+plt.imshow(cmDisp, cmap='Set2') #, interpolation='nearest', cmap='Pastel1'
+plt.title('Confusion matrix', size = 15)
+plt.colorbar()
+tickMarks = np.arange(10)
+tickLabels = [str(num) for num in range(10)]
+plt.xticks(tickMarks, tickLabels, size = 10, fontsize=12)
+plt.yticks(tickMarks, tickLabels, size = 10, fontsize=12)
+plt.tight_layout()
+plt.ylabel('Actual label', size = 15)
+plt.xlabel('Predicted label', size = 15)
+width, height = cm.shape
+for x in range(width):
+    for y in range(height):
+        plt.annotate(str(cm[x][y]), xy=(y, x), horizontalalignment='center', verticalalignment='center')
+</code></pre>
+
+<p><img src="/blog/logReg4/output_41_0.png" alt="png" /></p>
+
+<p>We have two misclassified samples only, which we show below. The charts on the LHS are displayed with different blue hues, related to the pixel intensity, while the RHS charts are plotted with gray hues.</p>
+
+<pre><code class="language-python">Nr, Nc, span = 2, 5, 3
+Nel = Nr*Nc
+errIdxs = np.where(YY!=Ypred)[0]
+
+plt.figure(figsize=(18,8))
+for row, idx in enumerate(errIdxs):
+    plt.subplot(errIdxs.shape[0], 2, 2*row + 1)
+    plt.imshow(digits.images[idx].reshape(-1, 8), cmap='Blues')
+    plt.title('Actual label: {}, predicted label: {}'.format(YY[idx], Ypred[idx]), fontsize = 16)
+    plt.subplot(errIdxs.shape[0], 2, 2*row + 2)
+    plt.imshow(digits.images[idx].reshape(-1, 8), cmap=plt.cm.gray)
+    plt.title('Actual label: {}, predicted label: {}'.format(YY[idx], Ypred[idx]), fontsize = 16)
+</code></pre>
+
+<p><img src="/blog/logReg4/output_44_0.png" alt="png" /></p>
+
+<h2 id="4-mnist-dataset">4. MNIST dataset</h2>
+
+<p>The amazing achievements on the <strong>digit</strong> dataset are also due to the very simple task we were trying to solve, which is not representative of common real world machine learning tasks.
+We are going to introduce the MNIST dataset to increase the challenge by learning techniques and pattern recognition methods on real-world data while spending minimal efforts on preprocessing and formatting.</p>
+
+<p>We are going to retrieve the dataset from Yann LeCun <a href="http://yann.lecun.com/exdb/mnist/">page</a> and load it with the <em>input_data</em> module from TF.
+You can follow <a href="https://chromium.googlesource.com/external/github.com/tensorflow/tensorflow/+/r0.7/tensorflow/g3doc/tutorials/mnist/download/index.md">this</a> tutorial to set everything up.</p>
+
+<h3 id="4-1-data-collection-and-analysis">4.1 Data collection and analysis</h3>
+
+<pre><code class="language-python">import tensorflow as tf
+from tensorflow.examples.tutorials.mnist import input_data
+
+mnist = input_data.read_data_sets(&quot;MNIST_data/&quot;, one_hot=True)
+</code></pre>
+
+<p>The training and testing datasets contain 55k and 10k examples of (28x28) images, each stored as a flattened (784,) 1D array.</p>
+
+<pre><code class="language-python">print(&quot;Training and testing dataset size: {} - {}&quot;.format(mnist.train.images.shape, mnist.test.images.shape))
+</code></pre>
+
+<pre><code>Training and testing dataset size: (55000, 784) - (10000, 784)
+</code></pre>
+
+<p>We extract 10 examples spanning 3 rows one to another.
+We need to reshape each (784,) sample into a (28, 28) array to get an human easy-to-read image.</p>
+
+<pre><code class="language-python">Ncls = 10
+Nr, Nc, span = 2, 5, 3
+Nel = Nr*Nc
+plt.figure(figsize=(18,8))
+for idx, (image, label) in enumerate(zip(mnist.train.images[0:Nel*span:span], mnist.train.labels[0:Nel*span:span])):
+    plt.subplot(Nr, Nc, idx + 1)
+    plt.imshow(image.reshape(-1, 28), cmap='Blues')
+    plt.title('Label %i\n' % np.where(label==1), fontsize = 16)
+</code></pre>
+
+<p><img src="/blog/logReg4/output_52_0.png" alt="png" /></p>
+
+<p>We create a Python dictionary with 10 keys, one for each class.
+The corresponding value stores the first encountered image for that class.
+The current label is extracted from the one-hot encoding by using the Numpy <em>where</em> function.</p>
+
+<pre><code class="language-python">spectro = {}
+kk = 0
+while len(spectro) &lt; 10:
+    currLabel = str(np.where(mnist.train.labels[kk])[0][0])
+    if currLabel not in spectro:
+        spectro[currLabel] = mnist.train.images[kk]
+    kk += 1
+</code></pre>
+
+<p>Figure shows a kind of spectrogram of the first image example of the 10 different classes that are stored in <em>spectro</em>.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(17, 9))
+for kk, (label, img) in enumerate(spectro.items()):
+    plt.subplot(2, 5, kk+1)
+    plt.imshow(img.reshape(-1, 1), cmap='gist_gray', aspect=0.002)
+    plt.xticks([])
+    plt.title('Label: ' + label, fontsize = 16)
+</code></pre>
+
+<p><img src="/blog/logReg4/output_56_0.png" alt="png" /></p>
+
+<p>In this step, we want to retrieve the &ldquo;average&rdquo; image of each class.
+We convert the one-hot encoding to a label encoding by identifying where the only 1 of each label is located.
+Within a for-loop through the 10 classes, we take only images related to one specific class.
+The rows of the image matrix that correspond to a given class are selected, the average array is obtained by executing the mean along the rows (axis=0) and it is reshaped to get the actual image format.</p>
+
+<p>To get more details about the powerful indexing operation available in Numpy, visit <a href="https://docs.scipy.org/doc/numpy/reference/arrays.indexing.html#boolean-array-indexing">this</a> docs.</p>
+
+<pre><code class="language-python">Ycls = np.argmax(mnist.train.labels==1, axis=1)
+
+plt.figure(figsize=(17, 9))
+for kk in range(10):
+    plt.subplot(2, 5, kk+1)
+    plt.imshow(np.mean(mnist.train.images[Ycls==kk, :], axis=0).reshape(-1, 28), cmap='Blues')
+    plt.title('Label: ' + str(kk), fontsize = 16)
+</code></pre>
+
+<p><img src="/blog/logReg4/output_59_0.png" alt="png" /></p>
+
+<p>We group the 10 average arrays (images) into a list and build a 2D array where row i and column j represent the <a href="https://en.wikipedia.org/wiki/Dot_product">scalar product</a> between the average arrays of classes i and j.
+It is clear that this matrix is symmetric.</p>
+
+<pre><code class="language-python">meanArrays = [np.mean(mnist.train.images[Ycls==kk, :], axis=0) for kk in range(10)]
+
+corrs = np.zeros((10, 10))
+for k1 in range(10):
+    for k2 in range(10):
+        corrs[k1, k2] = np.dot(meanArrays[k1], meanArrays[k2])
+
+plt.imshow(corrs, cmap='Blues')
+</code></pre>
+
+<p><img src="/blog/logReg4/output_63_1.png" alt="png" /></p>
+
+<p>We take the highest correlating product along the 0-axis and realize that class 1 average image is highly correlated to class 8, while class 5 to class 0.</p>
+
+<pre><code class="language-python">print(&quot;Highest-correlated classes for each of the 10 classes\n{}&quot;.format(np.argmax(corrs, axis=0)))
+</code></pre>
+
+<pre><code>Highest-correlated classes for each of the 10 classes
+[0 8 2 3 4 0 6 7 8 9]
+</code></pre>
+
+<h3 id="4-2-creating-the-logistic-regression-model-in-tf">4.2 Creating the logistic regression model in TF</h3>
+
+<p>The loss function is easily implemented using the method <em>sigmoid_cross_entropy_with_logits</em> from <em>losses</em> package.
+The optimizer object that actually adjusts the model parameters (TF variables) with the gradient descent algorithm.</p>
+
+<p>The next steps to <strong>train</strong> the model are to:</p>
+
+<ol>
+<li>initialize the variables.</li>
+<li>run a new session, which let us perform the actual computation by exploitng the graph structure previousluy defined.</li>
+<li>run the optimizer as many steps as the numner of epochs <em>Nepoch</em>.</li>
+<li>run the model with the final parameter set and store the mdoel output <em>ymdl</em> into the prediction array.</li>
+<li>retrieve the final parameter values by running a dedicated session. A different way would be to call the <a href="https://www.tensorflow.org/api_docs/python/tf/global_variables">global_variables()</a> method and get the variable values by key name.</li>
+</ol>
+
+<pre><code class="language-python">Nfeat, Ncls = 784, 10
+tf.reset_default_graph()
+xp = tf.placeholder(dtype=tf.float32, shape=(None, 784))
+yp = tf.placeholder(dtype=tf.float32, shape=(None, Ncls))
+ww = tf.Variable(np.zeros((784, 10)), dtype=tf.float32)
+bb = tf.Variable(tf.zeros([10]))
+ymdl = tf.matmul(xp, ww) + bb
+
+ypred = tf.argmax(tf.sigmoid(ymdl),1)
+yact = tf.argmax(yp,1)
+
+accuracy = tf.reduce_mean(tf.cast(tf.equal(ypred, yact), dtype=tf.float32))
+mdlLoss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=ymdl, labels=yp))
+optimizer = tf.train.AdamOptimizer(learning_rate=0.01).minimize(loss=mdlLoss)
+</code></pre>
+
+<pre><code class="language-python">print('Input shape: {}'.format(xp.shape))
+print('Ground-truth output shape: {}'.format(yp.shape))
+print('Weight shape: {}'.format(ww.shape))
+print('Model output shape: {}'.format(ymdl.shape))
+</code></pre>
+
+<pre><code>Input shape: (?, 784)
+Ground-truth output shape: (?, 10)
+Weight shape: (784, 10)
+Model output shape: (?, 10)
+</code></pre>
+
+<pre><code class="language-python">Nepoch = 200
+Nbtc = 100 # number of batches
+init = tf.global_variables_initializer()
+XX, Yclass = mnist.train.images, mnist.train.labels
+with tf.Session() as sess:
+    sess.run(init)
+    Jevol = []
+    for kk in range(Nepoch):
+        Xbatch, Ybatch = mnist.train.next_batch(Nbtc)
+        mdl_loss, _ = sess.run([mdlLoss, optimizer], feed_dict={xp: Xbatch, yp: Ybatch})
+        if kk%50 == 0:
+            Jevol.append((kk, mdl_loss))
+            print('The current model loss is {}'.format(mdl_loss))
+        if kk==Nepoch-1:
+            print('The final model loss is {}'.format(mdl_loss))
+            trainAcc = sess.run([accuracy], feed_dict={xp: mnist.train.images, yp: mnist.train.labels})[0]
+            print('The final model accuracy is {}'.format(trainAcc))
+
+    Wcoef = sess.run(ww, feed_dict={xp: XX, yp: Yclass})
+    Ypred_tf, Yact = sess.run([ypred, yact], feed_dict={xp: XX, yp: Yclass})
+    mdlAcc = sess.run([accuracy], feed_dict={xp: XX, yp: Yclass})[0]
+</code></pre>
+
+<pre><code>The current model loss is 2.3025853633880615
+The current model loss is 0.3165014386177063
+The current model loss is 0.4505566358566284
+The current model loss is 0.25453245639801025
+The final model loss is 0.3332114517688751
+The final model accuracy is 0.9073818325996399
+</code></pre>
+
+<pre><code class="language-python">print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(Yact, Ypred_tf)))
+print(&quot;Precision: {}&quot;.format(metrics.precision_score(Yact, Ypred_tf, average='weighted')))
+print(&quot;Recall: {}&quot;.format(metrics.recall_score(Yact, Ypred_tf, average='weighted')))
+</code></pre>
+
+<pre><code>Accuracy: 0.9073818181818182
+Precision: 0.9079350099345992
+Recall: 0.9073818181818182
+</code></pre>
+
+<p>We define the confusion matrix also for the MNIST case.
+For the sake of readability, we set the diagonal values to $NaN$ to prevent everything else to collapse to the bottom colormap (green).</p>
+
+<pre><code class="language-python">cm = metrics.confusion_matrix(Yact, Ypred_tf)
+
+cmDisp = cm.astype(float)
+cmDisp[np.diag_indices(Ncls)] = np.nan
+
+plt.figure(figsize=(9,9))
+plt.imshow(cmDisp, interpolation='nearest', cmap='Set2') # cmap='Pastel1'
+plt.title('Confusion matrix', size = 15)
+plt.colorbar()
+tickMarks = np.arange(10)
+tickLabels = [str(num) for num in range(10)]
+plt.xticks(tickMarks, tickLabels, size = 10, fontsize=12)
+plt.yticks(tickMarks, tickLabels, size = 10, fontsize=12)
+plt.tight_layout()
+plt.ylabel('Actual label', size = 15)
+plt.xlabel('Predicted label', size = 15)
+width, height = cm.shape
+for x in range(width):
+    for y in range(height):
+        plt.annotate(str(cm[x][y]), xy=(y, x), horizontalalignment='center', verticalalignment='center')
+</code></pre>
+
+<p><img src="/blog/logReg4/output_74_0.png" alt="png" /></p>
+
+<h3 id="4-3-misclassified-images">4.3 Misclassified images</h3>
+
+<p>In this section we analyze the misclassified images. The figure shows 12 cases, where each chart reports the actual and predicted classes of the corresponding image.</p>
+
+<pre><code class="language-python">misclassified = np.where(Yact != Ypred_tf)[0]
+
+Nr, Nc, span = 3, 4, 3
+Nel = Nr*Nc
+plt.figure(figsize=(18,14))
+for qq, idx in enumerate(misclassified[:Nel*span:span]):
+    img, label = mnist.train.images[idx], mnist.train.labels[idx]
+    plt.subplot(Nr, Nc, qq+1)
+    plt.imshow(img.reshape(-1, 28), cmap='Blues')
+    plt.title('Actual/predicted labels: {}/{}'.format(str(Yact[idx]), str(Ypred_tf[idx])), fontsize = 14)
+</code></pre>
+
+<p><img src="/blog/logReg4/output_77_0.png" alt="png" /></p>
+
+<p>This step is one of the most important in the Machine Learning field. To analyze the model errors and try to come up with new ideas either to change the architecture or the hyperparameters of the model itself.
+We can clearly spot how frequently class 5 has been misclassified.
+This fact is coherent with poor correlation for class 5 with itself. Recall that it was indeed more correlated to class 0.</p>
+
+<h3 id="4-4-model-parameter-mapping">4.4 Model parameter mapping</h3>
+
+<p>In the final section, we display the model parameter (or weight) values stored in the (784x10) 2D array <em>Wcoef</em>.
+We can treat this 2D array as a horizontal concatenation of 10 (784,) 1D arrays, one for each class.
+Each 1D array stores the weights of every pixel of the image, out of the 784 total ones.
+If we reshape this 1D array, we can visually get the alignment between the pixel (inputs) and the weight.
+It is very fascinating how the weight contour plot matches the input structure in such a way for you to easily read the class number.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(17, 9))
+for kk in range(10):
+    plt.subplot(2, 5, kk+1)
+    plt.imshow(Wcoef[:, kk].reshape(-1, 28), cmap='Blues')
+    plt.title('Label: ' + str(kk), fontsize = 16)
+</code></pre>
+
+<p><img src="/blog/logReg4/output_80_0.png" alt="png" /></p>
+
+<h2 id="reference">Reference</h2>
+
+<ol>
+<li><a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf">CS229 notes</a></li>
+<li><a href="https://www.coursera.org/learn/machine-learning">Machine Learning at Coursera</a></li>
+<li><a href="http://people.math.gatech.edu/~ecroot/3225/maximum_likelihood.pdf">Maximum likelihood estimators and least squares</a></li>
+<li><a href="https://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf">An Introduction to Statistical Learning</a></li>
+<li><a href="https://stats.stackexchange.com/questions/46523/how-to-simulate-artificial-data-for-logistic-regression/46525">Generating artificial data</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc">Logistic Regression overview</a></li>
+<li><a href="https://machinelearningmastery.com/logistic-regression-for-machine-learning/">Logistic Regression for Machine learning</a></li>
+<li><a href="https://data.princeton.edu/wws509/notes/c3.pdf">Princeton notes</a></li>
+<li><a href="https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8">Building A Logistic Regression in Python, Step by Step</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-using-python-sklearn-numpy-mnist-handwriting-recognition-matplotlib-a6b31e2b166a">Logistic Regression using Python (scikit-learn)</a></li>
+</ol>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/logisticregression_part3/" style="color: #4ABDAC; font-size: 18px; "> How to learn to classify - Part 3</a>
+
+          
+          &raquo;</p>
+          </span>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

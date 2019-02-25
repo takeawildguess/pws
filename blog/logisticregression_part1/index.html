@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.49" />
+  <title>How to learn to classify - Part 1 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+
+  
+  
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="How to learn to classify - Part 1">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/logisticregression_part1/" style="font-size: 16px; ">Is it coffee or cappuccino?</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/coffee_cappuccino.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">How to learn to classify - Part 1</h1>
+          <h6 class="card-text text-center">February 3, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 22 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/logistic-regression"><kbd class="item-tag">logistic-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> <a href="https://takeawildguess.net/tags/tensorflow"><kbd class="item-tag">tensorflow</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-problem-formulation">1. Problem formulation</h2>
+
+<p>We want to create a simplified representation (model) of real/world from available data.
+The model architecture can be seen as a box that takes some quantities as input, performs some internal computation and returns some other quantities as output. The inputs are also referred to as <em>features</em> or <em>predictors</em> of the problem to solve, since they contain valuable information that the model should exploit to come up with the correct outcome.
+In this post-series, we are going to study the very basic modeling for classification problems, the logistic regression.</p>
+
+<p>I shortly summarize the main difference between a classification and regression problem:</p>
+
+<ol>
+<li><strong>Classification</strong>: the output is a discrete variable that can assume integer values within a pre-defined limited set, where the set dimension is the number of classes. Some examples are <em>spam detection</em>, <em>object recognition</em> and <em>topic identification</em>.</li>
+<li><strong>Regression</strong>: the output is a continuous variable that can assume real values. Some examples are <em>house price prediction</em>, <em>electricity price estimation</em> and <em>Flight delay forecast</em>.</li>
+</ol>
+
+<p>The classification problem can also be split into three sub-categories.
+If the number of classes is two, it is a <strong>binary classification</strong> problem, where the outcome can belong to either one class or the other one. One example is <em>spam detection</em>, where the outcome can belong to either the “spam” class or the “ham”.
+If more than two classes are present, it is a <strong>multinomial (or multi-class) classification</strong> problem. Some examples are <em>object recognition</em>, where the outcome gives the probability that the input (an image) contains a specific object which the model has been trained for, <em>topic identification</em>, where the model selects the topic of the input text within a defined list.
+If the classes of the dependent variable are ordered, we deal with <strong>Ordinal classification</strong> problem. One example is
+<em>movie rating</em>, where the output assumes discrete values ranging from 1 to 5.</p>
+
+<p>Here follows the post-series steps:</p>
+
+<ol>
+<li>Probabilistic model of a classification problem and cross-entropy definition via maximum likelihood (Part 1).</li>
+<li>Logistic regression developed from scratch with Python and Numpy (Part 1).</li>
+<li>Logistic regression implementation in Scikit-learn and TensorFlow (<a href="/blog/logisticregression_part2/">Part 2</a>).</li>
+<li>How to model different predictor spaces, namely 1D, 2D and 3D (<a href="/blog/logisticregression_part2/">Part 2</a>).</li>
+<li>Multinomial classification, where both softmax function and one-vs-all method are applied and compared (<a href="/blog/logisticregression_part3/">Part 3</a>).</li>
+<li>Non-linear input predictors (<a href="/blog/logisticregression_part3/">Part 3</a>).</li>
+<li>Categorical and numerical predictors (<a href="/blog/logisticregression_part4/">Part 4</a>).</li>
+<li>Logistic regression applied to the <strong>digits</strong> dataset (<a href="/blog/logisticregression_part4/">Part 4</a>).</li>
+<li>Logistic regression applied to the <strong>MNIST</strong> dataset (<a href="/blog/logisticregression_part4/">Part 4</a>).</li>
+</ol>
+
+<h2 id="2-the-hello-world-case-for-machine-learning-classifier">2. The hello-world case for Machine Learning classifier</h2>
+
+<p>The problem we are going to study and analyze in this post is the very introductive example of the Machine Learning algorithm field, alongside linear regression.
+I would say it is the <em>Hello world</em> case to build a Machine learning based classifier.
+This is a very critical step before diving into a more complex structure such as neural networks.
+Most of the time, the model that we want to study, implement and analyse in this post is stacked at the very end of any neural network you might use for classification tasks.</p>
+
+<p>Please refer to <a href="/blog/linearregression_part1/">this</a> post for further details about the overall model structure for a machine-learning framework.
+In general, we need to define the model structure to reduce the searching space to the machine.
+We need a <strong>loss function</strong> to say the machine how well/bad it is performing within the assigned task.
+We guide the machine at changing its parameters with a <em>recipe</em>, the <strong>learning algorithm</strong>.</p>
+
+<h3 id="2-1-applications">2.1 Applications</h3>
+
+<p>Classification tasks are very common in various fields, such as:</p>
+
+<ol>
+<li><strong>health and care</strong>: predicting mortality in injured patients, predicting the risk of developing a given disease based on observed features of the patient, predicting whether some DNA mutations are disease-causing or not based on DNA sequence data.</li>
+<li><strong>politics</strong>: predicting election voting for a party based on specific characteristics of the voter.</li>
+<li><strong>engineering</strong>: predicting the probability of failure of a given process or system.</li>
+<li><strong>marketing</strong>: predicting how a customer/subscriber is likely to purchase a product/stop a subscription.</li>
+<li><strong>finance</strong>: predicting the likelihood of a homeowner to default on a mortgage, whether or not a transaction being performed on an online banking service&rsquo;s site is fraudulent.</li>
+</ol>
+
+<h2 id="3-probabilistic-model">3. Probabilistic model</h2>
+
+<p>In this post we want to focus on the binary classification problem only, where the outcome can assume only two values, 0 or 1.
+We explain why and then show how linear regression fails at handling this classification case.</p>
+
+<h3 id="3-1-why-not-linear-regression">3.1 Why not linear regression</h3>
+
+<p>Intuitively, a simple linear regression model would take values larger than 1 or smaller than 0, making them hard to interpret
+as probabilities.
+One could saturate the linear model to the lower and upper bounds of 0 and 1, respectively, as follows:</p>
+
+<p>$ \pi = max(0, min(1, \omega^T\cdot x))$</p>
+
+<p>This would introduce some challenges to effectively train the model with gradient descent, since the gradient information would vanish any time the linear model exceeds the unit interval.
+If the gradient becomes 0, the learning algorithm struggles to improve the model performance due to lack of any guidance to adjusting the parameters.</p>
+
+<p>If the model outcome can assume one of more than two classes, the situation is even worse, since any coding chosen to embed the outcome classes implies an order on the outcomes and leads the linear regression to capture strange quantitative correlation.
+Let the input be an image to classify within three classes: 1) dog, 2) cat and 3) bird.
+The difference between <em>dog</em> and <em>cat</em> is the same as the difference between <em>cat</em> and <em>bird</em>, and it is as half as the difference between <em>dog</em> and <em>bird</em>. However, there is no particular reason for this to happen.</p>
+
+<p>Since the model dependent variable can belong to one of the categories of a fixed set, we assume the binary response <em>y</em> is a
+realization of a <a href="https://en.wikipedia.org/wiki/Bernoulli_trial">Bernoulli trial</a>, rather than a continuous outcome, as it would be with a linear regression model.
+This implies that the residuals cannot be normally distributed, which is a necessary condition for the linear regression model.</p>
+
+<p>Moreover, the distribution of the model output, Y, is a <a href="https://en.wikipedia.org/wiki/Bernoulli_distribution"><em>Bernoulli</em> distribution</a>:</p>
+
+<p>$ P(Y=y) = \pi^{y}\cdot (1-\pi)^{1-y}$</p>
+
+<p>where y is either 1 or 0 and $\pi$ is the probability of the output of being equal to 1.
+In fact, both the mean, or expected value, and the variance of this distribution depend upon the probability $\pi$:</p>
+
+<p>$ E(Y) = \mu = \pi $</p>
+
+<p>$ var(Y) = \sigma^2 = \pi\cdot (1-\pi) $</p>
+
+<p>This implies that a linear model is not suitable for this case since it assumes that the variance is constant.
+We will see that the introduction of the sigmoid function is fundamental to capture the variance correlation with the underlying probability $\pi$.
+Indeed, its derivate has the same shape as the variance of the Bernoulli distribution.</p>
+
+<h3 id="3-2-towards-the-logistic-regression-model">3.2 Towards the logistic regression model</h3>
+
+<p>Since the linear probabilistic model $\pi = \omega^T\cdot x$ lacks of domain coerence (the LHS term ranges from 0 to 1, while the RHS term can take any real value, a simple solution would be to transform the probability into a new intermediate variable which is model as a linear function of the input.
+We introduce the odds of an event as the ratio of the probability to its complement, or the ratio of favorable to unfavorable cases:</p>
+
+<p>$ odds = \frac{\pi}{1-\pi}$</p>
+
+<p>Odds are traditionally used instead of probabilities in horse-racing, since
+they relate more naturally to the correct betting strategy.
+In fact, odds of 1 : k should imply a payoff of k for a stake of 1, in a fair game.
+It means that if you have a 20% change of winning a bet ($\pi = 0.2 $), the odds are 1:4, you should get a payoff of 4 for a stake of 1, which is in equilibrium in a long term perspective.
+You will in fact win 4 dollars (assuming the currency is dollar) only 1 out 5 times of betting, but you will lose one dollar 4 out 5 times.</p>
+
+<p>However, we still need a step to get a variable whose domain matches the real domain of the input, i.e., the predictors.
+We therefore introduce the logarithm of the odds, which is also referred to as <em>logit</em>, and</p>
+
+<p>$ logit(\pi) = \log {\frac {\pi}{1-\pi}} $</p>
+
+<p>Even tough the model output is a Bernoulli-distributed variable, the logit varies on the entire real domain.
+Positive/negative logits represent probabilities above/below 50%.</p>
+
+<p>It is now possible to assume that the logit of the success probability, $\pi$, is described by a linear model of the predictors:</p>
+
+<p>$ logit(\pi) = \omega^T\cdot x $</p>
+
+<p>where $x$ is a vector of predictors and $\omega$ is a vector of the regression coefficients.</p>
+
+<p>The change in the predicted log-odds of success probability equals $\omega_j$ for a unit change in the <em>j-th</em> predictor, when all other predictors are kept constant.
+If we exponentiate the logit expression, we get the direct correlation between probability and predictors:</p>
+
+<p>$ odds = \frac {\pi}{1-\pi} = e^{\omega^T\cdot x} $</p>
+
+<p>It is now easy to determine the impact of a regression coefficient to the odds.
+If we increase the <em>j-th</em> predictor by a unit, the odds becomes:</p>
+
+<p>$ odds = e^{\omega^T\cdot x + \omega_j} = e^{\omega^T\cdot x}\cdot e^{\omega_j} = odds_0 \cdot e^{\omega_j} $</p>
+
+<p>The exponential factor $e^{\omega_j}$ represents the odds ratio.</p>
+
+<p>We need to invert the logit function to have a direct expression of the probability of the model outcome of being 1, or interchangeably belonging to the second class.</p>
+
+<p>The inverse function of the logit is the logistic function, which is a <a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid function</a>.
+It is interpreted as taking input log-odds and returning estimated probability.</p>
+
+<p>We first set the log-odds to be equal to intermediate variable, t, that was introduced above. This intermediate variable is described with a linear model of multiple explanatory variables (predictors).</p>
+
+<p>$ logit(\pi) = t = \log {\frac {\pi}{1-\pi}} $</p>
+
+<p>$ \Longrightarrow e^t = \frac {\pi}{1-\pi} \Longrightarrow (1-\pi)\cdot e^t = \pi \Longrightarrow (1+e^t)\cdot\pi = e^t $</p>
+
+<p>$ \Longrightarrow \pi = \frac{e^t}{(1+e^t)} = \frac{1}{(1+e^{-t})} = \sigma(t) $</p>
+
+<p>The probability of success is related to the linear model of the predictors via the non-linear sigmoid fucntion, which takes the entire real domain of the predictors and squashes to the (0, 1) probability domain.
+The final formulation, which represents the logistic regression model, is therefore as follows:</p>
+
+<p>$ P(y=1|x; \omega) = \pi = \sigma(\omega^T\cdot x) $</p>
+
+<p>A nice property of the $\sigma$ function is that the derivate has the same structure as the variance of the Bernoulli distrubution.</p>
+
+<p>$ \frac{d \sigma(t)}{dt} = \frac{d}{dt}\frac{1}{(1+e^{-t})} = \frac{d}{dt}\frac{e^t}{(1+e^t)} = \frac{e^{t}\cdot(1+e^t)-e^{2t}}{(1+e^t)^2} = \frac{e^{t}}{(1+e^t)^2} $</p>
+
+<p>$ \Longrightarrow \frac{e^{t}}{(1+e^t)}\cdot\frac{1+e^t-e^t}{(1+e^t)} = \sigma(t)\cdot(1-\sigma(t)) \quad\quad var(B(\pi)) = \pi\cdot(1-\pi) $</p>
+
+<h2 id="4-loss-function">4. Loss function</h2>
+
+<p>The compact way to express the Bernoulli distribution for both success/fail (<sup>1</sup>&frasl;<sub>0</sub>) cases is also used to model the probability function:</p>
+
+<p>$ P(Y=y | x; \omega) = \pi^{y}\cdot (1-\pi)^{1-y} = (\sigma(\omega^T\cdot x))^{y}\cdot (1-\sigma(\omega^T\cdot x))^{1-y} $</p>
+
+<p>Assuming that the training examples were generated independently, we can then write down the likelihood of the parameters as</p>
+
+<p>$ L(\omega) = \prod_i{P(Y=y_i | x_i; \omega)} = \prod_i{(\sigma(\omega^T\cdot x_i))^{y_i}\cdot (1-\sigma(\omega^T\cdot x_i))^{1-y_i} } $</p>
+
+<p>where $x_i$ and $y_i$ are the predictors and ground-truth output of the <em>i-th</em> example.</p>
+
+<p>We take the log-likelihood:</p>
+
+<p>$ l(\omega) = \log L(\omega) = \sum_i{(y_i\cdot\log\sigma + (1-y_i)\cdot\log(1-\sigma))} $</p>
+
+<p>which is maximized using optimization techniques such as <a href="https://en.wikipedia.org/wiki/Gradient_descent">gradient descent</a>.</p>
+
+<p>If we want to treat the task as a minimization problem of a loss function, we introduce a negative sign:</p>
+
+<p>$ C(\omega) = - l(\omega) = - \log L(\omega) $</p>
+
+<p>You can see how the cost function is neutral to a model response of 1 when the ground-truth output is 1 as well (red line), but returns an increasing penalty as the model response moves away from 1, i.e., it decreases down to 0, and exponentially reaches $+\infty$ as it tends to 0.
+The behaviour for the $y=0$ case is the other way around, flipped around the vertical axis $\sigma = \frac{1}{2}$.</p>
+
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+</code></pre>
+
+<pre><code class="language-python">def sigmoid(xx):
+    return 1/(1+np.exp(-xx))
+</code></pre>
+
+<pre><code class="language-python">xx = np.linspace(-10, 10, 100)
+sgm = sigmoid(xx)
+logLH1 = -np.log(sgm)
+logLH0 = -np.log(1-sgm)
+
+plt.figure(figsize=(12, 6))
+plt.subplot(1,2,1)
+plt.plot(sgm, logLH1, 'r', lw=2, label='y=1')
+plt.plot(sgm, logLH0, 'g', lw=2, label='y=0')
+plt.xlabel('$\sigma$')
+plt.ylabel('$C(\omega)$')
+plt.legend()
+
+plt.subplot(1,2,2)
+plt.plot(xx, logLH1, 'r', lw=2, label='y=1')
+plt.plot(xx, logLH0, 'g', lw=2, label='y=0')
+plt.xlabel('Predictor')
+plt.ylabel('$C(\omega)$')
+plt.legend();
+</code></pre>
+
+<p><img src="/blog/logReg1/output_9_0.png" alt="png" /></p>
+
+<pre><code class="language-python">def lossFunLSE(XX, YY, ww):
+    Npnt = XX.shape[0]
+    J = np.sum((sigmoid(np.dot(XX, ww)) - YY)**2, axis=0)/2/Npnt
+    return J
+</code></pre>
+
+<pre><code class="language-python">def lossFunML(XX, YY, ww):
+    Npnt = XX.shape[0]
+    hh = sigmoid(np.dot(XX, ww))
+    J = np.sum(YY*np.log(hh) + (1-YY)*np.log(1-hh), axis=0)/Npnt
+    return J
+</code></pre>
+
+<h2 id="5-gradient-descent-algorithm">5. Gradient descent algorithm</h2>
+
+<h3 id="5-1-gradient-of-the-least-squares-error-function">5.1 Gradient of the Least-Squares-Error function</h3>
+
+<p>We calculate the gradient of the LSE loss function with respect to the model parameters, as follows:</p>
+
+<p>$ \frac{\partial L_{lse}(\omega)}{\partial\omega_j} = (\frac{1}{2}\cdot 2\cdot(y-h)\cdot\frac{\partial\sigma(\omega^T\cdot x)}{\partial\omega_j} ) = ((y-h)\cdot h\cdot(1-h)\frac{\partial(\omega^T\cdot x)}{\partial\omega_j} ) $</p>
+
+<p>$ \Longrightarrow ((y-h)\cdot h\cdot(1-h)\cdot x_j ) $</p>
+
+<p>This therefore gives us the stochastic gradient ascent rule</p>
+
+<p>$ h^{(i)} = \sigma(\omega^T\cdot x^{(i)}) \quad $
+$ \omega_j = \omega_j - \alpha\cdot( (y^{(i)}-h)\cdot h\cdot(1-h)\cdot x_j^{(i)} ) $</p>
+
+<p>where $x_j^{(i)}$ is the <em>j-th</em> element of <em>i-th</em> predictor and $y^{(i)}$ is the corresponding ground-truth binary output.
+Note the negative sign in the update formula, since we are minimizing the loss function.</p>
+
+<pre><code class="language-python">def gradDescLSE(XX, YY, ww, lr=0.1, Nepoch=1500):
+    Npnt = XX.shape[0]
+    Jevol, wevol = [], []
+    for _ in range(Nepoch):
+        Jevol.append(lossFunLSE(XX, YY, ww))
+        wevol.append(ww[:,0])
+        hh = sigmoid(np.dot(XX, ww))
+        ww = ww - lr/Npnt * np.sum((hh - YY) * hh * (1-hh) * XX, axis=0).reshape(-1,1)
+    return np.array(wevol), np.array(Jevol)
+</code></pre>
+
+<h3 id="5-2-gradient-of-the-maximum-likelihood-function">5.2 Gradient of the maximum-likelihood function</h3>
+
+<p>We calculate the gradient of the ML loss function with respect to the model parameters, as follows:</p>
+
+<p>$ \frac{\partial L_{ml}(\omega)}{\partial\omega_j} = (\frac{y}{h} - \frac{1-y}{1-h})\frac{\partial\sigma(\omega^T\cdot x)}{\partial\omega_j} ) = (\frac{y}{h} - \frac{1-y}{1-h})\cdot h\cdot(1-h)\cdot\frac{\partial(\omega^T\cdot x)}{\partial\omega_j} ) $</p>
+
+<p>$ \Longrightarrow (y\cdot (1-h) - (1-y)\cdot h)\cdot x_j ) = (y - y\cdot h - h + y\cdot h)\cdot x_j ) $</p>
+
+<p>$ \Longrightarrow (y-h)\cdot x_j ) $</p>
+
+<p>This gives us the stochastic gradient ascent rule</p>
+
+<p>$ \omega_j = \omega_j + \alpha\cdot(y^{(i)} - \sigma(\omega^T\cdot x^{(i)}))\cdot x_j^{(i)} $</p>
+
+<p>where $x_j^{(i)}$ is the <em>j-th</em> element of <em>i-th</em> predictor and $y^{(i)}$ is the corresponding ground-truth binary output.</p>
+
+<p>Note the positive sign in the update formula, since we are maximizing the ML function.</p>
+
+<pre><code class="language-python">def gradDescML(XX, YY, ww, lr=0.1, Nepoch=1500):
+    Npnt = XX.shape[0]
+    Jevol, wevol = [], []
+    for _ in range(Nepoch):
+        Jevol.append(lossFunML(XX, YY, ww))
+        wevol.append(ww[:,0])
+        hh = sigmoid(np.dot(XX, ww))
+        ww = ww - lr/Npnt * np.sum((hh - YY) * XX, axis=0).reshape(-1,1)
+    return np.array(wevol), np.array(Jevol)
+</code></pre>
+
+<h2 id="6-data-generation">6. Data generation</h2>
+
+<p>We create an equispaced x grid with 1000 points ranging from -10 to 10.
+Then true y outcome, which represents the class to assign to the input, is defined via the logistic function of the linear transformation of input x with parameters <em>Wgt</em> (2, -12).
+The actual class is assigned by drawing samples from a <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.binomial.html">binomial distribution</a>.
+A binomial distribution becomes a Bernoulli distribution when the number of trials is 1.
+In other words, we generate data by sampling the y class for each input x, where the probability of success (i.e., of belonging to class 1) is given by:</p>
+
+<p>$ p = \sigma(\lbrack x, 1\rbrack\cdot \omega) $</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Logistic_function">logistic function</a> is the $\sigma$ operator in the equation.</p>
+
+<pre><code class="language-python">def logistic(XX, ww, noise=0):
+    tt = np.dot(XX, ww) + noise
+    return 1/(1 + np.exp(-tt))
+</code></pre>
+
+<pre><code class="language-python">xx = np.linspace(-10., 10, 1000)
+bb = np.ones_like(xx)
+XX = np.vstack([xx, bb]).T # Add intercept
+Wgt = np.array([2, -12]).reshape(-1, 1) # ground-truth parameters
+Ymean = logistic(XX, Wgt) # True mean
+Ynoise = logistic(XX, Wgt, noise=np.random.normal(scale=0.5, size=(len(xx), 1))) # noise
+Yclass = np.random.binomial(1., Ynoise) # dichotomous variable, n_trial=1 =&gt; Bernoulli distribution
+</code></pre>
+
+<p>Figure shows the y class of each input in blue, the noise probability of success in green and the true mean with solid red line.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(12,6))
+plt.plot(xx, Ymean, 'r-', lw=2, label='true mean curve')
+plt.scatter(xx, Ynoise, c='g', label='noise curve')
+plt.scatter(xx, Yclass, c='b', label='Y-class, dichotomous variable')
+plt.legend();
+</code></pre>
+
+<p><img src="/blog/logReg1/output_20_0.png" alt="png" /></p>
+
+<h2 id="7-training">7. Training</h2>
+
+<p>At this stage we apply the gradient descent algorithm to evolve the initial parameter setting to optimize the loss function down to its minimum value.
+We want to compare the two final outcomes that we get from minimizing the Maximum-Likelihood (ML) and Least-Squared-Error (LSE) functions.</p>
+
+<pre><code class="language-python">wInit = np.array([-2, 4]).reshape(-1, 1)
+
+J = lossFunML(XX, Yclass, wInit)
+Nepoch, lr = 1500, 0.05
+wEvolML, JevolML = gradDescML(XX, Yclass, wInit, lr, Nepoch)
+wOptML, Jopt = wEvolML[-1:,:], JevolML[-1]
+print(&quot;Optimal ML parameter values: {}, Optimal ML loss value: {}&quot;.format(wOptML, Jopt))
+</code></pre>
+
+<pre><code>[[ 0.6702804  -3.85882638]] [-0.13505221]
+</code></pre>
+
+<pre><code class="language-python">wEvolLSE, JevolLSE = gradDescLSE(XX, Yclass, wInit, lr, Nepoch)
+wOptLSE, Jopt = wEvolLSE[-1:,:], JevolLSE[-1]
+print(&quot;Optimal LSE parameter values: {}, Optimal LSE loss value: {}&quot;.format(wOptLSE, Jopt))
+</code></pre>
+
+<pre><code>[[-2.82634014  3.23804035]] [ 0.36677638]
+</code></pre>
+
+<p>Figure shows the ground-truth class of each input in blue, the model probability of success (being in state 1) predicted by ML and LSE methods with solid green and red lines, respectively.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+plt.scatter(xx, Yclass, alpha=0.75, label='ground-truth')
+plt.plot(xx, sigmoid(np.dot(XX, wOptLSE.T)[:,0]), 'r', lw=2, label='LSE')
+plt.plot(xx, sigmoid(np.dot(XX, wOptML.T)[:,0]), 'g', lw=2, label='ML')
+plt.xlabel(&quot;X&quot;)
+plt.ylabel(&quot;Y&quot;)
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="/blog/logReg1/output_26_0.png" alt="png" /></p>
+
+<h2 id="8-iteratively-reweighted-least-squares-irls">8. Iteratively reweighted least squares (IRLS)</h2>
+
+<p>A different method to identify the coefficients of a binary logistic regression classifier is to use <em>iteratively reweighted least squares (IRLS)</em>, which is equivalent to minimizing the log-likelihood of a Bernoulli distributed process using Newton&rsquo;s method (see <a href="https://en.wikipedia.org/wiki/Logistic_regression#Iteratively_reweighted_least_squares_(IRLS)">Wiki</a> reference for further details).</p>
+
+<p>The parameters $\omega_k$ at step $k$ are updated as follows:</p>
+
+<p>$\omega_{k+1} = (X^T\cdot S_k\cdot X)^{-1}\cdot X^T\cdot (S_k\cdot X \cdot\omega_k + Y - \hat{Y})$</p>
+
+<p>where $X$ contains as many rows as examples and columns as the model parameters (i.e., the number of predictors plus the bias), $S_k$ is a diagonal matrix of Bernoulli variance of the model prediction $\hat{Y}\cdot(1-\hat{Y})$, $Y$ contains the ground-truth labels, $\hat{Y}$ is the current model prediction for each example of the dataset.</p>
+
+<p>The matrix inverse operation is implemented using the <em>pinv</em> method in the <em>linalg</em> package to better handle critical situations such as singular matrices.</p>
+
+<p>Here we show the shape of each of the involved matrices.</p>
+
+<pre><code class="language-python">ww = np.array([-1, 1]).reshape(-1, 1)
+Yhat = sigmoid(np.dot(XX, ww))
+Sk = np.diag(Yhat[:,0]*(1-Yhat[:,0]))
+T3 = (np.dot(Sk, np.dot(XX, ww)) + Yclass - Yhat)
+T1 = np.linalg.pinv(np.dot(XX.T, np.dot(Sk, XX)))
+wNew = np.dot(T1, np.dot(XX.T, T3))
+</code></pre>
+
+<pre><code class="language-python">XX.shape, Yclass.shape, Yhat.shape, ww.shape, wNew.shape
+</code></pre>
+
+<pre><code>((1000, 2), (1000, 1), (1000, 1), (2, 1), (2, 1))
+</code></pre>
+
+<p>Here we plot the initial prediction variance matrix $S_k$, where 0 values have been replaced with $NaN$ to improve readability.</p>
+
+<pre><code class="language-python">Sk_vis = Sk
+Sk_vis[Sk_vis==0] = np.nan
+plt.imshow(Sk_vis);
+</code></pre>
+
+<p><img src="/blog/logReg1/output_32_1.png" alt="png" /></p>
+
+<pre><code class="language-python">def irls(XX, YY, ww):
+    Yhat = sigmoid(np.dot(XX, ww))
+    Sk = np.diag(Yhat[:,0]*(1-Yhat[:,0]))
+    T3 = (np.dot(Sk, np.dot(XX, ww)) + YY - Yhat)
+    T1 = np.linalg.pinv(np.dot(XX.T, np.dot(Sk, XX)))
+    ww = np.dot(T1, np.dot(XX.T, T3))
+    return ww, Sk
+</code></pre>
+
+<pre><code class="language-python">ww = np.array([-1, 1]).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">Jevol, wevol = [], []
+ww = np.array([-1, 1]).reshape(-1, 1)
+Nepoch = 100
+for _ in range(Nepoch):
+    ww, Sk = irls(XX, Yclass, ww)
+    Jevol.append(lossFunML(XX, Yclass, ww))
+    wevol.append(ww[:,0])
+wEvolIRLS, JevolIRLS = np.array(wevol), np.array(Jevol)
+
+plt.plot(Jevol);
+</code></pre>
+
+<p><img src="/blog/logReg1/output_36_1.png" alt="png" /></p>
+
+<pre><code class="language-python">Sk_vis = Sk
+Sk_vis[Sk_vis==0] = np.nan
+plt.imshow(Sk_vis);
+</code></pre>
+
+<p><img src="/blog/logReg1/output_37_1.png" alt="png" /></p>
+
+<h2 id="9-linear-and-logistic-regression">9. Linear and logistic regression</h2>
+
+<p>Since we stated that linear regression would fail to handle classification problems, we want to get an idea of how it fails and struggles with this simple toy task.
+To this end, we use the two modules from the linear model package of Scikit-Learn to create the linear and logistic regression models.
+Since the output of the linear regression model is continuous in the real domain, we convert it to Boolean (0/1) with a simple $ \geq 0.5$ condition.</p>
+
+<pre><code class="language-python">from sklearn.linear_model import LinearRegression, LogisticRegression
+
+lnr = LinearRegression()
+lnr.fit(XX, Yclass)
+yprobLNR = lnr.predict(XX)
+ypredLNR = (yprobLNR&gt;.5).astype(int)
+
+print(&quot;The linear regression model accuracy is {}&quot;.format(np.sum(ypredLNR == Yclass)/len(Yclass)*100))
+</code></pre>
+
+<pre><code>95.700000000000003
+</code></pre>
+
+<pre><code class="language-python">lgs = LogisticRegression(C=1e5)
+lgs.fit(XX, Yclass[:,0])
+ypredLGS = lgs.predict(XX).reshape(-1, 1)
+yprobLGS = lgs.predict_proba(XX)[:,1].reshape(-1, 1)
+
+print(&quot;The logistic regression model accuracy is {}&quot;.format(np.sum(ypredLGS == Yclass)/len(Yclass)*100))
+</code></pre>
+
+<pre><code>96.399999999999991
+</code></pre>
+
+<p>Figure compares the ground-truth class of each input in blue, the linear and logistic regression model predicted probability of success (being in state 1) in red and green, respectively, and the linear regression model predicted class in yellow.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+plt.scatter(xx, Yclass, alpha=0.75, label='ground-truth')
+plt.plot(xx, yprobLNR[:,0], 'y', lw=2, label='Linear regression - probability')
+plt.plot(xx, ypredLNR[:,0], 'r', lw=2, label='Linear regression - class')
+plt.plot(xx, yprobLGS[:,0], 'g', lw=2, label='Logistic regression - probability')
+plt.plot([xx.min(), xx.max()], [0.5, 0.5], 'k', lw=2, label='Threshold', alpha=.5)
+plt.xlabel(&quot;X&quot;)
+plt.ylabel(&quot;Y&quot;)
+plt.legend();
+</code></pre>
+
+<p><img src="/blog/logReg1/output_46_0.png" alt="png" /></p>
+
+<h2 id="10-parameter-evolution">10. Parameter evolution</h2>
+
+<p>We want to see how the model parameters evolve within the loss function domain.
+To this end, we calculate the loss function value for each combination of parameters $\omega_1$ and $\omega_2$ and we keep track of the parameter values for all the training epochs the gradient descent algorithm requires to converge to the optimal solution.</p>
+
+<pre><code class="language-python">step = 0.5
+w1s = np.arange(-2.5, 3, step)
+w2s = np.arange(-6, 6, step)
+w1mg, w2mg = np.meshgrid(w1s, w2s)
+wmg = np.vstack((w1mg.flatten(), w2mg.flatten())).T
+w1s.shape, w2s.shape, wmg.shape
+</code></pre>
+
+<pre><code>((11,), (24,), (264, 2))
+</code></pre>
+
+<pre><code class="language-python">w_ = np.array([-3, 5]).reshape(-1, 1)
+[w_, lossFunML(XX, Yclass, w_)]
+</code></pre>
+
+<pre><code>[array([[-3],
+        [ 5]]), array([-13.90418806])]
+</code></pre>
+
+<p>Figure shows the contour plot of the loss function in the domain $(\omega_1, \omega_2) \in (-6,6)\times(-2.5, 3)$.
+The higher value, the hotter the colors, the lower the loss function, the better the model is.
+Recall that the loss function is something we want to minimize by definition, while we want to maximize the likelihood of the data. It is good practice to take the maximum likelihood definition with negative sign as the loss function.
+A pair of parameter values is a dot, whose size is related to the loss function. The smaller the dot, the better it is.
+Initial and final (and hopefully optimal) weights are plotted in green and red.</p>
+
+<pre><code class="language-python">Jlist = [lossFunML(XX, Yclass, wmg[kk,:].reshape(-1, 1)) for kk in range(wmg.shape[0])]
+Jmap = np.array(Jlist).reshape(-1, w1s.shape[0])
+
+plt.figure(figsize=(10, 5))
+plt.contourf(w1mg, w2mg, Jmap, alpha=0.5, cmap=plt.cm.jet)
+plt.colorbar()
+plt.scatter(wEvolML[:,0], wEvolML[:,1], s=10+10*JevolML/np.max(JevolML), alpha=0.5, label='Weight evolution')
+plt.plot(wEvolML[-1,0], wEvolML[-1,1], 'r', linestyle='none', marker='o', markersize=10, alpha=0.75, label='Optimal weights')
+plt.plot(wEvolML[0,0], wEvolML[0,1], 'g', linestyle='none', marker='o', markersize=10, alpha=0.75, label='Initial weights')
+plt.xlabel(&quot;$\omega_1$&quot;)
+plt.ylabel(&quot;$\omega_2$&quot;)
+#plt.axis('equal')
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="/blog/logReg1/output_51_0.png" alt="png" /></p>
+
+<p>In this figure we present the same evolution when the parameters are updated with respect to the LSE function instead.
+It is clear how the loss function shape is different and less smooth than the ML one.</p>
+
+<pre><code class="language-python">Jlist = [lossFunLSE(XX, Yclass, wmg[kk,:].reshape(-1, 1)) for kk in range(wmg.shape[0])]
+Jmap = np.array(Jlist).reshape(-1, w1s.shape[0])
+
+plt.figure(figsize=(10, 5))
+plt.contourf(w1mg, w2mg, Jmap, alpha=0.5, cmap=plt.cm.jet)
+plt.colorbar()
+plt.scatter(wEvolLSE[:,0], wEvolLSE[:,1], s=10+10*JevolLSE/np.max(JevolLSE), alpha=0.5, label='Weight evolution')
+plt.plot(wEvolLSE[-1,0], wEvolLSE[-1,1], 'r', linestyle='none', marker='o', markersize=10, alpha=0.75, label='Optimal weights')
+plt.plot(wEvolLSE[0,0], wEvolLSE[0,1], 'g', linestyle='none', marker='o', markersize=10, alpha=0.75, label='Initial weights')
+plt.xlabel(&quot;$\omega_1$&quot;)
+plt.ylabel(&quot;$\omega_2$&quot;)
+#plt.axis('equal')
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="/blog/logReg1/output_53_0.png" alt="png" /></p>
+
+<p>Final plot shows the trend of ML and LSE functions over the training steps $N_{epoch}$ (1500 in this experiment).</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+plt.plot(np.log(JevolLSE), lw=2, label='LSE')
+plt.plot(JevolML, lw=2, label='ML')
+plt.xlabel(&quot;training steps ($N_{epoch}$)&quot;)
+plt.ylabel(&quot;Logarithm loss trend ($log(J_{evol})$)&quot;)
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="/blog/logReg1/output_55_0.png" alt="png" /></p>
+
+<h2 id="reference">Reference</h2>
+
+<ol>
+<li><a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf">CS229 notes</a></li>
+<li><a href="https://www.coursera.org/learn/machine-learning">Machine Learning at Coursera</a></li>
+<li><a href="http://people.math.gatech.edu/~ecroot/3225/maximum_likelihood.pdf">Maximum likelihood estimators and least squares</a></li>
+<li><a href="https://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf">An Introduction to Statistical Learning</a></li>
+<li><a href="https://stats.stackexchange.com/questions/46523/how-to-simulate-artificial-data-for-logistic-regression/46525">Generating artificial data</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc">Logistic Regression overview</a></li>
+<li><a href="https://machinelearningmastery.com/logistic-regression-for-machine-learning/">Logistic Regression for Machine learning</a></li>
+<li><a href="https://data.princeton.edu/wws509/notes/c3.pdf">Princeton notes</a></li>
+<li><a href="https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8">Building A Logistic Regression in Python, Step by Step</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-using-python-sklearn-numpy-mnist-handwriting-recognition-matplotlib-a6b31e2b166a">Logistic Regression using Python (scikit-learn)</a></li>
+</ol>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/linearregression_part4/" style="color: #4ABDAC; font-size: 18px; "> Hello world example for Machine learning - Part 4</a>
+
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/logisticregression_part2/" style="color: #4ABDAC; font-size: 18px; ">How to learn to classify - Part 2</a>
+          
+          &raquo;</p>
+          </span>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>
