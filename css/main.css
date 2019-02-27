@@ -76,7 +76,7 @@ max-height: 400px; display: block; margin-left: auto; margin-right: auto; paddin
 .description .col-lg-6 { padding-bottom: 50px; }
 .description .heroTitle { padding-right: 10px; padding-left: 10px; }
 .description .heroQuotes { padding-right: 10px; padding-left: 10px; }
-#lmbtn { padding-left: 50px; padding-right: 50px; }
+#lmbtn { padding-left: 5px; padding-right: 5px; }
 }
 
 /* ================ LATEST POSTS ================ */
@@ -102,8 +102,9 @@ max-height: 400px; display: block; margin-left: auto; margin-right: auto; paddin
 .drives { padding: 0px 0px; } }
 
 /* ================ WHAT: WEBSITE TOPCIS ================ */
-.what .wordCloud img { height: auto; width: auto; max-width: 400px; max-height: 400px; display: block; margin-left: auto;
+.what .wordCloud img { height: auto; width: auto; max-width: 100%; max-height: 400px; display: block; margin-left: auto;
   margin-right: auto; }
+
 .what { background-color: #414141 !important; color: #fff; }
 .what .row { margin: auto; padding: 20px; max-width: 1400px; }
 .what p{ color:#DFDCE3; font-size: 20px; }
@@ -296,7 +297,8 @@ background-size: cover; background-position: center; }
 .postHead .descr { position: relative; padding-top: 50px; padding-bottom: 20px; min-height: 600px;
   margin-left: auto; margin-right: auto; max-width: 1400px; display: block; }
 .postHead .card { background-color: #535353; border: 0px; }
-.postHead h1{ color:#DFDCE3; font-size: 30; }
+.postHead h1 { color:#DFDCE3; font-size: 30; }
+.postHead h5 { color:#DFDCE3; font-size: 25; }
 .postHead h6{ color:#DFDCE3; font-size: 22; }
 .postHead p{ color:#666; font-size: 18px; width: 100%; line-height: 1.5; }
 .postHead img{ margin: auto; display: block; max-width: 800px; width: auto; height: auto; }
@@ -306,6 +308,8 @@ background-size: cover; background-position: center; }
 /* .postContent .row { margin: auto; padding: 0px; max-width: 1800px; } */
 .postContent { padding-top: 50px; }
 .blogPost a{ color: #FC4A1A; font-size: 18px; }
+.blogPost table { height: auto; width: 100%; }
+/* .blogPost table { margin: auto; display: block; width: 100%; height: auto; } */
 
 .pgNav { background-color: #DFDCE3; position: relative; padding-top: 20px; padding-bottom: 20px; }
 .pgNav { display: flex; flex-direction: row; align-items: center; justify-content: center; }
@@ -313,7 +317,7 @@ background-size: cover; background-position: center; }
 
 @media only screen and (max-width: 500px) {
 .postContent .row { padding: 0px 0px; }
-.postHead img{ max-width: 350px; }
+.postHead img{ max-width: 300px; }
 .pgNav { padding-left: 0px; padding-right: 0px; }
 }
 

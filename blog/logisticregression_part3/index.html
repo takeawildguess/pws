@@ -121,7 +121,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
       <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="How to learn to classify - Part 3">
     </a>
   
-  <a class="navbar-brand" href="/blog/logisticregression_part3/" style="font-size: 16px; ">Is it coffee or cappuccino?</a>
+  <a class="navbar-brand" href="/blog/logisticregression_part3/" style="font-size: 16px; ">Coffee or cappuccino?</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
       <span class="navbar-toggler-icon"></span>
   </button>
@@ -175,6 +175,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
       <div class="card">
         <div class="card-body">
           <h1 class="card-title text-center">How to learn to classify - Part 3</h1>
+          <h5 class="card-title text-center">Coffee or cappuccino?</h5>
           <h6 class="card-text text-center">February 17, 2019</h6>
           <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 16 min read</h6>
           <h6 class="card-text text-center">
@@ -456,7 +457,9 @@ In this section, we will face an example of circle-shaped boundary.</p>
 <p>We create the Bernoulli distribution for the two predictors, x1 and x2, from two intermediate variables, $rr$ and $tt$, which model the radius and the angle of a point with respect to the <a href="https://en.wikipedia.org/wiki/Polar_coordinate_system">polar coordinate system</a>.
 We apply the circle polar transformation to get the cartesian coordinates. However, the dichotomous response variable is controlled directly with the intermediate variables, so that the decision boundary should be:</p>
 
-<p>$ hh = \omega_0 + \omega_1\cdot r + \omega_2\cdot \theta = 0 \Rightarrow r = -\omega_0/\omega_1 = 5 $</p>
+<p>$$ hh = \omega_0 + \omega_1\cdot r + \omega_2\cdot \theta = 0 $$</p>
+
+<p>$$\Rightarrow r = -\omega_0/\omega_1 = 5 $$</p>
 
 <p>where $\omega_2$ has been set to 0.</p>
 
@@ -550,7 +553,9 @@ plt.contour(x1grd, x2grd, ygrd, levels = [0], colors=('k',), linestyles=('-',),l
 If we have two inputs, ($x_1$, $x_2$), we can get the full set of a polynomial class of degree N.
 For instance, if n = 3, we get the following 10-sized set:</p>
 
-<p>$ (1, x_1, x_2, x_1^2, x_1\cdot x_2, x_2^2, x_1^3, x_1^2\cdot x_2, x_1\cdot x_2^2, x_2^3) $</p>
+<p>$$ (1, x_1, x_2, x_1^2, x_1\cdot x_2, x_2^2, $$</p>
+
+<p>$$ x_1^3, x_1^2\cdot x_2, x_1\cdot x_2^2, x_2^3) $$</p>
 
 <p>Here we show what we get if ($x_1$, $x_2$) = (3, 2).</p>
 

@@ -121,7 +121,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
       <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="How to learn to classify - Part 4">
     </a>
   
-  <a class="navbar-brand" href="/blog/logisticregression_part4/" style="font-size: 16px; ">Is it coffee or cappuccino?</a>
+  <a class="navbar-brand" href="/blog/logisticregression_part4/" style="font-size: 16px; ">Coffee or cappuccino?</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
       <span class="navbar-toggler-icon"></span>
   </button>
@@ -175,6 +175,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
       <div class="card">
         <div class="card-body">
           <h1 class="card-title text-center">How to learn to classify - Part 4</h1>
+          <h5 class="card-title text-center">Coffee or cappuccino?</h5>
           <h6 class="card-text text-center">February 24, 2019</h6>
           <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 20 min read</h6>
           <h6 class="card-text text-center">
@@ -253,7 +254,8 @@ The target concept is <em>win for x</em>, i.e., the response variable is True wh
 <p>The binary problem is slightly skewed to the positive class.
 About 65.3% are positive outcomes, i.e., wins for <em>x</em>.</p>
 
-<p>We use <a href="https://pandas.pydata.org/">Pandas</a> to read in the dataset and we provide full column schema with the <em>names</em> attribute.</p>
+<p>We use <a href="https://pandas.pydata.org/">Pandas</a> to read in the dataset and we provide full column schema with the <em>names</em> attribute.
+Table column namings contain abbreviations (T: top, M: middle, B: bottom, L: left, R: right).</p>
 
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
@@ -272,15 +274,15 @@ df.head()
 <table>
 <thead>
 <tr>
-<th>top-left</th>
-<th>top-middle</th>
-<th>top-right</th>
-<th>middle-left</th>
-<th>middle-middle</th>
-<th>middle-right</th>
-<th>bottom-left</th>
-<th>bottom-middle</th>
-<th>bottom-right</th>
+<th>TL</th>
+<th>TM</th>
+<th>TR</th>
+<th>ML</th>
+<th>MM</th>
+<th>MR</th>
+<th>BL</th>
+<th>BM</th>
+<th>BR</th>
 <th>class</th>
 </tr>
 </thead>
@@ -460,7 +462,7 @@ There is indeed no reason for the algorithm to <em>&ldquo;believe&rdquo;</em> th
 <p>One-hot encoding can be seen as an array with as many elements as the number of distinct classes. All the elements are 0, except the element whose index coincides with the class value.
 For a categorical variable that can take on 6 values from 0 to 5, the numerical value 4 is transformed into the following array:</p>
 
-<p>$ (0, 0, 0, 0, 1, 0) $</p>
+<p>$$ (0, 0, 0, 0, 1, 0) $$</p>
 
 <pre><code class="language-python">ohe = OneHotEncoder(categorical_features = range(XX.shape[1]), sparse=False )
 

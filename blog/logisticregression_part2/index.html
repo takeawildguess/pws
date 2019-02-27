@@ -121,7 +121,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
       <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="How to learn to classify - Part 2">
     </a>
   
-  <a class="navbar-brand" href="/blog/logisticregression_part2/" style="font-size: 16px; ">Is it coffee or cappuccino?</a>
+  <a class="navbar-brand" href="/blog/logisticregression_part2/" style="font-size: 16px; ">Coffee or cappuccino?</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
       <span class="navbar-toggler-icon"></span>
   </button>
@@ -175,6 +175,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
       <div class="card">
         <div class="card-body">
           <h1 class="card-title text-center">How to learn to classify - Part 2</h1>
+          <h5 class="card-title text-center">Coffee or cappuccino?</h5>
           <h6 class="card-text text-center">February 10, 2019</h6>
           <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 17 min read</h6>
           <h6 class="card-text text-center">
@@ -233,7 +234,7 @@ The actual class is assigned by drawing samples from a <a href="https://docs.sci
 A binomial distribution becomes a Bernoulli distribution when the number of trials is 1.
 In other words, we generate data by sampling the y class for each input x, where the probability of success (i.e., of belonging to class 1) is given by:</p>
 
-<p>$ p = \sigma(\lbrack x, 1\rbrack\cdot \omega) $</p>
+<p>$$ p = \sigma(\lbrack x, 1\rbrack\cdot \omega) $$</p>
 
 <p>The <a href="https://en.wikipedia.org/wiki/Logistic_function">logistic function</a> is the $\sigma$ operator in the equation.</p>
 
@@ -338,11 +339,11 @@ Ypred.shape, Ypred_prob.shape
 
 <p>The definition of precision $P$, recall $R$ and accuracy $A$ are:</p>
 
-<p>$ P = TP/(TP+FP) $</p>
+<p>$$ P = \frac{TP}{TP+FP} $$</p>
 
-<p>$ R = TP/(TP+FN) $</p>
+<p>$$ R = \frac{TP}{TP+FN} $$</p>
 
-<p>$ A = (TP+TN)/(TP+TN+FP+FN) $</p>
+<p>$$ A = \frac{TP+TN}{TP+TN+FP+FN} $$</p>
 
 <p>See more details <a href="https://en.wikipedia.org/wiki/Precision_and_recall">here</a>.</p>
 
@@ -392,7 +393,7 @@ The matrix multiplication between the input matrix and the weight array is perfo
 The probability of belonging to class 1 is given by the sigmoid function implemented in TF.
 The class is obtained with the round operator, as:</p>
 
-<p>$ Y_{class} = 1_{{p&gt;0.5}} $</p>
+<p>$$ Y_{class} = 1_{{p&gt;0.5}} $$</p>
 
 <p>where the $ 1_x $ operator returns 1 when x is True and 0 otherwise.</p>
 
@@ -655,13 +656,13 @@ Recall: 0.9484902309058615
 
 <p>Figure reports the original dataset and the decision boundary as a plane whose mesh color is proportional to the x3 predictor.
 The plane represents the set of predictor points for which the probability of success is equal to 50%.
-That means the hypothesis function, which is fed to the logistic function, is equal to 0:</p>
+That means the hypothesis function, $h$, which is fed to the logistic function, is equal to 0:</p>
 
-<p>$ h = \omega_0 + \omega_1\cdot x_1 + \omega_2\cdot x_2 + \omega_3\cdot x_3 = 0 $</p>
+<p>$$ \omega_0 + \omega_1\cdot x_1 + \omega_2\cdot x_2 + \omega_3\cdot x_3 = 0 $$</p>
 
 <p>The plane can be described as an explit function between the x3 predictor and the other two inputs:</p>
 
-<p>$ x_3 = -(\omega_0 + \omega_1\cdot x_1 + \omega_2\cdot x_2)/\omega_3 $</p>
+<p>$$ x_3 = -(\omega_0 + \omega_1\cdot x_1 + \omega_2\cdot x_2)/\omega_3 $$</p>
 
 <p>It is clear how the plane separates the two classes nicely.</p>
 

@@ -175,6 +175,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
       <div class="card">
         <div class="card-body">
           <h1 class="card-title text-center">Hello world example for Machine learning - Part 1</h1>
+          <h5 class="card-title text-center">Hello world</h5>
           <h6 class="card-text text-center">January 6, 2019</h6>
           <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 10 min read</h6>
           <h6 class="card-text text-center">
@@ -235,7 +236,7 @@ The <em>machine</em> uses the tools provided by the designer to improve its perf
 
 <p>For the sake of visualization, we use a 2D plot to show the correlation of a 1D input, x, and the continuous output, y. Let assume the model output shape (a line) represents a bar and each data point is a mass connected to the bar via a vertical spring. The energy stored in the spring is proportional to the spring stiffness and the squared displacement:</p>
 
-<p>$ E_j = \frac{1}{2}\cdot k_j\cdot \delta x_j^2 $</p>
+<p>$$ E_j = \frac{1}{2}\cdot k_j\cdot \delta x_j^2 $$</p>
 
 <p>where the displacement is the vertical distance between the mass (data point) and its projection to the bar (see Fig. 2).</p>
 
@@ -248,40 +249,42 @@ The <em>machine</em> uses the tools provided by the designer to improve its perf
 
 <p>The correlation between the output $ y_j $ and the input $ x_j $ can be formulated as follows:</p>
 
-<p>$ y_j = \theta^T \cdot x_j + \epsilon_j $</p>
+<p>$$ y_j = \theta^T \cdot x_j + \epsilon_j $$</p>
 
 <p>where $ \epsilon_j $ is the error related to point $P_j$ that includes either random noise or effects that are not captured by the selected predictors in the <em>x</em> term. If the error values are independently and identically distributed with a normal distribution ($ \epsilon_j \mathtt{\sim} N(0, \sigma^2) $), we can state that the density distribution is as follows:</p>
 
-<p>$ p(\epsilon_j) = \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{\epsilon_j^2}{2\cdot\sigma^2}} $</p>
+<p>$$ p(\epsilon_j) = \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{\epsilon_j^2}{2\cdot\sigma^2}} $$</p>
 
 <p><img src="/blog/linReg1/likelihoodModel.png" alt="png" title="Likelihood-based loss function scheme" />
 <em>Figure 3 – Likelihood-based loss function scheme</em></p>
 
 <p>By combining the latter equation with the error-based linear regression expression (1), the output density given inputs and parameter estimation for point $P_j$ is:</p>
 
-<p>$ p(y_j | x_j; \theta) = \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}} $</p>
+<p>$$ p(y_j | x_j; \theta) = \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}} $$</p>
 
 <p>The probability of the dataset is given by the combined contributions of every data point. Since inputs and outputs are fixed, we can select the best values of parameter vector $\theta$ that <strong>maximize the likelihood</strong> of the dataset:</p>
 
-<p>$ max_{\theta}\quad p(\hat{y} | \hat{x}; \theta) $</p>
+<p>$$ max_{\theta}\quad p(\hat{y} | \hat{x}; \theta) $$</p>
 
 <p>where $ \hat{x} \in R^{m, n}$ and $ \hat{y} \in R^{m, 1}$ are the matrix and the vector containing the dataset inputs and outputs, <em>m</em> is the number of data points, <em>n</em> is the dimension of the predictors. Since the data points are independent each other, the likelihood function can be re-written as:</p>
 
-<p>$ L(\theta) = \Pi_{j=1}^{m} p(y_j | x_j; \theta) $</p>
+<p>$$ L(\theta) = \Pi_{j=1}^{m} p(y_j | x_j; \theta) $$</p>
 
-<p>$ L(\theta) = \Pi_{j=1}^{m} \frac{1}{\sqrt(2\pi)\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}} $</p>
+<p>$$ L(\theta) = \Pi_{j=1}^{m} \frac{1}{\sqrt(2\pi)\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}} $$</p>
 
 <p>Maximizing <em>L</em> is equivalent to maximizing $ l(\theta) = log(L(\theta)) $ due to the strictly increasing behavior of the <em>log</em> function.</p>
 
-<p>$ l(\theta) = log \Pi_{j=1}^{m} \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}} $</p>
+<p>$$ l(\theta) = \log \Pi_{j=1}^{m} \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}} $$</p>
 
-<p>$\rightarrow = \sum_{j=1}^{m} \log \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}}$</p>
+<p>$$\rightarrow = \sum_{j=1}^{m} \log \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}}$$</p>
 
-<p>$\rightarrow = m\cdot\log\frac{1}{\sqrt{2\pi}\cdot \sigma} - \frac{1}{2\cdot\sigma^2}\sum_{j=1}^{m} (y_j-\theta^T \cdot x_j)^2$</p>
+<p>$$\rightarrow = C - \frac{1}{2\cdot\sigma^2}\sum_{j=1}^{m} (y_j-\theta^T \cdot x_j)^2$$</p>
+
+<p>where $C = m\cdot\log\frac{1}{\sqrt{2\pi}\cdot \sigma}$ is a constant value.</p>
 
 <p>Maximizing <em>l</em> is equivalent to minimizing the loss function obtained with the least-squared error:</p>
 
-<p>$ LSE = \frac{1}{2}\sum_{j=1}^{m} (y_j-\theta^T \cdot x_j)^2$</p>
+<p>$$ LSE = \frac{1}{2}\sum_{j=1}^{m} (y_j-\theta^T \cdot x_j)^2$$</p>
 
 <p>Under the previous probabilistic assumptions on the data, least-squared error minimization corresponds to finding the maximum likelihood estimate of $\theta$.</p>
 
@@ -293,24 +296,26 @@ The <em>machine</em> uses the tools provided by the designer to improve its perf
 
 <p>Gradient descent algorithm is used to optimize the loss function, i.e., to find the parameter values that minimize it. From calculus theory, we exploit that the minimum of a continuous function can be identified by solving the following problem $\nabla_\theta J = 0$. In other words, we need to find the parameter values $\theta$ that let the gradient of the function J to be 0. The gradient is the vector perpendicular to the isolines of the surface described by J. The gradient is the 0-vector at every minimum, maximum or saddle point of the surface. Let us analyse the following example:</p>
 
-<p>$ J = \omega_1^2 + \omega_2^2 + 5$</p>
+<p>$$ J = \omega_1^2 + \omega_2^2 + 5$$</p>
 
 <p>This is a paraboloid in a 3D space, or an infinite <em>collection</em> of circles centred in the origin and whose radius is $ \sqrt{J-5} $. That implies that the smallest circle has 0 radius for $J=5$.
 Every circle is obtained by slicing the 3D space with a horizontal plane $J = k$, where <em>k</em> is the height of the plane. The gradient of that function is a vector where every element is the variation of the function with respect to the corresponding parameter, as follows:</p>
 
-<p>$ \nabla_{\theta} J = (\frac{\partial J}{\partial \omega_1}, \frac{\partial J}{\partial \omega_2}) $.</p>
+<p>$$ \nabla_{\theta} J = (\frac{\partial J}{\partial \omega_1}, \frac{\partial J}{\partial \omega_2}) $$</p>
 
-<p>In our example, $ \nabla J = 2\cdot(\omega_1, \omega_2) $.</p>
+<p>In our example, the gradient is:</p>
+
+<p>$$ \nabla J = 2\cdot(\omega_1, \omega_2) $$</p>
 
 <p>We draw this vector field in conjunction with the isolines. It is 0 if and only if $ (\omega_1, \omega_2) = (0, 0) $. Since any point in the neighbouring area of $(0, 0)$ leads to higher J values, we conclude it is a minimum. Since machine-learning problems cannot be analytically solved, we need to iterate to gradually get closer to the minimum point by changing the parameters.</p>
 
 <p>The <em>gradient descent algorithm</em> changes the parameter vector values at each epoch, k (or iteration), using the gradient direction and magnitude. The actual change in $\theta$ is controlled also by the learning rate $\alpha$, as follows:</p>
 
-<p>$ \theta^{k+1} = \theta^k - \alpha \nabla_{\theta} J(\theta)$</p>
+<p>$$ \theta^{k+1} = \theta^k - \alpha \nabla_{\theta} J(\theta)$$</p>
 
 <p>The parameter update rule can be expliticily written for each element as follows:</p>
 
-<p>$ \theta_j^{k+1} = \theta_j^k - \alpha \frac{\partial J(\theta)}{\partial \theta_j} $</p>
+<p>$$ \theta_j^{k+1} = \theta_j^k - \alpha \frac{\partial J(\theta)}{\partial \theta_j} $$</p>
 
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
@@ -340,9 +345,6 @@ plt.show()
 </code></pre>
 
 <p><img src="/blog/linReg1/output_8_0.png" alt="png" /></p>
-
-<pre><code class="language-python">
-</code></pre>
 
 <h2 id="reference">Reference</h2>
 
