@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.49" />
+  <title>Hello world example for Machine learning - Part 5 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+
+  
+  
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Hello world example for Machine learning - Part 5">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/linreg/linreg5/" style="font-size: 16px; ">Hello world</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/images/blog/linearRegression/hello.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Hello world example for Machine learning - Part 5</h1>
+          <h5 class="card-title text-center">Hello world</h5>
+          <h6 class="card-text text-center">January 27, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 22 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/linear-regression"><kbd class="item-tag">linear-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> <a href="https://takeawildguess.net/tags/tensorflow"><kbd class="item-tag">tensorflow</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>We have introduced the concept of the linear-regression problem and the structure to solve it in a &ldquo;machine-learning&rdquo; fashion in <a href="/blog/linreg/linreg1/">this</a> post, while we have applied the theory to a simple but practical case of linear-behavior identification from a bunch of data that are generated in a synthetic way <a href="/blog/linreg/linreg2/">here</a> and extend the analysis to a multi-linear case where more than one feature (or input) are fed to the model to predict the outcome <a href="/blog/linreg/linreg3/">here</a>.</p>
+
+<p>We have implementated the same process with <a href="https://scikit-learn.org/stable/">Sklearn</a> and <a href="https://www.tensorflow.org/">Tensorflow</a> in the last <a href="/blog/linreg/linreg4/">post</a>.</p>
+
+<p>This post takes care of fundamental aspects of machine learning theory, such as <a href="https://en.wikipedia.org/wiki/Feature_scaling">feature scaling</a>, feature augmentation, via techniques such as <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html">polynomial features</a>, and <a href="https://en.wikipedia.org/wiki/Hypothesis">hypothesis evaluation</a>. The last step translates into splitting the data set in at least two sub-sets, namely <strong>training</strong> and <strong>testing</strong>. The former is used to find optimal parameters of the model, the latter is adopted to evaluate the <em>real</em> performance of the model when it is fed with data that have never been seen during training.</p>
+
+<p>One major challenge is to collect large enough training set to find out the optimal parameters, but be able to keep apart a set that can still represent the actual data distribution of the world the model will be employed in.
+More details of this practise can be found <a href="https://en.wikipedia.org/wiki/Training,_validation,_and_test_sets">here</a>.</p>
+
+<h2 id="2-feature-scaling">2. Feature scaling</h2>
+
+<p>Feature scaling can impact the final performance of some algorithms to a great extent, while might have a minimal or no effect in others.
+From a theoretical point of view, feature scaling should impact mostly algorithms based on the Euclidean distance.
+If one of the features varies over a much broader range, the distance will be ruled by this feature.
+Another reason to apply feature scaling is that it helps the gradient descent algorithm to converge much faster.</p>
+
+<p>We want to investigate the effects of feature scaling for dataset 2 and 3 and show how linear regression has no benefits into applying feature scaling in terms of final outcome.</p>
+
+<h3 id="2-1-dataset-2">2.1 Dataset 2</h3>
+
+<p>We first run the same Scikit-Learn model on dataset 2, without any preprocess of the features.
+Recall that the maximum value of the first input is far greater than the second one.
+In particular, <code>x1</code> scales from -1000 to 1000, while <code>x2</code> from -1 to 1.</p>
+
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+import pandas as pd
+from mpl_toolkits import mplot3d
+</code></pre>
+
+<pre><code class="language-python">lm2 = LinearRegression() # linear model without feature-scaling
+</code></pre>
+
+<pre><code class="language-python">lm2.fit(XX2, YY2)
+Ypred2 = lm2.predict(XX2)
+</code></pre>
+
+<pre><code class="language-python">xx1, xx2, yy, wws = visData2
+print('The final RSME is : {}'.format(mean_squared_error(YY2, Ypred2)))
+print('The original parameter values: {}'.format(wws))
+print('The final parameter values: {}'.format(np.hstack((lm2.intercept_, lm2.coef_[0,:])).tolist()))
+</code></pre>
+
+<pre><code>The final RSME is : 0.06319048495495569
+The original parameter values: [2, -3, -1]
+The final parameter values: [1.7556085903611112, -2.9999176976634137, -0.9975157271349785]
+</code></pre>
+
+<pre><code class="language-python">ypred2 = Ypred2.reshape(-1, xx1.shape[-1])
+plt.figure(figsize=(10, 5))
+ax = plt.axes(projection='3d')
+ax.plot_surface(xx1, xx2, ypred2, rstride=1, cstride=1, cmap='viridis', edgecolor='none', alpha=0.5)
+ax.scatter(xx1, xx2, yy, cmap='viridis', linewidth=0.5, alpha=0.5)
+ax.set_xlabel('$x_1$')
+ax.set_ylabel('$x_2$')
+ax.set_zlabel('y')
+ax.view_init(20, 30)
+plt.tight_layout()
+plt.show()
+</code></pre>
+
+<p><img src="output_7_0.png" alt="png" /></p>
+
+<p>The gradient descent algorithm is able to find the optimal parameter values that minimize the loss function to the data-noise level.</p>
+
+<h3 id="2-2-dataset-3">2.2 Dataset 3</h3>
+
+<p>We run the same Scikit-learn model on dataset 3, without any preprocess of the features.
+Recall that the first feature <code>x1</code> shows off as a quadratic function.</p>
+
+<pre><code class="language-python">lm3 = LinearRegression() # linear model without feature-scaling
+</code></pre>
+
+<pre><code class="language-python">lm3.fit(XX3, YY3)
+Ypred3 = lm3.predict(XX3)
+</code></pre>
+
+<pre><code class="language-python">xx1, xx2, yy, wws = visData3
+print('The final RSME is : {}'.format(mean_squared_error(YY3, Ypred3)))
+print('The original parameter values: {}'.format(wws))
+print('The final parameter values: {}'.format(np.hstack((lm3.intercept_, lm3.coef_[0,:])).tolist()))
+</code></pre>
+
+<pre><code>The final RSME is : 0.06302815103212135
+The original parameter values: [2, -3, -1, 2]
+The final parameter values: [1.7457329949127356, -2.9991028003507973, -1.0006755077021603, 2.001083379548741]
+</code></pre>
+
+<pre><code class="language-python">ypred3 = Ypred3.reshape(-1, xx1.shape[-1])
+plt.figure(figsize=(10, 5))
+ax = plt.axes(projection='3d')
+ax.plot_surface(xx1, xx2, ypred3, rstride=1, cstride=1, cmap='viridis', edgecolor='none', alpha=0.5)
+ax.scatter(xx1, xx2, yy, cmap='viridis', linewidth=0.5, alpha=0.5)
+ax.set_xlabel('$x_1$')
+ax.set_ylabel('$x_2$')
+ax.set_zlabel('y')
+ax.view_init(20, 30)
+plt.tight_layout()
+plt.show()
+</code></pre>
+
+<p><img src="output_13_0.png" alt="png" /></p>
+
+<p>The gradient descent algorithm is able to find the optimal parameter values that minimize the loss function to the data-noise level.</p>
+
+<h2 id="3-polynomial-regression">3. Polynomial regression</h2>
+
+<h3 id="3-1-second-degree-polynomial">3.1 Second-degree polynomial</h3>
+
+<p>We import the method <code>PolynomialFeatures</code> from SKL package <code>preprocessing</code>.
+We extract the first-order terms of the two features from the original input matrix <code>XX3</code> by removing the square term of the first feature, which is contained in the second column.
+We define the degree of the polynomial of the two features and transform the input matrix. Since we apply second-degree polynomial transformation to two features, we obtain 6 columns at the end, as follows (Eq. 1):</p>
+
+<p>$$ (x_1, x_2) \rightarrow (1, x_1, x_2, x_1^2, x_1\cdot x_2, x_2^2) $$</p>
+
+<p>We then feed the new matrix into the linear model object to get the optimal weights.</p>
+
+<pre><code class="language-python">from sklearn.preprocessing import PolynomialFeatures
+</code></pre>
+
+<pre><code class="language-python">Xpr = np.delete(XX3, 1, axis=1) # drop (1-indexed) second column along axis=1
+PF = PolynomialFeatures(degree=2)
+Xpr = PF.fit_transform(Xpr)
+print('The input matrix comes with {} features/columns'.format(Xpr.shape[-1]))
+</code></pre>
+
+<pre><code>The input matrix comes with 6 features/columns
+</code></pre>
+
+<pre><code class="language-python">lm4 = LinearRegression()
+lm4.fit(Xpr, YY3)
+Ypred4 = lm4.predict(Xpr)
+</code></pre>
+
+<pre><code class="language-python">xx1, xx2, yy, wws = visData3
+print('The final RSME is : {}'.format(mean_squared_error(YY3, Ypred4)))
+print('The original parameter values: {}'.format(wws))
+print('The final parameter values: {}'.format(np.hstack((lm4.intercept_, lm4.coef_[0,1:])).tolist()))
+</code></pre>
+
+<pre><code>The final RSME is : 0.06297591725187177
+The original parameter values: [2, -3, -1, 2]
+The final parameter values: [1.750110081427339, -2.9991028003507987, 2.00108337954874, -1.00067550770216, -0.0007005962684500263, -0.0005046523275718696]
+</code></pre>
+
+<p>The order of the final parameter set is given by the expression (1). Two terms, $x_1\cdot x_2$ and $x_2^2$, received almost 0-weight, which means the algorithm is able to identify which polynomial feature is required to describe the phenomenon.
+However, it is safe to introduce some techniques to prevent the algorithm to learn overfit.
+Indeed, it could happen that too complex functions that react in an unreasonable way to extreme input values, even though their associated weights are small.
+Overfitting is a critical topic for machine learning.
+A dedicated post will be realised soon.</p>
+
+<p>We use the new model to generate the surface corresponding to a broader input domain $(-10, 10) \times (-10, 10)$, while the data could has been generated for the domain $(-5, 5) \times (-5, 5)$.</p>
+
+<pre><code class="language-python">Npntx, Npnty = 50, 50 # number of points
+x1_ = np.linspace(-10, 10, Npntx)
+x2_ = np.linspace(-10, 10, Npnty)
+xx1L, xx2L = np.meshgrid(x1_, x2_)
+
+Xlarge = np.vstack((xx1L.flatten(), xx2L.flatten())).T
+XLP = PF.fit_transform(Xlarge)
+Ypred4L = lm4.predict(XLP)
+ypred4L = Ypred4L.reshape(-1, xx1L.shape[-1])
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+ax = plt.axes(projection='3d')
+ax.plot_surface(xx1L, xx2L, ypred4L, rstride=1, cstride=1, cmap='viridis', edgecolor='none', alpha=0.5)
+ax.scatter(xx1, xx2, yy, cmap='viridis', linewidth=0.5, alpha=0.5)
+ax.set_xlabel('$x_1$')
+ax.set_ylabel('$x_2$')
+ax.set_zlabel('y')
+ax.view_init(20, 20)
+plt.tight_layout()
+plt.show()
+</code></pre>
+
+<p><img src="output_23_0.png" alt="png" /></p>
+
+<h3 id="3-2-third-degree-polynomial">3.2 Third-degree polynomial</h3>
+
+<p>We now apply third-degree polynomial transformation to two features and obtain 10 columns at the end, as follows (Eq. 2):</p>
+
+<p>$$ (x_1, x_2) \rightarrow (1, x_1, x_2, x_1^2, x_1\cdot x_2, x_2^2, x_1^3, x_1^2\cdot x_2, x_1\cdot x_2^2, x_2^3) $$</p>
+
+<p>We then feed the new matrix into the linear model object to get the optimal weights.</p>
+
+<pre><code class="language-python">Xpr = np.delete(XX3, 1, axis=1) # drop (1-indexed) second column along axis=1
+PF = PolynomialFeatures(degree=3)
+Xpr = PF.fit_transform(Xpr)
+print('The input matrix comes with {} features/columns'.format(Xpr.shape[-1]))
+</code></pre>
+
+<pre><code>The input matrix comes with 10 features/columns
+</code></pre>
+
+<p>You can easily understand how SKL handles the polynomial generation with this simple array transformation.</p>
+
+<pre><code class="language-python">print(PF.fit_transform(np.array([[2,3]])))
+</code></pre>
+
+<pre><code>[[  1.   2.   3.   4.   6.   9.   8.  12.  18.  27.]]
+</code></pre>
+
+<pre><code class="language-python">lm5 = LinearRegression()
+lm5.fit(Xpr, YY3)
+Ypred5 = lm5.predict(Xpr)
+</code></pre>
+
+<pre><code class="language-python">xx1, xx2, yy, wws = visData3
+print('The final RSME is : {}'.format(mean_squared_error(YY3, Ypred5)))
+print('The original parameter values: {}'.format(wws))
+print('The final parameter values: {}'.format(np.hstack((lm5.intercept_, lm5.coef_[0,1:])).tolist()))
+</code></pre>
+
+<pre><code>The final RSME is : 0.06292996557343045
+The original parameter values: [2, -3, -1, 2]
+The final parameter values: [1.7501100814273354, -2.9986611741153584, 2.00081744310528, -1.00067550770216, -0.0007005962684500823, -0.0005046523275716124, 5.3787097770249686e-05, -0.00022137986615712604, -0.00014768202685457046, 0.00014009740059971174]
+</code></pre>
+
+<p>The order of the final parameter set is given by the expression (2). Whatever feature was not used to generate the dataset has received a closed to 0 weight. However, since some features are powered to 3, the overfitting problem and then the risk of unstable behaviour of the model are even more severe and critical.</p>
+
+<p>We use the new model to generate the surface corresponding to a broader input domain $(-10, 10) \times (-10, 10)$, while the data could has been generated for the domain $(-5, 5) \times (-5, 5)$.</p>
+
+<pre><code class="language-python">Npntx, Npnty = 50, 50 # number of points
+x1_ = np.linspace(-10, 10, Npntx)
+x2_ = np.linspace(-10, 10, Npnty)
+xx1L, xx2L = np.meshgrid(x1_, x2_)
+
+Xlarge = np.vstack((xx1L.flatten(), xx2L.flatten())).T
+XLP = PF.fit_transform(Xlarge)
+Ypred5L = lm5.predict(XLP)
+ypred5L = Ypred5L.reshape(-1, xx1L.shape[-1])
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+ax = plt.axes(projection='3d')
+ax.plot_surface(xx1L, xx2L, ypred5L, rstride=1, cstride=1, cmap='viridis', edgecolor='none', alpha=0.5)
+ax.scatter(xx1, xx2, yy, cmap='viridis', linewidth=0.5, alpha=0.5)
+ax.set_xlabel('$x_1$')
+ax.set_ylabel('$x_2$')
+ax.set_zlabel('y')
+ax.view_init(20, 20)
+plt.tight_layout()
+plt.show()
+</code></pre>
+
+<p><img src="output_32_0.png" alt="png" /></p>
+
+<h2 id="4-hypothesis-evaluation">4. Hypothesis evaluation</h2>
+
+<p>The last chapter of this post concerns the capability of the learned model to generalise to new samples.
+It means we want our model to be reliable in real-wolrd applications when it is going to face new inputs that have not been encounter before, i.e., during training.</p>
+
+<p>We split the complete dataset into two sets by using the 80-20 rule, which implies we are going to use 80% of the data to train the model parameters and 20% of it to test the actual performance.
+The dataset needs to be shuffled before being split to prevent the two new datasets from bearing different statistical content.
+Luckly for us, it is implemented in the <code>train_test_split</code> method from <code>model_selection</code> package available in SKL.</p>
+
+<pre><code class="language-python">from sklearn.model_selection import train_test_split
+</code></pre>
+
+<pre><code class="language-python">Xtrain, Xtest, Ytrain, Ytest = train_test_split(XX3, YY3, test_size=0.2, random_state=42)
+</code></pre>
+
+<pre><code class="language-python">lm6 = LinearRegression()
+lm6.fit(Xtrain, Ytrain)
+Ypred6 = lm6.predict(Xtest)
+</code></pre>
+
+<pre><code class="language-python">xx1, xx2, yy, wws = visData3
+print('The final RSME over training set is : {}'.format(mean_squared_error(Ytrain, lm6.predict(Xtrain))))
+print('The final RSME over complete set is : {}'.format(mean_squared_error(YY3, lm6.predict(XX3))))
+print('The final RSME over testing set is : {}'.format(mean_squared_error(Ytest, lm6.predict(Xtest))))
+print('-'*80)
+print('The original parameter values: {}'.format(wws))
+print('The final parameter values: {}'.format(np.hstack((lm6.intercept_, lm6.coef_[0,:])).tolist()))
+</code></pre>
+
+<pre><code>The final RSME over training set is : 0.06205556313356443
+The final RSME over complete set is : 0.06303448176658248
+The final RSME over testing set is : 0.0669501562986547
+--------------------------------------------------------------------------------
+The original parameter values: [2, -3, -1, 2]
+The final parameter values: [1.7429651595022575, -2.9995190644738403, -1.0004142598405084, 2.0008497763561404]
+</code></pre>
+
+<p>The algorithm is still able to identify the proper model that describes the data.
+However, model error is slightly higher over testing set.</p>
+
+<pre><code class="language-python">ypred6 = lm6.predict(XX3).reshape(-1, xx1.shape[-1])
+plt.figure(figsize=(10, 5))
+ax = plt.axes(projection='3d')
+ax.plot_surface(xx1, xx2, ypred6, rstride=1, cstride=1, cmap='viridis', edgecolor='none', alpha=0.5)
+ax.scatter(xx1, xx2, yy, cmap='viridis', linewidth=0.5, alpha=0.5)
+ax.set_xlabel('$x_1$')
+ax.set_ylabel('$x_2$')
+ax.set_zlabel('y')
+ax.view_init(20, 20)
+plt.tight_layout()
+plt.show()
+</code></pre>
+
+<p><img src="output_39_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/linreg/linreg3/" style="color: #4ABDAC; font-size: 18px; "> Hello world example for Machine learning - Part 3</a>
+
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/linreg/linreg4/" style="color: #4ABDAC; font-size: 18px; ">Hello world example for Machine learning - Part 4</a>
+          
+          &raquo;</p>
+          </span>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

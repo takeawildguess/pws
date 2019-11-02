@@ -52,10 +52,19 @@ We focus on the input/output space, the predictor structure, the learning algori
     
     <item>
       <title>Hello world example for Machine learning - Part 4</title>
-      <link>https://takeawildguess.net/blog/linearregression_part4/</link>
+      <link>https://takeawildguess.net/blog/linreg/linreg4/</link>
       <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.net/blog/linearregression_part4/</guid>
+      <guid>https://takeawildguess.net/blog/linreg/linreg4/</guid>
+      <description>1. Introduction We have introduced the concept of the linear-regression problem and the structure to solve it in a &amp;ldquo;machine-learning&amp;rdquo; fashion in this post, while we have applied the theory to a simple but practical case of linear-behavior identification from a bunch of data that are generated in a synthetic way here and extend the analysis to a multi-linear case where more than one feature (or input) are fed to the model to predict the outcome here.</description>
+    </item>
+    
+    <item>
+      <title>Hello world example for Machine learning - Part 5</title>
+      <link>https://takeawildguess.net/blog/linreg/linreg5/</link>
+      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/linreg/linreg5/</guid>
       <description>1. Introduction We have introduced the concept of the linear-regression problem and the structure to solve it in a &amp;ldquo;machine-learning&amp;rdquo; fashion in this post, while we have applied the theory to a simple but practical case of linear-behavior identification from a bunch of data that are generated in a synthetic way here and extend the analysis to a multi-linear case where more than one feature (or input) are fed to the model to predict the outcome here.</description>
     </item>
     

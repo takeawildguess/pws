@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.49" />
+  <title>Hello world example for Machine learning - Part 3 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+
+  
+  
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Hello world example for Machine learning - Part 3">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/linreg/linreg3/" style="font-size: 16px; ">Hello world</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/images/blog/linearRegression/hello.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Hello world example for Machine learning - Part 3</h1>
+          <h5 class="card-title text-center">Hello world</h5>
+          <h6 class="card-text text-center">January 20, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 14 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/linear-regression"><kbd class="item-tag">linear-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/numpy"><kbd class="item-tag">numpy</kbd></a> <a href="https://takeawildguess.net/tags/gradient-descent"><kbd class="item-tag">gradient descent</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>We have introduced the concept of the linear-regression problem and the structure to solve it in a &ldquo;machine-learning&rdquo; fashion in <a href="/blog/linreg/linreg1/">this</a> post, while we have applied the theory to a simple but practical case of linear-behavior identification from a bunch of data that are generated in a synthetic way <a href="/blog/linreg/linreg2/">here</a>.</p>
+
+<p>We now extend the analysis to a multi-linear case where more than one feature (or input) are fed to the model to predict the outcome.
+A real-world application could be to estimate the weight of a vehicle engine based on maximum power, maximum torque and displacement.</p>
+
+<p>We are going to implement the logic from scratch in Python and its powerful numerical library, <a href="http://www.numpy.org/">Numpy</a>, but the article structure is consistent to that used in the single-feature case.
+Feel free to go through these two post side by side to appreciate to what extent the code can be general and easily spot the differences.</p>
+
+<h2 id="2-data-generation">2. Data generation</h2>
+
+<p>First we start generating some synthetic data (<code>Npntx*Npnty=50*30</code> points).
+We assume we know both the slope of the two inputs ($ \omega_1 = 3, \omega_2 = -1 $) and the intercept ($ \omega_0 = 5 $) of the plane we want to indentify, but we also introduce some noise with a gaussian distribution and zero-mean to the plane to make the data source a bit closer to real-world scenarios.</p>
+
+<p>The chart shows the generated data cloud that we feed to the learning algorithm to identify the plane specifications.
+Please keep in mind that the linear model of one feature can be visualized as a line, the same model of two features as a plane, while standard and effective visualization techniques fail to represent models of more than two features. However, it is common practise to have an abstract idea of such a model as a hyperplane.</p>
+
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+import pandas as pd
+from mpl_toolkits import mplot3d
+</code></pre>
+
+<pre><code class="language-python">Npntx, Npnty = 50, 30 # number of points
+x1_ = np.linspace(0, 3, Npntx)
+x2_ = np.linspace(-1, 1, Npnty)
+xx1, xx2 = np.meshgrid(x1_, x2_)
+noise = 0.25*(np.random.randn(Npnty,Npntx)-1)
+w0, w1, w2 = 5, -3, -1
+yy = w0 + w1*xx1 + w2*xx2 + noise
+zz = w0 + w1*xx1 + w2*xx2
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+ax = plt.axes(projection='3d')
+ax.plot_surface(xx1, xx2, zz, rstride=1, cstride=1, cmap='viridis', edgecolor='none', alpha=0.5)
+ax.scatter(xx1, xx2, yy, cmap='viridis', linewidth=0.5, alpha=0.5)
+plt.xlabel(&quot;X1&quot;)
+plt.ylabel(&quot;X2&quot;)
+plt.ylabel(&quot;Y&quot;)
+
+ax.set_xlabel('x1')
+ax.set_ylabel('x2')
+ax.set_zlabel('y')
+ax.view_init(30, 35)
+plt.show()
+</code></pre>
+
+<p><img src="output_4_0.png" alt="png" /></p>
+
+<p>The dataset is generated by creating two 2D arrays, one for inputs and one for output.
+The input array, XX, is the horizontal concatenation of a column of 1s, as many as the length of the initial flattened 1D array <code>xx</code>, and the flattened version of the two input arrays, <code>xx1</code> and <code>xx2</code>.
+We first stack the three 1D arrays vertically and then transpose it to get the examples (<code>50*30=1500</code>) over the rows and the features over the columns (1+2).
+The output 2D array is just a single column filled with the <code>y</code> values.
+Here the shape of the arrays.</p>
+
+<pre><code class="language-python">XX = np.vstack((np.ones_like(xx1.flatten()), xx1.flatten(), xx2.flatten())).T
+ww = np.array([0, -4, 1]).reshape(-1, 1)
+YY = yy.flatten().reshape(-1,1)
+[XX.shape, YY.shape]
+</code></pre>
+
+<pre><code>[(1500, 3), (1500, 1)]
+</code></pre>
+
+<h2 id="3-loss-function">3. Loss function</h2>
+
+<p>Let us recall the <a href="/blog/linreg/linreg1/#lossFun">loss function</a>, <em>J</em>, where $x^j$ and $y^j$ are the input and output of the <em>j-th</em> example and <em>n</em> is the number of features (2):</p>
+
+<p>$$ J = \frac{1}{2}\sum<em>{j=1}^{m} (y^j- \sum</em>{k=1}^{n} (\theta_k \cdot x^j_k) )^2 $$</p>
+
+<p>$$ J = \frac{1}{2}\sum_{j=1}^{m} (y^j-\theta^T \cdot x^j)^2 $$</p>
+
+<p>We realize that the formula is also valid for the multi-linear case, since its format is already vectorized to handle two parameters in the single-feature case, one for the intercept and one for the feature itself.
+In this case the number of features is two and the parameter array to learn has size equal to three. We only need to extend the columns of the X array and the lenght of the $\theta$ array by one.</p>
+
+<p>The final loss function (<a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation">Root mean squared error</a>) code is as simple as what follows.
+It is the Numpy implementation of <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html">this</a> Scikit-learn function.</p>
+
+<pre><code class="language-python">def lossFunction(XX, YY, ww):
+    Npnt = XX.shape[0]
+    J = np.sum((np.dot(XX, ww) - YY)**2, axis=0)/2/Npnt
+    return J
+lossFunction(XX, YY, ww)
+</code></pre>
+
+<pre><code>array([ 20.64306295])
+</code></pre>
+
+<h2 id="4-gradient-descent">4.Gradient descent</h2>
+
+<p>We recall the equation of the gradient of the loss function to apply the <em>gradient descent algorithm</em> to the multi-linear regression problem, where the <em>k</em> element is:</p>
+
+<p>$$ \frac{\partial J}{\partial \theta<em>k} = \sum</em>{j=1}^{m} (y^j-\theta^T \cdot x^j)\cdot x_k^j $$</p>
+
+<p>Keep in mind that the input feature associated to the first parameter $\theta_0$, which is the intercept, is always 1.</p>
+
+<p>Code-wise, a vectorized implementation of the parameter update step is fundamental to achieve fast computation.
+The input data are stored into a 2D array, <code>XX</code>, where m and n+1 are number of rows and columns, respectively.
+In the below code example, <code>m=6</code> and <code>n=2</code>.
+Parameters are allocated into a 2D array, <code>ww</code>, with n+1 rows and one column. Numpy <code>dot</code> operator returns the matrix multiplication of the two 2D arrays, whose size is (m, 1).
+We then subtract element-wise the result with the ground-truth output, y, and broadcast the resulting (m, 1) array, $\epsilon$, to perform the element-wise product with the input array, XX.</p>
+
+<pre><code class="language-python">X_ = np.arange(18).reshape(-1,3)
+Y_ = np.arange(6).reshape(-1,1)
+w_ = np.arange(3).reshape(-1,1)
+epsilon = np.dot(X_, w_) - Y_
+print(X_)
+print('-'*10)
+print(w_)
+print('-'*10)
+print(epsilon)
+</code></pre>
+
+<pre><code>[[ 0  1  2]
+ [ 3  4  5]
+ [ 6  7  8]
+ [ 9 10 11]
+ [12 13 14]
+ [15 16 17]]
+----------
+[[0]
+ [1]
+ [2]]
+----------
+[[ 5]
+ [13]
+ [21]
+ [29]
+ [37]
+ [45]]
+</code></pre>
+
+<p>We exploit the <strong>broadcasting</strong> technique to implement the vectorized code. See <a href="https://docs.scipy.org/doc/numpy-1.15.0/user/basics.broadcasting.html">official documentation</a> and further details in my previous <a href="/blog/linreg/linreg2/">post</a> and a very clear <a href="https://jakevdp.github.io/PythonDataScienceHandbook/02.05-computation-on-arrays-broadcasting.html">post</a> from the author of <em>Python Data Science Handbook</em>.
+The (m,1) array, $\epsilon$, represent the constant part for each parameter $\theta_k$.</p>
+
+<pre><code class="language-python">print(epsilon.shape)
+print(X_.shape)
+print(epsilon * X_)
+print((epsilon * X_).shape)
+</code></pre>
+
+<pre><code>(6, 1)
+(6, 3)
+[[  0   5  10]
+ [ 39  52  65]
+ [126 147 168]
+ [261 290 319]
+ [444 481 518]
+ [675 720 765]]
+(6, 3)
+</code></pre>
+
+<p>We then sum through the examples to get the gradient array and reshape it to have a 2D column array (n+1, 1) that match the size of the current parameter vector estimate.</p>
+
+<pre><code class="language-python">grad_ = np.sum((np.dot(X_, w_) - Y_) * X_, axis=0)
+print(grad_.shape)
+print('-'*10)
+print(grad_.reshape(-1,1))
+</code></pre>
+
+<pre><code>(3,)
+----------
+[[1545]
+ [1695]
+ [1845]]
+</code></pre>
+
+<h2 id="4-training">4. Training</h2>
+
+<p>Here follows the complete code of the learning process, where the model parameters are changed for <code>Nepoch</code> times.
+The parameters and the corresponding loss function value are stored in associated lists and returned at the end of the function call.</p>
+
+<pre><code class="language-python">def gradientDescent(XX, YY, ww, lr=0.1, Nepoch=1500):
+    Npnt = XX.shape[0]
+    Jevol, wevol = [], []
+    for _ in range(Nepoch):
+        Jevol.append(lossFunction(XX, YY, ww))
+        wevol.append(ww[:,0])
+        ww = ww - lr/Npnt * np.sum((np.dot(XX, ww) - YY) * XX, axis=0).reshape(-1,1)
+
+    return np.array(wevol), np.array(Jevol)
+</code></pre>
+
+<p><code>wOpt</code> and <code>Jopt</code> are the optimal parameter values and the minimum loss that are stacked at the bottom of the evolution lists. The final values for <code>wOpt</code> are very closed to the ones used to generate the data.</p>
+
+<pre><code class="language-python">J = lossFunction(XX, YY, ww)
+Nepoch, lr = 5000, 0.005
+wEvol, Jevol = gradientDescent(XX, YY, ww, lr, Nepoch)
+wOpt, Jopt = wEvol[-1,:], Jevol[-1]
+print('optimal weights: ' + str(wOpt))
+print('optimal loss: ' + str(np.log(Jopt)))
+</code></pre>
+
+<pre><code>optimal weights: [ 4.73739369 -2.99593775 -0.99554761]
+optimal loss: [-3.43847623]
+</code></pre>
+
+<p>The below figure compares the plane with optimal parameters, <code>wOpt</code>, to the cloud of points used to train the model.</p>
+
+<pre><code class="language-python">ypred = wOpt[0] + wOpt[1]*xx1 + wOpt[2]*xx2
+
+plt.figure(figsize=(10, 5))
+ax = plt.axes(projection='3d')
+ax.plot_surface(xx1, xx2, ypred, rstride=1, cstride=1, cmap='viridis', edgecolor='none', alpha=0.5)
+ax.scatter(xx1, xx2, yy, cmap='viridis', linewidth=0.5, alpha=0.5)
+ax.set_xlabel('$x_1$')
+ax.set_ylabel('$x_2$')
+ax.set_zlabel('y')
+ax.view_init(20, 30)
+
+plt.tight_layout()
+plt.show()
+</code></pre>
+
+<p><img src="output_21_0.png" alt="png" /></p>
+
+<h2 id="5-parameter-evolution">5. Parameter evolution</h2>
+
+<p>Here we plot the evolution of the parameters $\omega$ over the <code>Nepoch</code> training steps.
+The initial and final values are depicted with the green and red points, respectively.
+The size of each intermediate blue point is proportional to the loss function, where the smaller the point, the lower the loss, the better the model performance.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+ax = plt.axes(projection='3d')
+score = Jevol/np.max(Jevol)
+ax.scatter(wEvol[:,0], wEvol[:,1], wEvol[:,2], c='b', s=10+100*score, alpha=0.5, label='Weight evolution')
+ax.plot3D(wEvol[:1,0], wEvol[:1,1], wEvol[:1,2], 'g', marker='o', markersize=10, alpha=0.75, label='Initial weights')
+ax.plot3D(wEvol[-1:,0], wEvol[-1:,1], wEvol[-1:,2], 'r', marker='o', markersize=10, alpha=0.75, label='Optimal weights')
+ax.set_xlabel(&quot;$\omega_0$&quot;)
+ax.set_ylabel(&quot;$\omega_1$&quot;)
+ax.set_zlabel(&quot;$\omega_2$&quot;)
+plt.legend()
+#ax.view_init(10, 60)
+plt.tight_layout()
+plt.show()
+</code></pre>
+
+<p><img src="output_23_0.png" alt="png" /></p>
+
+<p>In the following plot, we compare the evolution of the parameters $\omega$ with the loss function 2D map.
+To this end, we need to create a grid for every combination of $\omega_0$, $\omega_1$ and $\omega_2$, using <code>meshgrid</code>.
+The three 3D (12, 8, 6)-shaped arrays are then flattened and veritcally stacked to obtain the parameter meshgrid, <code>wmg</code>, which is contains $12*8*6=576$ three-element tuples. We want to calculate the loss function for each triple of parameters.
+The loss function requires a (3,1) array, so we need to reshape the 1D array that we get from for-iterating along the <code>wmg</code> rows.
+The Python list comprehension helps performing this process that returns a list of 576 loss values corresponding to every point of the meshgrid. The final step is to convert the list into an array and reshape it into a 3D whose size is as equal as the initial 3D parameter arrays, <code>w0mg</code>, <code>w1mg</code> and <code>w2mg</code>.</p>
+
+<pre><code class="language-python">step = 0.5
+w0s = np.arange(-1, 5, step)
+w1s = np.arange(-5, -1, step)
+w2s = np.arange(-1, 2, step)
+w0mg, w1mg, w2mg = np.meshgrid(w0s, w1s, w2s, indexing='ij')
+wmg = np.vstack((w0mg.flatten(), w1mg.flatten(), w2mg.flatten())).T
+print('array size:')
+print('Size of the three 1D arrays: {}, {}, {}'.format(w0s.shape, w1s.shape, w2s.shape))
+print('Size of the three meshgrid arrays: {}'.format(w0mg.shape))
+print('Size of the parameter meshgrid: {}'.format(wmg.shape))
+</code></pre>
+
+<pre><code>array size:
+Size of the three 1D arrays: (12,), (8,), (6,)
+Size of the three meshgrid arrays: (12, 8, 6)
+Size of the parameter meshgrid: (576, 3)
+</code></pre>
+
+<pre><code class="language-python">w_ = np.array([-3.5, 5, 2]).reshape(-1, 1)
+print('Random parameter vector: \n{}'.format(w_))
+print('Loss value for that parameter vector: {}'.format(lossFunction(XX, YY, w_)))
+</code></pre>
+
+<pre><code>Random parameter vector:
+[[-3.5]
+ [ 5. ]
+ [ 2. ]]
+Loss value for that parameter vector: [ 33.69217748]
+</code></pre>
+
+<pre><code class="language-python">Jlist = [lossFunction(XX, YY, wmg[kk,:].reshape(-1, 1)) for kk in range(wmg.shape[0])]
+print(len(Jlist))
+</code></pre>
+
+<pre><code>576
+</code></pre>
+
+<pre><code class="language-python">Jmap = np.array(Jlist).reshape(-1, w1s.shape[0], w2s.shape[0])
+print(Jmap.shape)
+</code></pre>
+
+<pre><code>(12, 8, 6)
+</code></pre>
+
+<p>The plot shows the parameter evolution on top of the countor plot of the 3D loss function, where the greater the loss value the warmer the color.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+ax = plt.axes(projection='3d')
+ax.scatter(w0mg.flatten(), w1mg.flatten(), w2mg.flatten(),
+           cmap='viridis', c=Jmap.flatten(), s=10+20*Jmap.flatten(), alpha=0.1, label='Loss function')
+score = Jevol/np.max(Jevol)
+ax.scatter(wEvol[:,0], wEvol[:,1], wEvol[:,2], c=score, s=10+100*score, alpha=0.95, label='Weight evolution')
+ax.plot3D(wEvol[:1,0], wEvol[:1,1], wEvol[:1,2], 'k', marker='o', markersize=10, alpha=1, label='Initial weights')
+ax.plot3D(wEvol[-1:,0], wEvol[-1:,1], wEvol[-1:,2], 'r', marker='o', markersize=10, alpha=1, label='Optimal weights')
+ax.set_xlabel(&quot;$\omega_0$&quot;)
+ax.set_ylabel(&quot;$\omega_1$&quot;)
+ax.set_zlabel(&quot;$\omega_2$&quot;)
+plt.legend()
+#ax.view_init(10, 60)
+plt.tight_layout()
+plt.show()
+</code></pre>
+
+<p><img src="output_30_0.png" alt="png" /></p>
+
+<p>This plot reports the logarithmic trend of the loss function over the training steps.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+plt.plot(np.log(Jevol), lw=2)
+plt.xlabel(&quot;training steps ($N_{epoch}$)&quot;)
+plt.ylabel(&quot;Logarithm loss trend ($log(J_{evol})$)&quot;)
+plt.show()
+</code></pre>
+
+<p><img src="output_32_0.png" alt="png" /></p>
+
+<p>The final plot wants to summarize the post by visualizing the training process at specific steps, at which the logarithm of the loss function assume integer values. We create a list, <code>idxs</code>, that stores the <code>Nrow = 6+1</code> indices of the <code>Jevol</code> array that correspond to such training steps, in addition to the final training step.</p>
+
+<pre><code class="language-python">idxs = [np.where(np.log(Jevol)&lt;kk)[0][0] for kk in range(3, -3, -1)] + [Jevol.shape[0]-1]
+Nrow = len(idxs)
+Nstep = int(Nepoch/Nrow)
+print(Nrow)
+</code></pre>
+
+<pre><code>7
+</code></pre>
+
+<p>The chart has a matrix structure, with as many rows as the training steps to analyse, <code>Nrow</code>, and two columns, the left-most one that compares the data point cloud to the current model (colorful plane) and highlights the current loss (J value), the right-most one that shows the trajectory of the model parameters up to the current epoch within the 3D parameter space.</p>
+
+<pre><code class="language-python">fig = plt.figure(figsize=(15, Nrow*5))
+for kk, idx in enumerate(idxs):
+    ax = fig.add_subplot(Nrow, 2, 2*kk+1, projection='3d')
+    ypred_ = wEvol[idx,0] + wEvol[idx,1]*xx1 + wEvol[idx,2]*xx2
+    ax.plot_surface(xx1, xx2, ypred_, rstride=1, cstride=1, cmap='viridis', edgecolor='none', alpha=0.5)
+    ax.scatter(xx1, xx2, yy, cmap='viridis', linewidth=0.5, alpha=0.5)
+    ax.set_xlabel('$x_1$')
+    ax.set_ylabel('$x_2$')
+    ax.set_zlabel('y')
+    plt.title(&quot;Current J value: {0:.2f}&quot;.format(Jevol[idx, 0]))
+    ax.view_init(10, 60)
+
+    ax = fig.add_subplot(Nrow, 2, 2*kk+2, projection='3d')
+    ax.scatter(w0mg.flatten(), w1mg.flatten(), w2mg.flatten(),
+               cmap='viridis', c=Jmap.flatten(), s=10+20*Jmap.flatten(), alpha=0.1, label='Loss function')
+    score = Jevol[:idx]/np.max(Jevol)
+    ax.scatter(wEvol[:idx,0], wEvol[:idx,1], wEvol[:idx,2], c=score, s=10+100*score, alpha=0.95, label='Weight evolution')
+    ax.plot3D(wEvol[idx:idx+1,0], wEvol[idx:idx+1:,1], wEvol[idx:idx+1:,2], 'r', marker='o', markersize=10,
+              alpha=1, label='Current weights')
+    ax.set_xlabel(&quot;$\omega_0$&quot;)
+    ax.set_ylabel(&quot;$\omega_1$&quot;)
+    ax.set_zlabel(&quot;$\omega_2$&quot;)
+    plt.title(&quot;Current epoch: &quot; + str(idx))
+    ax.legend()
+
+plt.tight_layout()
+plt.show()
+</code></pre>
+
+<p><img src="output_36_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/linreg/linreg2/" style="color: #4ABDAC; font-size: 18px; "> Hello world example for Machine learning - Part 2</a>
+
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/linreg/linreg5/" style="color: #4ABDAC; font-size: 18px; ">Hello world example for Machine learning - Part 5</a>
+          
+          &raquo;</p>
+          </span>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>
