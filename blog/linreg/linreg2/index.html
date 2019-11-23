@@ -12,7 +12,7 @@
   
 
   <meta name="generator" content="Hugo 0.49" />
-  <title>Hello world example for Machine learning - Part 2 &middot; take a wild guess</title>
+  <title>Hello world for Machine learning - Part 2 &middot; take a wild guess</title>
 
   
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -103,13 +103,57 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
   <![endif]-->
 
   
+  
+  
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
 
   
   
-  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
-  <script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  </script>
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
   
 
 </head>
@@ -118,7 +162,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
   
     <a class="navbar-brand abs" href="https://takeawildguess.net/">
-      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Hello world example for Machine learning - Part 2">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Hello world for Machine learning - Part 2">
     </a>
   
   <a class="navbar-brand" href="/blog/linreg/linreg2/" style="font-size: 16px; ">Hello world</a>
@@ -171,12 +215,12 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <header class="postHead">
   <div class="container-fluid overlay">
     <div class="descr">
-      <img src="https://takeawildguess.net/images/blog/linearRegression/hello.jpeg" class="img-fluid" alt="__">
+      <img src="https://takeawildguess.net/blog/images/hello.jpeg" class="img-fluid" alt="__">
       <div class="card">
         <div class="card-body">
-          <h1 class="card-title text-center">Hello world example for Machine learning - Part 2</h1>
+          <h1 class="card-title text-center">Hello world for Machine learning - Part 2</h1>
           <h5 class="card-title text-center">Hello world</h5>
-          <h6 class="card-text text-center">January 13, 2019</h6>
+          <h6 class="card-text text-center">January 20, 2019</h6>
           <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 13 min read</h6>
           <h6 class="card-text text-center">
             <a href="https://takeawildguess.net/tags/linear-regression"><kbd class="item-tag">linear-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/numpy"><kbd class="item-tag">numpy</kbd></a> <a href="https://takeawildguess.net/tags/gradient-descent"><kbd class="item-tag">gradient descent</kbd></a> 
@@ -206,13 +250,12 @@ In this post we apply the theory to a simple but practical case of linear-behavi
 
 <p>We are going to implement the logic from scratch in Python and its powerful numerical library, <a href="http://www.numpy.org/">Numpy</a>.</p>
 
-<p><img src="/blog/linreg/linreg2/learningFramework2.png" alt="png" title="Machine learning general structure" />
-<img src="media/learningFramework2.png" width="20%">
+<p><img src="/blog/linreg/linreg2/learningFramework2.png" alt="pngM" title="Machine learning general structure" />
 <em>Figure 1 - Machine learning general structure</em></p>
 
 <h2 id="2-data-generation">2. Data generation</h2>
 
-<p>First we start generating some synthetic data (<code>Npnts = 500</code> points). We assume we know both the slope (<code>m = 5</code>) and the intercept (<code>q = -3</code>) of the line we want to indentify, but we also introduce some noise with a gaussian distribution and zero-mean to the line to make the data source a bit closer to real-world scenarios.</p>
+<p>First we start generating some synthetic data (<code>Npnts = 500</code> points). We assume we know both the slope (<code>m = 5</code>) and the intercept (<code>q = -3</code>) of the line we want to identify, but we also introduce some noise with a gaussian distribution and zero-mean to the line to make the data source a bit closer to real-world scenarios.</p>
 
 <p>The chart shows the generated data cloud that we feed to the learning algorithm to identify the line specifications.</p>
 
@@ -236,9 +279,9 @@ plt.ylabel(&quot;Y&quot;)
 plt.show()
 </code></pre>
 
-<p><img src="output_3_0.png" alt="png" /></p>
+<p><img src="output_5_0.png" alt="png" /></p>
 
-<p>The dataset is generated by creating two 2D arrays, one for inputs and one for output.
+<p>The dataset is generated by creating two 2D arrays, one for inputs and one for outputs.
 The input array, XX, is the horizontal concatenation of a column of 1s, as many as the length of the initial 1D array <em>xx</em>, and the array itself. We first stack the two 1D arrays vertically and then transpose it to get the examples (500) over the rows and the features over the columns (2). The output 2D array is just a single column filled with the <em>y</em> values.
 Here the shape of the arrays.</p>
 
@@ -257,16 +300,16 @@ YY = yy.reshape(-1,1)
 
 <h2 id="3-loss-function">3. Loss function</h2>
 
-<p>Let us recall the <a href="/blog/linreg/linreg1/#lossFun">loss function</a>, <em>J</em>, where $x^j$ and $y^j$ are the input and output of the <em>j-th</em> example and <em>n</em> is the number of features (2):</p>
+<p>Let us recall the <a href="/blog/linreg/linreg1/#lossFun">loss function</a>, $J$, where $x^j$ and $y^j$ are the input and output of the <code>j</code>-th example and $n$ is the number of features (2):</p>
 
-<p>$$ J = \frac{1}{2}\sum<em>{j=1}^{m} (y^j- \sum</em>{k=1}^{n} (\theta_k \cdot x^j_k) )^2 $$</p>
+<p>$$ J = \frac{1}{2}\sum_{j=1}^{m} (y^j- \sum_k^{n} (\theta_k \cdot x^j_k) )^2 $$</p>
 
 <p>$$ J = \frac{1}{2}\sum_{j=1}^{m} (y^j-\theta^T \cdot x^j)^2 $$</p>
 
 <p>The model parameters (or weights), $\theta$, are combined with the j-th example input, $x^j$, to return the predicted output.
 It is then compared to the actual output, $y^j$, in terms of squared difference.
 The following code gives the error of the j-th example, where the first method uses for-loop while the second one employs matrix multiplication.
-The first method is chosen for esemplification, the second one is chosen for efficiency and therefore adopted in real implementation.</p>
+The first method is chosen for exemplification, the second one is chosen for efficiency and therefore adopted in real implementation.</p>
 
 <pre><code class="language-python">Nex, Nfeat = XX.shape # examples, features
 ww = np.array([0, -4]).reshape(-1, 1)
@@ -288,7 +331,7 @@ for kk in range(Nfeat):
 <pre><code>76.67599552148954
 </code></pre>
 
-<p>If the full matrix product between input and parameter arrays is taken, we obtain a 2D array with a single column that stores the predictions over the set of examples. Its shape is identical to that of the actual ouput, <em>y</em>.
+<p>If the full matrix product between input and parameter arrays is taken, we obtain a 2D array with a single column that stores the predictions over the set of examples. Its shape is identical to that of the actual output, <code>y</code>.
 The overall loss is the sum of every error contribution, over the row axis of the examples, which is indexed with 0 in Numpy.
 The final loss function implementation is as simple as what follows.</p>
 
@@ -305,10 +348,10 @@ lossFunction(XX, YY, ww)
 
 <h2 id="4-gradient-descent">4.Gradient descent</h2>
 
-<p>We need to calculate the gradient of the loss function to apply the <em>gradient descent algorithm</em> to the linear regression problem.
-We calculate the <em>k</em> element of the gradient (Eq. (1)):</p>
+<p>We need to calculate the gradient of the loss function to apply the <strong>gradient descent</strong> algorithm to the linear regression problem.
+We calculate the $k$ element of the gradient (Eq. (1)):</p>
 
-<p>$$\frac{\partial J}{\partial \theta_k} = \frac{\partial}{\partial \theta<em>k}\frac{1}{2}\sum</em>{j=1}^{m} (y^j-\theta^T \cdot x^j)^2 $$</p>
+<p>$$\frac{\partial J}{\partial \theta_k} = \frac{\partial}{\partial \theta_k}\frac{1}{2}\sum_j^{m} (y^j-\theta^T \cdot x^j)^2 $$</p>
 
 <p>$$ = \frac{1}{2}\sum_{j=1}^{m} \frac{\partial}{\partial \theta_k}(y^j-\theta^T \cdot x^j)^2 $$</p>
 
@@ -322,10 +365,10 @@ We calculate the <em>k</em> element of the gradient (Eq. (1)):</p>
 
 <p>the derivative of this vector product with respect to the parameter $\theta_k$ is $x_k^j$.</p>
 
-<p>Keep in mind that the input feature associated to the first parameter $\theta_0$, which is the intercept, is always 1.</p>
+<p>Keep in mind that the input feature associated with the first parameter $\theta_0$, which is the intercept, is always 1.</p>
 
 <p>Code-wise, a vectorized implementation of the parameter update step is fundamental to achieve fast computation.
-The input data are stored into a 2D array, <code>XX</code>, where m and n+1 are number of rows and columns, respectively.
+The input data are stored into a 2D array, <code>XX</code>, where m and n+1 are the number of rows and columns, respectively.
 In the below code example, <code>m=6</code> and <code>n=1</code>.
 Parameters are allocated into a 2D array, <code>ww</code>, with <code>n+1</code> rows and one column. Numpy <code>dot</code> operator returns the matrix multiplication of the two 2D arrays, whose size is (m, 1).
 We then subtract element-wise the result with the ground-truth output, y, and broadcast the resulting (m, 1) array, $\epsilon$, to perform the element-wise product with the input array, <code>XX</code>.</p>
@@ -359,12 +402,15 @@ print(epsilon)
  [6]]
 </code></pre>
 
-<p>Broadcasting is a powerful Numpy feature that enable the element-wise product of two arrays that share at least one dimension (row or column), but the size of the other dimension of one of two arrays is equal to 1.
-Two cases can occur that both lead to a (n, m) array:
-1. A (n,m) array with a (n,1) array, where the second array is duplicated column-wise m times
-2. A (n,m) array with a (1,m) array, where the second array is duplicated row-wise n times</p>
+<p>Broadcasting is a powerful Numpy feature that enables the element-wise product of two arrays that share at least one dimension (row or column), but the size of the other dimension of one of two arrays is equal to 1.
+Two cases can occur that both lead to an <code>(n, m)</code> array:</p>
 
-<p>The (m,1) array, $\epsilon$, represent the constant part for each parameter $\theta_k$. Since Eq. (1) states that the gradient element for $\theta_k$ is related to its corresponding feature $x_k$, we use the complete <em>XX</em> array to simultaneously update the entire parameter vector $\theta$.</p>
+<ol>
+<li>An <code>(n,m)</code> array with an <code>(n,1)</code> array, where the second array is duplicated column-wise m times</li>
+<li>An <code>(n,m)</code> array with an <code>(1,m)</code> array, where the second array is duplicated row-wise n times</li>
+</ol>
+
+<p>The (m,1) array, $\epsilon$, represent the constant part for each parameter $\theta_k$. Since Eq. (1) states that the gradient element for $\theta_k$ is related to its corresponding feature $x_k$, we use the complete <code>XX</code> array to simultaneously update the entire parameter vector $\theta$.</p>
 
 <pre><code class="language-python">print(epsilon.shape)
 print(X_.shape)
@@ -383,7 +429,7 @@ print((epsilon * X_).shape)
 (6, 2)
 </code></pre>
 
-<p>The <code>sum</code> operator is Eq. (1) is active through the examples, which translates to the Numpy <code>sum</code> operator over the 0-axis. However, this step returns a 1D array, with size equal to the number of parameters to learn (n+1).
+<p>The <code>sum</code> operator is Eq. (1) is active through the examples, which translates to the Numpy <code>sum</code> operator over the 0-axis. However, this step returns a 1D array, with a size equal to the number of parameters to learn (n+1).
 We need first <code>reshape</code> it to have a 2D column array (n+1, 1) and apply the update step with learning rate and actual parameter vector estimate.</p>
 
 <pre><code class="language-python">grad_ = np.sum((np.dot(X_, w_) - Y_) * X_, axis=0)
@@ -398,7 +444,7 @@ print(grad_.reshape(-1,1))
  [161]]
 </code></pre>
 
-<h2 id="4-training">4. Training</h2>
+<h2 id="5-training">5. Training</h2>
 
 <p>Here follows the complete code of the learning process, where the model parameters are changed for <code>Nepoch</code> times.
 The parameters and the corresponding loss function value are stored in associated lists and returned at the end of the function call.</p>
@@ -410,11 +456,11 @@ The parameters and the corresponding loss function value are stored in associate
         Jevol.append(lossFunction(XX, YY, ww))
         wevol.append(ww[:,0])
         ww = ww - lr/Npnt * np.sum((np.dot(XX, ww) - YY) * XX, axis=0).reshape(-1,1)
-
+    
     return np.array(wevol), np.array(Jevol)
 </code></pre>
 
-<p><code>wOpt</code> and <code>Jopt</code> are the optimal parameter set of values and the minimum loss that are stacked at the bottom of the evolution lists. The final values for <code>wOpt</code> are very closed to the ones used to generate the data.</p>
+<p><code>wOpt</code> and <code>Jopt</code> are the optimal parameter set of values and the minimum loss that are stacked at the bottom of the evolution lists. The final values for <code>wOpt</code> are very close to the ones used to generate the data.</p>
 
 <pre><code class="language-python">J = lossFunction(XX, YY, ww)
 Nepoch, lr = 1500, 0.05
@@ -436,12 +482,13 @@ plt.ylabel(&quot;Y&quot;)
 plt.show()
 </code></pre>
 
-<p><img src="output_25_0.png" alt="png" /></p>
+<p><img src="output_27_0.png" alt="png" /></p>
 
-<h2 id="5-parameter-evolution">5. Parameter evolution</h2>
+<h2 id="6-parameter-evolution">6. Parameter evolution</h2>
 
 <p>Here we plot the evolution of the parameters $\omega$ over the <code>Nepoch</code> training steps.
-The initial and final values are depicted with the green and red points, respectively. The size of each intermediate blue point is proportional to the loss function, where the smaller the point, the lower the loss, the better the model performance.</p>
+The initial and final values are depicted with the green and red points, respectively.
+The size of each intermediate blue point is proportional to the loss function, where the smaller the point, the lower the loss, the better the model performance.</p>
 
 <pre><code class="language-python">plt.figure(figsize=(10, 5))
 plt.scatter(wEvol[:,0], wEvol[:,1], s=10+100*Jevol/np.max(Jevol), alpha=0.5, label='Weight evolution')
@@ -453,13 +500,16 @@ plt.legend()
 plt.show()
 </code></pre>
 
-<p><img src="output_27_0.png" alt="png" /></p>
+<p><img src="output_29_0.png" alt="png" /></p>
 
 <p>In the following plot, we compare the evolution of the parameters $\omega$ with the loss function 2D map.
-To this end, we need to create a grid for every combination of $\omega_1$ and $\omega_2$, using <em>meshgrid</em>. The two 2D arrays are then flattened and veritcally stacked to obtain the parameter meshgrid, <code>wmg</code>, which is contains $20*26=520$ two-element tuples. We want to calculate the loss function for each pair of parameters.
-The loss function requires a (2,1) array, so we need to reshape the 1D array that we get from for-iterating along the <code>wmg</code> rows.
-The Python list comprehension helps performing this process that returns a list of 520 loss values corresponding to every point of the meshgrid. The final step is to convert the list into an array and reshape it into a 2D whose size is as equal as the initial 2D parameter arrays, <code>w1mg</code> and <code>w2mg</code>.
-The plot shows the parameter evolution on top of the countor plot of the 2D loss function, where the greater the loss value the warmer the color.</p>
+To this end, we need to create a grid for every combination of $\omega_1$ and $\omega_2$, using <code>meshgrid</code>.
+The two 2D arrays are then flattened and vertically stacked to obtain the parameter meshgrid, <code>wmg</code>, which contains $20*26=520$ two-element tuples.
+We want to calculate the loss function for each pair of parameters.
+The loss function requires a (2,1) array, so we need to reshape the 1D array that we get from for-iterating along the <code>wmg</code> rows.</p>
+
+<p>The Python list comprehension helps to perform this process that returns a list of 520 loss values corresponding to every point of the meshgrid. The final step is to convert the list into an array and reshape it into a 2D whose size is as equal as the initial 2D parameter arrays, <code>w1mg</code> and <code>w2mg</code>.
+The plot shows the parameter evolution on top of the contour plot of the 2D loss function, where the greater the loss value the warmer the colour.</p>
 
 <pre><code class="language-python">step = 0.5
 w1s = np.arange(-7, 3, step)
@@ -496,7 +546,7 @@ plt.ylabel(&quot;$\omega_2$&quot;)
 plt.show()
 </code></pre>
 
-<p><img src="output_32_0.png" alt="png" /></p>
+<p><img src="output_34_0.png" alt="png" /></p>
 
 <p>This plot reports the logarithmic trend of the loss function over the training steps.</p>
 
@@ -507,9 +557,10 @@ plt.ylabel(&quot;Logarithm loss trend ($log(J_{evol})$)&quot;)
 plt.show()
 </code></pre>
 
-<p><img src="output_34_0.png" alt="png" /></p>
+<p><img src="output_36_0.png" alt="png" /></p>
 
-<p>The final plot wants to summarize the post by visualizing the training process at specific steps, at which the logarithm of the loss function assume integer values. We create a list, <code>idxs</code>, that stores the <code>Nrow = 6+1</code> indices of the <code>Jevol</code> array that correspond to such training steps, in addition to the final training step.</p>
+<p>The final plot wants to summarize the post by visualizing the training process at those steps where the logarithm of the loss function assumes integer values.
+We create a list, <code>idxs</code>, that stores the <code>Nrow = 6+1</code> indices of the <code>Jevol</code> array that correspond to such training steps, in addition to the final training step.</p>
 
 <pre><code class="language-python">idxs = [np.where(np.log(Jevol)&lt;kk)[0][0] for kk in range(4, -2, -1)] + [Jevol.shape[0]-1]
 Nrow = len(idxs)
@@ -530,7 +581,7 @@ for kk, idx in enumerate(idxs):
     plt.xlabel(&quot;X&quot;)
     plt.ylabel(&quot;Y&quot;)
     plt.title(&quot;Current J value: {0:.2f}&quot;.format(Jevol[idx,0]))    
-
+    
     plt.subplot(Nrow, 2, 2*kk+2)
     plt.contourf(w1mg, w2mg, Jmap, alpha=0.5, cmap=plt.cm.jet)
     plt.colorbar()
@@ -544,16 +595,25 @@ plt.tight_layout()
 plt.show()
 </code></pre>
 
-<p><img src="output_38_0.png" alt="png" /></p>
+<p><img src="output_40_0.png" alt="png" /></p>
+
+<h2 id="reference">Reference</h2>
+
+<ol>
+<li><a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf">CS229 notes</a></li>
+<li><a href="https://www.coursera.org/learn/machine-learning">Machine Learning at Coursera</a></li>
+<li><a href="http://people.math.gatech.edu/~ecroot/3225/maximum_likelihood.pdf">Maximum likelihood estimators and least squares</a></li>
+<li><a href="https://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf">An Introduction to Statistical Learning</a></li>
+</ol>
 
         </div>
         <div class="pgNav PageNavigation col-12 text-center">
           <span>
-          <p>&laquo; <a class="" href="/blog/linreg/linreg1/" style="color: #4ABDAC; font-size: 18px; "> Hello world example for Machine learning - Part 1</a>
+          <p>&laquo; <a class="" href="/blog/linreg/linreg1/" style="color: #4ABDAC; font-size: 18px; "> Hello world for Machine learning - Part 1</a>
 
           
           &nbsp;&nbsp; | &nbsp;&nbsp;
-          <a class="" href="/blog/linreg/linreg3/" style="color: #4ABDAC; font-size: 18px; ">Hello world example for Machine learning - Part 3</a>
+          <a class="" href="/blog/linreg/linreg3/" style="color: #4ABDAC; font-size: 18px; ">Hello world for Machine learning - Part 3</a>
           
           &raquo;</p>
           </span>

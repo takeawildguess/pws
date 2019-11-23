@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.49" />
+  <title>Learning to classify coffee from cappuccino - Part 3 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+  
+  
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Learning to classify coffee from cappuccino - Part 3">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/logreg/logreg3/" style="font-size: 16px; ">Coffee or cappuccino?</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/coffee_cappuccino.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Learning to classify coffee from cappuccino - Part 3</h1>
+          <h5 class="card-title text-center">Coffee or cappuccino?</h5>
+          <h6 class="card-text text-center">March 3, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 10 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/logistic-regression"><kbd class="item-tag">logistic-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> <a href="https://takeawildguess.net/tags/tensorflow"><kbd class="item-tag">tensorflow</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction-and-assumptions">1. Introduction and assumptions</h2>
+
+<p>In this post-series, we are going to study the very basic modelling for classification problems, the logistic regression.
+<strong>Classification</strong> entails that the output is a discrete variable taking values on a pre-defined limited set, where the set dimension is the number of classes. Some examples are <em>spam detection</em>, <em>object recognition</em> and <em>topic identification</em>.</p>
+
+<p>In this post, we implement the simple logistic regression case that we have analyzed in the first two posts (<a href="/blog/logreg/logreg1/">Part 1</a> and <a href="/blog/logreg/logreg2/">Part 2</a>) using Sklearn first and Tensorflow then.</p>
+
+<p>In this series, we do not split the dataset into training and testing sets, but we assess every model on the training set only.
+A dedicated post on model selection, overfitting/underfitting problem and regularization will be published soon.</p>
+
+<h2 id="2-data-generation">2. Data generation</h2>
+
+<p>We create an equispaced x grid with 1000 points ranging from -20 to 20.
+Then true y outcome, which represents the class to assign to the input, is defined via the logistic function of the linear transformation of input x with parameters <code>Wgt</code>.
+The actual class is assigned by drawing samples from a <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.binomial.html">binomial distribution</a>.</p>
+
+<p>A binomial distribution becomes a Bernoulli distribution when the number of trials is 1.
+In other words, we generate data by sampling the <code>y</code> class for each input <code>x</code>, where the probability of success (i.e., of belonging to class 1) is given by:</p>
+
+<p>$$ p = \sigma(\lbrack x, 1\rbrack\cdot \omega) $$</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Logistic_function">logistic function</a> is the $\sigma$ operator in the equation.</p>
+
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from mpl_toolkits import mplot3d
+</code></pre>
+
+<pre><code class="language-python">def logistic(XX, ww, noise=0):
+    tt = np.dot(XX, ww) + noise
+    return 1/(1 + np.exp(-tt))
+</code></pre>
+
+<pre><code class="language-python">xx = np.linspace(-20., 20, 1000)
+bb = np.ones_like(xx)
+XX = np.vstack([xx, bb]).T # Add intercept
+Wgt = np.array([2, -15]).reshape(-1, 1) # ground-truth parameters
+Ymean = logistic(XX, Wgt) # True mean
+Ynoise = logistic(XX, Wgt, noise=np.random.normal(scale=0.5, size=(len(xx), 1))) # noise
+Yclass = np.random.binomial(1., Ynoise) # dichotomous variable, n_trial=1 =&gt; Bernoulli distribution
+</code></pre>
+
+<p>The figure shows the <code>y</code> class of each input in blue, the noise probability of success in green and the true mean with solid red line.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(12,6))
+plt.plot(xx, Ymean, 'r-', lw=2, label='true mean curve')
+plt.scatter(xx, Ynoise, c='g', label='noise curve')
+plt.scatter(xx, Yclass, c='b', label='Y-class, dichotomous variable')
+plt.legend();
+</code></pre>
+
+<p><img src="output_7_0.png" alt="png" /></p>
+
+<h2 id="3-scikit-learn-implementation">3. Scikit-learn implementation</h2>
+
+<p>We implement the logistic regression <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">class</a> and the metric module directly from Scikit-learn.</p>
+
+<p><img src="/blog/logreg/logreg3/sklearn.png" alt="pngS" title="Scikit-learn logo" />
+<em>Figure 1 - Scikit-learn logo</em></p>
+
+<p>Since we ignore regularization at this point, we set the <em>C</em> parameter to a very high value to reduce the regularization strength down to 0.
+It is in fact the inverse of regularization strength, as it is the case for <a href="https://scikit-learn.org/stable/modules/svm.html">Support Vector Machine</a> applications.</p>
+
+<p>After creating an instance of the model, we train it on the data with the fit method.
+The information learned from the data is automatically stored into the model instance, which is in this case <code>lgr</code>.
+Sklearn returns the parameter configuration of the model instance.</p>
+
+<pre><code class="language-python">from sklearn.linear_model import LogisticRegression
+from sklearn import metrics
+</code></pre>
+
+<pre><code class="language-python">lgr = LogisticRegression(C=1e5) # we want to ignore regularization
+YY = Yclass[:, 0]
+lgr.fit(XX, YY)
+</code></pre>
+
+<pre><code>LogisticRegression(C=100000.0, class_weight=None, dual=False,
+          fit_intercept=True, intercept_scaling=1, max_iter=100,
+          multi_class='ovr', n_jobs=1, penalty='l2', random_state=None,
+          solver='liblinear', tol=0.0001, verbose=0, warm_start=False)
+</code></pre>
+
+<p>We then predict the labels of the same data input to assess the model performance at reproducing the training dataset.
+It uses the information learned during the training process (fit step).
+The predict method returns the class each input belongs according to the model, while <code>predict_proba</code> returns the probability to belong to any of the classes.
+That&rsquo;s why you get always 1 if you sum that 2D array along the horizontal axis.</p>
+
+<pre><code class="language-python">Ypred = lgr.predict(XX)
+Ypred_prob = lgr.predict_proba(XX)
+Ypred.shape, Ypred_prob.shape
+</code></pre>
+
+<pre><code>((1000,), (1000, 2))
+</code></pre>
+
+<pre><code class="language-python">np.all(np.sum(Ypred_prob, axis=1)==1)
+</code></pre>
+
+<pre><code>True
+</code></pre>
+
+<p>We retrieve the model parameters and assess the model in terms of accuracy, precision and recall.</p>
+
+<pre><code class="language-python">print(&quot;Parameters of single predictor: {:.3f}, intercept of decision boundary: {:.3f}&quot;.format(lgr.coef_[0,0], lgr.intercept_[0]))
+</code></pre>
+
+<pre><code>Parameters of single predictor: 1.837, intercept of decision boundary: -6.915
+</code></pre>
+
+<p>We define here the metrics to assess the model performance:</p>
+
+<ol>
+<li>accuracy, which is the fraction of correct predictions to the total number of data points,</li>
+<li>precision, which is the fraction of correct predictions to the total number of positively predicted points,</li>
+<li>recall, which is the fraction of correct predictions to the total number of positive points.</li>
+</ol>
+
+<p>For binary classification, four outcomes only are possible, where the positive/negative class refers to <code>1</code>/<code>0</code> value:</p>
+
+<ol>
+<li>True positive (TP): the model correctly predicts class 1</li>
+<li>False positive (FP): the model incorrectly predicts class 1</li>
+<li>True negative (TN): the model correctly predicts class 0</li>
+<li>False negative (FN): the model incorrectly predicts class 0</li>
+</ol>
+
+<p>Positive/negative refers to the model outcome, True/False to the correctness of the model prediction.</p>
+
+<p>The definition of precision $P$, recall $R$ and accuracy $A$ are:</p>
+
+<p>$$ P = TP/(TP+FP) $$</p>
+
+<p>$$ R = TP/(TP+FN) $$</p>
+
+<p>$$ A = (TP+TN)/(TP+TN+FP+FN) $$</p>
+
+<p>See more details <a href="https://en.wikipedia.org/wiki/Precision_and_recall">here</a>.</p>
+
+<pre><code class="language-python">print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(YY, Ypred)))
+print(&quot;Precision: {}&quot;.format(metrics.precision_score(YY, Ypred)))
+print(&quot;Recall: {}&quot;.format(metrics.recall_score(YY, Ypred)))
+</code></pre>
+
+<pre><code>Accuracy: 0.978
+Precision: 0.9647435897435898
+Recall: 0.9647435897435898
+</code></pre>
+
+<p>The figure shows the ground-truth class of each input in blue, the model predicted class in red and the beneath probability of success with a solid green line.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 6))
+plt.scatter(xx, Yclass, c='b', s=60, alpha=0.6, label='Ground-truth')
+plt.scatter(xx, Ypred, c='r', s=20, alpha=0.5, label='Dichotomous response')
+plt.plot(xx, Ypred_prob[:,1], 'g', lw=2, label='Response probability')
+plt.xlabel(&quot;X&quot;)
+plt.ylabel(&quot;Y&quot;)
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="output_21_0.png" alt="png" /></p>
+
+<h2 id="4-tensorflow-implementation">4. TensorFlow implementation</h2>
+
+<p>We implement the same algorithm using the deep-learning library from Google, <code>TensorFlow</code>.</p>
+
+<p><img src="/blog/logreg/logreg3/tensorflow.png" alt="pngS" title="TensorFlow logo" />
+<em>Figure 2 - TensorFlow logo</em></p>
+
+<p>We import the entire library, from which we access to the various methods required to describe the model, to train it to the dataset and to estimate the outputs that are compared to the dataset ground-truth values.</p>
+
+<p>The very first step is to reset the TF to the default graph, which means TF clears the default graph stack and resets the global default graph.</p>
+
+<p>We then define the <code>x</code> and <code>y</code> variables as <a href="https://www.tensorflow.org/api_docs/python/tf/placeholder"><strong>placeholder</strong></a>, while the <code>ww</code> parameters as <a href="https://www.tensorflow.org/guide/variables"><strong>variable</strong></a>.</p>
+
+<p>In short, <code>tf.Variable</code> is used for trainable parameters of the model, while <code>tf.placeholder</code> is used to feed actual training examples.
+That&rsquo;s why we need to assign initial values, often random-generated, to the TF variables only.
+The variable values can therefore be updated during optimization, can be shared and be stored after training.
+We assign the placeholder type as <code>float32</code> to both input and output.
+The size of the input placeholder, <code>xp</code>, is set to (None, 2), since the number of rows is automatically determined from the batch size we feed to the optimizer object in the training step, while the column size is equal to the number of features (2 for the first case).
+The size of the output placeholder is instead set to (None, 1), since only one value is required for each sample.</p>
+
+<p>The feature weights <code>ww</code> and bias <code>bb</code>, which is equivalent to the Scikit-Learn intercept, are defined with the <code>Variable</code> method and initialized as a (2,1) and a (1,1) zero-arrays, respectively.</p>
+
+<p>The final step is to combine TF variables and placeholders to translate the mathematical model into code.
+The matrix multiplication between the input matrix and the weight array is performed with <code>matmul</code>.
+The probability of belonging to class 1 is given by the sigmoid function implemented in TF.
+The class is obtained with the round operator, as:</p>
+
+<p>$$ Y_{class} = 1_{{p&gt;0.5}} $$</p>
+
+<p>where the $ 1_x $ operator returns 1 when x is True and 0 otherwise.</p>
+
+<p>Accuracy is then defined by checking how frequently the model outcome and the ground-truth classes match each other.</p>
+
+<p>At the end of these steps, we inspect the shape of each tensor.
+The question-mark symbol says that TF needs some data to determine the actual row size.</p>
+
+<pre><code class="language-python">import tensorflow as tf
+</code></pre>
+
+<pre><code class="language-python">tf.reset_default_graph()
+xp = tf.placeholder(dtype=tf.float32, shape=(None, 2))
+yp = tf.placeholder(dtype=tf.float32, shape=(None, 1))
+ww = tf.Variable(np.zeros((2,1)), dtype=tf.float32)
+ymdl = tf.matmul(xp, ww)
+yprob = tf.sigmoid(ymdl)
+ycls = tf.round(yprob)
+accuracy = tf.reduce_mean(tf.cast(tf.equal(ycls, yp), dtype=tf.float32))
+</code></pre>
+
+<pre><code class="language-python">print('Input shape: {}'.format(xp.shape))
+print('Ground-truth output shape: {}'.format(yp.shape))
+print('Weight shape: {}'.format(ww.shape))
+print('Model output shape: {}'.format(ymdl.shape))
+</code></pre>
+
+<pre><code>Input shape: (?, 2)
+Ground-truth output shape: (?, 1)
+Weight shape: (2, 1)
+Model output shape: (?, 1)
+</code></pre>
+
+<p>The loss function is easily implemented using the method <code>sigmoid_cross_entropy_with_logits</code> from <code>losses</code> package.
+The optimizer object that actually adjusts the model parameters (TF variables) with the gradient descent algorithm.</p>
+
+<pre><code class="language-python">mdlLoss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=ymdl, labels=yp))
+optimizer = tf.train.AdamOptimizer(learning_rate=0.01).minimize(loss=mdlLoss)
+</code></pre>
+
+<p>The next steps to <strong>train</strong> the model are to:</p>
+
+<ol>
+<li>initialize the variables.</li>
+<li>run a new session, which let us perform the actual computation by exploiting the graph structure previously defined.</li>
+<li>run the optimizer as many steps as the number of epochs <code>Nepoch</code>.</li>
+<li>run the model with the final parameter set and store the model output <code>ycls</code> into the prediction array.</li>
+<li>retrieve the final parameter values by running a dedicated session. A different way would be to call the <a href="https://www.tensorflow.org/api_docs/python/tf/global_variables">global_variables()</a> method and get the variable values by key name.</li>
+</ol>
+
+<pre><code class="language-python">Nepoch = 10000
+init = tf.global_variables_initializer()
+with tf.Session() as sess:
+    sess.run(init)
+    Jevol = []
+    for kk in range(Nepoch):
+        mdl_loss, _ = sess.run([mdlLoss, optimizer], feed_dict={xp: XX, yp: Yclass})
+        if kk%100 == 0:
+            Jevol.append((kk, mdl_loss))
+        if kk==Nepoch-1:
+            print('The final model loss is {}'.format(mdl_loss))
+    
+    Ypred_tf = sess.run(ycls, feed_dict={xp: XX})
+    Yprob_tf = sess.run(yprob, feed_dict={xp: XX})
+    wOpt = sess.run([ww])[0]
+    mdlAcc = sess.run([accuracy], feed_dict={xp: XX, yp: Yclass})[0]
+</code></pre>
+
+<pre><code>The final model loss is 0.04472097009420395
+</code></pre>
+
+<p>We retrieve the model parameters and assess the model in terms of accuracy, precision and recall.</p>
+
+<pre><code class="language-python">print(&quot;Parameter of single predictor: {:.3f}, intercept of decision boundary: {:.3f}&quot;.format(wOpt[0,0], wOpt[1,0]))
+</code></pre>
+
+<pre><code>Parameter of single predictor: 1.837, intercept of decision boundary: -13.830
+</code></pre>
+
+<pre><code class="language-python">print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(YY, Ypred_tf)))
+print(&quot;Precision: {}&quot;.format(metrics.precision_score(YY, Ypred_tf)))
+print(&quot;Recall: {}&quot;.format(metrics.recall_score(YY, Ypred_tf)))
+</code></pre>
+
+<pre><code>Accuracy: 0.978
+Precision: 0.9647435897435898
+Recall: 0.9647435897435898
+</code></pre>
+
+<p>The figure shows the ground-truth class of each input in blue, the model predicted class in red and the beneath probability of success with a solid green line.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 6))
+plt.scatter(xx, Yclass, c='b', s=60, alpha=0.6, label='Ground-truth')
+plt.scatter(xx, Ypred_tf, c='r', s=20, alpha=0.5, label='Dichotomous response')
+plt.plot(xx, Yprob_tf, 'g', lw=2, label='Response probability')
+plt.xlabel(&quot;X&quot;)
+plt.ylabel(&quot;Y&quot;)
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="output_36_0.png" alt="png" /></p>
+
+<h2 id="reference">Reference</h2>
+
+<ol>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">Logistic Regression in Scikit-learn</a></li>
+<li><a href="https://www.geeksforgeeks.org/ml-logistic-regression-using-tensorflow/">Logistic Regression in Tensorflow</a></li>
+<li><a href="https://www.tensorflow.org/tutorials/estimator/linear">Build a linear model with Estimators</a></li>
+<li><a href="https://stats.stackexchange.com/questions/46523/how-to-simulate-artificial-data-for-logistic-regression/46525">Generating artificial data</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc">Logistic Regression overview</a></li>
+<li><a href="https://machinelearningmastery.com/logistic-regression-for-machine-learning/">Logistic Regression for Machine learning</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-using-python-sklearn-numpy-mnist-handwriting-recognition-matplotlib-a6b31e2b166a">Logistic Regression using Python (scikit-learn)</a></li>
+</ol>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/logreg/logreg2/" style="color: #4ABDAC; font-size: 18px; "> Learning to classify coffee from cappuccino - Part 2</a>
+
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/logreg/logreg6/" style="color: #4ABDAC; font-size: 18px; ">Learning to classify coffee from cappuccino - Part 6</a>
+          
+          &raquo;</p>
+          </span>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

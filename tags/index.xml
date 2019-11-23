@@ -6,7 +6,7 @@
     <description>Recent content in Tags on take a wild guess</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 24 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://takeawildguess.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -23,7 +23,7 @@
     <item>
       <title>Algorithm</title>
       <link>https://takeawildguess.net/tags/algorithm/</link>
-      <pubDate>Sun, 24 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/tags/algorithm/</guid>
       <description></description>
@@ -86,7 +86,7 @@
     <item>
       <title>Gradient Descent</title>
       <link>https://takeawildguess.net/tags/gradient-descent/</link>
-      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/tags/gradient-descent/</guid>
       <description></description>
@@ -140,7 +140,7 @@
     <item>
       <title>Logistic Regression</title>
       <link>https://takeawildguess.net/tags/logistic-regression/</link>
-      <pubDate>Sun, 24 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/tags/logistic-regression/</guid>
       <description></description>
@@ -149,7 +149,7 @@
     <item>
       <title>Machine Learning</title>
       <link>https://takeawildguess.net/tags/machine-learning/</link>
-      <pubDate>Sun, 24 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/tags/machine-learning/</guid>
       <description></description>
@@ -158,7 +158,7 @@
     <item>
       <title>Maximum Likelihood</title>
       <link>https://takeawildguess.net/tags/maximum-likelihood/</link>
-      <pubDate>Sun, 06 Jan 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 13 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/tags/maximum-likelihood/</guid>
       <description></description>
@@ -176,7 +176,7 @@
     <item>
       <title>Numpy</title>
       <link>https://takeawildguess.net/tags/numpy/</link>
-      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 24 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/tags/numpy/</guid>
       <description></description>
@@ -185,7 +185,7 @@
     <item>
       <title>Python</title>
       <link>https://takeawildguess.net/tags/python/</link>
-      <pubDate>Sun, 24 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/tags/python/</guid>
       <description></description>
@@ -203,7 +203,7 @@
     <item>
       <title>Scikit Learn</title>
       <link>https://takeawildguess.net/tags/scikit-learn/</link>
-      <pubDate>Sun, 24 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/tags/scikit-learn/</guid>
       <description></description>
@@ -230,7 +230,7 @@
     <item>
       <title>Tensorflow</title>
       <link>https://takeawildguess.net/tags/tensorflow/</link>
-      <pubDate>Sun, 24 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 03 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/tags/tensorflow/</guid>
       <description></description>

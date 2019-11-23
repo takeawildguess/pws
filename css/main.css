@@ -308,7 +308,16 @@ background-size: cover; background-position: center; }
 /* .postContent .row { margin: auto; padding: 0px; max-width: 1800px; } */
 .postContent { padding-top: 50px; }
 .blogPost a{ color: #FC4A1A; font-size: 18px; }
-.blogPost table { height: auto; width: 100%; }
+.blogPost img[alt=png]{ margin: auto; display: block; max-width: 1000px; width: auto; height: auto; }
+.blogPost img[alt=pngS]{ margin: auto; display: block; max-width: 150px; width: auto; height: auto; }
+.blogPost img[alt=pngM]{ margin: auto; display: block; max-width: 750px; width: auto; height: auto; }
+.blogPost img[alt=pngL]{ margin: auto; display: block; max-width: 2000px; width: auto; height: auto; }
+/* .blogPost img[alt=png_small]{ height: auto; width: 100%; } */
+/* .blogPost table { height: auto; width: 100%; } */
+.blogPost table { display: block; position: relative; margin-bottom: 100px; height: auto; width: 100%;  border-spacing: 50px; }
+.blogPost th { border-bottom: 2px solid #4ABDAC; }
+.blogPost td, th { text-align: center; background-color: #FC4A1A; padding: 10px;}
+
 /* .blogPost table { margin: auto; display: block; width: 100%; height: auto; } */
 
 .pgNav { background-color: #DFDCE3; position: relative; padding-top: 20px; padding-bottom: 20px; }
@@ -318,8 +327,14 @@ background-size: cover; background-position: center; }
 @media only screen and (max-width: 500px) {
 .postContent .row { padding: 0px 0px; }
 .postHead img{ max-width: 300px; }
+.blogPost img[alt=png]{ width: 100%; }
+.blogPost img[alt=pngM]{ width: 100%; }
+.blogPost img[alt=pngL]{ width: 100%; }
+.blogPost img[alt=pngS]{ width: 50%; }
 .pgNav { padding-left: 0px; padding-right: 0px; }
 }
+/* .blogPost img { width: 100%; } */
+.blogPost code.hljs { border-radius: 15px; padding: 15px; }
 
 /* .blogHead div { border:1px solid red; }
 .blog div { border:1px solid blue; } */
@@ -357,9 +372,6 @@ nav[data-toggle='toc'] { top: 100px; }
 .back-to-top { cursor: pointer; position: fixed; bottom: 15px; right: 15px; display:none; color: rgb(0, 0, 0); }
 .back-to-top i { color: #fff; margin: 0; position: relative; font-size: 25px; }
 
-/* ======================== POST ============== */
-.blogPost img { width: 100%; }
-.blogPost code.hljs { border-radius: 15px; padding: 15px; }
 
 /* [src*="#thumbnail"] */
 

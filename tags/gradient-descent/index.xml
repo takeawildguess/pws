@@ -6,25 +6,25 @@
     <description>Recent content in Gradient Descent on take a wild guess</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://takeawildguess.net/tags/gradient-descent/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Hello world example for Machine learning - Part 3</title>
+      <title>Hello world for Machine learning - Part 3</title>
       <link>https://takeawildguess.net/blog/linreg/linreg3/</link>
-      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/blog/linreg/linreg3/</guid>
-      <description>1. Introduction We have introduced the concept of the linear-regression problem and the structure to solve it in a &amp;ldquo;machine-learning&amp;rdquo; fashion in this post, while we have applied the theory to a simple but practical case of linear-behavior identification from a bunch of data that are generated in a synthetic way here.
+      <description>1. Introduction We have introduced the concept of the linear-regression problem and the structure to solve it in a &amp;ldquo;machine-learning&amp;rdquo; fashion in this post, while we have applied the theory to a simple but practical case of linear-behaviour identification from a bunch of data that are generated in a synthetic way here.
 We now extend the analysis to a multi-linear case where more than one feature (or input) are fed to the model to predict the outcome.</description>
     </item>
     
     <item>
-      <title>Hello world example for Machine learning - Part 2</title>
+      <title>Hello world for Machine learning - Part 2</title>
       <link>https://takeawildguess.net/blog/linreg/linreg2/</link>
-      <pubDate>Sun, 13 Jan 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/blog/linreg/linreg2/</guid>
       <description>1. Introduction We have introduced in the previous post the concept of the linear-regression problem and the structure to solve it in a &amp;ldquo;machine-learning&amp;rdquo; fashion. In this post we apply the theory to a simple but practical case of linear-behavior identification from a bunch of data that are generated in a synthetic way.
@@ -32,9 +32,9 @@ We are going to implement the logic from scratch in Python and its powerful nume
     </item>
     
     <item>
-      <title>Hello world example for Machine learning - Part 1</title>
+      <title>Hello world for Machine learning - Part 1</title>
       <link>https://takeawildguess.net/blog/linreg/linreg1/</link>
-      <pubDate>Sun, 06 Jan 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 13 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/blog/linreg/linreg1/</guid>
       <description>1. Problem formulation We want to create a simplified representation (model) of real/world from available data. The model architecture can be seen as a box that takes some quantities as input, performs some internal computation and returns some other quantities as output. The inputs are also referred to as features or predictors of the problem to solve, since they contain valuable information that the model should exploit to come up with the correct outcome.</description>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.49" />
+  <title>Learning to classify coffee from cappuccino - Part 2 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+  
+  
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Learning to classify coffee from cappuccino - Part 2">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/logreg/logreg2/" style="font-size: 16px; ">Coffee or cappuccino?</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/coffee_cappuccino.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Learning to classify coffee from cappuccino - Part 2</h1>
+          <h5 class="card-title text-center">Coffee or cappuccino?</h5>
+          <h6 class="card-text text-center">February 24, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 11 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/logistic-regression"><kbd class="item-tag">logistic-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/numpy"><kbd class="item-tag">numpy</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction-and-assumptions">1. Introduction and assumptions</h2>
+
+<p>In this post-series, we are going to study the very basic modelling for classification problems, the logistic regression.
+<strong>Classification</strong> entails that the output is a discrete variable taking values on a pre-defined limited set, where the set dimension is the number of classes. Some examples are <em>spam detection</em>, <em>object recognition</em> and <em>topic identification</em>.</p>
+
+<p>In this post, we implement the logistic regression theory that we have analyzed in the <a href="/blog/logreg/logreg1/">first post</a> using Python and Numpy from scratch.
+We then implement a different method, Iteratively reweighted least squares (IRLS), to identify the coefficients of a binary logistic regression classifier.
+We also compare linear and logistic regression algorithms on the same problem.
+We finally analyze how the model parameters evolve during the training process.</p>
+
+<p>In this series, we do not split the dataset into training and testing sets, but we assess every model on the training set only.
+A dedicated post on model selection, overfitting/underfitting problem and regularization will be published soon.</p>
+
+<h2 id="2-data-generation">2. Data generation</h2>
+
+<p>We create an equispaced x grid with 1000 points ranging from -10 to 10.
+Then true y outcome, which represents the class to assign to the input, is defined via the logistic function of the linear transformation of input x with parameters <code>Wgt</code> (2, -12).
+The actual class is assigned by drawing samples from a <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.binomial.html">binomial distribution</a>.
+A binomial distribution becomes a Bernoulli distribution when the number of trials is 1.
+In other words, we generate data by sampling the <code>y</code> class for each input <code>x</code>, where the probability of success (i.e., of belonging to class 1) is given by:</p>
+
+<p>$$ p = \sigma(\lbrack x, 1\rbrack\cdot \omega) $$</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Logistic_function">logistic function</a> is the $\sigma$ operator in the equation.</p>
+
+<pre><code class="language-python">def logistic(XX, ww, noise=0):
+    tt = np.dot(XX, ww) + noise
+    return 1/(1 + np.exp(-tt))
+</code></pre>
+
+<pre><code class="language-python">xx = np.linspace(-10., 10, 1000)
+bb = np.ones_like(xx)
+XX = np.vstack([xx, bb]).T # Add intercept
+Wgt = np.array([2, -12]).reshape(-1, 1) # ground-truth parameters
+Ymean = logistic(XX, Wgt) # True mean
+Ynoise = logistic(XX, Wgt, noise=np.random.normal(scale=0.5, size=(len(xx), 1))) # noise
+Yclass = np.random.binomial(1., Ynoise) # dichotomous variable, n_trial=1 =&gt; Bernoulli distribution
+</code></pre>
+
+<p>The figure shows the <code>y</code> class of each input in blue, the noise probability of success in green and the true mean with a solid red line.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(12,6))
+plt.plot(xx, Ymean, 'r-', lw=2, label='true mean curve')
+plt.scatter(xx, Ynoise, c='g', label='noise curve')
+plt.scatter(xx, Yclass, c='b', label='Y-class, dichotomous variable')
+plt.legend();
+</code></pre>
+
+<p><img src="output_6_0.png" alt="png" /></p>
+
+<h2 id="3-training">3. Training</h2>
+
+<p>At this stage, we apply the gradient descent algorithm to evolve the initial parameter setting to optimize the loss function down to its minimum value.
+We want to compare the two final outcomes that we get from minimizing the Maximum-Likelihood (ML) and Least-Squared-Error (LSE) functions.</p>
+
+<pre><code class="language-python">wInit = np.array([-2, 4]).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">J = lossFunML(XX, Yclass, wInit)
+Nepoch, lr = 1500, 0.05
+wEvolML, JevolML = gradDescML(XX, Yclass, wInit, lr, Nepoch)
+wOptML, Jopt = wEvolML[-1:,:], JevolML[-1]
+print(&quot;Optimal ML parameter values: {}, Optimal ML loss value: {}&quot;.format(wOptML, Jopt))
+</code></pre>
+
+<pre><code>[[ 0.6702804  -3.85882638]] [-0.13505221]
+</code></pre>
+
+<pre><code class="language-python">wEvolLSE, JevolLSE = gradDescLSE(XX, Yclass, wInit, lr, Nepoch)
+wOptLSE, Jopt = wEvolLSE[-1:,:], JevolLSE[-1]
+print(&quot;Optimal LSE parameter values: {}, Optimal LSE loss value: {}&quot;.format(wOptLSE, Jopt))
+</code></pre>
+
+<pre><code>[[-2.82634014  3.23804035]] [ 0.36677638]
+</code></pre>
+
+<p>The figure shows the ground-truth class of each input in blue, the model probability of success (being in state 1) predicted by ML and LSE methods with solid green and red lines, respectively.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+plt.scatter(xx, Yclass, alpha=0.75, label='ground-truth')
+plt.plot(xx, sigmoid(np.dot(XX, wOptLSE.T)[:,0]), 'r', lw=2, label='LSE')
+plt.plot(xx, sigmoid(np.dot(XX, wOptML.T)[:,0]), 'g', lw=2, label='ML')
+plt.xlabel(&quot;X&quot;)
+plt.ylabel(&quot;Y&quot;)
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="output_12_0.png" alt="png" /></p>
+
+<h2 id="4-iteratively-reweighted-least-squares-irls">4. Iteratively reweighted least squares (IRLS)</h2>
+
+<p>A different method to identify the coefficients of a binary logistic regression classifier is to use <em>iteratively reweighted least squares (IRLS)</em>, which is equivalent to minimizing the log-likelihood of a Bernoulli distributed process using Newton&rsquo;s method (see <a href="https://en.wikipedia.org/wiki/Logistic_regression#Iteratively_reweighted_least_squares_(IRLS)">Wiki</a> reference for further details).</p>
+
+<p>The parameters $\omega_k$ at step $k$ are updated as follows:</p>
+
+<p>$$\omega_{k+1} = (X^T\cdot S_k\cdot X)^{-1}\cdot X^T\cdot (S_k\cdot X \cdot\omega_k + Y - \hat{Y}) $$</p>
+
+<p>where $X$ contains as many rows as examples and columns as the model parameters (i.e., the number of predictors plus the bias), $S_k$ is a diagonal matrix of Bernoulli variance of the model prediction $\hat{Y}\cdot(1-\hat{Y})$, $Y$ contains the ground-truth labels, $\hat{Y}$ is the current model prediction for each example of the dataset.</p>
+
+<p>The matrix inverse operation is implemented using the <code>pinv</code> method in the <code>linalg</code> package to better handle critical situations such as singular matrices.</p>
+
+<p>Here we show the shape of each of the involved matrices.</p>
+
+<pre><code class="language-python">ww = np.array([-1, 1]).reshape(-1, 1)
+Yhat = sigmoid(np.dot(XX, ww))
+Sk = np.diag(Yhat[:,0]*(1-Yhat[:,0]))
+T3 = (np.dot(Sk, np.dot(XX, ww)) + Yclass - Yhat)
+T1 = np.linalg.pinv(np.dot(XX.T, np.dot(Sk, XX)))
+wNew = np.dot(T1, np.dot(XX.T, T3))
+</code></pre>
+
+<pre><code class="language-python">XX.shape, Yclass.shape, Yhat.shape, ww.shape, wNew.shape
+</code></pre>
+
+<pre><code>((1000, 2), (1000, 1), (1000, 1), (2, 1), (2, 1))
+</code></pre>
+
+<p>Here we plot the initial prediction variance matrix $S_k$, where 0 values have been replaced with NaN to improve readability.</p>
+
+<pre><code class="language-python">Sk_vis = Sk
+Sk_vis[Sk_vis==0] = np.nan
+plt.imshow(Sk_vis);
+</code></pre>
+
+<pre><code>&lt;matplotlib.image.AxesImage at 0x2102d466080&gt;
+</code></pre>
+
+<p><img src="output_17_1.png" alt="png" /></p>
+
+<pre><code class="language-python">def irls(XX, YY, ww):
+    Yhat = sigmoid(np.dot(XX, ww))
+    Sk = np.diag(Yhat[:,0]*(1-Yhat[:,0]))
+    T3 = (np.dot(Sk, np.dot(XX, ww)) + YY - Yhat)
+    T1 = np.linalg.pinv(np.dot(XX.T, np.dot(Sk, XX)))
+    ww = np.dot(T1, np.dot(XX.T, T3))
+    return ww, Sk
+</code></pre>
+
+<pre><code class="language-python">ww = np.array([-1, 1]).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">Jevol, wevol = [], []
+ww = np.array([-1, 1]).reshape(-1, 1)
+Nepoch = 100
+for _ in range(Nepoch):
+    ww, Sk = irls(XX, Yclass, ww)
+    Jevol.append(lossFunML(XX, Yclass, ww))
+    wevol.append(ww[:,0])
+wEvolIRLS, JevolIRLS = np.array(wevol), np.array(Jevol)
+</code></pre>
+
+<pre><code class="language-python">plt.plot(Jevol);
+</code></pre>
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x2102e7672e8&gt;]
+</code></pre>
+
+<p><img src="output_21_1.png" alt="png" /></p>
+
+<pre><code class="language-python">Sk_vis = Sk
+Sk_vis[Sk_vis==0] = np.nan
+plt.imshow(Sk_vis);
+</code></pre>
+
+<pre><code>&lt;matplotlib.image.AxesImage at 0x2102f884128&gt;
+</code></pre>
+
+<p><img src="output_22_1.png" alt="png" /></p>
+
+<h2 id="5-linear-vs-logistic-regression">5. Linear vs. logistic regression</h2>
+
+<p>Since we stated that linear regression would fail to handle classification problems, we want to get an idea of how it fails and struggles with this simple toy task.
+To this end, we use the two modules from the linear model package of Scikit-Learn to create the linear and logistic regression models.
+Since the output of the linear regression model is continuous in the real domain, we convert it to boolean (0/1) with a simple $ \geq 0.5$ condition.</p>
+
+<pre><code class="language-python">from sklearn.linear_model import LinearRegression, LogisticRegression
+</code></pre>
+
+<pre><code class="language-python">lnr = LinearRegression()
+lnr.fit(XX, Yclass)
+yprobLNR = lnr.predict(XX)
+ypredLNR = (yprobLNR&gt;.5).astype(int)
+</code></pre>
+
+<pre><code class="language-python">print(&quot;The linear regression model accuracy is {}&quot;.format(np.sum(ypredLNR == Yclass)/len(Yclass)*100))
+</code></pre>
+
+<pre><code>95.700000000000003
+</code></pre>
+
+<pre><code class="language-python">lgs = LogisticRegression(C=1e5)
+lgs.fit(XX, Yclass[:,0])
+ypredLGS = lgs.predict(XX).reshape(-1, 1)
+yprobLGS = lgs.predict_proba(XX)[:,1].reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">print(&quot;The logistic regression model accuracy is {}&quot;.format(np.sum(ypredLGS == Yclass)/len(Yclass)*100))
+</code></pre>
+
+<pre><code>96.399999999999991
+</code></pre>
+
+<p>The figure compares the ground-truth class of each input in blue, the linear and logistic regression model predicted the probability of success (being in state 1) in red and green, respectively, and the linear regression model predicted class in yellow.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+plt.scatter(xx, Yclass, alpha=0.75, label='ground-truth')
+plt.plot(xx, yprobLNR[:,0], 'y', lw=2, label='Linear regression - probability')
+plt.plot(xx, ypredLNR[:,0], 'r', lw=2, label='Linear regression - class')
+plt.plot(xx, yprobLGS[:,0], 'g', lw=2, label='Logistic regression - probability')
+plt.plot([xx.min(), xx.max()], [0.5, 0.5], 'k', lw=2, label='Threshold', alpha=.5)
+plt.xlabel(&quot;X&quot;)
+plt.ylabel(&quot;Y&quot;)
+plt.legend();
+</code></pre>
+
+<p><img src="output_30_0.png" alt="png" /></p>
+
+<h2 id="6-parameter-evolution">6. Parameter evolution</h2>
+
+<p>We want to see how the model parameters evolve within the loss function domain.
+To this end, we calculate the loss function value for each combination of parameters $\omega_1$ and $\omega_2$ and we keep track of the parameter values for all the training epochs the gradient descent algorithm requires to converge to the optimal solution.</p>
+
+<pre><code class="language-python">step = 0.5
+w1s = np.arange(-2.5, 3, step)
+w2s = np.arange(-6, 6, step)
+w1mg, w2mg = np.meshgrid(w1s, w2s)
+wmg = np.vstack((w1mg.flatten(), w2mg.flatten())).T
+w1s.shape, w2s.shape, wmg.shape
+</code></pre>
+
+<pre><code>((11,), (24,), (264, 2))
+</code></pre>
+
+<pre><code class="language-python">w_ = np.array([-3, 5]).reshape(-1, 1)
+[w_, lossFunML(XX, Yclass, w_)]
+</code></pre>
+
+<pre><code>[array([[-3],
+        [ 5]]), array([-13.90418806])]
+</code></pre>
+
+<p>The figure shows the contour plot of the loss function in the domain $(\omega_1, \omega_2) \in (-6,6)\times(-2.5, 3)$.
+The higher the value, the hotter the colours, the lower the loss function, the better the model is.
+Recall that the loss function is something we want to minimize by definition, while we want to maximize the likelihood of the data.
+It is good practice to take the maximum likelihood definition with a negative sign as the loss function.
+A pair of parameter values is a dot, whose size is related to the loss function. The smaller the dot, the better it is.
+Initial and final (and hopefully optimal) weights are plotted in green and red.</p>
+
+<pre><code class="language-python">Jlist = [lossFunML(XX, Yclass, wmg[kk,:].reshape(-1, 1)) for kk in range(wmg.shape[0])]
+Jmap = np.array(Jlist).reshape(-1, w1s.shape[0])
+
+plt.figure(figsize=(10, 5))
+plt.contourf(w1mg, w2mg, Jmap, alpha=0.5, cmap=plt.cm.jet)
+plt.colorbar()
+plt.scatter(wEvolML[:,0], wEvolML[:,1], s=10+10*JevolML/np.max(JevolML), alpha=0.5, label='Weight evolution')
+plt.plot(wEvolML[-1,0], wEvolML[-1,1], 'r', linestyle='none', marker='o', markersize=10, alpha=0.75, label='Optimal weights')
+plt.plot(wEvolML[0,0], wEvolML[0,1], 'g', linestyle='none', marker='o', markersize=10, alpha=0.75, label='Initial weights')
+plt.xlabel(&quot;$\omega_1$&quot;)
+plt.ylabel(&quot;$\omega_2$&quot;)
+#plt.axis('equal')
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="output_35_0.png" alt="png" /></p>
+
+<p>In this figure, we present the same evolution when the parameters are updated with respect to the LSE function instead.
+It is clear how the loss function shape is different and less smooth than the ML one.</p>
+
+<pre><code class="language-python">Jlist = [lossFunLSE(XX, Yclass, wmg[kk,:].reshape(-1, 1)) for kk in range(wmg.shape[0])]
+Jmap = np.array(Jlist).reshape(-1, w1s.shape[0])
+
+plt.figure(figsize=(10, 5))
+plt.contourf(w1mg, w2mg, Jmap, alpha=0.5, cmap=plt.cm.jet)
+plt.colorbar()
+plt.scatter(wEvolLSE[:,0], wEvolLSE[:,1], s=10+10*JevolLSE/np.max(JevolLSE), alpha=0.5, label='Weight evolution')
+plt.plot(wEvolLSE[-1,0], wEvolLSE[-1,1], 'r', linestyle='none', marker='o', markersize=10, alpha=0.75, label='Optimal weights')
+plt.plot(wEvolLSE[0,0], wEvolLSE[0,1], 'g', linestyle='none', marker='o', markersize=10, alpha=0.75, label='Initial weights')
+plt.xlabel(&quot;$\omega_1$&quot;)
+plt.ylabel(&quot;$\omega_2$&quot;)
+#plt.axis('equal')
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="output_37_0.png" alt="png" /></p>
+
+<p>The final plot shows the trend of ML and LSE functions over the training steps $N_{epoch}$ (1500 in this experiment).</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+plt.plot(np.log(JevolLSE), lw=2, label='LSE')
+plt.plot(JevolML, lw=2, label='ML')
+plt.xlabel(&quot;training steps ($N_{epoch}$)&quot;)
+plt.ylabel(&quot;Logarithm loss trend ($log(J_{evol})$)&quot;)
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="output_39_0.png" alt="png" /></p>
+
+<h2 id="reference">Reference</h2>
+
+<ol>
+<li><a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf">CS229 notes</a></li>
+<li><a href="https://www.coursera.org/learn/machine-learning">Machine Learning at Coursera</a></li>
+<li><a href="http://people.math.gatech.edu/~ecroot/3225/maximum_likelihood.pdf">Maximum likelihood estimators and least squares</a></li>
+<li><a href="https://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf">An Introduction to Statistical Learning</a></li>
+<li><a href="https://stats.stackexchange.com/questions/46523/how-to-simulate-artificial-data-for-logistic-regression/46525">Generating artificial data</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc">Logistic Regression overview</a></li>
+<li><a href="https://machinelearningmastery.com/logistic-regression-for-machine-learning/">Logistic Regression for Machine learning</a></li>
+<li><a href="https://data.princeton.edu/wws509/notes/c3.pdf">Princeton notes</a></li>
+<li><a href="https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8">Building A Logistic Regression in Python, Step by Step</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-using-python-sklearn-numpy-mnist-handwriting-recognition-matplotlib-a6b31e2b166a">Logistic Regression using Python (scikit-learn)</a></li>
+</ol>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/logreg/logreg1/" style="color: #4ABDAC; font-size: 18px; "> Learning to classify coffee from cappuccino - Part 1</a>
+
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/logreg/logreg3/" style="color: #4ABDAC; font-size: 18px; ">Learning to classify coffee from cappuccino - Part 3</a>
+          
+          &raquo;</p>
+          </span>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

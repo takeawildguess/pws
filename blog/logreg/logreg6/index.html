@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.49" />
+  <title>Learning to classify coffee from cappuccino - Part 6 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+  
+  
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Learning to classify coffee from cappuccino - Part 6">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/logreg/logreg6/" style="font-size: 16px; ">Coffee or cappuccino?</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/coffee_cappuccino.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Learning to classify coffee from cappuccino - Part 6</h1>
+          <h5 class="card-title text-center">Coffee or cappuccino?</h5>
+          <h6 class="card-text text-center">March 24, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 8 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/logistic-regression"><kbd class="item-tag">logistic-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction-and-assumptions">1. Introduction and assumptions</h2>
+
+<p>In this post-series, we are going to study the very basic modelling for classification problems with logistic regression algorithms.
+<strong>Classification</strong> entails that the output is a discrete variable taking values on a predefined limited set, where the set dimension is the number of classes.
+Some examples are <em>spam detection</em>, <em>object recognition</em> and <em>topic identification</em>.</p>
+
+<p>We analyzed the theory in the <a href="/blog/logreg/logreg1/">first post</a>, implement the algorithm with Numpy in <a href="/blog/logreg/logreg2/">Part 2</a> and using Sklearn and Tensorflow in <a href="/blog/logreg/logreg3/">Part 3</a>.
+We solved a binary classification problem for multivariate non-linear logistic regression in Scikit-learn in <a href="/blog/logreg/logreg4/">Part 4</a> and extended the analysis to multinomial classification in <a href="/blog/logreg/logreg5/">Part 5</a>.
+We now have a look at categorical and numerical inputs (predictors) from a simple but funny gaming example: <a href="https://en.wikipedia.org/wiki/Tic-tac-toe">tic-tac-toe</a>.</p>
+
+<p>In this series, we do not split the dataset into training and testing sets, but we assess every model on the training set only.
+A dedicated post on model selection, overfitting/underfitting problem and regularization will be published soon.</p>
+
+<p>Let&rsquo;s get started!</p>
+
+<h2 id="2-categorical-predictors">2. Categorical predictors</h2>
+
+<p>A categorical variable can take on values from two or more categories.
+There are two types of categorical variable, <em>nominal</em> and <em>ordinal</em>.
+A nominal variable has no intrinsic ordering to its categories. Some examples are <em>gender</em> (two categories, male and female), <em>citizenship</em> (as many categories as the number of countries in the dataset), <em>capitalized</em> (two categories, either a word is capitalized or it is not).</p>
+
+<p>An ordinal variable has a defined ordering. For example, temperature as a variable with three discrete levels (low, medium and high), movie rating (up to 5 stars).</p>
+
+<h2 id="3-dataset">3. Dataset</h2>
+
+<p>We introduce a new <a href="https://archive.ics.uci.edu/ml/datasets/Tic-Tac-Toe+Endgame">dataset</a> from <a href="https://archive.ics.uci.edu/ml/index.php">UCI Machine Learning repository</a> website to learn how to handle categorical predictors in a classification problem.</p>
+
+<p>This database encodes the complete set of possible board configurations at the end of tic-tac-toe games, where the <code>x</code> player is assumed to have played first.
+The target concept is <em>a win for x</em>, i.e., the response variable is True when <code>x</code> has got one of 8 possible ways to create a <code>three-in-a-row</code> crosses.</p>
+
+<p>The dataset consists of 958 instances of final game board configurations (legal tic-tac-toe endgame boards), filled with 9 attributes, each corresponding to one tic-tac-toe square, as follows (<code>x</code>: first player, <code>o</code>: second player, <code>b</code>: blank):</p>
+
+<ol>
+<li>top-left-square</li>
+<li>top-middle-square</li>
+<li>top-right-square</li>
+<li>middle-left-square</li>
+<li>middle-middle-square</li>
+<li>middle-right-square</li>
+<li>bottom-left-square</li>
+<li>bottom-middle-square</li>
+<li>bottom-right-square</li>
+</ol>
+
+<p>Each square can take one of the following three values: <code>x</code>, <code>o</code> or <code>b</code>.</p>
+
+<p>The binary problem is slightly skewed to the positive class.
+About 65.3% are positive outcomes, i.e., wins for <code>x</code>.</p>
+
+<p>We use <a href="https://pandas.pydata.org/">Pandas</a> to read in the dataset and we provide full column schema with the <code>names</code> attribute.</p>
+
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from mpl_toolkits import mplot3d
+
+import pandas as pd
+import numpy as np
+</code></pre>
+
+<pre><code class="language-python">colNames = ['top-left','top-middle','top-right','middle-left','middle-middle',
+         'middle-right','bottom-left','bottom-middle','bottom-right','class']
+df = pd.read_csv('data/tic-tac-toe.txt', names=colNames)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>TL</th>
+<th>TM</th>
+<th>TR</th>
+<th>ML</th>
+<th>MM</th>
+<th>MR</th>
+<th>BL</th>
+<th>BM</th>
+<th>BR</th>
+<th>class</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>o</td>
+<td>o</td>
+<td>x</td>
+<td>o</td>
+<td>o</td>
+<td>positive</td>
+</tr>
+
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>o</td>
+<td>o</td>
+<td>x</td>
+<td>x</td>
+<td>o</td>
+<td>positive</td>
+</tr>
+
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>o</td>
+<td>o</td>
+<td>x</td>
+<td>o</td>
+<td>x</td>
+<td>positive</td>
+</tr>
+
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>o</td>
+<td>o</td>
+<td>x</td>
+<td>b</td>
+<td>b</td>
+<td>positive</td>
+</tr>
+
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>o</td>
+<td>o</td>
+<td>b</td>
+<td>o</td>
+<td>b</td>
+<td>positive</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="4-visualizing-the-dataset">4. Visualizing the dataset</h2>
+
+<p>To have a clear and immediate view of the dataset, we rearrange the column encoding (1 for the x player, 0 for the o player, <code>NaN</code> for a blank position) to a typical tic-tac-toe board.</p>
+
+<pre><code class="language-python">encoding = {'x': 1, 'o': 0, 'b': np.nan}
+span, Nimg = 150, 6
+plt.figure(figsize=(14, 10))
+for kk, idx in enumerate(range(0, span*(Nimg-1)+1, span)):
+    example = df.iloc[idx].values
+    predictors, label = example[:-1], example[-1]
+    board = predictors.reshape(-1, 3)
+    plt.subplot(Nimg/2, 2, kk+1)
+    plt.imshow(np.array([encoding[vv] for vv in predictors]).reshape(-1, 3), cmap='Pastel1')
+    plt.title('Player {} has won the match'.format('x' if label=='positive' else 'o'))
+    for rr in range(3):
+        for cc in range(3):
+            cellLabel = board[rr, cc]
+            if cellLabel != 'b':
+                plt.annotate(str(cellLabel), xy=(cc, rr), horizontalalignment='center', verticalalignment='center', size=20)
+</code></pre>
+
+<p><img src="output_7_0.png" alt="png" /></p>
+
+<p>We are going to use encoding functions implemented in Sklearn, namely <code>LabelEncoder</code> and <code>OneHotEncoder</code>.</p>
+
+<p>However, Pandas offers the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html"><code>get_dummies</code></a> method, which makes the procedure to transform the categorical features into dummy variables very straight forward.
+It can be directly applied to the dataframe and the internal algorithm will recognize the categorical features.</p>
+
+<pre><code class="language-python">from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+</code></pre>
+
+<pre><code class="language-python">XX = df.values[:,:-1]
+YY = df.values[:,-1]
+leX = LabelEncoder()
+for col in range(XX.shape[-1]):
+    XX[:, col] = leX.fit_transform(XX[:, col])
+</code></pre>
+
+<pre><code class="language-python">leX.classes_
+</code></pre>
+
+<pre><code>array(['b', 'o', 'x'], dtype=object)
+</code></pre>
+
+<p>We transform the string-valued predictors into numerical values, ranging from 0 to 2 for the three classes.
+We take the numerical predictor array, <code>XX</code>, and we select a window of 50 values every 100 points and plot each window in a dedicated chart.</p>
+
+<p>This representation highlights the different board encoding that the logistic regression model will face identifying the proper winner.
+The cell colour encodes whether player <code>x</code> (grey) or player <code>o</code> (blue) has played or the cell is blank (green).</p>
+
+<pre><code class="language-python">Ncol, window, span = 5, 50, 100
+plt.figure(figsize=(15,8))
+for cc in range(Ncol):
+    plt.subplot(1, Ncol, cc+1)
+    plt.imshow(XX.astype(float)[cc*span:cc*span+window,:], cmap = 'Accent')
+    if cc == Ncol-1:
+        plt.colorbar()
+</code></pre>
+
+<p><img src="output_13_0.png" alt="png" /></p>
+
+<h2 id="5-one-hot-encoding">5. One-hot encoding</h2>
+
+<p>However, this encoding is still not suitable for a machine-learning algorithm to digest, since this numerical encoding comes with intrinsic ordering, which is something we do not want.
+There is indeed no reason for the algorithm to <em>believe</em> that an <code>o</code> label should be closer to the <code>x</code> one than the blank position, but the numerical representation says that the distance between the <code>x</code> and <code>o</code> codes is less than that one between the <code>x</code> and <code>b</code> codes, i.e., $|1-2| &lt; |0-2|$.</p>
+
+<p>To this end, we introduce the <a href="https://en.wikipedia.org/wiki/One-hot">one-hot</a> encoding to represent the model predictors.</p>
+
+<p>One-hot encoding can be seen as an array with as many elements as the number of distinct classes.
+All the elements are 0, except the element whose index coincides with the class value.
+For a categorical variable that can take on 6 values from 0 to 5, the numerical value 4 is transformed into the following array:</p>
+
+<p>$$ (0, 0, 0, 0, 1, 0) $$</p>
+
+<pre><code class="language-python">ohe = OneHotEncoder(categorical_features = range(XX.shape[1]), sparse=False) 
+XXohe = ohe.fit_transform(XX)
+XXohe.shape
+</code></pre>
+
+<pre><code>(958, 27)
+</code></pre>
+
+<p>The figure shows two charts, the left-hand side is the original numerical-labelling representation (player x is grey, player o is blue, blank is green), while the right-hand side is the one-hot encoding representation (1 is grey, 0 is green).
+The LHS representation stores the board configuration with 9 values, which are unpacked into $9*3 = 27$ columns since each categorical variable can vary over three discrete values that require three bits each in the one-hot encoding.</p>
+
+<pre><code class="language-python">window = 10
+plt.figure(figsize=(15,8))
+plt.subplot(1, 3, 1)
+plt.imshow(XX.astype(float)[:window,:], cmap = 'Accent')
+plt.subplot(1, 2, 2)
+plt.imshow(XXohe[:window,:], cmap = 'Accent')
+</code></pre>
+
+<pre><code>&lt;matplotlib.image.AxesImage at 0x1ee47191080&gt;
+</code></pre>
+
+<p><img src="output_17_1.png" alt="png" /></p>
+
+<p>The response variable is also string-valued.
+We need to create a different instance of label encoder to transform it into a 0-1 array (1 for positive class).</p>
+
+<pre><code class="language-python">leY = LabelEncoder()
+YY = leY.fit_transform(YY) #.reshape(-1,1)
+YY[:10]
+</code></pre>
+
+<pre><code>array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1], dtype=int64)
+</code></pre>
+
+<h2 id="6-training-a-logistic-regressor">6. Training a logistic regressor</h2>
+
+<p>We feed the one-hot encoded predictor array and the 1D array response variable to the logistic regression SKlearn module and follow the standard procedure.</p>
+
+<pre><code class="language-python">XXohe.shape, YY.shape
+</code></pre>
+
+<pre><code>((958, 27), (958,))
+</code></pre>
+
+<pre><code class="language-python">from sklearn.linear_model import LogisticRegression
+from sklearn import metrics
+# categorical features
+lgrCF = LogisticRegression(C=1e5) # we want to ignore regularization
+lgrCF.fit(XXohe, YY)
+Ypred = lgrCF.predict(XXohe)
+</code></pre>
+
+<pre><code class="language-python">print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(YY, Ypred)))
+print(&quot;Precision: {}&quot;.format(metrics.precision_score(YY, Ypred)))
+print(&quot;Recall: {}&quot;.format(metrics.recall_score(YY, Ypred)))
+</code></pre>
+
+<pre><code>Accuracy: 0.9832985386221295
+Precision: 0.9750778816199377
+Recall: 1.0
+</code></pre>
+
+<p>The model performance is great, which means it is able to <em>read</em> the final board and declare the winner!</p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/logreg/logreg3/" style="color: #4ABDAC; font-size: 18px; "> Learning to classify coffee from cappuccino - Part 3</a>
+
+          
+          &raquo;</p>
+          </span>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

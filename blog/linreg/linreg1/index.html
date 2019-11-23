@@ -12,7 +12,7 @@
   
 
   <meta name="generator" content="Hugo 0.49" />
-  <title>Hello world example for Machine learning - Part 1 &middot; take a wild guess</title>
+  <title>Hello world for Machine learning - Part 1 &middot; take a wild guess</title>
 
   
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -103,13 +103,57 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
   <![endif]-->
 
   
+  
+  
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
 
   
   
-  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
-  <script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  </script>
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
   
 
 </head>
@@ -118,7 +162,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
   
     <a class="navbar-brand abs" href="https://takeawildguess.net/">
-      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Hello world example for Machine learning - Part 1">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Hello world for Machine learning - Part 1">
     </a>
   
   <a class="navbar-brand" href="/blog/linreg/linreg1/" style="font-size: 16px; ">Hello world</a>
@@ -171,13 +215,13 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <header class="postHead">
   <div class="container-fluid overlay">
     <div class="descr">
-      <img src="https://takeawildguess.net/images/blog/linearRegression/hello.jpeg" class="img-fluid" alt="__">
+      <img src="https://takeawildguess.net/blog/images/hello.jpeg" class="img-fluid" alt="__">
       <div class="card">
         <div class="card-body">
-          <h1 class="card-title text-center">Hello world example for Machine learning - Part 1</h1>
+          <h1 class="card-title text-center">Hello world for Machine learning - Part 1</h1>
           <h5 class="card-title text-center">Hello world</h5>
-          <h6 class="card-text text-center">January 6, 2019</h6>
-          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 10 min read</h6>
+          <h6 class="card-text text-center">January 13, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 10.5 min read</h6>
           <h6 class="card-text text-center">
             <a href="https://takeawildguess.net/tags/linear-regression"><kbd class="item-tag">linear-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/maximum-likelihood"><kbd class="item-tag">maximum likelihood</kbd></a> <a href="https://takeawildguess.net/tags/gradient-descent"><kbd class="item-tag">gradient descent</kbd></a> 
           </h6>
@@ -203,32 +247,38 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <p>We want to create a simplified representation (model) of real/world from available data.
 The model architecture can be seen as a box that takes some quantities as input, performs some internal computation and returns some other quantities as output. The inputs are also referred to as <em>features</em> or <em>predictors</em> of the problem to solve, since they contain valuable information that the model should exploit to come up with the correct outcome.
-Two major problems are present, according to the output format:
-1.  <strong>Classification</strong>: the output is a discrete variable that can assume integer values within a pre-defined limited set, where the set dimension is the number of classes. If the number of classes is two, it is a binary classification problem, where the outcome can belong to either one class or the other one. One example is <em>spam detection</em>, where the outcome can belong to either the “spam” class or the “ham”. If more than two classes are present, it is a multinomial (or multi-class) classification problem. Some examples are <em>object recognition</em>, where the outcome gives the probability that the input (an image) contains a specific object which the model has been trained for, <em>topic identification</em>, where the model selects the topic of the input text within a defined list.
-2.  <strong>Regression</strong>: the output is a continuous variable that can assume real values. Some examples are <em>house price prediction</em>, <em>electricity price estimation</em> and <em>Flight delay forecast</em>.</p>
+Two major problems are present, according to the output format:</p>
+
+<ol>
+<li><strong>Classification</strong>: the output is a discrete variable that can assume integer values within a predefined limited set, where the set dimension is the number of classes. If the number of classes is two, it is a binary classification problem, where the outcome can belong to either one class or the other one. One example is <em>spam detection</em>, where the outcome can belong to either the <code>spam</code> class or the <code>ham</code>. If more than two classes are present, it is a multinomial (or multi-class) classification problem. Some examples are <em>object recognition</em>, where the outcome gives the probability that the input (an image) contains a specific object which the model has been trained for, <em>topic identification</em>, where the model selects the topic of the input text within a defined list.</li>
+<li><strong>Regression</strong>: the output is a continuous variable that can assume real values. Some examples are <em>house price prediction</em>, <em>electricity price estimation</em> and <em>Flight delay forecast</em>.</li>
+</ol>
 
 <h2 id="2-the-hello-world-case-for-machine-learning">2. The hello-world case for Machine Learning</h2>
 
-<p>The problem we are going to study and analyze in this post is the very introductive example of the Machine Learning algorithm field. I would say it is the <em>Hello world</em> of ML. I chose to get started talking about ML with this very easy problem so the it would be easier for you to focus on the ML implementation and analysis.</p>
+<p>The problem we are going to study and analyze in this post is the very introductive example of the Machine Learning algorithm field. I would say it is the <em>Hello world</em> of ML. I chose to get started talking about ML with this very easy problem so it would be easier for you to focus on the ML implementation and analysis.</p>
 
 <p>We (in this contest <em>we</em> refers to the human designers) need to define the architecture and give some boundaries to it (<strong>model structure</strong>, see Fig. 1). The model structure reduces the searching space to the machine. The machine is going to adopt the degrees of freedom we assign. It will then choose the <strong>optimal</strong> configuration within the assigned boundaries.
 We are both meta-designers and teachers. The machine can only generate some instances that belong to the family structure we have defined. If our design concept is internally flawless and robust, the machine will always be finding something useful.
-We are also teachers. We say the machine how well/bad it is performing within the assigned task. That’s why we need a <strong>loss function</strong> (see Fig. 1). The machine can use that function at any time to measure its performance. Its specific goal is to minimize that loss function as much as possible by changing its parameters, i.e., what we set as degrees of freedom to the machine. Saying that the machine aims at improving its score or performance is equivalent to saying it aims at minimizing the loss function.
+We are also teachers. We say the machine how well/bad it is performing within the assigned task.
+That&rsquo;s why we need a <strong>loss function</strong> (see Fig. 1). The machine can use that function at any time to measure its performance. Its specific goal is to minimize that loss function as much as possible by changing its parameters, i.e., what we set as degrees of freedom to the machine. Saying that the machine aims at improving its score or performance is equivalent to saying it aims at minimizing the loss function.
 How can the machine change its parameters to minimize the loss function? That is the <strong>learning algorithm</strong> that we need to state to guide the learning process (see Fig. 1). In other words, the learning recipe guides the machine to change to improve its score.</p>
 
-<p>Figure 1 shows the scheme of the main points of a Machine-learning framework. The top chart illustrates the interaction between data collected from the real-world, the designer and the machine. The designer takes care about three tasks: model structure, score (loss function) and the learning recipe.
-The <em>machine</em> uses the tools provided by the designer to improve its performance to represent the real-word scenario.</p>
+<p>Figure 1 shows the scheme of the main points of a Machine-learning framework. The top chart illustrates the interaction between data collected from the real-world, the designer and the machine. The designer takes care of three tasks: model structure, score (loss function) and the learning recipe.
+The <em>machine</em> uses the tools provided by the designer to improve its performance to represent the real-world scenario.</p>
 
-<p><img src="/blog/linreg/linreg1/learningFramework.png" alt="png" title="Machine learning general structure" />
-<img src="media/learningFramework.png" width="20%">
+<p><img src="/blog/linreg/linreg1/learningFramework.png" alt="pngM" title="Machine learning general structure" />
 <em>Figure 1 - Machine learning general structure</em></p>
 
 <h2 id="lossFun">3. Loss function</h2>
 
-<p>We present three ways to define the same loss function:
-1.  Energy-based definition, where the energy equilibrium of a mechanical system that consists of several mass-concentrated points are connected to a rigid bar by means of a spring.
-2.  Maximum likelihood estimation, where a statistical approach is used.
-3.  Least-squared error, where the residual definition is adopted.</p>
+<p>We present three ways to define the same loss function:</p>
+
+<ol>
+<li>Energy-based definition, where the energy equilibrium of a mechanical system that consists of several mass-concentrated points are connected to a rigid bar by means of a spring.</li>
+<li>Maximum likelihood estimation, where a statistical approach is used.</li>
+<li>Least-squared error, where the residual definition is adopted.</li>
+</ol>
 
 <h3 id="3-1-energy-based-loss-function">3.1 Energy-based loss function</h3>
 
@@ -238,11 +288,10 @@ The <em>machine</em> uses the tools provided by the designer to improve its perf
 
 <p>where the displacement is the vertical distance between the mass (data point) and its projection to the bar (see Fig.2).</p>
 
-<p><img src="/blog/linreg/linreg1/energyModel.png" alt="png" title="Energy-based loss function scheme" />
-<img src="media/energyModel.png" width="20%">
+<p><img src="/blog/linreg/linreg1/energyModel.png" alt="pngM" title="Energy-based loss function scheme" />
 <em>Figure 2 - Energy-based loss function scheme</em></p>
 
-<p>The overall energy content of the system is the sum of the contribution of each spring. The system tends to reach the equilibrium by minimizing its energy content. The equilibrium is identified by the least energy possible configuration. If every point is equally relevant, the stiffness value is constant for every spring (for simplicity we can set $ k_j = 1 $ for each $ j $). Otherwise we can force the system either to be extremely precise to represent one point by increasing its associated spring’s stiffness or to ignore one point by reducing the stiffness down to 0.</p>
+<p>The overall energy content of the system is the sum of the contribution of each spring. The system tends to reach equilibrium by minimizing its energy content. The equilibrium is identified by the least energy possible configuration. If every point is equally relevant, the stiffness value is constant for every spring (for simplicity we can set $ k_j = 1 $ for each $ j $). Otherwise, we can force the system either to be extremely precise to represent one point by increasing its associated spring&rsquo;s stiffness or to ignore one point by reducing the stiffness down to 0.</p>
 
 <h3 id="3-2-mle-based-loss-function-and-lsme">3.2 MLE-based loss function and LSME</h3>
 
@@ -250,12 +299,12 @@ The <em>machine</em> uses the tools provided by the designer to improve its perf
 
 <p>$$ y_j = \theta^T \cdot x_j + \epsilon_j $$</p>
 
-<p>where $ \epsilon_j $ is the error related to point $P_j$ that includes either random noise or effects that are not captured by the selected predictors in the <em>x</em> term. If the error values are independently and identically distributed with a normal distribution ($ \epsilon_j \mathtt{\sim} N(0, \sigma^2) $), we can state that the density distribution is as follows:</p>
+<p>where $ \epsilon_j $ is the error related to point $P_j$ that includes either random noise or effects that are not captured by the selected predictors in the $x$ term.
+If the error values are independently and identically distributed with a normal distribution ($ \epsilon_j \mathtt{\sim} N(0, \sigma^2) $), we can state that the density distribution is as follows:</p>
 
 <p>$$ p(\epsilon_j) = \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{\epsilon_j^2}{2\cdot\sigma^2}} $$</p>
 
-<p><img src="/blog/linreg/linreg1/likelihoodModel.png" alt="png" title="Likelihood-based loss function scheme" />
-<img src="media/likelihoodModel.png" width="20%">
+<p><img src="/blog/linreg/linreg1/likelihoodModel.png" alt="pngM" title="Likelihood-based loss function scheme" />
 <em>Figure 3 - Likelihood-based loss function scheme</em></p>
 
 <p>By combining the latter equation with the error-based linear regression expression (1), the output density given inputs and parameter estimation for point $P_j$ is:</p>
@@ -264,15 +313,16 @@ The <em>machine</em> uses the tools provided by the designer to improve its perf
 
 <p>The probability of the dataset is given by the combined contributions of every data point. Since inputs and outputs are fixed, we can select the best values of parameter vector $\theta$ that <strong>maximize the likelihood</strong> of the dataset:</p>
 
-<p>$$ max<em>{\theta} L(\theta) = max</em>{\theta} p(\hat{y} | \hat{x}; \theta) $$</p>
+<p>$$ \max\limits_{\theta} L(\theta) \quad\text{where}\quad L(\theta) = p(\hat{y} | \hat{x}; \theta)  $$</p>
 
-<p>where $ \hat{x} \in R^{m, n}$ and $ \hat{y} \in R^{m, 1}$ are the matrix and the vector containing the dataset inputs and outputs, <em>m</em> is the number of data points, <em>n</em> is the dimension of the predictors. Since the data points are independent each other, the likelihood function can be re-written as:</p>
+<p>where $ \hat{x} \in R^{m, n}$ and $ \hat{y} \in R^{m, 1}$ are the matrix and the vector containing the dataset inputs and outputs, $m$ is the number of data points, $n$ is the dimension of the predictors.
+Since the data points are independent from each other, the likelihood function can be re-written as:</p>
 
 <p>$$ L(\theta) = \Pi_{j=1}^{m} p(y_j | x_j; \theta) $$</p>
 
 <p>$$ L(\theta) = \Pi_{j=1}^{m} \frac{1}{\sqrt(2\pi)\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}} $$</p>
 
-<p>Maximizing <em>L</em> is equivalent to maximizing $ l(\theta) = log(L(\theta)) $ due to the strictly increasing behavior of the <em>log</em> function.</p>
+<p>Maximizing $L$ is equivalent to maximizing $ l(\theta) = log(L(\theta)) $ due to the strictly increasing behavior of the <code>log</code> function.</p>
 
 <p>$$ l(\theta) = log \Pi_{j=1}^{m} \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{(y_j-\theta^T \cdot x_j)^2}{2\cdot\sigma^2}} $$</p>
 
@@ -282,7 +332,7 @@ The <em>machine</em> uses the tools provided by the designer to improve its perf
 
 <p>where $ C = m\cdot\log\frac{1}{\sqrt{2\pi}\cdot \sigma} $ is a constant value.</p>
 
-<p>Maximizing <em>l</em> is equivalent to minimizing the loss function obtained with the least-squared error:</p>
+<p>Maximizing $l$ is equivalent to minimizing the loss function obtained with the least-squared error:</p>
 
 <p>$$ LSE = \frac{1}{2}\sum_{j=1}^{m} (y_j-\theta^T \cdot x_j)^2 $$</p>
 
@@ -290,16 +340,22 @@ The <em>machine</em> uses the tools provided by the designer to improve its perf
 
 <h3 id="3-3-least-squared-error">3.3 Least squared error</h3>
 
-<p>This method aims at finding the curve that represent a set of points at best by minimizing the sum of the squares of the residuals, where the residual is the difference between the data point and the corresponding projection on the identified curve. The error is squared to obtain a continuous differentiable loss function. This property however could lead to undesirable fitting results due to the presence of outliers (points that are far away from the major concentration of data points). The residual is calculated using the vertical projection of the data point to the curve, in order to simplify the formulation.</p>
+<p>This method aims at finding the curve that represents a set of points at best by minimizing the sum of the squares of the residuals, where the residual is the difference between the data point and the corresponding projection on the identified curve. The error is squared to obtain a continuous and differentiable loss function. This property, however, could lead to undesirable fitting results due to the presence of outliers (points that are far away from the major concentration of data points). The residual is calculated using the vertical projection of the data point to the curve, in order to simplify the formulation.</p>
 
 <h2 id="4-gradient-descent-algorithm">4. Gradient descent algorithm</h2>
 
-<p>Gradient descent algorithm is used to optimize the loss function, i.e., to find the parameter values that minimize it. From calculus theory, we exploit that the minimum of a continuous function can be identified by solving the following problem $\nabla_\theta J = 0$. In other words, we need to find the parameter values $\theta$ that let the gradient of the function J to be 0. The gradient is the vector perpendicular to the isolines of the surface described by J. The gradient is the 0-vector at every minimum, maximum or saddle point of the surface. Let us analyse the following example:</p>
+<p>Gradient descent algorithm is used to optimize the loss function, i.e., to find the parameter values that minimize it.
+From calculus theory, we exploit that the minimum of a continuous function can be identified by solving the following problem $\nabla_\theta J = 0$.
+In other words, we need to find the parameter values $\theta$ that let the gradient of the function J to be 0.
+The gradient is the vector perpendicular to the isolines of the surface described by J.
+The gradient is the 0-vector at every minimum, maximum or saddle point of the surface.
+Let us analyse the following example:</p>
 
 <p>$$ J = \omega_1^2 + \omega_2^2 + 5 $$</p>
 
-<p>This is a paraboloid in a 3D space, or an infinite <em>collection</em> of circles centred in the origin and whose radius is $ \sqrt{J-5} $. That implies that the smallest circle has 0 radius for $J=5$.
-Every circle is obtained by slicing the 3D space with a horizontal plane $J = k$, where <em>k</em> is the height of the plane. The gradient of that function is a vector where every element is the variation of the function with respect to the corresponding parameter, as follows:</p>
+<p>This is a paraboloid in a 3D space, or an infinite <em>collection</em> of circles centred in the origin and whose radius is $ \sqrt{J-5} $.
+That implies that the smallest circle has 0 radius for $J=5$.
+Every circle is obtained by slicing the 3D space with a horizontal plane $J = k$, where $k$ is the height of the plane. The gradient of that function is a vector where every element is the variation of the function with respect to the corresponding parameter, as follows:</p>
 
 <p>$$ \nabla_{\theta} J = (\frac{\partial J}{\partial \omega_1}, \frac{\partial J}{\partial \omega_2}) $$</p>
 
@@ -307,22 +363,26 @@ Every circle is obtained by slicing the 3D space with a horizontal plane $J = k$
 
 <p>$$ \nabla J = 2\cdot(\omega_1, \omega_2) $$</p>
 
-<p>We draw this vector field in conjunction with the isolines. It is 0 if and only if $ (\omega_1, \omega_2) = (0, 0) $. Since any point in the neighbouring area of $(0, 0)$ leads to higher J values, we conclude it is a minimum. Since machine-learning problems cannot be analytically solved, we need to iterate to gradually get closer to the minimum point by changing the parameters.</p>
+<p>We draw this vector field in conjunction with the isolines.
+It is 0 if and only if $ (\omega_1, \omega_2) = (0, 0) $.
+Since any point in the neighbouring area of $(0, 0)$ leads to higher J values, we conclude it is a minimum.
+Since machine-learning problems cannot be analytically solved, we need to iterate to gradually get closer to the minimum point by changing the parameters.</p>
 
-<p>The <em>gradient descent algorithm</em> changes the parameter vector values at each epoch, k (or iteration), using the gradient direction and magnitude. The actual change in $\theta$ is controlled also by the learning rate $\alpha$, as follows:</p>
+<p>The <strong>gradient descent algorithm</strong> changes the parameter vector values at each epoch, k (or iteration), using the gradient direction and magnitude. The actual change in $\theta$ is controlled also by the learning rate $\alpha$, as follows:</p>
 
 <p>$$ \theta^{k+1} = \theta^k - \alpha \nabla_{\theta} J(\theta) $$</p>
 
-<p>The parameter update rule can be expliticily written for each element as follows:</p>
+<p>The parameter update rule can be explicitly written for each element as follows:</p>
 
 <p>$$ \theta_j^{k+1} = \theta_j^k - \alpha \frac{\partial J(\theta)}{\partial \theta_j} $$</p>
 
 <h3 id="4-1-gradient-field-of-a-2d-surface-function">4.1 Gradient field of a 2D surface function</h3>
 
-<p>The figure compares the gradient (vector field) to the isolines of the J function. In any point of the chart, the color gives the intensity of the J function, so that the colder it is, the lower the J value is (see the colorbar in the right-hand side of the chart).
+<p>The figure compares the gradient (vector field) to the isolines of the J function.
+In any point of the chart, the colour gives the intensity of the J function, so that the colder it is, the lower the J value is (see the colorbar in the right-hand side of the chart).
 The arrow in the same point instead shows the direction of the gradient on which the function increases. The arrow length is related to the J increment, which means a longer arrow indicates a steeper increment of the J surface.</p>
 
-<p>The isolines are shown using the <em>contourf</em> command, while the gradient field with <em>quiver</em> command provided by the <strong>Matplotlib</strong> library.</p>
+<p>The isolines are shown using the <code>contourf</code> command, while the gradient field with <code>quiver</code> command provided by the <code>Matplotlib</code> library.</p>
 
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
@@ -344,7 +404,16 @@ plt.axis('equal')
 plt.show()
 </code></pre>
 
-<p><img src="output_8_0.png" alt="png" /></p>
+<p><img src="output_14_0.png" alt="png" /></p>
+
+<h2 id="reference">Reference</h2>
+
+<ol>
+<li><a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf">CS229 notes</a></li>
+<li><a href="https://www.coursera.org/learn/machine-learning">Machine Learning at Coursera</a></li>
+<li><a href="http://people.math.gatech.edu/~ecroot/3225/maximum_likelihood.pdf">Maximum likelihood estimators and least squares</a></li>
+<li><a href="https://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf">An Introduction to Statistical Learning</a></li>
+</ol>
 
         </div>
         <div class="pgNav PageNavigation col-12 text-center">
@@ -353,7 +422,7 @@ plt.show()
 
           
           &nbsp;&nbsp; | &nbsp;&nbsp;
-          <a class="" href="/blog/linreg/linreg2/" style="color: #4ABDAC; font-size: 18px; ">Hello world example for Machine learning - Part 2</a>
+          <a class="" href="/blog/linreg/linreg2/" style="color: #4ABDAC; font-size: 18px; ">Hello world for Machine learning - Part 2</a>
           
           &raquo;</p>
           </span>

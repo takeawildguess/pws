@@ -6,66 +6,19 @@
     <description>Recent content in Tensorflow on take a wild guess</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://takeawildguess.net/tags/tensorflow/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>How to learn to classify - Part 4</title>
-      <link>https://takeawildguess.net/blog/logisticregression_part4/</link>
-      <pubDate>Sun, 24 Feb 2019 00:00:00 +0000</pubDate>
+      <title>Learning to classify coffee from cappuccino - Part 3</title>
+      <link>https://takeawildguess.net/blog/logreg/logreg3/</link>
+      <pubDate>Sun, 03 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.net/blog/logisticregression_part4/</guid>
-      <description>1. Introduction and assumptions In this post-series, we are going to study the very basic modeling for classification problems, the logistic regression. Classification entails that the output is a discrete variable taking values on a pre-defined limited set, where the set dimension is the number of classes. Some examples are spam detection, object recognition and topic identification.
-We focus on the input/output space, the predictor structure, the learning algorithm and on applying the method to different datasets.</description>
-    </item>
-    
-    <item>
-      <title>How to learn to classify - Part 3</title>
-      <link>https://takeawildguess.net/blog/logisticregression_part3/</link>
-      <pubDate>Sun, 17 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/blog/logisticregression_part3/</guid>
-      <description>1. Introduction and assumptions In this post-series, we are going to study the very basic modeling for classification problems, the logistic regression. Classification entails that the output is a discrete variable taking values on a pre-defined limited set, where the set dimension is the number of classes. Some examples are spam detection, object recognition and topic identification.
-We focus on the input/output space, the predictor structure, the learning algorithm and on applying the method to different datasets.</description>
-    </item>
-    
-    <item>
-      <title>How to learn to classify - Part 2</title>
-      <link>https://takeawildguess.net/blog/logisticregression_part2/</link>
-      <pubDate>Sun, 10 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/blog/logisticregression_part2/</guid>
-      <description>1. Introduction and assumptions In this post-series, we are going to study the very basic modeling for classification problems, the logistic regression. Classification entails that the output is a discrete variable taking values on a pre-defined limited set, where the set dimension is the number of classes. Some examples are spam detection, object recognition and topic identification.
-We focus on the input/output space, the predictor structure, the learning algorithm and on applying the method to different datasets.</description>
-    </item>
-    
-    <item>
-      <title>How to learn to classify - Part 1</title>
-      <link>https://takeawildguess.net/blog/logisticregression_part1/</link>
-      <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/blog/logisticregression_part1/</guid>
-      <description>1. Problem formulation We want to create a simplified representation (model) of real/world from available data. The model architecture can be seen as a box that takes some quantities as input, performs some internal computation and returns some other quantities as output. The inputs are also referred to as features or predictors of the problem to solve, since they contain valuable information that the model should exploit to come up with the correct outcome.</description>
-    </item>
-    
-    <item>
-      <title>Hello world example for Machine learning - Part 4</title>
-      <link>https://takeawildguess.net/blog/linreg/linreg4/</link>
-      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/blog/linreg/linreg4/</guid>
-      <description>1. Introduction We have introduced the concept of the linear-regression problem and the structure to solve it in a &amp;ldquo;machine-learning&amp;rdquo; fashion in this post, while we have applied the theory to a simple but practical case of linear-behavior identification from a bunch of data that are generated in a synthetic way here and extend the analysis to a multi-linear case where more than one feature (or input) are fed to the model to predict the outcome here.</description>
-    </item>
-    
-    <item>
-      <title>Hello world example for Machine learning - Part 5</title>
-      <link>https://takeawildguess.net/blog/linreg/linreg5/</link>
-      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/blog/linreg/linreg5/</guid>
-      <description>1. Introduction We have introduced the concept of the linear-regression problem and the structure to solve it in a &amp;ldquo;machine-learning&amp;rdquo; fashion in this post, while we have applied the theory to a simple but practical case of linear-behavior identification from a bunch of data that are generated in a synthetic way here and extend the analysis to a multi-linear case where more than one feature (or input) are fed to the model to predict the outcome here.</description>
+      <guid>https://takeawildguess.net/blog/logreg/logreg3/</guid>
+      <description>1. Introduction and assumptions In this post-series, we are going to study the very basic modelling for classification problems, the logistic regression. Classification entails that the output is a discrete variable taking values on a pre-defined limited set, where the set dimension is the number of classes. Some examples are spam detection, object recognition and topic identification.
+In this post, we implement the simple logistic regression case that we have analyzed in the first two posts (Part 1 and Part 2) using Sklearn first and Tensorflow then.</description>
     </item>
     
   </channel>
