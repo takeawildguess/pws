@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Can we visualize the flow of a regression neural network? &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Can we visualize the flow of a regression neural network?">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/fcnn/fcnn16/" style="font-size: 16px; ">See inside a NN in different scenarios</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/fcnnHead2.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Can we visualize the flow of a regression neural network?</h1>
+          <h5 class="card-title text-center">See inside a NN in different scenarios</h5>
+          <h6 class="card-text text-center">December 8, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 8.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/neural-network"><kbd class="item-tag">neural network</kbd></a> <a href="https://takeawildguess.net/tags/meta-learning"><kbd class="item-tag">meta-learning</kbd></a> <a href="https://takeawildguess.net/tags/hyperparameter"><kbd class="item-tag">hyperparameter</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>Welcome back to the FCNN series!</p>
+
+<p>In this new post, we are going to use the Python visualization class, <code>visFCNN()</code>, developed in the <a href="/blog/fcnn/fcnn14/">two</a> <a href="/blog/fcnn/fcnn15/">previous</a> posts.
+We want to see what happens inside a feed-forward neural network, which has been trained on toy examples with Tensorflow with the previously-developed Python class, <code>trainFCNN()</code>, for a regression problem.</p>
+
+<p>The Python class, <code>visFCNN()</code>, takes as input a dictionary containing all the information required to visualize the network flow, namely the values of the network parameters and main nodes (inputs, linear outputs and activation outputs).
+This flow corresponds to a single sample extracted from the dataset.</p>
+
+<p>We are going through the following steps:</p>
+
+<ol>
+<li>Get some insights into a regression problem.</li>
+<li>See the impact of the activation function.</li>
+<li>Visualize different layouts, i.e., different network depths with layers of different dimensions.</li>
+</ol>
+
+<p>The source code can be found in my Github <a href="https://github.com/takeawildguess/FCNNlib" target="_blank">repo</a>.</p>
+
+<h2 id="2-regression">2. Regression</h2>
+
+<p>Let&rsquo;s explore the network in different scenarios.</p>
+
+<p>We get started with a regression problem, <code>prod</code>, the product of two inputs.</p>
+
+<pre><code class="language-python">tnn = trainFCNN(nb_pnt=2500, dataset='prod')
+</code></pre>
+
+<pre><code class="language-python">tnn.plotPoints(idx=0)
+</code></pre>
+
+<p><img src="output_4_0.png" alt="png" /></p>
+
+<p>We then use the <code>Tensorflow</code> library to train a fully connected neural network.
+We take three different cases to get the insight into the flow wrt the network size and the activation function.
+We define the network with the <code>dims</code> attribute and the activation function with <code>activation</code>:</p>
+
+<ol>
+<li><code>activation=relu</code>, <code>dims=[6]</code>: small relu net</li>
+<li><code>activation=relu</code>, <code>dims=[6, 6]</code>: large relu net</li>
+<li><code>activation=sigmoid</code>, <code>dims=[6]</code>: small sigmoid net</li>
+</ol>
+
+<p>The <code>dims=[6, 6]</code> case means two hidden layers with <code>6</code> and <code>6</code> neurons each.
+Input and output dimensions are inferred from the dataset itself.</p>
+
+<p>The training will be happening within the <code>train</code> method.</p>
+
+<p>At the end of the training stage, we visualize the loss history to check whether it has reached convergence and the model outcome for the whole domain grid with <code>plotModelEstimate</code>.</p>
+
+<h2 id="3-small-relu-net">3. Small relu net</h2>
+
+<h3 id="3-1-training-and-visualizing-the-network">3.1 Training and visualizing the network</h3>
+
+<p>We start with a small network, <code>dims=[4]</code>, i.e., a single hidden layer with <code>4</code> neurons, whose activation function is <code>relu</code>.
+We train for 250 epochs.</p>
+
+<pre><code class="language-python">tnn.train(lib='tf', dims=[4], activation='relu', nb_epochs=250, lr=0.005)
+</code></pre>
+
+<pre><code>The final model loss is 0.001387043041177094
+</code></pre>
+
+<pre><code class="language-python">plt.plot(tnn.lossHistory)
+plt.title(tnn.mdlDescription());
+</code></pre>
+
+<p><img src="output_8_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_9_0.png" alt="png" /></p>
+
+<p>Amazing, so far so good!</p>
+
+<p>Now we need to extract the network parameters and the values of each variable and store them in <code>nn_prms</code> and <code>nn_vars</code>, respectively.
+We thus define the structure <code>fcnn</code>, a Python dictionary, containing all the information required to visualize the network flow.
+We treat the input as the output of a fictitious previous activation layer.
+The set of activation layers, $a^{(kk)}$, is retrieved from <code>tnn.nn_vars[1::2]</code>, while the set of dense layers, $z^{(kk)}$, is retrieved from <code>tnn.nn_vars[::2]</code>.
+In a similar fashion, we extract weights and biases from <code>tnn.nn_prms</code>.</p>
+
+<pre><code class="language-python">fcnn = {'activations': [tnn.XX] + tnn.nn_vars[1::2], 'linNeurons':tnn.nn_vars[::2],
+        'weights': tnn.nn_prms[::2], 'biases': tnn.nn_prms[1::2],}
+</code></pre>
+
+<p>We extract the <code>10</code>-th sample (<code>idx=10</code>).</p>
+
+<p>Here we create an instance of the class and call the <code>visualize</code> method with a tuple of figure size as an attribute.
+The input coordinates are <code>(0.37, -.21)</code> and the outcome is <code>-0.019</code>, the product of the two inputs divided by <code>4</code>.</p>
+
+<p>Let&rsquo;s have a look at the top-most neuron of the first dense layer, <code>.81</code>.
+We get it as:</p>
+
+<p>$$ .37\cdot (.8) + -.21\cdot (-.453) - 0.757 \approx -0.366 $$</p>
+
+<p>Since the activation function is the <a href="/blog/fcnn/fcnn01/#actfun">ReLu</a> function, whatever is negative becomes 0, otherwise does not change at all.</p>
+
+<p>The output layer applies the identity function to the result of the scalar product:</p>
+
+<p>$$ (0, 0.25, 0, 0.5) \cdot (-0.48, 0.95, -0.47, 0.83) = 0.25\cdot 0.95 + 0.5 \cdot 0.83 = -0.01 $$</p>
+
+<p>to return the final prediction <code>-0.01</code>.</p>
+
+<pre><code class="language-python">idx = 10
+vnn = visFCNN()
+vnn.visualize(fcnn, idx, (15, 12), palette='viridis', colNorm='comp')
+</code></pre>
+
+<p><img src="output_13_0.png" alt="png" /></p>
+
+<p>This network shows a really nice property, as we can see from the first layer weight matrix.</p>
+
+<pre><code class="language-python">print('First layer weight matrix:\n{}'.format(W0))
+</code></pre>
+
+<pre><code>First layer weight matrix:
+[[ 0.2759463   0.49641293 -0.22344889 -0.45353654]
+ [ 0.44429868 -0.8133788  -0.40170252  0.79962885]]
+</code></pre>
+
+<pre><code class="language-python">plt.figure()
+W0 = tnn.nn_prms[0]
+plt.imshow(W0)
+plt.axis('off');
+</code></pre>
+
+<p><img src="output_16_0.png" alt="png" /></p>
+
+<p>If we take the left-most <code>2x2</code> matrix from <code>W0</code>, it is approximately opposite to the right-most <code>2x2</code> matrix.
+Moreover, two bias values are there, repeated twice across the four neurons.</p>
+
+<p>The first layer draws four lines in the $(x_1, x_2)$ space that we report here for the sake of readability.
+Lines are ordered and numbered from the bottom up so that line 1 is the bottom neuron and line 4 is the top one.</p>
+
+<pre><code class="language-python">x1 = np.linspace(-2, 2, 10).reshape(-1, 1)
+b0 = tnn.nn_prms[1]
+x2 = - (x1*W0[0:1,:] + b0) / W0[1,:]
+plt.figure()
+plt.plot(x1, x2)
+plt.xlim([-3, 3])
+plt.xlabel('$x_1$')
+plt.ylabel('$x_2$')
+plt.grid()
+plt.legend([1, 2, 3, 4], loc='right');
+</code></pre>
+
+<p><img src="output_18_0.png" alt="png" /></p>
+
+<p>They form a diamond!
+Each line associated with a negative bias gives a null contribution (neuron is silent or dead) in the diamond area.
+To prove it, take one point in there, $(x_1, x_2) = (0, 0)$, and realize the bias is responsible for the overall sign.
+The Relu function returns 0 for a negative input!</p>
+
+<p>Contrarily, a line corresponding to a positive bias returns the input itself.</p>
+
+<p>The first layer has shown tremendous symmetric behaviour!
+What about the second (and last) layer?
+We basically have two weights, <code>0.9</code> and <code>-0.45</code>.
+The former is associated with positive biases, lines 1 and 3, while the latter to negative biases, lines 2 and 4.</p>
+
+<h3 id="3-2-central-zone">3.2 Central zone</h3>
+
+<p>How does the network approximate the product function in the diamond area?
+We know that neurons 1 and 2 are active on the RHS of lines 1 and 2, while neurons 3 and 4 on the LHS of lines 3 and 4.</p>
+
+<p>So only first and third neurons are active in this area.
+We can extract the local behaviour of the network with the following four steps.</p>
+
+<p>Let&rsquo;s stack <code>W0</code> and <code>b0</code> vertically, which is a <code>3x4</code>.</p>
+
+<pre><code class="language-python">prm0 = np.vstack((W0, b0))
+print('Output of first step:\n{}'.format(prm0))
+</code></pre>
+
+<pre><code>Output of first step:
+[[ 0.2759463   0.49641293 -0.22344889 -0.45353654]
+ [ 0.44429868 -0.8133788  -0.40170252  0.79962885]
+ [ 0.38886008 -0.70824724  0.34960958 -0.75686085]]
+</code></pre>
+
+<p>Element-wise product of <code>W1</code> and a mask array for the given specific area. If neurons 1 and 4 are active only, the mask would be <code>[1, 0, 0, 1]</code>.</p>
+
+<pre><code class="language-python">W1 = tnn.nn_prms[2].T
+mask = np.r_[1, 0, 1, 0]
+step2 = W1 * np.r_[1, 0, 1, 0]
+print('Output of second step:\n{}'.format(step2))
+</code></pre>
+
+<pre><code>Output of second step:
+[[ 0.82583565 -0.          0.94744754 -0.        ]]
+</code></pre>
+
+<p>Matrix product of the first-layer parameter stack and the row array out of point 2.</p>
+
+<pre><code class="language-python">step3 = prm0 * (W1 * np.r_[1, 0, 1, 0])
+print('Output of third step:\n{}'.format(step3))
+</code></pre>
+
+<pre><code>Output of third step:
+[[ 0.22788628 -0.         -0.2117061   0.        ]
+ [ 0.36691769  0.         -0.38059207 -0.        ]
+ [ 0.32113451  0.          0.33123674  0.        ]]
+</code></pre>
+
+<p>Sum it horizontally (<code>axis=1</code>) and add the final bias to the last element of the array only.</p>
+
+<pre><code class="language-python">b1 = tnn.nn_prms[-1]
+# input weights at the output layer
+step4 = np.sum(step3, axis=1) + np.r_[0, 0, b1]
+print('Output of last step:\n{}'.format(step4))
+</code></pre>
+
+<pre><code>Output of last step:
+[ 0.01618018 -0.01367438 -0.00330321]
+</code></pre>
+
+<p>It means that this area can be approximated as:</p>
+
+<p>$$ y = (x_1\cdot x_2)/4 \approx  0.0162\cdot x_1 -0.0137\cdot x_2 -0.0033 $$</p>
+
+<p>In other terms, it is pretty flat!</p>
+
+<h3 id="3-3-north-east-zone">3.3 North-east zone</h3>
+
+<p>Let&rsquo;s move to the north-east zone, on the RHS of the red and green lines and LHS of the yellow line.
+It contains the point $(x_1, x_2) = (1, 1)$.
+The first neuron is active only, therefore the mask is <code>[1, 0, 0, 0]</code>.
+We compact the previous four steps in one function with the <code>mask</code> attribute.</p>
+
+<pre><code class="language-python">nnExp = lambda mask: np.sum(prm0 * (W1 * np.array(mask)), axis=1) + np.r_[0, 0, b1]
+nnExpNE = nnExp([1, 0, 0, 0])
+print('Output of the four steps for the North-East area:\n{}'.format(nnExpNE))
+</code></pre>
+
+<pre><code>Output of the four steps for the North-East area:
+[ 0.22788628  0.36691769 -0.33453995]
+</code></pre>
+
+<p>To understand the behaviour, we draw the line $ x_2 = x_{1}/2$ as $x_1$ varies from $.8$ to $2$.
+This linear function approximates the ground-truth trend quite well for $x_1$ greater than $1.25$.</p>
+
+<pre><code class="language-python">xx1 = np.linspace(.8, 2, 10)
+xx2 = xx1/2
+yy = nnExpNE[0]*xx1 + nnExpNE[1]*xx2 + nnExpNE[-1]
+ygt = (xx1*xx2)/4
+plt.figure()
+plt.plot(xx1, yy)
+plt.plot(xx1, ygt)
+plt.xlim([.5, 2.5])
+plt.xlabel('$x_1$')
+plt.ylabel('$y$')
+plt.grid()
+plt.legend(['NN linear function', 'Ground-truth']);
+</code></pre>
+
+<p><img src="output_32_0.png" alt="png" /></p>
+
+<h3 id="3-4-north-west-zone">3.4 North-west zone</h3>
+
+<p>Let&rsquo;s move to the north-west zone, on the LHS of the red and green lines (4, 3) and RHS of the blue line (1).
+It contains the point $(x_1, x_2) = (-1, 1)$.
+All but the second neurons are active, therefore the mask is <code>[1, 0, 1, 1]</code>.
+We compact the previous four steps in one function with the <code>mask</code> attribute.</p>
+
+<pre><code class="language-python">nnExpNW = nnExp([1, 0, 1, 1])
+print('Output of the four steps for the North-East area:\n{}'.format(nnExpNW))
+</code></pre>
+
+<pre><code>Output of the four steps for the North-East area:
+[ 0.23262142 -0.39528124  0.35789349]
+</code></pre>
+
+<p>To understand the behaviour, we draw the line $ x_2 = x_{1}/2$ as $x_1$ varies from $-2$ to $-.8$.
+This linear function approximates the ground-truth trend quite well for $x_1$ less than $-1.25$.</p>
+
+<pre><code class="language-python">xx1 = np.linspace(-2, -.8, 10)
+xx2 = -xx1/2
+yy = nnExpNW[0]*xx1 + nnExpNW[1]*xx2 + nnExpNW[-1]
+ygt = (xx1*xx2)/4
+plt.figure()
+plt.plot(xx1, yy)
+plt.plot(xx1, ygt)
+plt.xlim([-2.5, -.5])
+plt.xlabel('$x_1$')
+plt.ylabel('$y$')
+plt.grid()
+plt.legend(['NN linear function', 'Ground-truth']);
+</code></pre>
+
+<p><img src="output_36_0.png" alt="png" /></p>
+
+<h3 id="3-5-north-zone">3.5 North zone</h3>
+
+<p>Let&rsquo;s move to the north zone, on the LHS of the red line (4) and RHS of the green line (1).
+It contains the point $(x_1, x_2) = (0, 2)$.
+First and last neurons are active, therefore the mask is <code>[1, 0, 0, 1]</code>.
+We compact the previous four steps in one function with the <code>mask</code> attribute.</p>
+
+<pre><code class="language-python">nnExpNO = nnExp([1, 0, 0, 1])
+print('Output of the four steps for the North area:\n{}'.format(nnExpNO))
+</code></pre>
+
+<pre><code>Output of the four steps for the North area:
+[ 0.44432752 -0.01468917  0.02665675]
+</code></pre>
+
+<p>It means that this area can be approximated as:</p>
+
+<p>$$ y = (x_1\cdot x_2)/4 \approx  0.444\cdot x_1 -0.0147\cdot x_2 + 0.0266 $$</p>
+
+<p>In other terms, the output mainly depends on $x_1$, being it symmetric wrt the y-axis.</p>
+
+<p>Let&rsquo;s visualize the network again for a point from the north-east area, $(x_1, x_2) = (1, 1)$.
+Since the dataset is randomly generated, we need to look for the index of the closest point to $(1, 1)$.</p>
+
+<pre><code class="language-python">eps = 0.05
+idxs = (np.abs(tnn.XX[:,0]-1)&lt;eps) &amp; (np.abs(tnn.XX[:,1]-1)&lt;eps)
+idx = np.where(idxs)[0][0]
+idx
+</code></pre>
+
+<pre><code>1027
+</code></pre>
+
+<p>From the first hidden layer, the bottom-most neuron only <em>survives</em>. The following weight, combined with the final bias, gives the correct answer, $\frac{1\cdot 1}{4} \approx .25$.
+Nice!</p>
+
+<pre><code class="language-python">vnn.visualize(fcnn, idx, (15, 12), palette='viridis', colNorm='comp')
+</code></pre>
+
+<p><img src="output_42_0.png" alt="png" /></p>
+
+<h2 id="4-large-relu-net">4. Large relu net</h2>
+
+<h3 id="4-1-training-and-visualizing-the-network">4.1 Training and visualizing the network</h3>
+
+<p>We train the large network with two hidden layers, five neurons each.
+As usual, we plot the loss history and the model output space.</p>
+
+<pre><code class="language-python">tnn.train(lib='tf', dims=[5, 5], activation='relu', nb_epochs=250, lr=0.005)
+</code></pre>
+
+<pre><code>The final model loss is 0.0003507580258883536
+</code></pre>
+
+<pre><code class="language-python">plt.plot(tnn.lossHistory)
+plt.title(tnn.mdlDescription());
+</code></pre>
+
+<p><img src="output_45_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_46_0.png" alt="png" /></p>
+
+<p>Good!
+Now we update the Python dictionary <code>fcnn</code> with new parameters and values of the network variables.</p>
+
+<pre><code class="language-python">fcnn = {'activations': [tnn.XX] + tnn.nn_vars[1::2], 'linNeurons':tnn.nn_vars[::2],
+        'weights': tnn.nn_prms[::2], 'biases': tnn.nn_prms[1::2],}
+</code></pre>
+
+<p>We extract four different samples, with the same code snippet used at the end of the previous section:</p>
+
+<ol>
+<li>sample <code>1027</code> for  $(x_1, x_2) = (1, 1)$, north-east</li>
+<li>sample <code>2360</code> for  $(x_1, x_2) = (.5, 2)$, north</li>
+<li>sample <code>2453</code> for  $(x_1, x_2) = (-1, 1)$, north-west</li>
+<li>sample <code>1403</code> for  $(x_1, x_2) = (-1, -1)$, south-west</li>
+</ol>
+
+<p>In general, the network is more complex and difficult to read and interpret.
+However, we could see how the final layer changes to different inputs.</p>
+
+<p>Out of six weights, five are positive and in the range of $(.8, 1.2)$, while a single weight and the final bias are negative and close to $-.9$.</p>
+
+<p>In the first case, three neurons are active, the top neuron is off and the bottom one is almost dead.</p>
+
+<pre><code class="language-python">idx = 1027
+vnn.visualize(fcnn, idx, (15, 15), palette='rainbow', colNorm='comp')
+</code></pre>
+
+<p><img src="output_51_0.png" alt="png" /></p>
+
+<p>In the second case, the inputs&rsquo; signs don&rsquo;t change and all but the top neuron are active.</p>
+
+<pre><code class="language-python">idx = 2360
+vnn.visualize(fcnn, idx, (15, 15), palette='rainbow', colNorm='comp')
+</code></pre>
+
+<p><img src="output_53_0.png" alt="png" /></p>
+
+<p>In the third case, the first input sign changes and three neurons are used to generate <code>-0.26</code>.</p>
+
+<pre><code class="language-python">idx = 2453
+vnn.visualize(fcnn, idx, (15, 15), palette='rainbow', colNorm='comp')
+</code></pre>
+
+<p><img src="output_55_0.png" alt="png" /></p>
+
+<p>In the last case, south-west area, basically one neuron only is active.</p>
+
+<pre><code class="language-python">idx = 1403
+vnn.visualize(fcnn, idx, (15, 15), palette='rainbow', colNorm='comp')
+</code></pre>
+
+<p><img src="output_57_0.png" alt="png" /></p>
+
+<h2 id="5-small-sigmoid-net">5. Small sigmoid net</h2>
+
+<h3 id="5-1-training-and-visualizing-the-network">5.1 Training and visualizing the network</h3>
+
+<p>We train the small network (one hidden layer with four neurons) with the sigmoid function.
+As usual, we plot the loss history and the model output space.</p>
+
+<pre><code class="language-python">tnn.train(lib='tf', dims=[4], activation='sigmoid', nb_epochs=250, lr=0.001)
+</code></pre>
+
+<pre><code>The final model loss is 0.00593841727823019
+</code></pre>
+
+<pre><code class="language-python">plt.plot(tnn.lossHistory)
+plt.title(tnn.mdlDescription());
+</code></pre>
+
+<p><img src="output_60_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_61_0.png" alt="png" /></p>
+
+<p>Now we refresh the <code>fcnn</code> dictionary again with new parameters and variables&rsquo; values.</p>
+
+<pre><code class="language-python">fcnn = {'activations': [tnn.XX] + tnn.nn_vars[1::2], 'linNeurons':tnn.nn_vars[::2],
+        'weights': tnn.nn_prms[::2], 'biases': tnn.nn_prms[1::2],}
+</code></pre>
+
+<p>We extract two different samples, with the same code snippet used at the end of the previous section:</p>
+
+<ol>
+<li>sample <code>1027</code> for  $(x_1, x_2) = (1, 1)$, north-east</li>
+<li>sample <code>1403</code> for  $(x_1, x_2) = (-1, -1)$, south-west</li>
+</ol>
+
+<p>In general, the network shows higher values of biases and weights to compensate for the sigmoid function nature wrt those of the ReLu function.
+The former function, indeed, squeezes the input to the $(0, 1)$ range, so the parameters need to scale the output.
+Also, a neuron <em>dies</em> if its input is <em>very</em> negative.</p>
+
+<p>We again analyze the final layer for different inputs.</p>
+
+<p>Out of four weights, three are positive and in the range of $(.9, 1.4)$, while a single weight ($-2.1$) and the final bias ($-.34$) are negative.</p>
+
+<pre><code class="language-python">idx = 1027
+vnn.visualize(fcnn, idx, (10, 15), palette='cool', colNorm='comp')
+</code></pre>
+
+<p><img src="output_65_0.png" alt="png" /></p>
+
+<p>Moving from the north-east $(1, 1)$ point to the south-west $(-1, -1)$ point, we see how the second neuron value (from bottom) increases, while the other three neurons with positive weights somehow keep giving the same overall contribution.
+The third neuron decreases to counterbalance the first and last ones&rsquo; increment.</p>
+
+<pre><code class="language-python">idx = 2453
+vnn.visualize(fcnn, idx, (10, 15), palette='cool', colNorm='comp')
+</code></pre>
+
+<p><img src="output_67_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/fcnn/fcnn15/" style="color: #4ABDAC; font-size: 18px; "> How to build a Python class to visualize a neural network?</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/project/project4/" style="color: #4ABDAC; font-size: 18px; ">Project 4</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

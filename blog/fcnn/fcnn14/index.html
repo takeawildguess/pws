@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Can we see inside a neural network? &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Can we see inside a neural network?">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/fcnn/fcnn14/" style="font-size: 16px; ">See inside a NN</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/fcnnHead2.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Can we see inside a neural network?</h1>
+          <h5 class="card-title text-center">See inside a NN</h5>
+          <h6 class="card-text text-center">November 24, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 8.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/neural-network"><kbd class="item-tag">neural network</kbd></a> <a href="https://takeawildguess.net/tags/visualization"><kbd class="item-tag">visualization</kbd></a> <a href="https://takeawildguess.net/tags/matplotlib"><kbd class="item-tag">matplotlib</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>Welcome back to the FCNN series!</p>
+
+<p>In this new post, we are going to dig in and see what happens inside a feed-forward neural network that has been trained to return the right output.</p>
+
+<p>We train the neural network on some basic examples with Tensorflow.
+If you are new to this library, please check these two posts out, <a href="https://www.curiousily.com/posts/tensorflow-basics/" target="_blank">1</a> and <a href="https://steadforce.com/first-steps-tensorflow-part-3/" target="_blank">2</a>, as well as my introductory <a href="https://takeawildguess.net/blog/linearregression_part4/" target="_blank">post</a> on linear regression and that <a href="https://takeawildguess.net/blog/fcnn_tf/" target="_blank">one</a> on neural networks.</p>
+
+<p>The whole code to create a synthetic dataset and learn a neural network model with any of the four libraries mentioned above is wrapped into a Python class, <code>trainFCNN()</code>, and can be found in my Github <a href="https://github.com/takeawildguess/FCNNlib" target="_blank">repo</a>.</p>
+
+<p>We are going through the following steps:</p>
+
+<ol>
+<li>What do we want to achieve and how?</li>
+<li>Create a dataset, train the network and extract the final values of parameters and intermediate variables for a given set of inputs.</li>
+<li>Visualize two samples for a binary classification problem</li>
+<li>Describe the Python class, <code>visFCNN()</code>, step-by-step. The source code can be found in my Github <a href="https://github.com/takeawildguess/FCNNlib" target="_blank">repo</a>.</li>
+<li>Play a bit with the class to visualize different neural network architectures for some funny toy cases.</li>
+</ol>
+
+<p>Point 4 implies to create the dictionary <code>fcnn</code> containing what it is required to visualize the network, the initial settings, how to draw a neuron and a bias term, a line that represents a linear layer weight, how to define the colors of any object, how to draw the input layer, each hidden layer and the output layer.</p>
+
+<h2 id="2-what-do-we-want-to-achieve-and-how">2. What do we want to achieve and how?</h2>
+
+<p>We want to visualize what happens inside a neural network for specific inputs.
+We are going to use the class that we have been working on throughout the last posts to train the network to specific tasks.
+We will then play with it by feeding an input sample and inspecting how the neurons look like for a fixed configuration of parameters, i.e., the weights connecting the neurons (purple lines in the below scheme) and the biases (yellow rectangles).</p>
+
+<p>We simplify the nomenclature as follows: every variable (input, output, hidden variables) is a circle and is modelled as a neuron.
+In the below scheme, the input <code>x</code> is green, each output of the affine transformation <code>z</code> is cyan and the output <code>a</code> of the activation function (black rightward arrow) is blue.
+The last activation output is the actual response of the network <code>y</code>.</p>
+
+<p><img src="/blog/fcnn/fcnn14/fcnn_fcnnVisScheme1.png" alt="pngM" title="Scheme of the neural network that we are going to visualize" />
+<center><em>Figure 1 - Scheme of the neural network that we are going to visualize</em></center></p>
+
+<p>We list here the description and the variable name used in the class code:</p>
+
+<ol>
+<li><code>hor_mrg</code>: horizontal distance between the previous activation layer $a^{(kk-1)}$ and the next dense layer $z^{(kk)}$. It gives the horizontal length of the weights&rsquo; grid. For the first layer $a^{(0)} = x$.</li>
+<li><code>vert_mrg</code>: vertical distance between two consecutive neurons, no matter which layer.</li>
+<li><code>neuron_radius</code>: radius of the circle representing a neuron.</li>
+<li><code>bias_size</code>: side of the rectangle representing a bias term.</li>
+<li><code>hor_mrgLayer</code>: horizontal distance between the dense layer $z^{(kk)}$ and the activation layer $a^{(kk)}$ layer. It gives the horizontal length of the activation arrow.</li>
+<li><code>layerDist</code>: horizontal distance between two consecutive activation layers, $a^{(kk-1)}$ and $a^{(kk)}$. It is the sum of <code>hor_mrg</code> and <code>hor_mrgLayer</code>.</li>
+<li><code>Nneuron_max</code>: maximum number of neurons in a single layer. In the below scheme, it is equal to <code>3</code>, in the first hidden layer.</li>
+<li><code>bottomMargin</code>: vertical offset between the lowest neuron of the current layer <code>kk</code> and the lowest neuron from the largest layer. It is required to make sure every neuron layer is vertically centred with fixed space between neurons throughout the whole network. In the below scheme, the first hidden layer <code>H1</code> comes with the largest number of neurons. The second hidden layer <code>H2</code> is offset by <code>bottomMargin</code> (<code>yBH</code> in the figure).</li>
+<li><code>Nlayers</code>: number of layers, except for the input layer. In this case, two hidden and one output layers, <code>3</code>.</li>
+</ol>
+
+<p>In the below chart, we give a visual description of the geometric parameters we need to define the network layout.</p>
+
+<p><img src="/blog/fcnn/fcnn14/fcnn_fcnnVisScheme2.png" alt="pngM" title="Geometric parameters to visualize the neural network" />
+<center><em>Figure 2 - Geometric parameters to visualize the neural network</em></center></p>
+
+<h2 id="3-installing-and-importing">3. Installing and importing</h2>
+
+<p>First of all, we need to install this library with the <code>pip</code> command and to import the required package.</p>
+
+<pre><code class="language-python">$ pip install numpy matplotlib tensorflow
+</code></pre>
+
+<pre><code class="language-python">import numpy as np
+%matplotlib inline
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from matplotlib.colors import Normalize as mColNorm
+import tensorflow as tf
+from keras.utils import np_utils
+</code></pre>
+
+<h2 id="4-training">4. Training</h2>
+
+<p>In this section, we create the dataset for a binary classification problem, <code>stripe</code>.
+We basically divided the domain into three areas by drawing two parallel lines.
+Further details are given in <a href="/blog/fcnn/fcnn4/">this</a> post.</p>
+
+<p>The whole code to create a synthetic dataset and learn a neural network model with any of the four libraries mentioned above is wrapped into a Python class, <code>trainFCNN()</code>, and can be found in my Github <a href="https://github.com/takeawildguess/FCNNlib" target="_blank">repo</a>.</p>
+
+<pre><code class="language-python">tnn = trainFCNN(nb_pnt=2500, dataset='stripe')
+</code></pre>
+
+<pre><code class="language-python">tnn.plotPoints(idx=0)
+</code></pre>
+
+<p><img src="output_11_0.png" alt="png" /></p>
+
+<p>We then use the <code>Tensorflow</code> library to train a fully connected neural network.
+We define the network with the <code>dims</code> attribute.
+Since we want two hidden layers, with <code>3</code> and <code>2</code> neurons each, we set <code>dims=[3, 2]</code>.
+Input and output dimensions are inferred from the dataset itself.</p>
+
+<p>The training will be happening within the <code>train</code> method.</p>
+
+<p>At the end of the training stage, we visualize the loss history to check whether it has reached convergence and the model outcome for the whole domain grid with <code>plotModelEstimate</code>.</p>
+
+<pre><code class="language-python">tnn.train(lib='tf', dims=[3, 2], activation='relu', nb_epochs=250, lr=0.005)
+</code></pre>
+
+<pre><code>The final model loss is 0.000722280761692673
+</code></pre>
+
+<pre><code class="language-python">plt.plot(tnn.lossHistory)
+plt.title(tnn.mdlDescription());
+</code></pre>
+
+<p><img src="output_14_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_15_0.png" alt="png" /></p>
+
+<p>Amazing, so far so good!</p>
+
+<p>Now we need to extract the network parameters and the values of each variable within it to visualize the forward flow through the network.
+Parameters and variables are stored in <code>nn_prms</code> and <code>nn_vars</code>, respectively.</p>
+
+<p>We print out the dimension of each object.
+It is a series of 2D weights and 1D biases.
+The first weight matrix <code>(2, 3)</code> transforms the two inputs into three hidden variables in the first hidden layers.
+That&rsquo;s why a <code>(3,)</code> bias comes next.
+The second transformation goes from <code>3</code> neurons to <code>2</code>, while the last one from <code>2</code> to the sole output, <code>1</code>.</p>
+
+<pre><code class="language-python">{objNm: objVal.shape for objNm, objVal in zip(['W1', 'b1', 'W2', 'b2', 'W3', 'b3'], tnn.nn_prms)}
+</code></pre>
+
+<pre><code>{'W1': (2, 3), 'b1': (3,), 'W2': (3, 2), 'b2': (2,), 'W3': (2, 1), 'b3': (1,)}
+</code></pre>
+
+<p>Since we have fed the entire dataset of <code>2500</code> points, we have 2D arrays for the variables with a fixed number of rows.
+The second dimension stems from the layer dimensionality.</p>
+
+<pre><code class="language-python">{objNm: objVal.shape for objNm, objVal in zip(['X', 'z1', 'a1', 'z2', 'a2', 'z3', 'a3=Y'], [tnn.XX]+tnn.nn_vars)}
+</code></pre>
+
+<pre><code>{'X': (2500, 2),
+ 'z1': (2500, 3),
+ 'a1': (2500, 3),
+ 'z2': (2500, 2),
+ 'a2': (2500, 2),
+ 'z3': (2500, 1),
+ 'a3=Y': (2500, 1)}
+</code></pre>
+
+<p>We define the structure <code>fcnn</code>, a Python dictionary, containing all the information required to visualize the network flow.</p>
+
+<p>We treat the input as the output of a fictitious previous activation layer.
+The set of activation layers, $a^{(kk)}$, is retrieved from <code>tnn.nn_vars[1::2]</code>, while the set of dense layers, $z^{(kk)}$, come from <code>tnn.nn_vars[::2]</code>.
+In a similar fashion, we extract weights and biases from <code>tnn.nn_prms</code>.</p>
+
+<pre><code class="language-python">fcnn = {'activations': [tnn.XX] + tnn.nn_vars[1::2],
+        'linNeurons':tnn.nn_vars[::2],
+        'weights': tnn.nn_prms[::2],
+        'biases': tnn.nn_prms[1::2],}
+</code></pre>
+
+<h2 id="5-what-does-this-visualization-class-look-like">5. What does this visualization class look like?</h2>
+
+<p>Let&rsquo;s have a look at what we are going to build!</p>
+
+<p>Here the dataset of 2500 points, where the sampled point (<code>idx=10</code>) is highlighted with a black circle.</p>
+
+<pre><code class="language-python">idx = 10
+tnn.plotPoints(idx=idx)
+</code></pre>
+
+<p><img src="output_23_0.png" alt="png" /></p>
+
+<p>We create an instance of the class and call the <code>visualize</code> method with a tuple of figure size as an attribute.
+The input coordinates are <code>(0.44, 1.6)</code> and the outcome is <code>0</code>, the probability of the input to belonging to class 1 (blue).
+Let&rsquo;s have a look at the top-most neuron of the first dense layer, <code>-3.17</code>.
+We get it as:</p>
+
+<p>$$ 1.6\cdot (-2.21) + .44\cdot 2.23 - 0.62 \approx -3.17 $$</p>
+
+<p>Since the activation function is the <a href="/blog/fcnn/fcnn1/#actfun">ReLu</a> function, whatever is negative becomes 0, otherwise it does not change at all.
+The output layer employs a <a href="/blog/fcnn/fcnn1/#actfun">sigmoid</a> function to return the probability of the input to belonging to class 1 (blue).</p>
+
+<p>The logit is <em>quite</em> negative, <code>-6.82</code>, thus the probability is basically 0. The input belongs to class 0 (red) with probability equal to 1.</p>
+
+<pre><code class="language-python">vnn = visFCNN()
+</code></pre>
+
+<pre><code class="language-python">vnn.visualize(fcnn, sample=idx, (15, 8))
+</code></pre>
+
+<p><img src="output_26_0.png" alt="png" /></p>
+
+<p>We take now a different point from class 1.</p>
+
+<pre><code class="language-python">idx = 500
+tnn.plotPoints(idx=idx)
+</code></pre>
+
+<p><img src="output_28_0.png" alt="png" /></p>
+
+<p>From the first hidden layer, the bottom-most neuron only <em>survives</em> and its weights from first to second layers become the second layer outputs (biases are indeed negligible). Highly positive weights at the end give a final logit of <code>29.67</code>, which means 100% probability that it belongs to class 1.</p>
+
+<p>Nice!</p>
+
+<pre><code class="language-python">vnn.visualize(fcnn, sample=idx, (15, 8))
+</code></pre>
+
+<p><img src="output_30_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/fcnn/fcnn13/" style="color: #4ABDAC; font-size: 18px; "> Multi-hyperparameter analysis of a neural network and computational comparison</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/fcnn/fcnn15/" style="color: #4ABDAC; font-size: 18px; ">How to build a Python class to visualize a neural network?</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

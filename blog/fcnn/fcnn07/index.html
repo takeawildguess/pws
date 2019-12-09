@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>How neural networks learn basic features with Tensorflow &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="How neural networks learn basic features with Tensorflow">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/fcnn/fcnn07/" style="font-size: 16px; ">FCNN with Tensorflow</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/fcnnHead.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">How neural networks learn basic features with Tensorflow</h1>
+          <h5 class="card-title text-center">FCNN with Tensorflow</h5>
+          <h6 class="card-text text-center">October 6, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 14 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/neural-network"><kbd class="item-tag">neural network</kbd></a> <a href="https://takeawildguess.net/tags/tensorflow"><kbd class="item-tag">tensorflow</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts related to a huge and popular topic in machine learning: <strong>fully connected neural networks</strong>.</p>
+
+<p>The general series scope is three-fold:</p>
+
+<ol>
+<li>visualize the model features and characteristics with schematic pictures and charts</li>
+<li>learn to implement the model with different levels of abstraction, given by the framework used</li>
+<li>have some fun with one of the hottest topics right now!</li>
+</ol>
+
+<p>In this new post, we are going to analyze how to train a neural network on toy examples with <strong>Tensorflow</strong>.
+If you are new to this library, please check these two posts out, <a href="https://www.curiousily.com/posts/tensorflow-basics/" target="_blank">1</a> and <a href="https://steadforce.com/first-steps-tensorflow-part-3/" target="_blank">2</a>, as well as my introductory posts that employ this library to solve <a href="/blog/linreg/linreg4/">linear</a> and <a href="/blog/linreg/linreg3/">logistic</a> regressions.</p>
+
+<p>We are going through the following steps:</p>
+
+<ol>
+<li>training setting</li>
+<li>define the network architecture: dense layer, activation function and stack of layers</li>
+<li>train: loss and accuracy functions, optimizer and learning process</li>
+<li>visualize prediction</li>
+</ol>
+
+<p>Point 2 implies to create a layer class with corresponding weights and biases that need to be learned during <em>train</em> step.</p>
+
+<p>The whole code to create a synthetic dataset and learn a neural network model with any of the four libraries mentioned above is wrapped into a Python class, <code>trainFCNN()</code>, and can be found in my Github <a href="https://github.com/takeawildguess/FCNNlib" target="_blank">repo</a>.</p>
+
+<h2 id="2-installing-and-importing">2. Installing and importing</h2>
+
+<p>First of all, we need to install this library with the <code>pip</code> command and to import the required package.</p>
+
+<p><img src="/blog/fcnn/fcnn07/tensorflow.png" alt="pngS" title="Tensorflow logo" />
+<center><em>Figure 1 - Tensorflow logo</em></center></p>
+
+<pre><code class="language-python">$ pip install numpy matplotlib tensorflow
+</code></pre>
+
+<pre><code class="language-python">import numpy as np
+%matplotlib inline
+import matplotlib.pyplot as plt
+import tensorflow as tf
+from keras.utils import np_utils
+</code></pre>
+
+<h2 id="3-building-and-training-the-model-with-tensorflow">3. Building and training the model with <code>TensorFlow</code></h2>
+
+<p>The third library we analyze in this series is Tensorflow (<code>TF</code> from now on).
+So we first create the model by means of the function <code>tfModel</code> and afterwards we have the training process that happens within <code>tfTrain</code>.
+The overall process of initializing hyper-parameters, creating the model graph, training the model parameters and defining the model description to easily compare different settings, is controlled with the <code>train</code> function, which is here reported without the <code>if</code> statement used to select one of the three libraries.</p>
+
+<pre><code class="language-python">def train(self, nb_epochs=100, dims=[2], activation='sigmoid'):
+    # settings
+    self.LR = 0.005 # learning_rate
+    self.nb_epochs = nb_epochs
+    self.nb_batch = 100
+    self.activation = activation
+    self.dims = [2] + dims + [self.nb_class if self.kind=='multiCls' else 1]
+    self.nb_layer = len(self.dims)-1 # number of layers in the network with learnable parameters
+    self.lastActFun = 'sigmoid' if self.kind == 'binCls' else 'softmax' if self.kind == 'multiCls' else 'linear'
+    # graph creation and model training
+    self.tfModel()
+    self.tfTraining()
+    # model description
+    unitLabel = '-'.join([str(u) for u in self.dims])
+    self.description = 'lib: {}, units: {}, activation: {}, epochs: {}'.format(self.lib, unitLabel, activation, nb_epochs)
+</code></pre>
+
+<h3 id="3-1-placeholders">3.1 Placeholders</h3>
+
+<p>The very first step is to reset the default graph, which means <code>TF</code> clears the default graph stack and resets the global default graph.
+Please have a look at <a href="https://takeawildguess.net/blog/linearregression_part4/#4-linear-regression-with-tensorflow" target="_blank">this</a> post, where a simple linear regression model is created in <code>TF</code>.
+In principle, we&rsquo;re going to tell Tensorflow that we need to have a new graph for this new model.
+Every time we run the process, we need to have a new graph for this new model from scratch, without keep adding stuff to the previous graph.
+This essential if we need to run the code multiple times, which is the case during development and debugging.</p>
+
+<p>The second step is to define a <code>placeholder</code>. A <code>TF</code> placeholder is a variable that is going to receive data, so we need basically two placeholders, one for input and one for output.</p>
+
+<p>The structure is a 2D array for both input/outputs.
+The first dimension size is <code>None</code> because we don&rsquo;t know yet how many batch examples will be fed to the model anytime it is executed.
+It could be any integer greater than 0.</p>
+
+<p>The second dimension is instead fixed and is the number of input units of the first layer for <code>xx</code> and the number of output units of the last layer for <code>yy</code>.</p>
+
+<pre><code class="language-python">tf.reset_default_graph()
+xx = tf.placeholder(tf.float32, [None, self.dims[0]])
+yy = tf.placeholder(tf.float32, [None, self.dims[-1]])
+</code></pre>
+
+<h3 id="3-2-dense-layers">3.2 Dense layers</h3>
+
+<p>Now we create the stack of dense layers.
+This process is repeated in a for-loop <code>nb_layer</code> times.
+In general, any layer is going to receive as inputs the output of the previous layer and the output is what is coming out of the activation function.
+However, the previous layer of the first layer is actually the input itself to the network.
+That&rsquo;s why we are going to initialize the activation <code>act</code> with the input <code>xx</code>.</p>
+
+<p>The for-loop process is similar to Keras, but in this case, it is much more verbose because we need to:</p>
+
+<ol>
+<li>define the structure of the weights and the biases</li>
+<li>get the actual output of the affine transformation <code>zz</code></li>
+<li>select the activation function and applied that to <code>zz</code> to get the actual layer output.</li>
+</ol>
+
+<h3 id="3-3-parameters">3.3 Parameters</h3>
+
+<p>We are going to use <code>tf.Variable</code> from <code>TF</code> to define a parameter.
+This is just to tell <code>TF</code> that whatever is stored inside is something that we want to <em>learn</em>.
+Afterwards <code>tfTrain</code> is going to change those variables to minimize the loss.
+We use a dictionary for parameters <code>prms</code>, since there are as many weights and biases variables as the number of layers.</p>
+
+<p>The first variable is used for weights, which we initialize using a random normal distribution.
+We want weights to be 2D arrays, whose size is the number of inputs and the number of outputs.
+For a network of size <code>dims=[2, 3, 5, 6]</code>, the first layer should transform 2 inputs to 3 units, the second layer should transform 3 inputs to 5 outputs and so on so forth.
+This is what we can get from <code>dims[kk]</code> and <code>dims[kk+1]</code> for the <code>kk</code> layer.</p>
+
+<pre><code class="language-python">dIn, dOut = self.dims[kk], self.dims[kk+1]
+</code></pre>
+
+<p>Since we want to use the Xavier initialization (please have a look at <a href="https://andyljones.tumblr.com/post/110998971763/an-explanation-of-xavier-initialization" target="_blank">this</a> post for further details)
+we are going to set the standard deviation <code>stddev</code> to be equal to:</p>
+
+<p>$$ \sigma = \frac{2}{dIn+dOut} $$</p>
+
+<p>where <code>dIn</code> and <code>dOut</code> are the number of inputs and outputs of the current layer, respectively.</p>
+
+<p>The second variable is used for bias.
+We initialize it as a zeros-array with a size equal to the number of output units <code>dOut</code>.</p>
+
+<pre><code class="language-python">prms['W'+str(kk)] = tf.Variable(tf.random_normal([dIn, dOut], stddev=2/(dIn+dOut)), name='W' + str(kk))
+prms['b'+str(kk)] = tf.Variable(tf.zeros([dOut], name='b' + str(kk)))
+</code></pre>
+
+<p>A different way to create <em>learnable</em> parameters in <code>TF</code> is by using the <code>get_variable</code> method, as follows:</p>
+
+<pre><code class="language-python">prms['W'+str(kk+1)] = tf.get_variable('W'+str(kk+1), [dIn, dOut], initializer=tf.contrib.layers.xavier_initializer())
+</code></pre>
+
+<p>We need to define the <em>affine</em> transformation:</p>
+
+<p>$$ z = W_{k}\cdot a^{k-1} + b_k $$</p>
+
+<p>We take the previous activation $a^{k-1} \equiv$ <code>act_prev</code>, we multiply by the weights array $W_{k} \equiv$ <code>prms[&quot;W&quot;+str(kk)]</code> and sum elementwise to bias $b_k \equiv$ <code>prms[&quot;b&quot;+str(kk)]</code></p>
+
+<pre><code class="language-python">zz = tf.matmul(act_prev, prms[&quot;W&quot;+str(kk)]) + prms[&quot;b&quot;+str(kk)]
+</code></pre>
+
+<p>The activation coming from the previous layer <code>act_prev</code> is a 2D array with number of samples as rows and number of inputs into the current layer as columns.
+The current weight array has instead the number of inputs as rows and number of outputs as columns.
+The matrix multiplication <code>matmul</code> returns the number of samples as rows and the number of outputs as columns.</p>
+
+<h3 id="3-4-activation-function">3.4 Activation function</h3>
+
+<p>We use the same logic as previously used for Keras to define the activation function.
+It can be either the user-defined activation or the activation function specified for the last layer.
+Any of the activation functions available to the user can be found in the <code>tf.nn</code> module.
+The activation function is going to take the output of the previous layer, <code>zz</code>, and return its own output into <code>act</code>.</p>
+
+<pre><code class="language-python">actFun = self.activation if kk&lt;self.nb_layer-1 else self.lastActFun
+if actFun == 'relu':
+    act = tf.nn.relu(zz)
+elif actFun == 'sigmoid':
+    act = tf.nn.sigmoid(zz)
+elif actFun == 'tanh':
+    act = tf.nn.tanh(zz)
+elif actFun == 'softmax':
+    act = tf.nn.softmax(zz)
+elif actFun == 'linear':
+    act = zz
+</code></pre>
+
+<h2 id="4-loss-function">4. Loss function</h2>
+
+<p>This step is meant to define the loss function.</p>
+
+<p>We have three different cases:</p>
+
+<ol>
+<li>regression: we use mean square error from <code>tf.losses</code> and we have to say what is our prediction <code>predictions</code>, which is actually what is coming out of the last activation, and <code>labels</code>, which is the ground-truth <code>yy</code>.</li>
+<li>binary classification: we&rsquo;re going to use sigmoid cross-entropy <code>sigmoid_cross_entropy_with_logits</code> with logits. That&rsquo;s why we do not take the last activation output but the last <code>zz</code> instance.</li>
+<li>multi-classification: we use softmax cross-entropy <code>softmax_cross_entropy_with_logits_v2</code>. You&rsquo;re recommended to use the latest version because the previous one <code>softmax_cross_entropy_with_logits</code> will be deprecated soon.</li>
+</ol>
+
+<p>Afterwards, we have to take the mean with respect to samples with <code>tf.reduce_mean()</code> to get the final loss, which is what we want to minimize with respect to parameters <code>prms</code> with the optimizer object.</p>
+
+<pre><code class="language-python">if self.kind == 'regr':
+    loss_ = tf.losses.mean_squared_error(labels=yy, predictions=zz)
+elif self.kind == 'binCls':
+    loss_ = tf.nn.sigmoid_cross_entropy_with_logits(labels=yy, logits=zz)
+elif self.kind == 'multiCls':
+    loss_ = tf.nn.softmax_cross_entropy_with_logits_v2(labels=yy, logits=zz)
+else:
+    pass
+self.loss = tf.reduce_mean(loss_, name='loss')
+</code></pre>
+
+<h2 id="5-optimizer">5. Optimizer</h2>
+
+<p>The optimizer is going to take care of the <em>learning</em> process.
+According to the kind of optimizer we choose, it is going to use a specific strategy to optimize the network parameters step by step.
+The list of different optimizers can be found <a href="http://tflearn.org/optimizers/" target="_blank">here</a> and a detailed review of those methods has been published in <a href="http://ruder.io/optimizing-gradient-descent/" target="_blank">this</a> great post.</p>
+
+<p>We can use any of these <code>SGD</code>, <code>Adam</code>, <code>RMSProp</code> or <code>Adagrad</code> optimizers, in which we can specify the learning rate <code>LR</code>, and then append the <code>minimize</code> method with respect to <code>loss</code>.</p>
+
+<pre><code class="language-python">if self.opt=='sgd':
+    optimizer = tf.train.GradientDescentOptimizer(learning_rate=self.LR, name='sgdOpt')
+elif self.opt=='adam':
+    optimizer = tf.train.AdamOptimizer(learning_rate=self.LR, name='adamOpt')
+elif self.opt=='rmsprop':
+    optimizer = tf.train.RMSPropOptimizer(learning_rate=self.LR, name='rmspropOpt')
+elif self.opt=='adagrad':
+    optimizer = tf.train.AdagradOptimizer(learning_rate=self.LR, name='adagradOpt')
+self.optimizer = optimizer.minimize(self.loss)
+</code></pre>
+
+<p>If we have a multi-class problem, we have to perform the same step that we did for Keras.
+Let&rsquo;s retrieve the last activation <code>act</code> that gives us the distribution of probabilities over classes and take the maximum probability index over columns.
+That&rsquo;s why we have to say <code>axis=1</code>, the maximum index has to be column-wise.</p>
+
+<p>Finally, for a classification problem, we do also want to have an <em>accuracy</em> metric.</p>
+
+<p>We take the prediction and the actual output and we count how many time they are equal, i.e., they match each other.
+Accuracy is just the average of correctly predicted outputs.</p>
+
+<pre><code class="language-python">if self.kind == 'multiCls':
+    self.y_pred = tf.argmax(act, axis=1)
+    y_act = tf.argmax(yy, axis=1)
+else:
+    self.y_pred = act
+    y_act = yy
+
+if self.kind in ['binCls', 'multiCls']:
+    self.correct_pred = tf.equal(tf.round(self.y_pred), y_act, name='correct_pred')
+    self.accuracy = tf.reduce_mean(tf.cast(self.correct_pred, tf.float32), name='accuracy')
+self.xx, self.yy, self.prms = xx, yy, prms
+</code></pre>
+
+<h2 id="6-training">6. Training</h2>
+
+<p>The final step is the <em>training</em> process, where <code>TF</code> is going to actually play with data. This is the computational step that requires some time and hardware resources such as GPUs.
+So far nothing has been calculated, we have just created the graph structure.</p>
+
+<p>We initialize every variable, basically weights and biases, using the model settings and then start a new session with <code>tf.Session()</code>.
+<code>Session()</code> is the process itself that <code>TF</code> is going to use to actually train the model.
+But in general, it is not related to the learning step by default, it just uses the <code>TF</code> graph to compute the outputs we need to get, given a set of inputs that will be fed to the graph via the <code>feed_dict</code> attribute.
+The session is going to let the model learn only when we <code>run()</code> the session by calling the training object, <code>self.optimizer</code>, that aims at minimizing the loss wrt the parameters.
+Within the new session instance <code>sess</code>, we first initialise the model parameters with <code>sess.run(init)</code> and then train the model for as many epochs <code>nb_epochs</code> and many batches <code>nb_pnt//nb_batch</code> we have initially specified.
+We use our self-made <code>nextBatch</code> function that selects the next batch of <code>nb_batch</code> examples at every iteration <code>jj</code> from the entire dataset and feeds the input/output batch to the model to get the current loss and the new weights.</p>
+
+<pre><code class="language-python">def nextBatch(self, jj, XX, YY):
+    Xb = XX[jj*self.nb_batch:(jj+1)*self.nb_batch, :]
+    Yb = YY[jj*self.nb_batch:(jj+1)*self.nb_batch, :]
+    return Xb, Yb
+</code></pre>
+
+<p>At the end of each epoch, we store the current loss into the <code>lossHistory</code> history variable.</p>
+
+<p>When the outer for loop is completed, we need to save the current model weights before quitting the <code>with</code> statement, which would terminate the session.
+We would lose everything, and that&rsquo;s something we do not want to happen, especially after having waited for hours!</p>
+
+<p>That&rsquo;s why we run the model again to get the list of model parameters&rsquo; values <code>nn_prms</code> and the prediction <code>nn_Ygrd</code> corresponding to the input coming from the grid <code>XXgrd</code>.</p>
+
+<p>For a multi-class problem, we have to also transform the <code>YYgrd</code> response to a one-hot encoding, as we did for Keras.
+That is an easy task, with the available method <code>to_categorical</code>.</p>
+
+<pre><code class="language-python">def toOneHotEncoding(self, YY):
+    # transform the response variable to an one-hot-encoding representation
+    if self.kind == 'multiCls':
+        YYohe = np_utils.to_categorical(YY, num_classes=self.nb_class)
+        return YYohe
+    else:
+        return YY
+</code></pre>
+
+<p>The entire process is executed within the <code>tfTraining</code> function.</p>
+
+<pre><code class="language-python">def tfTraining(self,):
+    # training the tensorflow model
+    YY = self.toOneHotEncoding(self.YY)
+    init = tf.global_variables_initializer()
+    with tf.Session() as sess:
+        sess.run(init)
+        lossHistory = []
+        for kk in range(self.nb_epochs):
+            for jj in range(self.nb_pnt//self.nb_batch):
+                Xb, Yb = self.nextBatch(jj, self.XX, YY)
+                mdl_loss, _ = sess.run([self.loss, self.optimizer], feed_dict={self.xx: Xb, self.yy: Yb})
+            lossHistory.append(mdl_loss)
+            if kk==self.nb_epochs-1:
+                print('The final model loss is {}'.format(mdl_loss))
+        self.lossHistory = np.array(lossHistory)
+        self.nn_prms = sess.run(list(self.prms.values()))
+        self.nn_W0 = sess.run([self.prms['W0']])
+        self.nn_Ygrd = sess.run(self.y_pred, feed_dict={self.xx: self.XXgrd, self.yy: self.toOneHotEncoding(self.YYgrd)})
+</code></pre>
+
+<h2 id="7-visualize-some-results">7. Visualize some results</h2>
+
+<h3 id="7-1-nn-model-with-a-regression-problem">7.1 NN model with a regression problem</h3>
+
+<p>We visualize the loss history and the model prediction throughout the 2D grid for a regression problem (a polynomial function).</p>
+
+<pre><code class="language-python">tnn = trainFCNN(nb_pnt=2500, dataset='polynom')
+</code></pre>
+
+<pre><code class="language-python">tnn.train(lib='tf', dims=[6], activation='relu', nb_epochs=200, lr=0.005)
+</code></pre>
+
+<pre><code>The final model loss is 0.03229020908474922
+</code></pre>
+
+<pre><code class="language-python">plt.plot(tnn.lossHistory)
+plt.title(tnn.mdlDescription());
+</code></pre>
+
+<p><img src="output_35_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_36_0.png" alt="png" /></p>
+
+<h3 id="7-2-nn-model-with-binary-classification">7.2 NN model with binary classification</h3>
+
+<p>We visualize the loss history and the model prediction throughout the 2D grid for the <code>stripe</code> problem (binary-classification).</p>
+
+<pre><code class="language-python">tnn = trainFCNN(nb_pnt=2500, dataset='stripe')
+</code></pre>
+
+<pre><code class="language-python">tnn.train(lib='tf', dims=[6], activation='relu', nb_epochs=250, lr=0.005)
+</code></pre>
+
+<pre><code>The final model loss is 0.035296984016895294
+</code></pre>
+
+<pre><code class="language-python">plt.plot(tnn.lossHistory)
+plt.title(tnn.mdlDescription());
+</code></pre>
+
+<p><img src="output_40_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_41_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/fcnn/fcnn06/" style="color: #4ABDAC; font-size: 18px; "> How neural networks learn basic features with Keras</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/fcnn/fcnn08/" style="color: #4ABDAC; font-size: 18px; ">Key notions of Pytorch</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

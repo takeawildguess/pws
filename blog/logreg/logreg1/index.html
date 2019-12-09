@@ -11,12 +11,13 @@
    <meta name="author" content="Your name"> 
   
 
-  <meta name="generator" content="Hugo 0.49" />
+  <meta name="generator" content="Hugo 0.59.1" />
   <title>Learning to classify coffee from cappuccino - Part 1 &middot; take a wild guess</title>
 
   
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 
 
  <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
@@ -31,7 +32,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
-<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
 
   
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -40,6 +41,8 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
 
 
 
@@ -54,9 +57,6 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
 
-
-
-<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
 
 
 <script type="text/javascript">
@@ -103,10 +103,11 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
   <![endif]-->
 
   
-  
-  
-  
-  
+    
+    
+    
+    
+    
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -118,6 +119,7 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+    
   
 
   
@@ -196,11 +198,11 @@ if (!doNotTrack) {
       
       <ul class="navbar-nav navbar-right">
         
-          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
         
       </ul>
       
@@ -215,7 +217,7 @@ if (!doNotTrack) {
 <header class="postHead">
   <div class="container-fluid overlay">
     <div class="descr">
-      <img src="https://takeawildguess.net/blog/logreg/coffee_cappuccino.jpeg" class="img-fluid" alt="__">
+      <img src="https://takeawildguess.net/blog/images/coffee_cappuccino.jpeg" class="img-fluid" alt="__">
       <div class="card">
         <div class="card-body">
           <h1 class="card-title text-center">Learning to classify coffee from cappuccino - Part 1</h1>
@@ -243,35 +245,40 @@ if (!doNotTrack) {
         <div class="container blogPost">
           
 
-<p>replace media/ to /blog/logreg/logreg1/</p>
-
 <h2 id="1-problem-formulation">1. Problem formulation</h2>
 
 <p>We want to create a simplified representation (model) of real/world from available data.
 The model architecture can be seen as a box that takes some quantities as input, performs some internal computation and returns some other quantities as output. The inputs are also referred to as <em>features</em> or <em>predictors</em> of the problem to solve, since they contain valuable information that the model should exploit to come up with the correct outcome.
 In this post-series, we are going to study the very basic modelling for classification problems, the logistic regression.</p>
 
-<p>I shortly summarize the main difference between a classification and regression problem:
-1.  <strong>Classification</strong>: the output is a discrete variable that can assume integer values within a predefined limited set, where the set dimension is the number of classes. Some examples are <em>spam detection</em>, <em>object recognition</em> and <em>topic identification</em>.
-2.  <strong>Regression</strong>: the output is a continuous variable that can assume real values. Some examples are <em>house price prediction</em>, <em>electricity price estimation</em> and <em>Flight delay forecast</em>.</p>
+<p>I shortly summarize the main difference between a classification and regression problem:</p>
+
+<ol>
+<li><strong>Classification</strong>: the output is a discrete variable that can assume integer values within a predefined limited set, where the set dimension is the number of classes. Some examples are <em>spam detection</em>, <em>object recognition</em> and <em>topic identification</em>.</li>
+<li><strong>Regression</strong>: the output is a continuous variable that can assume real values. Some examples are <em>house price prediction</em>, <em>electricity price estimation</em> and <em>Flight delay forecast</em>.</li>
+</ol>
 
 <p>The classification problem can also be split into three sub-categories.
-If the number of classes is two, it is a <strong>binary classification</strong> problem, where the outcome can belong to either one class or the other one. One example is <em>spam detection</em>, where the outcome can belong to either the <code>spam</code> class or the <code>ham</code>.</p>
+If the number of classes is two, it is a <strong>binary classification</strong> problem, where the outcome can belong to either one class or the other one.
+One example is <em>spam detection</em>, where the outcome can belong to either the <code>spam</code> class or the <code>ham</code>.</p>
 
 <p>If more than two classes are present, it is a <strong>multinomial (or multi-class) classification</strong> problem.
 Some examples are <em>object recognition</em>, where the outcome gives the probability that the input (an image) contains a specific object which the model has been trained for, <em>topic identification</em>, where the model selects the topic of the input text within a defined list.
 If the classes of the dependent variable are ordered, we deal with <strong>Ordinal classification</strong> problem.
 One example is <em>movie rating</em>, where the output assumes discrete values ranging from 1 to 5.</p>
 
-<p>Here follows the post-series steps:
-1. Probabilistic model of classification problem and cross-entropy definition via maximum likelihood (<a href="/blog/logreg/logreg1/">Part 1</a>).
-2. Logistic regression developed from scratch with Python and Numpy (<a href="/blog/logreg/logreg2/">Part 2</a>).
-3. Logistic regression implementation in Scikit-learn and TensorFlow (<a href="/blog/logreg/logreg3/">Part 3</a>).
-4. Multivariate logistic regression algorithm with non-linear predictors in Scikit-learn (<a href="/blog/logreg/logreg4/">Part 4</a>).
-5. Multinomial logistic regression with Scikit-learn, where both softmax function and one-vs-all method are applied and compared (<a href="/blog/logreg/logreg5/">Part 5</a>).
-6. Multinomial logistic regression with categorical inputs in Scikit-learn (<a href="/blog/logreg/logreg6/">Part 6</a>).
-7. Logistic regression in Scikit-learn for the <code>digits</code> dataset (<a href="/blog/logreg/logreg7/">Part 7</a>).
-8. Logistic regression in Scikit-learn for the <code>MNIST</code> dataset (<a href="/blog/logreg/logreg8/">Part 8</a>).</p>
+<p>Here follows the post-series steps:</p>
+
+<ol>
+<li>Probabilistic model of classification problem and cross-entropy definition via maximum likelihood (<a href="/blog/logreg/logreg1/">Part 1</a>).</li>
+<li>Logistic regression developed from scratch with Python and Numpy (<a href="/blog/logreg/logreg2/">Part 2</a>).</li>
+<li>Logistic regression implementation in Scikit-learn and TensorFlow (<a href="/blog/logreg/logreg3/">Part 3</a>).</li>
+<li>Multivariate logistic regression algorithm with non-linear predictors in Scikit-learn (<a href="/blog/logreg/logreg4/">Part 4</a>).</li>
+<li>Multinomial logistic regression with Scikit-learn, where both softmax function and one-vs-all method are applied and compared (<a href="/blog/logreg/logreg5/">Part 5</a>).</li>
+<li>Multinomial logistic regression with categorical inputs in Scikit-learn (<a href="/blog/logreg/logreg6/">Part 6</a>).</li>
+<li>Logistic regression in Scikit-learn for the <code>digits</code> dataset (<a href="/blog/logreg/logreg7/">Part 7</a>).</li>
+<li>Logistic regression in Scikit-learn for the <code>MNIST</code> dataset (<a href="/blog/logreg/logreg8/">Part 8</a>).</li>
+</ol>
 
 <h2 id="2-the-hello-world-case-for-machine-learning-classifier">2. The hello-world case for Machine Learning classifier</h2>
 
@@ -287,12 +294,15 @@ We guide the machine at changing its parameters with a <em>recipe</em>, the <str
 
 <h3 id="2-1-applications">2.1 Applications</h3>
 
-<p>Classification tasks are very common in various fields, such as:
-1. <strong>health and care</strong>: predicting mortality in injured patients, predicting the risk of developing a given disease based on observed features of the patient, predicting whether some DNA mutations are disease-causing or not based on DNA sequence data.
-2. <strong>politics</strong>: predicting election voting for a party based on specific characteristics of the voter.
-3. <strong>engineering</strong>: predicting the probability of failure of a given process or system.
-4. <strong>marketing</strong>: predicting how a customer/subscriber is likely to purchase a product/stop a subscription.
-5. <strong>finance</strong>: predicting the likelihood of a homeowner to default on a mortgage, whether or not a transaction being performed on an online banking service&rsquo;s site is fraudulent.</p>
+<p>Classification tasks are very common in various fields, such as:</p>
+
+<ol>
+<li><strong>health and care</strong>: predicting mortality in injured patients, predicting the risk of developing a given disease based on observed features of the patient, predicting whether some DNA mutations are disease-causing or not based on DNA sequence data.</li>
+<li><strong>politics</strong>: predicting election voting for a party based on specific characteristics of the voter.</li>
+<li><strong>engineering</strong>: predicting the probability of failure of a given process or system.</li>
+<li><strong>marketing</strong>: predicting how a customer/subscriber is likely to purchase a product/stop a subscription.</li>
+<li><strong>finance</strong>: predicting the likelihood of a homeowner to default on a mortgage, whether or not a transaction being performed on an online banking service&rsquo;s site is fraudulent.</li>
+</ol>
 
 <h2 id="3-probabilistic-model">3. Probabilistic model</h2>
 
@@ -314,11 +324,10 @@ If the gradient becomes 0, the learning algorithm struggles to improve the model
 Let the input be an image to classify within three classes: 1) dog, 2) cat and 3) bird.
 The difference between <em>dog</em> and <em>cat</em> is the same as the difference between <em>cat</em> and <em>bird</em>, and it is as half as the difference between <em>dog</em> and <em>bird</em>. However, there is no particular reason for this to happen.</p>
 
-<p>Since the dependent variable of the model can belong to one of the categories of a fixed set, we assume the binary response <em>y</em> is a
-realization of a <a href="https://en.wikipedia.org/wiki/Bernoulli_trial">Bernoulli trial</a>, rather than a continuous outcome, as it would be with a linear regression model.
+<p>Since the dependent variable of the model can belong to one of the categories of a fixed set, we assume the binary response $y$ is a realization of a <a href="https://en.wikipedia.org/wiki/Bernoulli_trial" target="_blank">Bernoulli trial</a>, rather than a continuous outcome, as it would be with a linear regression model.
 This implies that the residuals cannot be normally distributed, which is a necessary condition for the linear regression model.</p>
 
-<p>Moreover, the distribution of the model output, Y, is a <a href="https://en.wikipedia.org/wiki/Bernoulli_distribution"><em>Bernoulli</em> distribution</a>:</p>
+<p>Moreover, the distribution of the model output, Y, is a <a href="https://en.wikipedia.org/wiki/Bernoulli_distribution" target="_blank"><em>Bernoulli</em> distribution</a>:</p>
 
 <p>$$ P(Y=y) = \pi^{y}\cdot (1-\pi)^{1-y} $$</p>
 
@@ -347,7 +356,7 @@ It means that if you have a 20% chance of winning a bet ($\pi = 0.2 $), the odds
 You will, in fact, win 4 dollars (assuming the currency is dollar) only 1 out 5 times of betting, but you will lose one dollar 4 out 5 times.</p>
 
 <p>However, we still need a step to get a variable whose domain matches the real domain of the input, i.e., the predictors.
-We, therefore, introduce the logarithm of the odds, which is also referred to as <em>logit</em>, and</p>
+We, therefore, introduce the logarithm of the odds, which is also referred to as <code>logit</code>, and</p>
 
 <p>$$ logit(\pi) = \log {\frac {\pi}{1-\pi}} $$</p>
 
@@ -360,13 +369,13 @@ Positive/negative logits represent probabilities above/below 50%.</p>
 
 <p>where $x$ is a vector of predictors and $\omega$ is a vector of the regression coefficients.</p>
 
-<p>The change in the predicted log-odds of success probability equals $\omega_j$ for a unit change in the <em>j-th</em> predictor when all other predictors are kept constant.
+<p>The change in the predicted log-odds of success probability equals $\omega_j$ for a unit change in the <code>j</code>-th predictor when all other predictors are kept constant.
 If we exponentiate the logit expression, we get the direct correlation between probability and predictors:</p>
 
 <p>$$ odds = \frac {\pi}{1-\pi} = e^{\omega^T\cdot x} $$</p>
 
 <p>It is now easy to determine the impact of a regression coefficient to the odds.
-If we increase the <em>j-th</em> predictor by a unit, the odds becomes:</p>
+If we increase the <code>j</code>-th predictor by a unit, the odds becomes:</p>
 
 <p>$$ odds = e^{\omega^T\cdot x + \omega_j} = e^{\omega^T\cdot x}\cdot e^{\omega_j} $$</p>
 
@@ -376,7 +385,7 @@ If we increase the <em>j-th</em> predictor by a unit, the odds becomes:</p>
 
 <p>We need to invert the logit function to have a direct expression of the probability of the model outcome of being 1, or interchangeably belonging to the second class.</p>
 
-<p>The inverse function of the logit is the logistic function, which is a <a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid function</a>.
+<p>The inverse function of the logit is the logistic function, which is a <a href="https://en.wikipedia.org/wiki/Sigmoid_function" target="_blank">sigmoid function</a>.
 It is interpreted as taking input log-odds and returning the estimated probability.</p>
 
 <p>We first set the log-odds to be equal to the intermediate variable, t, that was introduced above.
@@ -419,7 +428,7 @@ The final formulation, which represents the logistic regression model, is theref
 
 <p>$$ \rightarrow \prod_i{(\sigma(\omega^T\cdot x_i))^{y_i}\cdot (1-\sigma(\omega^T\cdot x_i))^{1-y_i} } $$</p>
 
-<p>where $x_i$ and $y_i$ are the predictors and ground-truth output of the <em>i-th</em> example.</p>
+<p>where $x_i$ and $y_i$ are the predictors and ground-truth output of the <code>i</code>-th example.</p>
 
 <p>We take the log-likelihood:</p>
 
@@ -427,7 +436,7 @@ The final formulation, which represents the logistic regression model, is theref
 
 <p>$$ \rightarrow \sum_i{(y_i\cdot\log\sigma + (1-y_i)\cdot\log(1-\sigma))} $$</p>
 
-<p>which is maximized using optimization techniques such as <a href="https://en.wikipedia.org/wiki/Gradient_descent">gradient descent</a>.</p>
+<p>which is maximized using optimization techniques such as <a href="https://en.wikipedia.org/wiki/Gradient_descent" target="_blank">gradient descent</a>.</p>
 
 <p>If we want to treat the task as a minimization problem of a loss function, we introduce a negative sign:</p>
 
@@ -487,19 +496,19 @@ plt.legend();
 
 <p>We calculate the gradient of the LSE loss function with respect to the model parameters, as follows:</p>
 
-<p>$$ \frac{\partial L_{lse}(\omega)}{\partial\omega_j} = (\frac{1}{2}\cdot 2\cdot(y-h)\cdot\frac{\partial\sigma(\omega^T\cdot x)}{\partial\omega_j} ) = $$</p>
+<p>$$ \frac{\partial L_{lse}(\omega)}{\partial\omega_j} = \Big(\frac{1}{2}\cdot 2\cdot(y-h)\cdot\frac{\partial\sigma(\omega^T\cdot x)}{\partial\omega_j} \Big) = $$</p>
 
-<p>$$ \rightarrow ((y-h)\cdot h\cdot(1-h)\frac{\partial(\omega^T\cdot x)}{\partial\omega_j} ) $$</p>
+<p>$$ \rightarrow \Big((y-h)\cdot h\cdot(1-h)\frac{\partial(\omega^T\cdot x)}{\partial\omega_j} \Big) $$</p>
 
-<p>$$ \rightarrow ((y-h)\cdot h\cdot(1-h)\cdot x_j ) $$</p>
+<p>$$ \rightarrow \big((y-h)\cdot h\cdot(1-h)\cdot x_j \big) $$</p>
 
 <p>This gives us the stochastic gradient ascent rule</p>
 
 <p>$$ h^{(i)} = \sigma(\omega^T\cdot x^{(i)}) \quad $$</p>
 
-<p>$$ \omega_j = \omega_j - \alpha\cdot( (y^{(i)}-h)\cdot h\cdot(1-h)\cdot x_j^{(i)} ) $$</p>
+<p>$$ \omega_j = \omega_j - \alpha\cdot \big( (y^{(i)}-h)\cdot h\cdot(1-h)\cdot x_j^{(i)} \big) $$</p>
 
-<p>where $x_j^{(i)}$ is the <em>j-th</em> element of <em>i-th</em> predictor and $y^{(i)}$ is the corresponding ground-truth binary output.
+<p>where $x_j^{(i)}$ is the <code>j</code>-th element of <code>i</code>-th predictor and $y^{(i)}$ is the corresponding ground-truth binary output.
 Note the negative sign in the update formula, since we are minimizing the loss function.</p>
 
 <pre><code class="language-python">def gradDescLSE(XX, YY, ww, lr=0.1, Nepoch=1500):
@@ -517,21 +526,21 @@ Note the negative sign in the update formula, since we are minimizing the loss f
 
 <p>We calculate the gradient of the ML loss function with respect to the model parameters, as follows:</p>
 
-<p>$$ \frac{\partial L_{ml}(\omega)}{\partial\omega_j} = (\frac{y}{h} - \frac{1-y}{1-h})\frac{\partial\sigma(\omega^T\cdot x)}{\partial\omega_j} ) = $$</p>
+<p>$$ \frac{\partial L_{ml}(\omega)}{\partial\omega_j} = \Big(\frac{y}{h} - \frac{1-y}{1-h} \Big)\cdot\frac{\partial\sigma(\omega^T\cdot x)}{\partial\omega_j} = $$</p>
 
-<p>$$ \rightarrow (\frac{y}{h} - \frac{1-y}{1-h})\cdot h\cdot(1-h)\cdot\frac{\partial(\omega^T\cdot x)}{\partial\omega_j} ) $$</p>
+<p>$$ \rightarrow \Big(\frac{y}{h} - \frac{1-y}{1-h}\Big)\cdot h\cdot(1-h)\cdot\frac{\partial(\omega^T\cdot x)}{\partial\omega_j} $$</p>
 
-<p>$$ \rightarrow (y\cdot (1-h) - (1-y)\cdot h)\cdot x_j ) = $$</p>
+<p>$$ \rightarrow \big(y\cdot (1-h) - (1-y)\cdot h \big) \cdot x_j = $$</p>
 
-<p>$$ \rightarrow (y - y\cdot h - h + y\cdot h)\cdot x_j ) $$</p>
+<p>$$ \rightarrow \big(y - y\cdot h - h + y\cdot h \big)\cdot x_j $$</p>
 
-<p>$$ \rightarrow (y-h)\cdot x_j ) $$</p>
+<p>$$ \rightarrow (y-h)\cdot x_j $$</p>
 
 <p>This gives us the stochastic gradient ascent rule</p>
 
-<p>$$ \omega_j = \omega_j + \alpha\cdot(y^{(i)} - \sigma(\omega^T\cdot x^{(i)}))\cdot x_j^{(i)} $$</p>
+<p>$$ \omega_j = \omega_j + \alpha\cdot \big(y^{(i)} - \sigma(\omega^T\cdot x^{(i)})\big)\cdot x_j^{(i)} $$</p>
 
-<p>where $x_j^{(i)}$ is the <em>j-th</em> element of <em>i-th</em> predictor and $y^{(i)}$ is the corresponding ground-truth binary output.</p>
+<p>where $x_j^{(i)}$ is the <code>j</code>-th element of <code>i</code>-th predictor and $y^{(i)}$ is the corresponding ground-truth binary output.</p>
 
 <p>Note the positive sign in the update formula, since we are maximizing the ML function.</p>
 
@@ -549,23 +558,22 @@ Note the negative sign in the update formula, since we are minimizing the loss f
 <h2 id="reference">Reference</h2>
 
 <ol>
-<li><a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf">CS229 notes</a></li>
-<li><a href="https://www.coursera.org/learn/machine-learning">Machine Learning at Coursera</a></li>
-<li><a href="http://people.math.gatech.edu/~ecroot/3225/maximum_likelihood.pdf">Maximum likelihood estimators and least squares</a></li>
-<li><a href="https://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf">An Introduction to Statistical Learning</a></li>
-<li><a href="https://stats.stackexchange.com/questions/46523/how-to-simulate-artificial-data-for-logistic-regression/46525">Generating artificial data</a></li>
-<li><a href="https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc">Logistic Regression overview</a></li>
-<li><a href="https://machinelearningmastery.com/logistic-regression-for-machine-learning/">Logistic Regression for Machine learning</a></li>
-<li><a href="https://data.princeton.edu/wws509/notes/c3.pdf">Princeton notes</a></li>
-<li><a href="https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8">Building A Logistic Regression in Python, Step by Step</a></li>
-<li><a href="https://towardsdatascience.com/logistic-regression-using-python-sklearn-numpy-mnist-handwriting-recognition-matplotlib-a6b31e2b166a">Logistic Regression using Python (scikit-learn)</a></li>
+<li><a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf" target="_blank">CS229 notes</a></li>
+<li><a href="https://www.coursera.org/learn/machine-learning" target="_blank">Machine Learning at Coursera</a></li>
+<li><a href="http://people.math.gatech.edu/~ecroot/3225/maximum_likelihood.pdf" target="_blank">Maximum likelihood estimators and least squares</a></li>
+<li><a href="https://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf" target="_blank">An Introduction to Statistical Learning</a></li>
+<li><a href="https://stats.stackexchange.com/questions/46523/how-to-simulate-artificial-data-for-logistic-regression/46525" target="_blank">Generating artificial data</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc" target="_blank">Logistic Regression overview</a></li>
+<li><a href="https://machinelearningmastery.com/logistic-regression-for-machine-learning/" target="_blank">Logistic Regression for Machine learning</a></li>
+<li><a href="https://data.princeton.edu/wws509/notes/c3.pdf" target="_blank">Princeton notes</a></li>
+<li><a href="https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8" target="_blank">Building A Logistic Regression in Python, Step by Step</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-using-python-sklearn-numpy-mnist-handwriting-recognition-matplotlib-a6b31e2b166a" target="_blank">Logistic Regression using Python (scikit-learn)</a></li>
 </ol>
 
         </div>
         <div class="pgNav PageNavigation col-12 text-center">
           <span>
-          <p>&laquo; <a class="" href="/blog/linreg/linreg3/" style="color: #4ABDAC; font-size: 18px; "> Hello world for Machine learning - Part 3</a>
-
+          <p>&laquo; <a class="" href="/blog/linreg/linreg5/" style="color: #4ABDAC; font-size: 18px; "> Hello world for Machine learning - Part 5</a>
           
           &nbsp;&nbsp; | &nbsp;&nbsp;
           <a class="" href="/blog/logreg/logreg2/" style="color: #4ABDAC; font-size: 18px; ">Learning to classify coffee from cappuccino - Part 2</a>
@@ -573,8 +581,8 @@ Note the negative sign in the update formula, since we are minimizing the loss f
           &raquo;</p>
           </span>
           
+          
         </div>
-
       </div>
     </div>
   </div>

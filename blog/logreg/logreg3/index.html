@@ -11,12 +11,13 @@
    <meta name="author" content="Your name"> 
   
 
-  <meta name="generator" content="Hugo 0.49" />
+  <meta name="generator" content="Hugo 0.59.1" />
   <title>Learning to classify coffee from cappuccino - Part 3 &middot; take a wild guess</title>
 
   
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 
 
  <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
@@ -31,7 +32,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
-<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
 
   
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -40,6 +41,8 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
 
 
 
@@ -54,9 +57,6 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
 
-
-
-<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
 
 
 <script type="text/javascript">
@@ -103,10 +103,11 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
   <![endif]-->
 
   
-  
-  
-  
-  
+    
+    
+    
+    
+    
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -118,6 +119,7 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+    
   
 
   
@@ -196,11 +198,11 @@ if (!doNotTrack) {
       
       <ul class="navbar-nav navbar-right">
         
-          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
         
       </ul>
       
@@ -257,14 +259,14 @@ A dedicated post on model selection, overfitting/underfitting problem and regula
 
 <p>We create an equispaced x grid with 1000 points ranging from -20 to 20.
 Then true y outcome, which represents the class to assign to the input, is defined via the logistic function of the linear transformation of input x with parameters <code>Wgt</code>.
-The actual class is assigned by drawing samples from a <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.binomial.html">binomial distribution</a>.</p>
+The actual class is assigned by drawing samples from a <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.binomial.html" target="_blank">binomial distribution</a>.</p>
 
 <p>A binomial distribution becomes a Bernoulli distribution when the number of trials is 1.
 In other words, we generate data by sampling the <code>y</code> class for each input <code>x</code>, where the probability of success (i.e., of belonging to class 1) is given by:</p>
 
 <p>$$ p = \sigma(\lbrack x, 1\rbrack\cdot \omega) $$</p>
 
-<p>The <a href="https://en.wikipedia.org/wiki/Logistic_function">logistic function</a> is the $\sigma$ operator in the equation.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Logistic_function" target="_blank">logistic function</a> is the $\sigma$ operator in the equation.</p>
 
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
@@ -299,13 +301,13 @@ plt.legend();
 
 <h2 id="3-scikit-learn-implementation">3. Scikit-learn implementation</h2>
 
-<p>We implement the logistic regression <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">class</a> and the metric module directly from Scikit-learn.</p>
+<p>We implement the logistic regression <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html" target="_blank">class</a> and the metric module directly from Scikit-learn.</p>
 
 <p><img src="/blog/logreg/logreg3/sklearn.png" alt="pngS" title="Scikit-learn logo" />
-<em>Figure 1 - Scikit-learn logo</em></p>
+<center><em>Figure 1 - Scikit-learn logo</em></center></p>
 
 <p>Since we ignore regularization at this point, we set the <em>C</em> parameter to a very high value to reduce the regularization strength down to 0.
-It is in fact the inverse of regularization strength, as it is the case for <a href="https://scikit-learn.org/stable/modules/svm.html">Support Vector Machine</a> applications.</p>
+It is in fact the inverse of regularization strength, as it is the case for <a href="https://scikit-learn.org/stable/modules/svm.html" target="_blank">Support Vector Machine</a> applications.</p>
 
 <p>After creating an instance of the model, we train it on the data with the fit method.
 The information learned from the data is automatically stored into the model instance, which is in this case <code>lgr</code>.
@@ -380,7 +382,7 @@ Ypred.shape, Ypred_prob.shape
 
 <p>$$ A = (TP+TN)/(TP+TN+FP+FN) $$</p>
 
-<p>See more details <a href="https://en.wikipedia.org/wiki/Precision_and_recall">here</a>.</p>
+<p>See more details <a href="https://en.wikipedia.org/wiki/Precision_and_recall" target="_blank">here</a>.</p>
 
 <pre><code class="language-python">print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(YY, Ypred)))
 print(&quot;Precision: {}&quot;.format(metrics.precision_score(YY, Ypred)))
@@ -411,13 +413,13 @@ plt.show()
 <p>We implement the same algorithm using the deep-learning library from Google, <code>TensorFlow</code>.</p>
 
 <p><img src="/blog/logreg/logreg3/tensorflow.png" alt="pngS" title="TensorFlow logo" />
-<em>Figure 2 - TensorFlow logo</em></p>
+<center><em>Figure 2 - TensorFlow logo</em></center></p>
 
 <p>We import the entire library, from which we access to the various methods required to describe the model, to train it to the dataset and to estimate the outputs that are compared to the dataset ground-truth values.</p>
 
 <p>The very first step is to reset the TF to the default graph, which means TF clears the default graph stack and resets the global default graph.</p>
 
-<p>We then define the <code>x</code> and <code>y</code> variables as <a href="https://www.tensorflow.org/api_docs/python/tf/placeholder"><strong>placeholder</strong></a>, while the <code>ww</code> parameters as <a href="https://www.tensorflow.org/guide/variables"><strong>variable</strong></a>.</p>
+<p>We then define the <code>x</code> and <code>y</code> variables as <a href="https://www.tensorflow.org/api_docs/python/tf/placeholder" target="_blank"><strong>placeholder</strong></a>, while the <code>ww</code> parameters as <a href="https://www.tensorflow.org/guide/variables" target="_blank"><strong>variable</strong></a>.</p>
 
 <p>In short, <code>tf.Variable</code> is used for trainable parameters of the model, while <code>tf.placeholder</code> is used to feed actual training examples.
 That&rsquo;s why we need to assign initial values, often random-generated, to the TF variables only.
@@ -481,8 +483,10 @@ optimizer = tf.train.AdamOptimizer(learning_rate=0.01).minimize(loss=mdlLoss)
 <li>run a new session, which let us perform the actual computation by exploiting the graph structure previously defined.</li>
 <li>run the optimizer as many steps as the number of epochs <code>Nepoch</code>.</li>
 <li>run the model with the final parameter set and store the model output <code>ycls</code> into the prediction array.</li>
-<li>retrieve the final parameter values by running a dedicated session. A different way would be to call the <a href="https://www.tensorflow.org/api_docs/python/tf/global_variables">global_variables()</a> method and get the variable values by key name.</li>
+<li>retrieve the final parameter values by running a dedicated session. A different way would be to call the <a href="https://www.tensorflow.org/api_docs/python/tf/global_variables" target="_blank">global_variables()</a> method and get the variable values by key name.</li>
 </ol>
+
+<p>Here the code.</p>
 
 <pre><code class="language-python">Nepoch = 10000
 init = tf.global_variables_initializer()
@@ -540,29 +544,28 @@ plt.show()
 <h2 id="reference">Reference</h2>
 
 <ol>
-<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">Logistic Regression in Scikit-learn</a></li>
-<li><a href="https://www.geeksforgeeks.org/ml-logistic-regression-using-tensorflow/">Logistic Regression in Tensorflow</a></li>
-<li><a href="https://www.tensorflow.org/tutorials/estimator/linear">Build a linear model with Estimators</a></li>
-<li><a href="https://stats.stackexchange.com/questions/46523/how-to-simulate-artificial-data-for-logistic-regression/46525">Generating artificial data</a></li>
-<li><a href="https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc">Logistic Regression overview</a></li>
-<li><a href="https://machinelearningmastery.com/logistic-regression-for-machine-learning/">Logistic Regression for Machine learning</a></li>
-<li><a href="https://towardsdatascience.com/logistic-regression-using-python-sklearn-numpy-mnist-handwriting-recognition-matplotlib-a6b31e2b166a">Logistic Regression using Python (scikit-learn)</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html" target="_blank">Logistic Regression in Scikit-learn</a></li>
+<li><a href="https://www.geeksforgeeks.org/ml-logistic-regression-using-tensorflow/" target="_blank">Logistic Regression in Tensorflow</a></li>
+<li><a href="https://www.tensorflow.org/tutorials/estimator/linear" target="_blank">Build a linear model with Estimators</a></li>
+<li><a href="https://stats.stackexchange.com/questions/46523/how-to-simulate-artificial-data-for-logistic-regression/46525" target="_blank">Generating artificial data</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc" target="_blank">Logistic Regression overview</a></li>
+<li><a href="https://machinelearningmastery.com/logistic-regression-for-machine-learning/" target="_blank">Logistic Regression for Machine learning</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-using-python-sklearn-numpy-mnist-handwriting-recognition-matplotlib-a6b31e2b166a" target="_blank">Logistic Regression using Python (scikit-learn)</a></li>
 </ol>
 
         </div>
         <div class="pgNav PageNavigation col-12 text-center">
           <span>
           <p>&laquo; <a class="" href="/blog/logreg/logreg2/" style="color: #4ABDAC; font-size: 18px; "> Learning to classify coffee from cappuccino - Part 2</a>
-
           
           &nbsp;&nbsp; | &nbsp;&nbsp;
-          <a class="" href="/blog/logreg/logreg6/" style="color: #4ABDAC; font-size: 18px; ">Learning to classify coffee from cappuccino - Part 6</a>
+          <a class="" href="/blog/logreg/logreg4/" style="color: #4ABDAC; font-size: 18px; ">Learning to classify coffee from cappuccino - Part 4</a>
           
           &raquo;</p>
           </span>
           
+          
         </div>
-
       </div>
     </div>
   </div>

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Learning to classify coffee from cappuccino - Part 4 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Learning to classify coffee from cappuccino - Part 4">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/logreg/logreg4/" style="font-size: 16px; ">Coffee or cappuccino?</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/coffee_cappuccino.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Learning to classify coffee from cappuccino - Part 4</h1>
+          <h5 class="card-title text-center">Coffee or cappuccino?</h5>
+          <h6 class="card-text text-center">March 10, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 13 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/logistic-regression"><kbd class="item-tag">logistic-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction-and-assumptions">1. Introduction and assumptions</h2>
+
+<p>In this post-series, we are going to study the very basic modelling for classification problems, the logistic regression.
+<strong>Classification</strong> entails that the output is a discrete variable taking values on a pre-defined limited set, where the set dimension is the number of classes. Some examples are <em>spam detection</em>, <em>object recognition</em> and <em>topic identification</em>.</p>
+
+<p>We have analyzed the theory in the <a href="/blog/logreg/logreg1/">first post</a>, implement the algorithm with Numpy in <a href="/blog/logreg/logreg2/">Part 2</a> and using Sklearn and Tensorflow in <a href="/blog/logreg/logreg3/">Part 3</a>.
+In this post, we solve a binary classification problem with a logistic regression algorithm with Scikit-learn, for multivariate logistic regression.
+In other words, we learn how to model different predictor spaces, namely 1D, 2D and 3D, and non-linear input predictors.</p>
+
+<p>In this series, we do not split the dataset into training and testing sets, but we assess every model on the training set only.
+A dedicated post on model selection, overfitting/underfitting problem and regularization will be published soon.</p>
+
+<p>Let&rsquo;s get started!
+We show how the logistic regression model handles different dimensions of the predictor space.
+However, the problem is still a binary classification since the <code>y</code> response can only take 0 or 1 values.</p>
+
+<h2 id="2-two-dimensional-space-of-predictors">2. Two-dimensional space of predictors</h2>
+
+<p>We create the Bernoulli distribution for the two predictors, <code>x1</code> and <code>x2</code>, that range from -10 to 10.</p>
+
+<pre><code class="language-python">Npntx, Npnty = 50, 50 # number of points
+x1_ = np.linspace(-10, 10, Npntx)
+x2_ = np.linspace(-10, 10, Npnty)
+xx1, xx2 = np.meshgrid(x1_, x2_)
+noise = 0.25*(np.random.randn(Npnty,Npntx)-1)
+w0, w1, w2 = 5, -3, -1  # ground-truth parameters
+hh = w0 + w1*xx1 + w2*xx2 + noise
+Ynoise = 1/(1+np.exp(-hh))
+Ycls = np.random.binomial(1., Ynoise) # dichotomous variable, n_trial=1 =&gt; Bernoulli distribution
+</code></pre>
+
+<p>The dataset is created by stacking the flattened version of the two 2D predictor arrays and the corresponding class array.
+We have therefore $50\cdot50$ examples over the rows, two predictors over the X columns and the response over the Y column.</p>
+
+<pre><code class="language-python">XX = np.vstack((xx1.flatten(), xx2.flatten())).T
+Ycls = Ycls.flatten().reshape(-1,1)
+print([XX.shape, Ycls.shape])
+</code></pre>
+
+<pre><code>[(2500, 2), (2500, 1)]
+</code></pre>
+
+<p>The figure reports the two-class distribution with yellow/purple colours.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+plt.scatter(xx1, xx2, c=Ycls, cmap='viridis')
+plt.xlabel(&quot;X1&quot;)
+plt.ylabel(&quot;X2&quot;);
+</code></pre>
+
+<p><img src="output_7_0.png" alt="png" /></p>
+
+<p>One of the amazing features of Sklearn concerns its general structure that defines the training/prediction process into four steps and requires little or no adjustment for slightly different model settings.</p>
+
+<pre><code class="language-python">lgr = LogisticRegression(C=1e5) # we want to ignore regularization
+YY = Ycls[:, 0]
+lgr.fit(XX, YY)
+Ypred = lgr.predict(XX)
+Ypred_prob = lgr.predict_proba(XX)
+Ypred.shape, Ypred_prob.shape
+</code></pre>
+
+<pre><code>((2500,), (2500, 2))
+</code></pre>
+
+<p>We retrieve the model parameters and realise that they are very close to the initial setting used to generate the dataset.</p>
+
+<pre><code class="language-python">print(&quot;predictor parameters: ({:.3f},{:.3f}), intercept of decision boundary: {:.3f}&quot;\
+      .format(lgr.coef_[0,0], lgr.coef_[0,1], lgr.intercept_[0]))
+</code></pre>
+
+<pre><code>predictor parameters: (-3.405,-1.152), intercept of decision boundary: 5.198
+</code></pre>
+
+<p>This can be confirmed by assessing the model in terms of accuracy, precision and recall and comparing them to the data noise level.</p>
+
+<pre><code class="language-python">print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(YY, Ypred)))
+print(&quot;Precision: {}&quot;.format(metrics.precision_score(YY, Ypred)))
+print(&quot;Recall: {}&quot;.format(metrics.recall_score(YY, Ypred)))
+</code></pre>
+
+<pre><code>Accuracy: 0.9796
+Precision: 0.9819193324061196
+Recall: 0.9826026443980515
+</code></pre>
+
+<p>The figure reports the original dataset and the decision boundary as a group of green points.
+It has been determined by taking the second column of <code>Ypred_prob</code>, reshaping to the shape of one of the two predictors, measuring the distance from the 50% threshold and selecting points that are not farther than 20%.
+It means the decision boundary is 40% thick, from 30% to 70%.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+plt.scatter(xx1, xx2, c=Ycls, cmap='viridis', label='data', alpha=0.4)
+thickDecBound = np.abs(Ypred_prob[:,1].reshape(-1, xx1.shape[-1])-0.5)&lt;0.2 # 0.4-thick decision boundary
+plt.scatter(xx1[thickDecBound], xx2[thickDecBound], c='g', s=40, alpha=0.8, label='0.4-thick decision boundary')
+plt.xlabel(&quot;X1&quot;)
+plt.ylabel(&quot;X2&quot;)
+plt.legend();
+</code></pre>
+
+<p><img src="output_15_0.png" alt="png" /></p>
+
+<h2 id="3-three-dimensional-space-of-predictors">3. Three-dimensional space of predictors</h2>
+
+<p>We create the Bernoulli distribution for the three predictors, <code>x1</code>, <code>x2</code> and <code>x3</code>, that range from -5 to 5.
+The dataset is a random-generated 3D array, where rows are the number of samples.</p>
+
+<pre><code class="language-python">Nx, Ny, Nz = 30, 20, 25
+Npnt = 1000
+xyz = 5*(2*np.random.rand(Npnt, 3)-1)
+xx1, xx2, xx3 = xyz[:,0], xyz[:,1], xyz[:,2]
+w0, w1, w2, w3 = 2, 3, -1, 3
+noise = 0.05*(np.random.randn(Npnt)-1)
+hh = w0 + w1*xx1 + w2*xx2 + w3*xx3 + noise
+Ynoise = 1/(1+np.exp(-hh))
+Ycls = np.random.binomial(1., Ynoise) # dichotomous variable, n_trial=1 =&gt; Bernoulli distribution
+XX = xyz.copy()
+Ycls = Ycls.flatten().reshape(-1,1)
+print([XX.shape, Ycls.shape])
+</code></pre>
+
+<pre><code>[(1000, 3), (1000, 1)]
+</code></pre>
+
+<p>The figure reports the two-class distribution with yellow/purple colours in the 3D space.
+This plotting is enabled with the module <a href="https://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html" target="_blank"><code>mplot3d</code></a>.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+ax = plt.axes(projection='3d')
+ax.scatter(xx1, xx2, xx3, c=Ycls, cmap='viridis', linewidth=0.5, alpha=0.5)
+ax.set_xlabel('x1')
+ax.set_ylabel('x2')
+ax.set_zlabel('x3')
+ax.view_init(20, 25)
+plt.show()
+</code></pre>
+
+<p><img src="output_19_0.png" alt="png" /></p>
+
+<p>We utilize the exact same structure also to build the 3D model.</p>
+
+<pre><code class="language-python">lgr = LogisticRegression(C=1e5) # we want to ignore regularization
+YY = Ycls[:, 0]
+lgr.fit(XX, YY)
+Ypred = lgr.predict(XX)
+Ypred_prob = lgr.predict_proba(XX)
+Ypred.shape, Ypred_prob.shape
+</code></pre>
+
+<pre><code>((1000,), (1000, 2))
+</code></pre>
+
+<p>We retrieve the model parameters and realise that they are very close to the initial setting used to generate the dataset.
+This can be confirmed by assessing the model in terms of accuracy, precision and recall and comparing them to the data noise level.</p>
+
+<pre><code class="language-python">print(&quot;predictor parameters: ({:.3f},{:.3f},{:.3f}), intercept of decision boundary: {:.3f}&quot;\
+      .format(lgr.coef_[0,0], lgr.coef_[0,1], lgr.coef_[0,2], lgr.intercept_[0]))
+print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(YY, Ypred)))
+print(&quot;Precision: {}&quot;.format(metrics.precision_score(YY, Ypred)))
+print(&quot;Recall: {}&quot;.format(metrics.recall_score(YY, Ypred)))
+</code></pre>
+
+<pre><code>predictor parameters: (2.983,-1.023,2.857), intercept of decision boundary: 2.045
+Accuracy: 0.952
+Precision: 0.9656419529837251
+Recall: 0.9484902309058615
+</code></pre>
+
+<p>The figure reports the original dataset and the decision boundary as a plane whose mesh colour is proportional to the $x_3$ predictor.
+The plane represents the set of predictor points for which the probability of success is equal to 50%.
+That means the hypothesis function, which is fed to the logistic function, is equal to 0:</p>
+
+<p>$$ h = \omega_0 + \omega_1\cdot x_1 + \omega_2\cdot x_2 + \omega_3\cdot x_3 = 0 $$</p>
+
+<p>The plane can be described as an explicit function between the $x_3$ predictor and the other two inputs:</p>
+
+<p>$$ x_3 = -(\omega_0 + \omega_1\cdot x_1 + \omega_2\cdot x_2)/\omega_3 $$</p>
+
+<p>It is clear how the plane separates the two classes nicely.</p>
+
+<pre><code class="language-python">Npntx, Npnty, mrg = 20, 20, 4 # number of points
+x1_ = np.linspace(-mrg, mrg, Npntx)
+x2_ = np.linspace(-mrg, mrg, Npnty)
+mx1, mx2 = np.meshgrid(x1_, x2_)
+zz = -(lgr.intercept_[0] + lgr.coef_[0,0]*mx1 + lgr.coef_[0,1]*mx2)/lgr.coef_[0,2]
+
+plt.figure(figsize=(10, 5))
+ax = plt.axes(projection='3d')
+ax.plot_surface(mx1, mx2, zz, rstride=1, cstride=1, cmap='viridis', edgecolor='none', alpha=0.4)
+ax.scatter(xx1, xx2, xx3, c=Ycls, cmap='viridis', linewidth=0.5, alpha=0.6, label='dataset')
+ax.set_xlabel('x1')
+ax.set_ylabel('x2')
+ax.set_zlabel('x3')
+ax.view_init(5, 65)
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="output_25_0.png" alt="png" /></p>
+
+<h2 id="4-two-dimensional-non-linear-space-of-predictors">4. Two-dimensional non-linear space of predictors</h2>
+
+<p>Here we show how the logistic regression model handles <strong>non-linear</strong> 2D predictor space. However, the problem is still a binary classification since the <code>y</code> response can only take 0 or 1 values.
+A non-linear space implies that the decision boundary that separates the two classes, if exists, is not a line anymore.
+In this section, we will face an example of a circle-shaped boundary.</p>
+
+<h3 id="4-1-two-dimentional-non-linear-data-generation">4.1 Two-dimentional non-linear data generation</h3>
+
+<p>We create the Bernoulli distribution for the two predictors, <code>x1</code> and <code>x2</code>, from two intermediate variables, <code>rr</code> and <code>tt</code>, which model the radius and the angle of a point with respect to the <a href="https://en.wikipedia.org/wiki/Polar_coordinate_system" target="_blank">polar coordinate system</a>.
+We apply the circle polar transformation to get the cartesian coordinates. However, the dichotomous response variable is controlled directly with the intermediate variables, so that the decision boundary should be:</p>
+
+<p>$$ hh = \omega_0 + \omega_1\cdot r + \omega_2\cdot \theta = 0 \Rightarrow r = -\omega_0/\omega_1 = 5 $$</p>
+
+<p>where $\omega_2$ has been set to 0.</p>
+
+<pre><code class="language-python">Npntx, Npnty = 10, 50 # number of points
+r_ = np.linspace(1, 10, Npntx)
+t_ = np.linspace(0, 2*np.pi, Npnty)
+rr, tt = np.meshgrid(r_, t_)
+noise = 0*(np.random.randn(Npnty,Npntx)-1)
+xx1 = rr*np.cos(tt)
+xx2 = rr*np.sin(tt)
+w0, w1, w2 = -5, 1, 0  # ground-truth parameters
+hh = w0 + w1*rr + w2*tt + noise
+Ynoise = 1/(1+np.exp(-hh))
+Ycls = np.random.binomial(1., Ynoise) # dichotomous variable, n_trial=1 =&gt; Bernoulli distribution
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+plt.scatter(xx1, xx2, c=Ycls, cmap='viridis')
+plt.xlabel(&quot;X1&quot;)
+plt.ylabel(&quot;X2&quot;);
+</code></pre>
+
+<p><img src="output_28_0.png" alt="png" /></p>
+
+<pre><code class="language-python">XX = np.vstack((xx1.flatten(), xx2.flatten())).T
+Ycls = Ycls.flatten().reshape(-1,1)
+print([XX.shape, Ycls.shape])
+</code></pre>
+
+<pre><code>[(500, 2), (500, 1)]
+</code></pre>
+
+<h3 id="4-2-logistic-regression-of-linear-predictors-only">4.2 Logistic regression of linear predictors only</h3>
+
+<p>We build the logistic regression model as a function of the two raw predictors only.
+Since the two-class delimiter is not linear, it is not possible for this model to correctly classify this dataset.
+The following steps want to prove this statement.
+In the next subsection we introduce the polynomial feature method to extend the input predictor space to non-linear features and test it to the dataset classification.</p>
+
+<pre><code class="language-python">lgr = LogisticRegression(C=1e5) # we want to ignore regularization
+YY = Ycls[:, 0]
+lgr.fit(XX, YY)
+Ypred = lgr.predict(XX)
+Ypred_prob = lgr.predict_proba(XX)
+Ypred.shape, Ypred_prob.shape
+</code></pre>
+
+<pre><code>((500,), (500, 2))
+</code></pre>
+
+<p>The accuracy and the precision highlights the poor performance of the model, which is as low as what we can get with the trivial model that returns 1 for any input.
+The trivial model accuracy can be calculated as the fraction of instances of the Y variable being equal to 1, to the total number of instances.</p>
+
+<pre><code class="language-python">print(&quot;Accuracy of the trivial model: {}&quot;.format(np.sum(YY==1)/YY.shape[0]))
+print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(YY, Ypred)))
+print(&quot;Precision: {}&quot;.format(metrics.precision_score(YY, Ypred)))
+print(&quot;Recall: {}&quot;.format(metrics.recall_score(YY, Ypred)))
+</code></pre>
+
+<pre><code>Accuracy of the trivial model: 0.55
+Accuracy: 0.55
+Precision: 0.55
+Recall: 1.0
+</code></pre>
+
+<p>The figure confirms that the model is not able to split the two classes at all.</p>
+
+<pre><code class="language-python">Npnt = 50  # number of points of the mesh
+mrg = .5
+x1min, x1max = xx1.min() - mrg, xx1.max() + mrg
+x2min, x2max = xx2.min() - mrg, xx2.max() + mrg
+x1grd, x2grd = np.meshgrid(np.linspace(x1min, x1max, Npnt), np.linspace(x2min, x2max, Npnt))
+ygrd = lgr.predict(np.vstack((x1grd.ravel(), x2grd.ravel())).T)
+ygrd = ygrd.reshape(x1grd.shape)
+
+plt.figure(figsize=(10, 5))
+# contour
+plt.contourf(x1grd, x2grd, ygrd, cmap=plt.cm.Paired, alpha=0.4)
+plt.title(&quot;Decision surface of Logistic Regression with linear features&quot;)
+plt.axis('tight')
+# dataset
+plt.scatter(xx1, xx2, c=Ycls, cmap='viridis')
+plt.xlabel(&quot;X1&quot;)
+plt.ylabel(&quot;X2&quot;)
+# decision boundary
+plt.contour(x1grd, x2grd, ygrd, levels = [0], colors=('k',), linestyles=('-',),linewidths=(2,));
+</code></pre>
+
+<p><img src="output_35_0.png" alt="png" /></p>
+
+<p>We introduce the Sklearn method to generate polynomial and interaction features, from a set of input features.
+If we have two inputs, ($x_1$, $x_2$), we can get the full set of a polynomial class of degree N.
+For instance, if n = 3, we get the following 10-sized set:</p>
+
+<p>$$ (1, x_1, x_2, x_1^2, x_1\cdot x_2, x_2^2, x_1^3, x_1^2\cdot x_2, x_1\cdot x_2^2, x_2^3) $$</p>
+
+<p>Here we show what we get if ($x_1$, $x_2$) = (3, 2).</p>
+
+<pre><code class="language-python">from sklearn.preprocessing import PolynomialFeatures
+</code></pre>
+
+<pre><code class="language-python">pf = PolynomialFeatures(3)
+ff = np.array([3, 2])
+print(ff)
+print(pf.fit_transform(ff.reshape(1,-1)))
+</code></pre>
+
+<pre><code>[3 2]
+[[  1.   3.   2.   9.   6.   4.  27.  18.  12.   8.]]
+</code></pre>
+
+<pre><code class="language-python">pf = PolynomialFeatures(2)
+XXnl = pf.fit_transform(XX) # not-linear
+print(XXnl.shape)
+</code></pre>
+
+<pre><code>(500, 6)
+</code></pre>
+
+<pre><code class="language-python">lgr = LogisticRegression(C=1e5) # we want to ignore regularization
+lgr.fit(XXnl, YY)
+Ypred = lgr.predict(XXnl)
+</code></pre>
+
+<p>The model performance has improved very much.</p>
+
+<pre><code class="language-python">print(&quot;predictor parameters: ({:.3f},{:.3f}), intercept of decision boundary: {:.3f}&quot;\
+      .format(lgr.coef_[0,0], lgr.coef_[0,1], lgr.intercept_[0]))
+print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(YY, Ypred)))
+print(&quot;Precision: {}&quot;.format(metrics.precision_score(YY, Ypred)))
+print(&quot;Recall: {}&quot;.format(metrics.recall_score(YY, Ypred)))
+</code></pre>
+
+<pre><code>predictor parameters: (-1.229,0.016), intercept of decision boundary: -1.229
+Accuracy: 0.842
+Precision: 0.892
+Recall: 0.8109090909090909
+</code></pre>
+
+<p>We show the new decision boundary, where brown is for yellow dots that belong to class 1, while cyan is for purple dots from class 0.
+Since the decision boundary is not linear, it is not trivial to get its explicit or parametric formulation.</p>
+
+<p>We exploit the contour function from <code>Matplotlib</code>, which can draw isolines of a surface for specific z-levels.
+In this case it is enough to set the <code>levels</code> attribute to the single 0-element list, in order to get the solid red line.</p>
+
+<pre><code class="language-python">ygrd = lgr.predict(pf.fit_transform(np.vstack((x1grd.ravel(), x2grd.ravel())).T))
+ygrd = ygrd.reshape(x1grd.shape)
+
+plt.figure(figsize=(10, 5))
+# contour
+plt.contourf(x1grd, x2grd, ygrd, cmap=plt.cm.Paired, alpha=0.4)
+plt.title(&quot;Decision surface of Logistic Regression with non-linear features&quot;)
+plt.axis('tight')
+# dataset
+plt.scatter(xx1, xx2, c=Ycls, cmap='viridis')
+plt.xlabel(&quot;X1&quot;)
+plt.ylabel(&quot;X2&quot;)
+# decision boundary
+cs = plt.contour(x1grd, x2grd, ygrd, levels = [0], colors=('r',), linestyles=('-',),linewidths=(3,));
+#plt.clabel(cs, fmt = '%2.1d', colors = 'k', fontsize=14) #contour line labels
+</code></pre>
+
+<p><img src="output_44_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/logreg/logreg3/" style="color: #4ABDAC; font-size: 18px; "> Learning to classify coffee from cappuccino - Part 3</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/logreg/logreg5/" style="color: #4ABDAC; font-size: 18px; ">Learning to classify coffee from cappuccino - Part 5</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>How neural networks learn basic features - Create datasets &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="How neural networks learn basic features - Create datasets">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/fcnn/fcnn04/" style="font-size: 16px; ">Dataset creation</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/fcnnHead.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">How neural networks learn basic features - Create datasets</h1>
+          <h5 class="card-title text-center">Dataset creation</h5>
+          <h6 class="card-text text-center">September 15, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 13.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/neural-network"><kbd class="item-tag">neural network</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts related to a huge and popular topic in machine learning: <strong>fully connected neural networks</strong>.</p>
+
+<p>The general series scope is three-fold:</p>
+
+<ol>
+<li>visualize the model features and characteristics with schematic pictures and charts</li>
+<li>learn to implement the model with different levels of abstraction, given by the framework used</li>
+<li>have some fun with one of the hottest topics right now!</li>
+</ol>
+
+<p>In the following posts, we are going to analyze toy examples with advanced deep-learning libraries, namely Scikit-learn, Keras, Tensorflow and Pytorch.</p>
+
+<p>We are going through the following steps in each post:</p>
+
+<ol>
+<li>initialization</li>
+<li>create a dataset for three different applications: regression, binary- and multi-classification</li>
+<li>visualize point, mesh</li>
+<li>define network: dense layer, activation function and stack of layers</li>
+<li>train: loss and accuracy functions, optimizer and learning process</li>
+<li>visualize prediction</li>
+</ol>
+
+<p>Point 4 implies to create a layer class with corresponding weights and biases that need to be learned during <em>train</em> step.
+The layer class is required for Tensorflow only and its structure is pretty simple:</p>
+
+<ol>
+<li>initialization</li>
+<li>forward pass</li>
+</ol>
+
+<p>How neural networks learn basic features, such as the product of two numbers, some logic functions as <code>AND</code> or  <code>OR</code>, and the geometric boundaries between concentric circles of different radius?
+To answer this question, we create 12 different types of dataset, 3 for <em>regression</em>, 6 for <em>binary-classification</em> and, 3 for <em>multi-class classification</em>.</p>
+
+<p>This post goes through this process.
+I know, you might think it is neither strictly related to neural networks nor to their fancy libraries.
+We will spend some time on that too, do not worry.</p>
+
+<p>Analyzing the data we are going to feed the neural network with is crucial for us to have a deeper understanding of the whole phenomenon.</p>
+
+<p>The whole code to create a synthetic dataset and learn a neural network model with any of the four libraries mentioned above is wrapped into a Python class, <code>trainFCNN()</code>, and can be found in my Github <a href="https://github.com/takeawildguess/FCNNlib" target="_blank">repo</a>.</p>
+
+<h2 id="2-importing">2. Importing</h2>
+
+<p>First of all, we need to install these two libraries with the <code>pip</code> command and to import them.</p>
+
+<pre><code class="language-python">$ pip install numpy matplotlib
+</code></pre>
+
+<pre><code class="language-python">import numpy as np
+%matplotlib inline
+import matplotlib.pyplot as plt
+</code></pre>
+
+<h2 id="3-general-dataset-structure">3. General dataset structure</h2>
+
+<p>We now build a class with an attribute that specifies which dataset we want to analyze and, with respect to that, which kind of problem we want to solve, whether it is a regression or a binary classification or a multi-object classification.</p>
+
+<p>We create two functions to visualize 1) the generated scattered dataset points and 2) a 2D grid of points (contour plot) so that we can really understand the behaviour of the model at the end of the learning process across the entire domain.
+Just to make everything easier to be visualized into a 2D space, we create a fictitious dataset for only two inputs.</p>
+
+<p>We also specify the library that we want to use to solve the problem.
+We need to build a function that implements the core concept for deep learning (see the <code>training</code> function in the code).</p>
+
+<p>Within this function, we can define the main hyperparameters for the model structure and learning process and the library to learn the optimal model for the user-selected dataset.</p>
+
+<p>We are going to realize that <code>Scikit-learn</code> and <code>Keras</code> are quite similar.
+They share the concert that we first define the model and then we optimize it using <code>fit</code> method with respect to the input <code>X</code> and output <code>Y</code>, coming from the dataset.</p>
+
+<p><code>Tensorflow</code> instead is a bit lower level and so we have to first build the model using basic mathematical operations, such as matrix multiplication <code>matmul</code>, element-wise activation function <code>sigmoid</code>, and then the learning process that executes the forward and backward passes in a <code>for</code> loop.
+The entire process results to be a bit more verbose.</p>
+
+<p>In the end, we are going to run the <code>plotModelEstimate</code> function that compares the model output (<strong>prediction</strong>) for every grid point of the 2D meshgrid to the dataset points used to train the model.</p>
+
+<p>In this way, we can see where the model is predicting the output correctly with respect to the actual points.
+Finally, we just save the <code>loss</code> history for every specific case and at the end compare each of those within the same plot to understand the learning behaviour.
+For instance, which case is going to be stuck to a given loss level and which case is going to converge to the optimal solution, which hyperparameters are key to converge faster or to get rid of some local optimum.</p>
+
+<p>Let&rsquo;s get started!
+We are going to analyze the main code snippets of the entire class, step by step, and at the end to show how we can use that class to compare different cases and to analyze the main differences between the four libraries.</p>
+
+<p>You can find <a href="https://github.com/takeawildguess/FCNNlib" target="_blank">here</a> the entire code for the class.</p>
+
+<p>The first step is to define the dataset. We create the <code>X</code> array, which is basically a two-dimensional array with as many rows as the number of points <code>nb_pnt</code> that we want to create and one column per dimension (2 in this toy examples).</p>
+
+<p>Both inputs $x_1$ and $x_2$ range from <code>-scale</code> to <code>scale</code>, where <code>scale</code> is something that we can control at the initialization setting.</p>
+
+<p>We use the <code>groundTruth</code> function to generate the response variable <code>Y</code> from <code>X</code>.
+We have a huge <code>if</code> statement block to create the corresponding response variable with respect to the dataset chosen by the user.</p>
+
+<p>For every case, we are going to show the equation and the code that we need to use to generate the Y variable and also called the <code>plotPoints</code> function to visualize the dataset structure.</p>
+
+<p>Just make sure that you see two colors only for a binary classification (a red point belongs to class 0, a blue point to class 1), as many colours as the number of classes for a multi-classification problem and a continuous range of colours for a regression problem, since the response <code>Y</code> is going to continuously change across the entire domain.</p>
+
+<h2 id="4-binary-classification">4. Binary classification</h2>
+
+<h3 id="4-1-and">4.1 AND</h3>
+
+<p>In the first case, we have the code to generate the <code>and</code> behaviour.
+We just take <code>x1</code> and <code>x2</code>, use the sign of both inputs and apply the <code>and</code> operator and convert it to an integer, either 0 or 1.
+We cannot apply the <code>and</code> operator to the raw inputs since they are real (<code>float</code>).
+We convert the output to an integer that can be fed to the deep-learning libraries.</p>
+
+<p>Whatever point is lying in the first quadrant is associated to the response equal to 1, which is the integer value for <code>True</code>, and every other possible combination of <code>x1</code> and <code>x2</code> to 0 (<code>False</code>).</p>
+
+<p>$$ Y = (x_1&gt;0) \And (x_2&gt;0) $$</p>
+
+<pre><code class="language-python">YY = ((x1&gt;0) &amp; (x2&gt;0)).astype(int).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">tnn = trainFCNN(dataset='and', nb_pnt=2500).plotPoints()
+</code></pre>
+
+<p><img src="output_8_0.png" alt="png" /></p>
+
+<h3 id="4-2-or">4.2 OR</h3>
+
+<p>Similarly, if we select the <code>or</code> dataset we are going to simulate <code>or</code> behaviour.</p>
+
+<pre><code class="language-python">tnn = trainFCNN(dataset='or', nb_pnt=2500).plotPoints()
+</code></pre>
+
+<p><img src="output_10_0.png" alt="png" /></p>
+
+<h3 id="4-3-xor">4.3 XOR</h3>
+
+<p>Here we define the <code>xor</code> case (whose mathematical symbol is $\oplus$) by taking the product of the two input&rsquo;s features and assign it to class 1 if the product is greater than 0 and to class 0 otherwise.</p>
+
+<p>$$ Y = (x_1&gt;0) \oplus (x_2&gt;0) $$</p>
+
+<pre><code class="language-python">YY = ((x1*x2&gt;0)).astype(int).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">tnn = trainFCNN(dataset='xor', nb_pnt=2500).plotPoints()
+</code></pre>
+
+<p><img src="output_13_0.png" alt="png" /></p>
+
+<h3 id="4-4-stripe">4.4 Stripe</h3>
+
+<p>Another case of binary classification is the <code>stripe</code> case, where we define a linear region where the absolute difference of <code>x1</code> and <code>x2</code> is less than or equal to 1.
+Any point between the two lines $x_2 = x_1 + 1$ and $x_2 = x_1 - 1$ belongs to class 1, everything else outside the stripe to class 0.</p>
+
+<p>$$ Y = |x_1-x_2| \le 1 $$</p>
+
+<pre><code class="language-python">YY = (np.abs(x1-x2)&lt;=1).astype(int).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">tnn = trainFCNN(dataset='stripe', nb_pnt=2500).plotPoints()
+</code></pre>
+
+<p><img src="output_16_0.png" alt="png" /></p>
+
+<h3 id="4-5-square">4.5 Square</h3>
+
+<p>The <code>square</code> case is generated by using the Manhattan distance definition (just take the sum of the absolute values of both <code>x1</code> and <code>x2</code>) and constrain this sum to be less than or equal to 1 to assign points to class 1, otherwise to class 0.</p>
+
+<p>$$ Y = |x_1|+|x_2| \le 1 $$</p>
+
+<pre><code class="language-python">YY = ((np.abs(x1)+np.abs(x2))&lt;=1).astype(int).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">tnn = trainFCNN(dataset='square', nb_pnt=2500).plotPoints()
+</code></pre>
+
+<p><img src="output_19_0.png" alt="png" /></p>
+
+<h3 id="4-6-circle">4.6 Circle</h3>
+
+<p>The <code>circle</code> case is generated by using the Euclidean distance definition (just take the sum of the squares of both <code>x1</code> and <code>x2</code>) and constrain this sum to be less than or equal to 1 to assign points to class 1, otherwise to class 0.</p>
+
+<p>$$ Y = x_1^2+x_2^2 \le 1 $$</p>
+
+<pre><code class="language-python">YY = ((x1**2+x2**2)&lt;=1).astype(int).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">tnn = trainFCNN(dataset='circle', nb_pnt=2500).plotPoints()
+</code></pre>
+
+<p><img src="output_22_0.png" alt="png" /></p>
+
+<h2 id="5-multi-object-classification">5. Multi-object classification</h2>
+
+<p>We go to the three cases for multi-class problems.</p>
+
+<h3 id="5-1-squares">5.1 Squares</h3>
+
+<p>We take the Manhattan distance between the two points and we convert that into an integer, which is going to be the class.</p>
+
+<p>Since <code>x1</code> and <code>x2</code> range from $-2$ to $+2$ if <code>scale=2</code>, the maximum Manhattan distance is $4$, which gives five distinct classes from 0 to 4.</p>
+
+<p>$$ Y = |x_1| + |x_2| $$</p>
+
+<pre><code class="language-python">YY = ((np.abs(x1)+np.abs(x2))).astype(int).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">tnn = trainFCNN(dataset='squares', nb_pnt=2500).plotPoints()
+</code></pre>
+
+<p><img src="output_25_0.png" alt="png" /></p>
+
+<h3 id="5-2-circles">5.2 Circles</h3>
+
+<p>We take the Euclidean distance between the two points, divide by 2 to prevent having a huge number of classes and convert that into an integer, which is going to be the class.</p>
+
+<p>Since <code>x1</code> and <code>x2</code> range from $-2$ to $+2$ if <code>scale=2</code>, the maximum distance is $(4+4)/2$, which gives five distinct classes from 0 to 4.</p>
+
+<p>$$ Y = \frac{1}{2}\cdot(x_1^2 + x_2^2) $$</p>
+
+<pre><code class="language-python">YY = ((x1**2+x2**2)/2).astype(int).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">tnn = trainFCNN(dataset='circles', nb_pnt=2500).plotPoints()
+</code></pre>
+
+<p><img src="output_28_0.png" alt="png" /></p>
+
+<h3 id="5-3-quadrants">5.3 Quadrants</h3>
+
+<p>In the last case, we split the 2D space into 4 quadrants, where the bottom-left quadrant belongs to the first class and the remaining three are numbered counter-clockwise.</p>
+
+<p>the Euclidean distance of the two points, divide by 2 to prevent having a huge number of classes and convert that into an integer, which is going to be the class.</p>
+
+<p>We calculate the angle that any point with coordinates <code>x1</code> and <code>x2</code> creates with the horizontal axis by means of <code>arctan2</code> function from Numpy, divided by $\pi/2$ to shrink the $(-\pi, \pi)$ range down to $[0, 4)$ and convert it to an integer.</p>
+
+<p>$$ Y = \frac{2}{\pi}\cdot\arctan\frac{x_2}{x_1} + 2 $$</p>
+
+<pre><code class="language-python">YY = (2*(np.arctan2(x2, x1)/np.pi+1)).astype(int).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">tnn = trainFCNN(dataset='quadrants', nb_pnt=2500).plotPoints()
+</code></pre>
+
+<p><img src="output_31_0.png" alt="png" /></p>
+
+<h2 id="6-regression">6. Regression</h2>
+
+<p>We go to the three cases for regression problems: <code>prod</code>, <code>sumSquares</code> and <code>polynom</code>.</p>
+
+<h3 id="6-1-product">6.1 Product</h3>
+
+<p>The first case is the product of two inputs <code>x1</code> and <code>x2</code>, as:</p>
+
+<p>$$ Y = \frac{1}{4}\cdot x_1\cdot x_2 $$</p>
+
+<pre><code class="language-python">YY = ((x1*x2)/4).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">tnn = trainFCNN(dataset='prod', nb_pnt=2500).plotPoints()
+</code></pre>
+
+<p><img src="output_34_0.png" alt="png" /></p>
+
+<h3 id="6-2-sum-of-squares">6.2 Sum of squares</h3>
+
+<p>The second case is the sum of squares of two inputs <code>x1</code> and <code>x2</code>, as:</p>
+
+<p>$$ Y = \frac{1}{4}\cdot (x_1^2 + x_2^2) $$</p>
+
+<p>It has the same behaviour that we can get from <code>circle</code> from binary classification, but we are not going to convert the output into an integer, thus the network has to learn how to capture the continuous behaviour that is typical of a regression problem.</p>
+
+<pre><code class="language-python">YY = ((x1**2+x2**2)/4).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">tnn = trainFCNN(dataset='sumSquares', nb_pnt=2500).plotPoints()
+</code></pre>
+
+<p><img src="output_37_0.png" alt="png" /></p>
+
+<h3 id="6-3-polynomial-function">6.3 Polynomial function</h3>
+
+<p>The final case is a polynomial function. We have two square terms for <code>x1</code> and <code>x2</code> and a mix term, i.e., the product of the two inputs, as:</p>
+
+<p>$$ Y = \frac{1}{4}\cdot \big(x_1^2 -3\cdot x_1\cdot x_2 - x_2^2 \big) $$</p>
+
+<pre><code class="language-python">YY = ((x1**2-3*x1*x2-x2**2)/4).reshape(-1, 1)
+</code></pre>
+
+<pre><code class="language-python">tnn = trainFCNN(dataset='polynom', nb_pnt=2500).plotPoints()
+</code></pre>
+
+<p><img src="output_40_0.png" alt="png" /></p>
+
+<h2 id="7-problem-type-from-selected-dataset">7. Problem type from selected dataset</h2>
+
+<p>With respect to the dataset that the user is going to select, the function also assigns the corresponding type of problem to solve.
+Below is the code snippet to differentiate the tree cases</p>
+
+<pre><code class="language-python">if self.dataset in ['prod', 'sumSquares', 'polynom']:
+    self.kind = 'regr'
+elif self.dataset in ['squares', 'circles', 'quadrants']:
+    self.kind = 'multiCls'
+elif self.dataset in ['and', 'or', 'xor', 'stripe', 'square', 'circle']:
+    self.kind = 'binCls'
+</code></pre>
+
+<p>Usually, we need to pre-process our dataset before feeding it into deep learning model itself.
+<em>Pre-processing</em> means that we need to scale and split dataset to <em>train</em> and <em>test</em> sets.
+If we have a classification problem and the model response variable <code>y</code> is represented using different labels for different classes, like a <code>dog-cat</code> for binary or <code>tiger-leopard-jaguar-panther-lion</code> for multi-class, we also need to make sure that this labelling encoding is converted into a class or integer representation or eventually an one-hot encoding representation.</p>
+
+<p>However, in this case, we don&rsquo;t scale because the input is already somehow scaled and also there is no sketching of any dimensions, i.e, <code>x1</code> and <code>x2</code> range within the same interval.</p>
+
+<p>We do not split the dataset into training and test sets, because we&rsquo;re just exploring this toy examples and really understand what a neural network can learn.</p>
+
+<p>We are finally going to investigate some extensions such as regularization and overfitting in future steps.
+Right now we just want to understand whether a given network structure is able to learn a given problem.</p>
+
+<p>Finally, there is no need to use a label encoder, such as <code>LabelEncoder</code> from <code>Sklearn</code>, because we already have the response variable for a multi-class problem encoded as an integer.
+The only thing that we need to do in this case is to take this encoding representation and converted to one-hot encoding representation, which is the proper structure for either Keras and Tensorflow.</p>
+
+<p>In any case, whenever we need to scale because there are different inputs ranging across completely different intervals, or we need to train the model and evaluate it on the test set, or we need to transform labels into integer representation, we can easily perform such tasks using pre-defined functions in Sklearn and there is plenty of material about <em>preprocessing</em>, such as <a href="https://towardsdatascience.com/preprocessing-with-sklearn-a-complete-and-comprehensive-guide-670cb98fcfb9" target="_blank">this</a> post, <a href="https://towardsdatascience.com/scale-standardize-or-normalize-with-scikit-learn-6ccc7d176a02" target="_blank">this one</a> and <a href="http://benalexkeen.com/feature-scaling-with-scikit-learn/" target="_blank">that one</a>.</p>
+
+<p>Now we need to define the network itself so we are going to learn how we can build the network with respect to the three different libraries and basically how we can create the dense layer and apply an activation function on top of that and then how to stack as many layers as the user defines within the <code>train</code> function attributes.</p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/fcnn/fcnn03/" style="color: #4ABDAC; font-size: 18px; "> FCNN - Geometric intuition behind neural networks</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/fcnn/fcnn05/" style="color: #4ABDAC; font-size: 18px; ">How neural networks learn basic features with Scikit-learn</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

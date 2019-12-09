@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Code art in Python - Spirograph pattern in circle - Part 3 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Code art in Python - Spirograph pattern in circle - Part 3">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/codeart/codeart3/" style="font-size: 16px; ">Code art</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/codeartHead.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Code art in Python - Spirograph pattern in circle - Part 3</h1>
+          <h5 class="card-title text-center">Code art</h5>
+          <h6 class="card-text text-center">July 28, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 13 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/coding"><kbd class="item-tag">coding</kbd></a> <a href="https://takeawildguess.net/tags/code-art"><kbd class="item-tag">code-art</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts where I intend to face the challenge of drawing both static and dynamic pictures with a programming language.
+This practise is commonly referred to as <strong>code art</strong>, where art is built with code.</p>
+
+<p>The first four posts will aim at defining a function to create a geometric pattern, a <strong>spirograph</strong> pattern in circle, inspired by this <a href="https://www.youtube.com/watch?v=VMOGIaS0GaE" target="_blank">video</a>, with Python libraries.</p>
+
+<p>We will follow these steps:</p>
+
+<ol>
+<li>Problem definition and visualization basics in <a href="/blog/codeart/codeart1">Part1</a>.</li>
+<li>Line definition through two points and intersection of two lines in <a href="/blog/codeart/codeart2">Part2</a>.</li>
+<li>Polygon vertex detection and postprocessing of intersection points <a href="/blog/codeart/codeart3">Part3</a>.</li>
+<li>Polygon drawing, colour scheme definition, global function implementation and final drawings in <a href="/blog/codeart/codeart4">Part4</a>.</li>
+</ol>
+
+<p>We want to make the two previously-developed methods faster by handling the 4-tuple of 4 points that should generate a polygon at once.
+We need to transform the point arrays into 2 dimensional arrays with as many rows as the number of points to handle simultaneously.</p>
+
+<h2 id="2-vectorized-parametric-method-for-polygon-vertex-detection">2. Vectorized parametric method for polygon vertex detection</h2>
+
+<p>We take the points <code>A</code> and <code>B</code>, repeat them 4 times over the vertical axis (row-wise) and assign them to <code>AAs</code> and <code>CCs</code>.
+I tend to use <code>s</code> at the end of a variable naming to highlight the <em>plurality</em> of the data.
+Since we want the four lines bordering the polygon, the four rows are listed as:</p>
+
+<ol>
+<li><code>(A, Pka1, B, Pkb1)</code>, first segment connects A to first $P_k$, while the second segment connects B to <strong>its</strong> first $P_k$,</li>
+<li><code>(A, Pka1, B, Pkb2)</code>, first segment connects A to first $P_k$, while the second segment connects B to <strong>its</strong> second $P_k$,</li>
+<li><code>(A, Pka2, B, Pkb1)</code>, first segment connects A to second $P_k$, while the second segment connects B to <strong>its</strong> first $P_k$,</li>
+<li><code>(A, Pka2, B, Pkb2)</code>, first segment connects A to second $P_k$, while the second segment connects B to <strong>its</strong> second $P_k$.</li>
+</ol>
+
+<p>That&rsquo;s why <code>BBs</code> requires to <a href="https://het.as.utexas.edu/HET/Software/Numpy/reference/generated/numpy.repeat.html" target="_blank"><code>repeat</code></a> and <code>DDs</code> to <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.tile.html" target="_blank"><code>tiles</code></a> twice vertically.</p>
+
+<pre><code class="language-python">AAs = np.tile(np.array(Pa), (4,1))
+CCs = np.tile(np.array(Pb), (4,1))
+print('The single point A {} becomes the 2D array\n{}'.format(Pa, AAs))
+</code></pre>
+
+<pre><code>The single point A (1.0, 0.0) becomes the 2D array
+[[1. 0.]
+ [1. 0.]
+ [1. 0.]
+ [1. 0.]]
+</code></pre>
+
+<pre><code class="language-python">idxA, idxB = 12, 18
+Pka = (xPs[idxA:idxA+2], yPs[idxA:idxA+2])
+BBs = np.repeat(np.vstack(Pka).T, 2, axis=0)
+print('The two adjacent points connected to A\n{}\nbecome the 2D array\n{}'.format(Pka, BBs))
+</code></pre>
+
+<pre><code>The two adjacent points connected to A
+(array([-0.80901699, -0.58778525]), array([-0.58778525, -0.80901699]))
+become the 2D array
+[[-0.80901699 -0.58778525]
+ [-0.80901699 -0.58778525]
+ [-0.58778525 -0.80901699]
+ [-0.58778525 -0.80901699]]
+</code></pre>
+
+<pre><code class="language-python">Pkb = (xPs[idxB:idxB+2], yPs[idxB:idxB+2])
+DDs = np.tile(np.vstack(Pkb).T, (2,1))
+print('The two adjacent points connected to B\n{}\nbecome the 2D array\n{}'.format(Pkb, DDs))
+</code></pre>
+
+<pre><code>The two adjacent points connected to B
+(array([0.80901699, 0.95105652]), array([-0.58778525, -0.30901699]))
+become the 2D array
+[[ 0.80901699 -0.58778525]
+ [ 0.95105652 -0.30901699]
+ [ 0.80901699 -0.58778525]
+ [ 0.95105652 -0.30901699]]
+</code></pre>
+
+<p>We build a temporary function to get the points B and D linked to the two generators, given the two indexes.</p>
+
+<pre><code class="language-python">def index2points(idxA, idxB):
+    Pka = (xPs[idxA:idxA+2], yPs[idxA:idxA+2])
+    BBs = np.repeat(np.vstack(Pka).T, 2, axis=0)
+    Pkb = (xPs[idxB:idxB+2], yPs[idxB:idxB+2])
+    DDs = np.tile(np.vstack(Pkb).T, (2,1))
+    return BBs, DDs
+</code></pre>
+
+<p>Now we need to treat everything as a 2D array where every row potentially gives one of the 4 polygon vertexes.
+The first vector $\vec{AB}$ is the simple difference between <code>BBs</code> and <code>AAs</code>.
+Each cross product of two 2D arrays is a 1D array.
+The cross product of two 2D vectors in theory is a 3D vector, but in practise is treated as a scalar since the first two elements are always 0.
+Therefore the 1D array coming out of the cross product is the simple <em>list</em> of the four pairs of two 2D vectors (or segments).</p>
+
+<pre><code class="language-python">ABs = BBs-AAs
+cp1 = np.cross(AAs-CCs, DDs-CCs)
+cp2 = np.cross(DDs-CCs, ABs)
+print('The shape of two 2D arrays cross products is indeed {} and {}'.format(cp1.shape, cp2.shape))
+</code></pre>
+
+<pre><code>The shape of two 2D arrays cross products is indeed (4,) and (4,)
+</code></pre>
+
+<p>We need to make sure <code>cp2</code> does not contain 0 values (that happens when $\vec{CD}$ and $\vec{AB}$ are parallel) to prevent either <code>NaN</code> or $\infty$ values as a result of the division operation.
+So first we keep note of such events and then we simply replace every 0 with whatever else (say, 1).</p>
+
+<pre><code class="language-python">paralSeg = cp2==0
+cp2[paralSeg] = 1
+</code></pre>
+
+<p>To apply element-wise product between the 2D array <code>ABs</code> and the 1D array got from the ratio of two cross products, by exploiting Numpy <a href="https://docs.scipy.org/doc/numpy/user/basics.broadcasting.html" target="_blank">broadcasting</a>, we need to reshape the latter array to a 2D with <code>.reshape(-1, 1)</code>.
+Finally the <code>(4, 2)</code> array is split into two <code>(4,)</code> arrays, which represent the $(x, y)$ coordinates of the four intersecting points.</p>
+
+<pre><code class="language-python">print('Shape of ratio of two cross products is {}'.format((cp1/cp2).shape))
+</code></pre>
+
+<pre><code>Shape of ratio of two cross products is (4,)
+</code></pre>
+
+<pre><code class="language-python">PIs = ABs*(cp1/cp2).reshape(-1,1)+AAs
+xIs, yIs = np.split(PIs, 2, axis=1)
+</code></pre>
+
+<p>We show here the four lines defining one of the possible polygons and the four intersecting points (green dots).
+We draw the points only if the lines are coincident (<code>paralSeg==0</code>).</p>
+
+<pre><code class="language-python">figSize = 10
+fourLines(idxA, idxB)
+plt.plot(xIs[paralSeg==0], yIs[paralSeg==0], ls='', marker='o', markersize=10, color=&quot;green&quot;);
+</code></pre>
+
+<p><img src="output_16_0.png" alt="png" /></p>
+
+<p>We check the code for a case of <strong>parallel/collinear</strong> segments.</p>
+
+<pre><code class="language-python">idxA, idxB = 6, 0
+BBs, DDs = index2points(idxA, idxB)
+
+ABs = BBs-AAs
+cp1 = np.cross(AAs-CCs, DDs-CCs)
+cp2 = np.cross(DDs-CCs, ABs)
+are2segParallel = np.abs(cp2)&lt;1e-5
+cp2[are2segParallel] = 1
+
+PIs = ABs*(cp1/cp2).reshape(-1,1)+AAs
+xIs, yIs = np.split(PIs, 2, axis=1)
+</code></pre>
+
+<pre><code class="language-python">figSize = 10
+fourLines(idxA, idxB)
+plt.plot(xIs[paralSeg==0], yIs[paralSeg==0], ls='', marker='o', markersize=10, color=&quot;green&quot;);
+</code></pre>
+
+<p><img src="output_19_0.png" alt="png" /></p>
+
+<h2 id="3-vectorized-homogeneous-method-for-polygon-vertex-detection">3. Vectorized homogeneous method for polygon vertex detection</h2>
+
+<p>We have got the 4 tuples of 4 points A, B, C and D stored with same structure in arrays <code>AAs</code>, <code>BBs</code>, <code>CCs</code> and <code>DDs</code>.</p>
+
+<p>We transform each of the four points into homogeneous coordinates, namely $(x_a, y_a)$ in <code>AAs</code> becomes $(x_a, y_a, 1)$ in <code>AHs</code>, and so on.</p>
+
+<pre><code class="language-python">idxA, idxB = 12, 18
+BBs, DDs = index2points(idxA, idxB)
+</code></pre>
+
+<pre><code class="language-python">AHs = np.hstack((AAs, np.ones((4, 1))))
+BHs = np.hstack((BBs, np.ones((4, 1))))
+CHs = np.hstack((CCs, np.ones((4, 1))))
+DHs = np.hstack((DDs, np.ones((4, 1))))
+print('Each of these 2D arrays has shape equal to {}'.format(AHs.shape))
+</code></pre>
+
+<pre><code>Each of these 2D arrays has shape equal to (4, 3)
+</code></pre>
+
+<p><code>L1</code> is the coordinates of the line through points A and B, as a cross product of the homogeneous coordinates of those points.
+The shape does not change.</p>
+
+<pre><code class="language-python">L1 = np.cross(AHs, BHs)
+L2 = np.cross(CHs, DHs)
+</code></pre>
+
+<p><code>PIHs</code> is the homogeneous coordinates for intersecting point of the two lines.
+Every row is the intersection between one of the four-line pair combinations.
+We horizontally (<code>axis=1</code>) split the <code>(4, 3)</code> arrays into the three homogeneous coordinate elements, <code>xIHs</code>, <code>yIHs</code> and <code>zIHs</code>, each being a 1D array with shape <code>(4,)</code>.</p>
+
+<pre><code class="language-python">PIHs = np.cross(L1, L2) # homogeneous coordinates for intersecting point
+xIHs, yIHs, zIHs = np.split(PIHs, 3, axis=1)
+</code></pre>
+
+<p>We check that the 3D scaling factor <code>zIHs</code> is not 0, otherwise the lines are parallel or collinear.
+We finally convert homogeneous into Euclidean coordinates by dividing by <code>zIHs</code>.</p>
+
+<pre><code class="language-python">paralSeg = np.abs(zIHs)&lt;1e-5
+zIHs[paralSeg] = 1
+xIs, yIs = xIHs/zIHs, yIHs/zIHs
+</code></pre>
+
+<p>We draw the points only if the lines are coincident (<code>paralSeg==0</code>).</p>
+
+<pre><code class="language-python">figSize = 10
+fourLines(idxA, idxB)
+plt.plot(xIs[paralSeg==0], yIs[paralSeg==0], ls='', marker='o', markersize=10, color=&quot;green&quot;);
+</code></pre>
+
+<p><img src="output_30_0.png" alt="png" /></p>
+
+<p>We check the code for a case of <strong>parallel/collinear</strong> segments.</p>
+
+<pre><code class="language-python">idxA, idxB = 6, 0
+BBs, DDs = index2points(idxA, idxB)
+</code></pre>
+
+<pre><code class="language-python">BHs = np.hstack((BBs, np.ones((4, 1))))
+DHs = np.hstack((DDs, np.ones((4, 1))))
+L1 = np.cross(AHs, BHs)
+L2 = np.cross(CHs, DHs)
+PIHs = np.cross(L1, L2) # homogeneous coordinates for intersecting point
+xIHs, yIHs, zIHs = np.split(PIHs, 3, axis=1)
+paralSeg = np.abs(zIHs)&lt;1e-5
+zIHs[paralSeg] = 1
+xIs, yIs = xIHs/zIHs, yIHs/zIHs
+</code></pre>
+
+<pre><code class="language-python">figSize = 10
+fourLines(idxA, idxB)
+plt.plot(xIs[paralSeg==0], yIs[paralSeg==0], ls='', marker='o', markersize=10, color=&quot;green&quot;);
+</code></pre>
+
+<p><img src="output_34_0.png" alt="png" /></p>
+
+<h2 id="4-postprocess-the-set-of-intersecting-points">4. Postprocess the set of intersecting points</h2>
+
+<p>We need to process the list of coordinates for the detected intersecting points.</p>
+
+<p>Here the main steps to perform:</p>
+
+<ol>
+<li>We first need to drop any duplicates, which means points that coincide with each other. Despite Matplotlib can handle polygons with duplicated coordinates, it is a good practise to remove those points.</li>
+<li>Whatever point lying outside the circle has to be removed.</li>
+<li>The array of point coordinates needs to be sorted in a (anti-)clockwise fashion to make sure the patch Matplotlib has to fill with colour is convex. A simple visual example will come soon.</li>
+</ol>
+
+<h3 id="4-1-remove-duplicate-points">4.1 Remove duplicate points</h3>
+
+<p>Let&rsquo;s take a case where we end up with duplicate intersecting points (<code>idxA=18</code> and <code>idx=19</code>).</p>
+
+<pre><code class="language-python">idxA, idxB = 18, 19
+BBs, DDs = index2points(idxA, idxB)
+
+BHs = np.hstack((BBs, np.ones((4, 1))))
+DHs = np.hstack((DDs, np.ones((4, 1))))
+L1 = np.cross(AHs, BHs)
+L2 = np.cross(CHs, DHs)
+PIHs = np.cross(L1, L2) # homogeneous coordinates for intersecting point
+xIHs, yIHs, zIHs = np.split(PIHs, 3, axis=1)
+paralSeg = np.abs(zIHs)&lt;1e-5
+zIHs[paralSeg] = 1
+xIs, yIs = xIHs/zIHs, yIHs/zIHs
+</code></pre>
+
+<pre><code class="language-python">figSize = 8
+fourLines(idxA, idxB)
+plt.plot(xIs[paralSeg==0], yIs[paralSeg==0], ls='', marker='o', markersize=10, color=&quot;green&quot;);
+</code></pre>
+
+<p><img src="output_37_0.png" alt="png" /></p>
+
+<p>You can realize the point $(1, 0)$ is repeated twice, placed at second and last rows. However we cannot simply feed that to the Numpy <code>unique</code> function since the two points are not numerically identical.
+First those points need to be rounded up to the 6-th decimal digits with the <code>around</code> method and then fed to the <code>unique</code> function.</p>
+
+<pre><code class="language-python">polygonalPoints = np.hstack((xIs, yIs))
+print('Full set of coordinates identified for the 4 pairs of intersecting lines:\n{}'.format(polygonalPoints))
+</code></pre>
+
+<pre><code>Full set of coordinates identified for the 4 pairs of intersecting lines:
+[[ 9.09422702e-01 -2.78768258e-01]
+ [ 1.00000000e+00 -1.53094054e-16]
+ [ 9.51056516e-01 -3.09016994e-01]
+ [ 1.00000000e+00 -2.09377778e-16]]
+</code></pre>
+
+<pre><code class="language-python">polygonalPoints1 = np.unique(np.around(polygonalPoints, decimals=6), axis=0)
+print('Set of unique rounded coordinates identified for the 4 pairs of intersecting lines:\n{}'.format(polygonalPoints1))
+</code></pre>
+
+<pre><code>Set of unique rounded coordinates identified for the 4 pairs of intersecting lines:
+[[ 0.909423 -0.278768]
+ [ 0.951057 -0.309017]
+ [ 1.       -0.      ]]
+</code></pre>
+
+<h3 id="4-2-remove-points-outside-the-circle">4.2 Remove points outside the circle</h3>
+
+<p>In the original drawing every polygon lies within the circle only, so we need to remove every point of the intersecting set exceeding it.
+The logic is quite straightforward.
+First the squared distance of the point from the circle centre $(0, 0)$ is obtained by squaring the coordinates element-wise, summing along the columns and finally taking the square root to get a linear distance.
+We round the distance to the third digit and check it is less than the circle radius <code>radius</code>.
+The intersecting point set is reduced to such points that satisfy this check only.
+In Numpy the syntax to select some rows of array <code>AA</code> that meet some criteria <code>cc</code> is <code>AA[cc==True, :]</code>.</p>
+
+<pre><code class="language-python">distance = np.sqrt(np.sum(polygonalPoints1**2, axis=1))
+criteria = np.around(distance, decimals=3)&lt;=radius
+polygonalPoints2 = polygonalPoints1[criteria, :]
+</code></pre>
+
+<h3 id="4-3-sort-the-set-of-intersecting-points-anticlockwise">4.3 Sort the set of intersecting points anticlockwise</h3>
+
+<p>We generate 4 2D points as vertexes of a polygon and draw it in purple on the LHS, making sure that it is <a href="https://en.wikipedia.org/wiki/Concave_polygon" target="_blank">concave</a> (non-<a href="https://en.wikipedia.org/wiki/Convex_polygon" target="_blank">convex</a>).</p>
+
+<p>A swapped version of the same set (2 and 3 rows) is then shifted by 5 units rightward and depicted in yellow.
+Clearly the two shapes are quite different, according to the specific order of the points along the array rows.
+We need to sort the set in some way.
+We take the anticlockwise sense.</p>
+
+<pre><code class="language-python">polygCoord = np.array([[2,-1], [0,1], [1,1.5], [-1,-1.5]])
+polygCoord1 = polygCoord+np.array([5, 0])
+swapIdx = [1, 2]
+polygCoord1[swapIdx] = polygCoord1[swapIdx[::-1]]
+
+plt.figure(figsize=(10, 5))
+patches = [Polygon(polygCoord, True), Polygon(polygCoord1, True)]
+pc = PatchCollection(patches, alpha=.3)
+pc.set_array(np.array([0, 1]))
+
+ax = plt.gca()
+ax.add_collection(pc)
+
+ax.get_xaxis().set_ticks([])
+ax.get_yaxis().set_ticks([])
+ax.axis('off')
+ax.axis('equal');
+</code></pre>
+
+<p><img src="output_44_0.png" alt="png" /></p>
+
+<p>We now complete the logic to sort anticlockwise.</p>
+
+<p>If there are still 4 intersecting points after applying the two previous steps, we need to sort those points anticlockwise.</p>
+
+<p>Here it comes the <a href="https://en.wikipedia.org/wiki/Polar_coordinate_system" target="_blank">polar coordinate system</a> at hand one more time.</p>
+
+<p>We first calculate the centroid <code>C</code> of the polygon as the geometric mean of the 4 points.
+It is the row-wise (<code>axis=0</code>) <code>mean</code> of point coordinates set (red point the below chart).</p>
+
+<p>Then the angle $\theta_j$ is formed between the segment connecting the $P_j$ and the centroid <code>C</code> and the <code>x</code> axis.
+That angle gives the criterion to sort the 4 points. Since angle increases anticlockwise by convention in polar system, points are sorted accordingly, but it has no effect on the polygon visualization in Matplotlib.</p>
+
+<p>The angle between one segment $\vec{CP_j}$ and the horizontal line is given by the <code>arctangent</code> function as:</p>
+
+<p>$$ \theta_j = \arctan{\frac{y_{P_j}-y_C}{x_{P_j}-x_C}} $$</p>
+
+<p>This function is implemented both in <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arctan2.html" target="_blank">Numpy</a> and in the <a href="https://docs.python.org/2/library/math.html#math.atan2" target="_blank"><code>math</code></a> library as <code>atan2(y, x)</code>.</p>
+
+<p>Since we need to sort the 2D array of point coordinates $(x,y)$ with respect to a third temporary variable, $\theta$, the Python sorting functionality is required due to a lack of similar package in Numpy.
+Indeed, one can here use the <code>key</code> attribute to the <code>sort</code> function to give the sorting criterion.
+That&rsquo;s why we use the <code>atan2</code> from the <code>math</code> library.</p>
+
+<p>The new polygon is shifted by 5 units leftward and depicted in green.</p>
+
+<pre><code class="language-python">centroid = np.mean(polygCoord, axis=0)
+polygCoord_ = list(polygCoord)
+polygCoord_.sort(key=lambda pnt: math.atan2(pnt[1]-centroid[1], pnt[0]-centroid[0]))
+polygCoord2 = np.array(polygCoord_)-np.array([5, 0])
+patches.insert(1, Polygon(polygCoord2, True))
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(20, 5))
+plt.plot(centroid[0], centroid[1], ls='', marker='o', markersize=10, color=&quot;red&quot;);
+pc = PatchCollection(patches, alpha=.3)
+pc.set_array(np.array([0, 1, 2]))
+ax = plt.gca()
+ax.add_collection(pc)
+ax.get_xaxis().set_ticks([])
+ax.get_yaxis().set_ticks([])
+ax.axis('off')
+ax.axis('equal');
+</code></pre>
+
+<p><img src="output_47_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/codeart/codeart2/" style="color: #4ABDAC; font-size: 18px; "> Code art in Python - Spirograph pattern in circle - Part 2</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/codeart/codeart4/" style="color: #4ABDAC; font-size: 18px; ">Code art in Python - Spirograph pattern in circle - Part 4</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

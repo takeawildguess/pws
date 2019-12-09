@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>meta-learning on take a wild guess</title>
+    <link>https://takeawildguess.net/tags/meta-learning/</link>
+    <description>Recent content in meta-learning on take a wild guess</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://takeawildguess.net/tags/meta-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Can we visualize the flow of a regression neural network?</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn16/</link>
+      <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn16/</guid>
+      <description>1. Introduction Welcome back to the FCNN series!
+In this new post, we are going to use the Python visualization class, visFCNN(), developed in the two previous posts. We want to see what happens inside a feed-forward neural network, which has been trained on toy examples with Tensorflow with the previously-developed Python class, trainFCNN(), for a regression problem.
+The Python class, visFCNN(), takes as input a dictionary containing all the information required to visualize the network flow, namely the values of the network parameters and main nodes (inputs, linear outputs and activation outputs).</description>
+    </item>
+    
+    <item>
+      <title>How to build a Python class to visualize a neural network?</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn15/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn15/</guid>
+      <description>1. Introduction Welcome back to the FCNN series!
+In this new post, we are going to develop a Python class to visualize what happens inside a feed-forward neural network, which has been trained on toy examples with Tensorflow with the previously-developed Python class, trainFCNN(). The Python class, visFCNN(), takes as input a dictionary containing all the information required to visualize the network flow, namely the values of the network parameters and main nodes (inputs, linear outputs and activation outputs).</description>
+    </item>
+    
+    <item>
+      <title>Multi-hyperparameter analysis of a neural network and computational comparison</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn13/</link>
+      <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn13/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post we are going to:</description>
+    </item>
+    
+    <item>
+      <title>Hyperparameter analysis for regression</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn12/</link>
+      <pubDate>Sun, 10 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn12/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to analyze the hyperparameter (HP) space for a regression problem in Keras.</description>
+    </item>
+    
+    <item>
+      <title>Hyperparameter analysis for multi-class classification</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn11/</link>
+      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn11/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to analyze the hyperparameter (HP) space for a multi-class classification problem in Keras.</description>
+    </item>
+    
+    <item>
+      <title>Meta-learning neural networks over basic tasks</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn10/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn10/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to analyze the hyper-parameter space, which is referred to as meta-learning.</description>
+    </item>
+    
+  </channel>
+</rss>

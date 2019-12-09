@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Learning Python by doing - Part 5 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Learning Python by doing - Part 5">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/kata/kata5/" style="font-size: 16px; ">Coding kata</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/kataHead2.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Learning Python by doing - Part 5</h1>
+          <h5 class="card-title text-center">Coding kata</h5>
+          <h6 class="card-text text-center">July 7, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 11.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/coding"><kbd class="item-tag">coding</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts where I intend to face the challenge of learning a new programming language, such as Python, <strong>by doing</strong>.
+In the first two posts (<a href="/blog/kata/kata1/">Part1</a> and <a href="/blog/kata/kata2/">Part2</a>), we develop a Python code from scratch to determine the travelled distance of a bike rider in a given time span, for a fixed and increasing annual distance target.
+We started to play with some text processing tasks in <a href="/blog/kata/kata3/">Part3</a>.</p>
+
+<p>The new challenge aims at identifying the highest wages from a company employee&rsquo;s salary list in Python.
+We have split this post into two sections.
+<a href="/blog/kata/kata4/">Part4</a> focuses on the function definition and the reference output, while this post tackles the implementation of other methods and the comparison in terms of computational performance.</p>
+
+<h2 id="2-function-development">2. Function development</h2>
+
+<p>For every function we define a second argument <code>case</code> to determine which kind of output is required out of largest (<code>case==1</code>), second largest (<code>case==2</code>) and n-th largest (<code>case==3</code>) cases.
+The third attribute is pertaining to the option to remove duplicates in the input array.
+The input is first reduced to a list of unique values if <code>duplicates</code> is true and then cleaned to get rid of <code>None</code> elements.</p>
+
+<p>The first function uses the <code>nlargest</code> method from <code>heapq</code> module.
+First we need to specify how many of the top largest items we want to retrieve (<code>nlargest(4, xx)</code> gives the first 4 largest items in <code>x</code>), and then we take the last one.</p>
+
+<pre><code class="language-python">import heapq
+</code></pre>
+
+<pre><code class="language-python">def fun1(example, case=1, duplicates=False):
+    &quot;&quot;&quot;heapq&quot;&quot;&quot;
+    if duplicates:
+        example = list(set(example))
+    nn = 1 if case==1 else 2 if case==2 else 4
+    example = clean(example)
+    return heapq.nlargest(nn, clean(example))[-1]
+</code></pre>
+
+<pre><code class="language-python">print('The 4-th largest unique item in {} is: {}'.format(example, fun1(example, 3, duplicates=True)))
+</code></pre>
+
+<pre><code>The 4-th largest unique item in [83, 'None', 107, 'None', 123, 46, 'None', 'None', 127, 75, 108, 51, 129, 'None', 126, 147, 97, 84, 112, 87, 41, 80, 119, 89, 65] is: 126
+</code></pre>
+
+<p>The second function takes the maximum item with Python <code>max</code> method to save it to <code>maxVal</code>.
+If we look for n-th largest item where <code>n&gt;=2</code>, we keep repeating the process of removing the current maximum value and search for the new maximum one more time.
+This is carried out in a for-loop for <code>n-1</code> times.
+The final value of <code>maxVal</code> is then returned.</p>
+
+<pre><code class="language-python">def fun2(example, case=1, duplicates=False):
+    &quot;&quot;&quot;max-remove&quot;&quot;&quot;
+    if duplicates:
+        example = list(set(example))
+    nn = 1 if case==1 else 2 if case==2 else 4
+    
+    example = clean(example)
+    maxVal = max(example)
+    for _ in range(nn-1):
+        example.remove(maxVal)
+        maxVal = max(example)
+    return maxVal
+</code></pre>
+
+<pre><code class="language-python">print('The 4-th largest unique item is: {}'.format(fun2(example, 3, duplicates=True)))
+</code></pre>
+
+<pre><code>The 4-th largest unique item is: 126
+</code></pre>
+
+<p>The third, fourth and fifth functions use the <code>sort</code> method from Numpy and native Python, respectively and Python <code>sorted</code> method.
+The only point is that the Python <code>sort</code> works in-place, so the code gets a bit longer.
+The final step is to retrieve the <code>-n</code> element since the list/array is sorted in an ascending fashion.</p>
+
+<pre><code class="language-python">def fun3(example, case=1, duplicates=False):
+    &quot;&quot;&quot;np-sort&quot;&quot;&quot;
+    if duplicates:
+        example = list(set(example))
+    nn = 1 if case==1 else 2 if case==2 else 4
+    
+    return np.sort(clean(example))[-nn]
+</code></pre>
+
+<pre><code class="language-python">print('The 4-th largest unique item is: {}'.format(fun3(example, 3, duplicates=True)))
+</code></pre>
+
+<pre><code>The 4-th largest unique item is: 126
+</code></pre>
+
+<pre><code class="language-python">def fun4(example, case=1, duplicates=False):
+    &quot;&quot;&quot;list-sort&quot;&quot;&quot;
+    if duplicates:
+        example = list(set(example))
+    nn = 1 if case==1 else 2 if case==2 else 4
+    
+    example = clean(example)
+    example.sort()
+    return example[-nn]
+</code></pre>
+
+<pre><code class="language-python">print('The 4-th largest unique item is: {}'.format(fun4(example, 3, duplicates=True)))
+</code></pre>
+
+<pre><code>The 4-th largest unique item is: 126
+</code></pre>
+
+<pre><code class="language-python">def fun5(example, case=1, duplicates=False):
+    &quot;&quot;&quot;sorted&quot;&quot;&quot;
+    if duplicates:
+        example = list(set(example))
+    nn = 1 if case==1 else 2 if case==2 else 4
+    
+    return sorted(clean(example))[-nn]
+</code></pre>
+
+<pre><code class="language-python">print('The 4-th largest unique item is: {}'.format(fun5(example, 3, duplicates=True)))
+</code></pre>
+
+<pre><code>The 4-th largest unique item is: 126
+</code></pre>
+
+<p>The last function uses the same logic as the second one but by employing Numpy functionalities.
+Since the <code>delete</code> function requires the array index to delete, we use <code>argmax</code> instead of <code>max</code> to access the array maximum location.
+If we look for n-th largest item where <code>n&gt;=2</code>, we keep repeating the process of removing the current maximum value and search for the new maximum one more time.
+This is carried out in a for-loop for <code>n-1</code> times.
+The final <code>index</code> is then used to return the input item at that location.</p>
+
+<pre><code class="language-python">def fun6(example, case=1, duplicates=False):
+    &quot;&quot;&quot;np-argmax-delete&quot;&quot;&quot;
+    if duplicates:
+        example = list(set(example))
+    nn = 1 if case==1 else 2 if case==2 else 4
+    
+    example = clean(example)
+    index = np.argmax(example)
+    for _ in range(nn-1):
+        example = np.delete(example, index)
+        index = np.argmax(example)
+    return example[index]
+</code></pre>
+
+<pre><code class="language-python">print('The 4-th largest unique item is: {}'.format(fun6(example, 3, duplicates=True)))
+</code></pre>
+
+<pre><code>The 4-th largest unique item is: 126
+</code></pre>
+
+<h2 id="3-function-assessment">3. Function assessment</h2>
+
+<h3 id="3-1-process-correctness">3.1 Process correctness</h3>
+
+<p>In this last section of this <strong>sorting</strong> task, we compare the performance of every developed function with the benchmark results, both in terms of process correctness and computational time.
+The process correctness is evaluated with a final score, which is the percentage of successful tests obtained with that function.
+As always, I do propose two methods to get the score, with and without list comprehension.</p>
+
+<p>The computational time is first assessed with the <code>%%time</code> magic command available in Jupyter and then with a method available in the Python <code>time</code> library.
+The second method is useful to store intermediate steps into an array for different input sizes and different developed functions.</p>
+
+<p>Every time the results of the first reference function, <code>refFun_largest</code>, are compared to the ones obtained with the developed functions (in the following snippet, <code>fun1</code> is used).
+If they match, the score is increased by one unit.
+At the end of the for loop, the score is divided by the length of the test samples and converted to a percentage.
+Since the division is embedded into the assignment sign, <code>/=</code>, we need to place <code>/</code> in front of <code>100</code>.</p>
+
+<pre><code class="language-python">score = 0
+for example, result in zip(testSet, testResults1):
+    if fun1(example) == result:
+        score += 1
+
+score /= len(testSet)/100
+print('Final score for function 1 is {}%.'.format(score))
+</code></pre>
+
+<pre><code>Final score for function 1 is 100.0%.
+</code></pre>
+
+<p>Here a more compact version of the same process.
+The developed function returns the same results as the reference function did.</p>
+
+<pre><code class="language-python">score = sum(1 for example, result in zip(testSet, testResults1) if fun1(example) == result)/len(testSet)*100
+print('Final score for function 1 is {}%.'.format(score))
+</code></pre>
+
+<pre><code>Final score for function 1 is 100.0%.
+</code></pre>
+
+<p>We define the scoring function with four arguments, the developed, the reference functions, the case from 1 to 3 to select the largest, second-largest or the n-th largest item, and the duplicate-removing option.
+When <code>case=1</code>, we set the <code>case</code> attribute within the developed function equal to 1 and we select the first reference function, <code>refFun_largest</code> to generate the ground-truth result.
+Same procedure is used for second (<code>case=2</code>) and n-th (<code>case=3</code>) largest item search.</p>
+
+<p>This <code>scoring</code> function returns its score over the test set.
+We place the three reference functions into the <code>refFuns</code> list, while the six developed functions into the <code>devFuns</code> list.</p>
+
+<pre><code class="language-python">def scoring(fun, refFuns, case=1, duplicates=False):
+    score = 0
+    for example in testSet:
+        if fun(example, case=case, duplicates=duplicates) == refFuns[case-1](example, duplicates=duplicates):
+            score += 1
+    score /= len(testSet)/100
+    return score
+</code></pre>
+
+<pre><code class="language-python">refFuns = [refFun_largest, refFun_secondLargest, refFun_nthLargest]
+devFuns = [fun1, fun2, fun3, fun4, fun5, fun6]
+</code></pre>
+
+<p>We test the <strong>largest-item</strong> option.</p>
+
+<p>We write a <code>report</code>, which takes the <code>scores</code> list and check it contains only <code>100</code> marks, using the <code>set</code> method.
+If the set does not coincide with the <code>{100}</code> set, we check which function failed and return its index, <code>kk+1</code>, via a generator to the <code>join</code> method, which combines into comma-space-separated string.</p>
+
+<p>We got the <code>report</code> string using the powerful <a href="https://docs.python.org/3/reference/expressions.html#lambda" target="_blank"><code>lambda</code></a> operator to create a function anonymously.</p>
+
+<pre><code class="language-python">scores = [scoring(fun, refFuns, case=2) for fun in devFuns]
+report = lambda scores: 'All tests have been successfully passed' if set(scores) == {100} else \
+'functions ' + ', '.join(kk+1 for kk, ss in enumerate(scores) if ss&lt;100) + 'failed.'
+print(report(scores))
+</code></pre>
+
+<pre><code>All tests have been successfully passed
+</code></pre>
+
+<p>We test the <strong>second-largest-item</strong> option, where duplicates are first kept and then deleted.</p>
+
+<pre><code class="language-python">print(report(scoring(fun, refFuns, case=2) for fun in devFuns))
+</code></pre>
+
+<pre><code>All tests have been successfully passed
+</code></pre>
+
+<pre><code class="language-python">print(report(scoring(fun, refFuns, case=2, duplicates=True) for fun in devFuns))
+</code></pre>
+
+<pre><code>All tests have been successfully passed
+</code></pre>
+
+<p>We test the <strong>n-th-largest-item</strong> option, where duplicates are first kept and then deleted.</p>
+
+<pre><code class="language-python">print(report(scoring(fun, refFuns, case=3) for fun in devFuns))
+</code></pre>
+
+<pre><code>All tests have been successfully passed
+</code></pre>
+
+<pre><code class="language-python">print(report(scoring(fun, refFuns, case=3, duplicates=True) for fun in devFuns))
+</code></pre>
+
+<pre><code>All tests have been successfully passed
+</code></pre>
+
+<h3 id="3-2-computational-time">3.2 Computational time</h3>
+
+<p>We finally compare the performance of each function in terms of computational time.
+We first use one of the <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html" target="_blank">built-in magic commands</a> available in the Jupyter notebook, <code>timeit</code>, which estimates the execution time of a Python statement or expression.
+One (<code>%timeit</code>) or two (<code>%%timeit</code>) percent signs are required to evaluate one-line statement or one cell, respectively.
+It is very practical when a single cell has to be assessed.</p>
+
+<p>The first developed function, which employs the module <code>Heapq</code>, is almost double faster than the fifth developed function, which uses the Python <code>sorted</code> function.</p>
+
+<pre><code class="language-python">Nwages = 10**6
+wages = np.random.randint(30, 150, size=(Nwage,)).tolist()
+</code></pre>
+
+<pre><code class="language-python">%%timeit
+result = fun1(wages, case=3)
+</code></pre>
+
+<pre><code>301 ms ± 21.8 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</code></pre>
+
+<pre><code class="language-python">%%timeit
+result = fun5(wages, case=3)
+</code></pre>
+
+<pre><code>581 ms ± 18.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</code></pre>
+
+<p>Here we want to assess both reference and developed functions for different input sizes and store these timing values to a 2D array (one dimension for functions and one for different input sizes).
+Then we can plot as many lines as the number of functions with <code>plot</code> command in <code>Matplotlib</code>, where the vertical axis is the computational time (the lower the better) and the horizontal axis is the input size.</p>
+
+<p>We use the <code>perf_counter</code> method from <code>time</code> library.
+It gives the current time when it called.
+We call it and append its output to the <code>timings</code> list before and after every execution of the tested functions.</p>
+
+<pre><code class="language-python">from time import perf_counter
+</code></pre>
+
+<pre><code class="language-python">funs = [refFun_nthLargest] + devFuns
+Nwages = [10**kk for kk in range(1, 7)]
+timings = []
+for Nwage in Nwages:
+    wages = np.random.randint(30, 150, size=(Nwage,)).tolist()
+    for fun in funs:
+        timings.append(perf_counter())
+        if fun.__name__.startswith('ref'):
+            result = fun(wages)
+        else:
+            result = fun(wages, case=3)
+        timings.append(perf_counter())
+</code></pre>
+
+<p>We now convert the <code>timings</code> list into a 2D Numpy array, by using the <code>reshape</code> method.
+It forces the 2D array to have as many rows as the number of different sizes we wanted to test.
+We let Numpy figure it out how many columns are required to fill the original content, with the <code>-1</code> argument.</p>
+
+<p>But what we really need is the actual time spent for every function call.
+Since every odd row (Python is 0-index!) gives the time at the end of the function call, while every even row gives the time at the beginning of the call, we index every two columns from <strong>second</strong> to last (<code>[1::2]</code>) to get the final timing and we index every two columns from <strong>first</strong> to last but one (<code>[::2]</code>) to get the initial timing.
+The simple difference is stored in <code>deltaTimings</code>, whose shape is (6, 7).</p>
+
+<pre><code class="language-python">timings = np.array(timings).reshape(len(Nwages), -1)
+deltaTimings = timings[:, 1::2]-timings[:, ::2]
+</code></pre>
+
+<pre><code class="language-python">print('Shape of deltaTimings is {}, we have {} different input sizes and {} functions'\
+      .format(deltaTimings.shape, len(Nwages), len(funs)))
+</code></pre>
+
+<pre><code>Shape of deltaTimings is (6, 7), we have 6 different input sizes and 7 functions
+</code></pre>
+
+<p>We plot the computational time of these 7 functions for different 6 input sizes that range in an exponential fashion from <code>10^1</code> to <code>10^6</code>.
+Since Python treat a function as a class instance, we use the built-in attribute <code>__doc__</code> to get access to the description that we inserted at the first line of the function definition itself.</p>
+
+<p>We can only see 6 lines clearly, since <code>list-sort</code> and <code>sorted</code> do completely overlap each other!
+The best option for the <strong>n-th largest</strong> case is to use the <code>bisect-insort</code> method defined in the reference function.
+<code>Heapq</code>, <code>max-remove</code> and <code>np-sort</code> are quite similar one to the other.
+The same idea of <code>max-remove</code> implemented with Numpy functionalities, <code>np-argmax-delete</code>, is a bit slower.
+The two overlapping cases, <code>list-sort</code> and <code>sorted</code>, are instead way too much slower.</p>
+
+<pre><code class="language-python">plt.figure()
+plt.plot(Nwages, deltaTimings, lw=2.5, ls='--', alpha=.5)
+plt.legend([fun.__doc__ for fun in funs])
+</code></pre>
+
+<pre><code>&lt;matplotlib.legend.Legend at 0x20533571f60&gt;
+</code></pre>
+
+<p><img src="output_45_1.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/kata/kata4/" style="color: #4ABDAC; font-size: 18px; "> Learning Python by doing - Part 4</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/codeart/codeart1/" style="color: #4ABDAC; font-size: 18px; ">Code art in Python - Spirograph pattern in circle - Part 1</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

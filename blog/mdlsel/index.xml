@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>take a wild guess</title>
+    <link>https://takeawildguess.net/blog/mdlsel/</link>
+    <description>Recent content on take a wild guess</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://takeawildguess.net/blog/mdlsel/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Do not overlearn your data too much, learn to generalize - Part 8</title>
+      <link>https://takeawildguess.net/blog/mdlsel/mdlsel8/</link>
+      <pubDate>Sun, 02 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/mdlsel/mdlsel8/</guid>
+      <description>1. Introduction After two introductory post-series (linear and logistic regression), we dive into a crucial topic that every machine-learning practitioner should be at least aware of: model selection.
+Basically, we do not want our models to learn our data by heart and then to struggle to handle new unseen data samples. We want them to be great at generalizing.
+We have introduced the bias and variance concepts in Part1 and the bias-variance dilemma, the model capacity, the training/testing split practice and learning curves analysis in Part2.</description>
+    </item>
+    
+    <item>
+      <title>Do not overlearn your data too much, learn to generalize - Part 7</title>
+      <link>https://takeawildguess.net/blog/mdlsel/mdlsel7/</link>
+      <pubDate>Sun, 26 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/mdlsel/mdlsel7/</guid>
+      <description>1. Introduction After two introductory post-series (linear and logistic regression), we dive into a crucial topic that every machine-learning practitioner should be at least aware of: model selection.
+Basically, we do not want our models to learn our data by heart and then to struggle to handle new unseen data samples. We want them to be great at generalizing.
+We have introduced the bias and variance concepts in Part1 and the bias-variance dilemma, the model capacity, the training/testing split practice and learning curves analysis in Part2.</description>
+    </item>
+    
+    <item>
+      <title>Do not overlearn your data too much, learn to generalize - Part 6</title>
+      <link>https://takeawildguess.net/blog/mdlsel/mdlsel6/</link>
+      <pubDate>Sun, 19 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/mdlsel/mdlsel6/</guid>
+      <description>1. Introduction After two introductory post-series (linear and logistic regression), we dive into a crucial topic that every machine-learning practitioner should be at least aware of: model selection.
+Basically, we do not want our models to learn our data by heart and then to struggle to handle new unseen data samples. We want them to be great at generalizing.
+We have introduced the bias and variance concepts in Part1 and the bias-variance dilemma, the model capacity, the training/testing split practice and learning curves analysis in Part2.</description>
+    </item>
+    
+    <item>
+      <title>Do not overlearn your data too much, learn to generalize - Part 5</title>
+      <link>https://takeawildguess.net/blog/mdlsel/mdlsel5/</link>
+      <pubDate>Sun, 12 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/mdlsel/mdlsel5/</guid>
+      <description>1. Introduction After two introductory post-series (linear and logistic regression), we dive into a crucial topic that every machine-learning practitioner should be at least aware of: model selection.
+Basically, we do not want our models to learn our data by heart and then to struggle to handle new unseen data samples. We want them to be great at generalizing.
+We have introduced the bias and variance concepts in Part1 and the bias-variance dilemma, the model capacity, the training/testing split practice and learning curves analysis in Part2.</description>
+    </item>
+    
+    <item>
+      <title>Do not overlearn your data too much, learn to generalize - Part 4</title>
+      <link>https://takeawildguess.net/blog/mdlsel/mdlsel4/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/mdlsel/mdlsel4/</guid>
+      <description>1. Introduction After two introductory post-series (linear and logistic regression), we dive into a crucial topic that every machine-learning practitioner should be at least aware of: model selection.
+Basically, we do not want our models to learn our data by heart and then to struggle to handle new unseen data samples. We want them to be great at generalizing.
+We have introduced the bias and variance concepts in Part1 and the bias-variance dilemma, the model capacity, the training/testing split practice and learning curves analysis in Part2.</description>
+    </item>
+    
+    <item>
+      <title>Do not overlearn your data too much, learn to generalize - Part 3</title>
+      <link>https://takeawildguess.net/blog/mdlsel/mdlsel3/</link>
+      <pubDate>Sun, 28 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/mdlsel/mdlsel3/</guid>
+      <description>1. Introduction After two introductory post-series (linear and logistic regression), we dive into a crucial topic that every machine-learning practitioner should be at least aware of: model selection.
+Basically, we do not want our models to learn our data by heart and then to struggle to handle new unseen data samples. We want them to be great at generalizing.
+We have introduced the bias and variance concepts in Part1 and the bias-variance dilemma, the model capacity, the training/testing split practice and learning curves analysis in Part2.</description>
+    </item>
+    
+    <item>
+      <title>Do not overlearn your data too much, learn to generalize - Part 2</title>
+      <link>https://takeawildguess.net/blog/mdlsel/mdlsel2/</link>
+      <pubDate>Sun, 21 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/mdlsel/mdlsel2/</guid>
+      <description>1. Introduction After two introductory post-series (linear and logistic regression), we dive into a crucial topic that every machine-learning practitioner should be at least aware of: model selection.
+Basically, we do not want our models to learn our data by heart and then to struggle to handle new unseen data samples. We want them to be great at generalizing.
+We have already introduced the two key terms that we need to deal with: bias and variance.</description>
+    </item>
+    
+    <item>
+      <title>Do not overlearn your data too much, learn to generalize - Part 1</title>
+      <link>https://takeawildguess.net/blog/mdlsel/mdlsel1/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/mdlsel/mdlsel1/</guid>
+      <description>1. Introduction In the two previous post-series about (linear and (logistic regression, we have used the whole dataset to train the model and to assess the final performance.
+We now have the chance to go a bit deeper to get some understanding about model selection, why it is so crucial in the machine-learning field to prevent that expected-to-work-amazingly models or applications could miserably and/or dangerously fail.
+A failure in a machine-learning application is not always the end of the world, especially if we want to classify whether a cat is in an uploaded picture or not.</description>
+    </item>
+    
+  </channel>
+</rss>

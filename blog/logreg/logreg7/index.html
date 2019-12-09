@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Learning to classify coffee from cappuccino - Part 7 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Learning to classify coffee from cappuccino - Part 7">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/logreg/logreg7/" style="font-size: 16px; ">Coffee or cappuccino?</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/coffee_cappuccino.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Learning to classify coffee from cappuccino - Part 7</h1>
+          <h5 class="card-title text-center">Coffee or cappuccino?</h5>
+          <h6 class="card-text text-center">March 31, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 9.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/logistic-regression"><kbd class="item-tag">logistic-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction-and-assumptions">1. Introduction and assumptions</h2>
+
+<p>In this post-series, we are going to study the very basic modelling for classification problems with logistic regression algorithms.
+<strong>Classification</strong> entails that the output is a discrete variable taking values on a predefined limited set, where the set dimension is the number of classes.
+Some examples are <em>spam detection</em>, <em>object recognition</em> and <em>topic identification</em>.</p>
+
+<p>We analyzed the theory in the <a href="/blog/logreg/logreg1/">first post</a>, implement the algorithm with Numpy in <a href="/blog/logreg/logreg2/">Part 2</a> and using Sklearn and Tensorflow in <a href="/blog/logreg/logreg3/">Part 3</a>.
+We solved a binary classification problem for multivariate non-linear logistic regression in Scikit-learn in <a href="/blog/logreg/logreg4/">Part 4</a> and extended the analysis to multinomial classification in <a href="/blog/logreg/logreg5/">Part 5</a>.
+After having played with the <a href="https://en.wikipedia.org/wiki/Tic-tac-toe" target="_blank">tic-tac-toe</a> gaming example in <a href="/blog/logreg/logreg6/">Part 6</a>, we shift to a bit harder problem, the <code>digits</code> dataset.</p>
+
+<p>In this series, we do not split the dataset into training and testing sets, but we assess every model on the training set only.
+A dedicated post on model selection, overfitting/underfitting problem and regularization will be published soon.</p>
+
+<p>Let&rsquo;s get started!</p>
+
+<h2 id="2-digits-dataset-collection">2. Digits dataset collection</h2>
+
+<p>The digits dataset comes with Scikit-learn directly and therefore do not require any file downloading from external websites.</p>
+
+<p>The following code will load the required libraries and the dataset.
+We can see that there are 1797 (8x8) images with 1797 labels from 0 to 9.</p>
+
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+import pandas as pd
+import numpy as np
+from sklearn.datasets import load_digits
+from sklearn.linear_model import LogisticRegression
+from sklearn import metrics
+digits = load_digits()
+</code></pre>
+
+<pre><code class="language-python">print(&quot;Image Data: {}, Label Data: {}&quot;.format(digits.data.shape, digits.target.shape))
+print(&quot;Response variable set: {}&quot;.format(np.unique(digits.target)))
+</code></pre>
+
+<pre><code>Image Data: (1797, 64), Label Data: (1797,)
+Response variable set: [0 1 2 3 4 5 6 7 8 9]
+</code></pre>
+
+<h2 id="3-dataset-visualization">3. Dataset visualization</h2>
+
+<p>We extract 10 examples spanning 3 rows one to another.
+We need to reshape each <code>(64,)</code> sample into an <code>(8, 8)</code> array to get a human easy-to-read image.</p>
+
+<pre><code class="language-python">Nr, Nc, span = 2, 5, 3
+Nel = Nr*Nc
+plt.figure(figsize=(18,8))
+for idx, (image, label) in enumerate(zip(digits.data[0:Nel*span:span], digits.target[0:Nel*span:span])):
+    plt.subplot(Nr, Nc, idx + 1)
+    plt.imshow(image.reshape(-1, 8), cmap='Blues')
+    plt.title('Label %i\n' % label, fontsize = 16)
+</code></pre>
+
+<p><img src="output_6_0.png" alt="png" /></p>
+
+<p>We also visualize how the dataset examples are distributed over the 10 response classes, by counting how many times each of the 10 response classes occurs in the dataset.
+The result confirms that the dataset is equally distributed over the different classes.</p>
+
+<pre><code class="language-python">unique, counts = np.unique(digits.target, return_counts=True)
+print(&quot;Counting how many times each of the 10 response classes occurs in the dataset\n{}&quot;.format(dict(zip(unique, counts))))
+</code></pre>
+
+<pre><code>Counting how many times each of the 10 response classes occurs in the dataset
+{0: 178, 1: 182, 2: 177, 3: 183, 4: 181, 5: 182, 6: 181, 7: 179, 8: 174, 9: 180}
+</code></pre>
+
+<h2 id="4-training-the-logistic-regression-model">4. Training the logistic regression model</h2>
+
+<p>Now we run the training step and we get the model outcome response that is compared to the ground-truth response to get the model main metrics.
+The results are close to perfection!</p>
+
+<pre><code class="language-python">XX, YY = digits.data, digits.target
+lgr = LogisticRegression(C=1e5) # we want to ignore regularization
+lgr.fit(XX, YY)
+Ypred = lgr.predict(XX)
+</code></pre>
+
+<pre><code class="language-python">print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(YY, Ypred)))
+print(&quot;Precision: {}&quot;.format(metrics.precision_score(YY, Ypred, average='weighted')))
+print(&quot;Recall: {}&quot;.format(metrics.recall_score(YY, Ypred, average='weighted')))
+</code></pre>
+
+<pre><code>Accuracy: 0.9988870339454646
+Precision: 0.9988870339454646
+Recall: 0.9988870339454646
+</code></pre>
+
+<h2 id="5-model-accuracy">5. Model accuracy</h2>
+
+<p>We also want to understand a bit deeper which label the model has struggled the most.
+To this end, we define the <a href="https://en.wikipedia.org/wiki/Confusion_matrix" target="_blank">confusion matrix</a>, which is a table used to describe the performance of the classifier at labelling one specific class of the response variable and to easily spot which other labels are instead picked by the model when it is wrong.</p>
+
+<pre><code class="language-python">cm = metrics.confusion_matrix(YY, Ypred)
+</code></pre>
+
+<pre><code class="language-python">cmDisp = cm.astype(float)
+cmDisp[cmDisp==0] = np.nan
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(9,9))
+plt.imshow(cmDisp, cmap='Set2') #, interpolation='nearest', cmap='Pastel1'
+plt.title('Confusion matrix', size = 15)
+plt.colorbar()
+tickMarks = np.arange(10)
+tickLabels = [str(num) for num in range(10)]
+plt.xticks(tickMarks, tickLabels, size = 10, fontsize=12)
+plt.yticks(tickMarks, tickLabels, size = 10, fontsize=12)
+plt.tight_layout()
+plt.ylabel('Actual label', size = 15)
+plt.xlabel('Predicted label', size = 15)
+width, height = cm.shape
+for x in range(width):
+    for y in range(height):
+        plt.annotate(str(cm[x][y]), xy=(y, x), horizontalalignment='center', verticalalignment='center')
+</code></pre>
+
+<p><img src="output_15_0.png" alt="png" /></p>
+
+<h2 id="6-error-analysis">6. Error analysis</h2>
+
+<p>We have two misclassified samples only, which we show below. The charts on the LHS are displayed with different blue hues, related to the pixel intensity, while the RHS charts are plotted with grey hues.</p>
+
+<pre><code class="language-python">Nr, Nc, span = 2, 5, 3
+Nel = Nr*Nc
+errIdxs = np.where(YY!=Ypred)[0]
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(18,8))
+for row, idx in enumerate(errIdxs):
+    plt.subplot(errIdxs.shape[0], 2, 2*row + 1)
+    plt.imshow(digits.images[idx].reshape(-1, 8), cmap='Blues')
+    plt.title('Actual label: {}, predicted label: {}'.format(YY[idx], Ypred[idx]), fontsize = 16)
+    plt.subplot(errIdxs.shape[0], 2, 2*row + 2)
+    plt.imshow(digits.images[idx].reshape(-1, 8), cmap=plt.cm.gray)
+    plt.title('Actual label: {}, predicted label: {}'.format(YY[idx], Ypred[idx]), fontsize = 16)
+</code></pre>
+
+<p><img src="output_18_0.png" alt="png" /></p>
+
+<h2 id="7-model-parameter-analysis">7. Model parameter analysis</h2>
+
+<p>In the final section, we display the model parameter (or weight) values stored in the <code>(64,10)</code> 2D array <code>Wcoef</code>.
+We can treat this 2D array as a horizontal concatenation of 10 <code>(64,)</code> 1D arrays, one for each class.
+Each 1D array stores the weights of every pixel of the image, out of the 64 total ones.
+If we reshape this 1D array, we can visually get the alignment between the pixel (inputs) and the weight.</p>
+
+<h3 id="7-1-average-inputs-per-class">7.1 Average inputs per class</h3>
+
+<p>The figure shows the average input for each class <code>kk</code>.
+We can easily read each number from 0 to 9.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(17, 9))
+for kk in range(10):
+    plt.subplot(2, 5, kk+1)
+    Xavg = np.mean(XX[YY==kk, :], axis=0).reshape(-1, 8)
+    plt.imshow(Xavg, cmap='inferno')
+    plt.title('Label: ' + str(kk), fontsize = 16)
+    plt.axis('off')
+</code></pre>
+
+<p><img src="output_21_0.png" alt="png" /></p>
+
+<p>The next figure, instead, reports the difference between the average input of class <code>kk</code> and the average input from any other input.
+It is just a way to see how each input differs and is unique.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(17, 9))
+for kk in range(10):
+    plt.subplot(2, 5, kk+1)
+    Xavg = np.mean(XX[YY==kk, :], axis=0).reshape(-1, 8)
+    Xcompl = np.mean(XX[YY!=kk, :], axis=0).reshape(-1, 8)
+    plt.imshow(Xavg-Xcompl, cmap='inferno')
+    plt.title('Label: ' + str(kk), fontsize = 16)
+    plt.axis('off')
+</code></pre>
+
+<p><img src="output_23_0.png" alt="png" /></p>
+
+<h3 id="7-2-model-parameters">7.2 Model Parameters</h3>
+
+<p>It is interesting to observe how the weights&rsquo; structure <em>somehow</em> resembles the input pattern for class <code>0</code>, <code>3</code> and <code>6</code>, while it is pretty flat and uniform for class <code>1</code>, <code>8</code> and <code>9</code>.
+However, the corresponding biases for these three cases are quite different to correctly classify the input.
+Even when the weights&rsquo; structure of a given class doesn&rsquo;t look like the input pattern, it has specific values that are either very positive or negative where the input pattern for that class differs from inputs of any other class.</p>
+
+<pre><code class="language-python">Wcoef = lgr.coef_.T
+bcoef = lgr.intercept_
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(15, 11))
+for kk in range(10):
+    plt.subplot(3, 4, kk+1)
+    plt.imshow(Wcoef[:, kk].reshape(8, -1), cmap='inferno')
+    plt.axis('off')
+    plt.title('Label: ' + str(kk), fontsize = 16)
+</code></pre>
+
+<p><img src="output_26_0.png" alt="png" /></p>
+
+<pre><code class="language-python">plt.figure(figsize=(8, 9))
+plt.imshow(bcoef.reshape(-1, 5), cmap='inferno')
+plt.axis('off');
+</code></pre>
+
+<p><img src="output_27_0.png" alt="png" /></p>
+
+<h3 id="7-3-how-is-the-same-input-transformed-by-different-classes-weights">7.3 How is the same input transformed by different classes&rsquo; weights</h3>
+
+<p>The figures below show how the input from the same class gets changed by each and every weight array <code>Wcoef[:,kk]</code> to return the <code>kk</code> class logit (up to the additive constant bias, <code>bcoef[kk]</code>).
+Recall that very positive/negative logits lead to a probability closer to <code>1</code>/<code>0</code>.
+The first example feeds the <code>0</code> input, while the second one takes <code>1</code> as input.</p>
+
+<pre><code class="language-python">def visWeights(kinp, kprm=None):
+    plt.figure(figsize=(17, 11))
+    for kk in range(10):
+        plt.subplot(3, 4, kk+1)
+        kinp_ = kinp if kinp is not None else kk
+        Xavg = np.mean(XX[YY==kinp_, :], axis=0).reshape(-1, 8)
+        kprm_ = kprm if kprm is not None else kk
+        WW_, bb_ = Wcoef[:,kprm_].reshape(-1,8), bcoef[kprm_]
+        logits = np.sum(Xavg*WW_) + bb_
+        plt.imshow(Xavg*WW_, cmap='inferno')
+        plt.title('Label: {}, logit: {:0.1f}, bias: {:0.1f}'.format(kk, logits, bb_), fontsize = 13)
+        plt.axis('off')
+        if kk==kinp:
+            plt.colorbar(orientation='horizontal')
+</code></pre>
+
+<pre><code class="language-python">visWeights(0, kprm=None)
+</code></pre>
+
+<p><img src="output_30_0.png" alt="png" /></p>
+
+<pre><code class="language-python">visWeights(1, kprm=None)
+</code></pre>
+
+<p><img src="output_31_0.png" alt="png" /></p>
+
+<h3 id="7-4-how-the-same-class-weight-array-transform-different-classes-inputs">7.4 How the same class weight array transform different classes&rsquo; inputs</h3>
+
+<p>The figures below show how each input from the 10 classes get changed by the weight array  <code>Wcoef[:,kprm]</code> from the same class <code>kprm</code>.</p>
+
+<p>The first example feeds the <code>0</code> input, while the second one takes <code>1</code> as input.</p>
+
+<pre><code class="language-python">visWeights(kinp=None, kprm=0)
+</code></pre>
+
+<p><img src="output_33_0.png" alt="png" /></p>
+
+<pre><code class="language-python">visWeights(kinp=None, kprm=1)
+</code></pre>
+
+<p><img src="output_34_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/logreg/logreg6/" style="color: #4ABDAC; font-size: 18px; "> Learning to classify coffee from cappuccino - Part 6</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/logreg/logreg8/" style="color: #4ABDAC; font-size: 18px; ">Learning to classify coffee from cappuccino - Part 8</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

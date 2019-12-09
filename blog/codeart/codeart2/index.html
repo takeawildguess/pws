@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Code art in Python - Spirograph pattern in circle - Part 2 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Code art in Python - Spirograph pattern in circle - Part 2">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/codeart/codeart2/" style="font-size: 16px; ">Code art</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/codeartHead.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Code art in Python - Spirograph pattern in circle - Part 2</h1>
+          <h5 class="card-title text-center">Code art</h5>
+          <h6 class="card-text text-center">July 21, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 8.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/coding"><kbd class="item-tag">coding</kbd></a> <a href="https://takeawildguess.net/tags/code-art"><kbd class="item-tag">code-art</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts where I intend to face the challenge of drawing both static and dynamic pictures with a programming language.
+This practise is commonly referred to as <strong>code art</strong>, where art is built with code.</p>
+
+<p>The first four posts will aim at defining a function to create a geometric pattern, a <strong>spirograph</strong> pattern in circle, inspired by this <a href="https://www.youtube.com/watch?v=VMOGIaS0GaE" target="_blank">video</a>, with Python libraries.</p>
+
+<p>We will follow these steps:</p>
+
+<ol>
+<li>Problem definition and visualization basics in <a href="/blog/codeart/codeart1">Part1</a>.</li>
+<li>Line definition through two points and intersection of two lines in <a href="/blog/codeart/codeart2">Part2</a>.</li>
+<li>Polygon vertex detection and postprocessing of intersection points <a href="/blog/codeart/codeart3">Part3</a>.</li>
+<li>Polygon drawing, colour scheme definition, global function implementation and final drawings in <a href="/blog/codeart/codeart4">Part4</a>.</li>
+</ol>
+
+<h2 id="2-define-the-line-through-two-points">2. Define the line through two points</h2>
+
+<p>If you have two points, A and B, you can treat them as two vectors and determine the vector connecting A to B, $\vec{AB}$:</p>
+
+<p>$$ \vec{AB} = \vec{B}-\vec{A} = $$</p>
+
+<p>$$ = (x_B, y_B) - (x_A, y_A) = (x_B-x_A, y_B-y_A) $$</p>
+
+<p>Then the parametric equation of the line through these two points is:</p>
+
+<p>$$ P = t\cdot\vec{AB} + \vec{A}, where t \in (-\infty, \infty) $$</p>
+
+<p>The generic point <code>P</code> on the line is controlled by the only parameter of this equation <code>t</code>, which can also be associated to the time.
+There are five macro situations:</p>
+
+<ol>
+<li><code>t=0</code>: the point coincides to point A</li>
+<li><code>t=1</code>: the point coincides to point B</li>
+<li><code>t&lt;0</code>: the point lies ahead of A</li>
+<li><code>0&lt;t&lt;1</code>: the point lies between A and B</li>
+<li><code>t&gt;1</code>: the point lies behind B.</li>
+</ol>
+
+<p>If we unpack the vector formulation into two scalar equations, we end up with:</p>
+
+<p>$$ (x, y) = t\cdot(x_B-x_A, y_B-y_A) + (x_A, y_A) $$</p>
+
+<p>$$ x = t\cdot(x_B-x_A) + x_A $$</p>
+
+<p>$$ y = t\cdot(y_B-y_A) + y_A $$</p>
+
+<p>If the system is reduced to one equation by substituting <code>t</code> from the second equation into the first equation, we get the <strong>implicit</strong> line equation.
+Whenever one of the two equations have got no <code>t</code>, either <code>x = k</code> or <code>y = k</code>, there is no need to change anything, the implicit equation is already there!
+The former case would be a vertical line passing through <code>(k, 0)</code>, the latter case is a horizontal line through the point <code>(0, k)</code>.</p>
+
+<p>Some references can be found on the <a href="http://mathworld.wolfram.com/Two-PointForm.html" target="_blank">Wolfram</a> website and on <a href="https://en.wikipedia.org/wiki/Line_(geometry)" target="_blank">Wiki</a>.</p>
+
+<h2 id="3-define-the-intersection-of-two-lines-each-given-a-pair-of-points">3. Define the intersection of two lines, each given a pair of points</h2>
+
+<h3 id="3-1-parametric-method">3.1 Parametric method</h3>
+
+<p>In this case we have four points, A, B, C and D, and two vectors or segments, $\vec{AB}$ and $\vec{CD}$.</p>
+
+<p>The first line, which crosses both points A and B, is given by the following vector equation:</p>
+
+<p>$$ L_{ab} = t\cdot\vec{AB} + \vec{A},\quad t \in (-\infty, \infty) $$</p>
+
+<p>The second line crossing points C and D is instead given by this equation, where the parameter <code>u</code> plays the same temporal role as <code>t</code>:</p>
+
+<p>$$ L_{cd} = u\cdot\vec{CD} + \vec{C},\quad u \in (-\infty, \infty) $$</p>
+
+<p>We need to find the relative time of the two lines, <code>t</code> and <code>u</code>, at which they intersect each other:</p>
+
+<p>$$ L_{ab} = L_{cd} $$</p>
+
+<p>$$ t\cdot\vec{AB} + \vec{A} = u\cdot\vec{CD} + \vec{C} $$</p>
+
+<p>Now we cross both sides with $\vec{AB}$:</p>
+
+<p>$$ (t\cdot\vec{AB} + \vec{A})\times\vec{AB} = (u\cdot\vec{CD} + \vec{C})\times\vec{AB} $$</p>
+
+<p>Here a picture from main <a href="https://en.wikipedia.org/wiki/Cross_product" target="_blank">Wiki</a> page that should help clarifying the cross product.
+The area confined by the parallelogram defined by the two input vectors is the module of the output vector.
+Direction is perpendicular to the plane containing the two vectors and sense of direction is given by the right-hand rule.</p>
+
+<p><img src="/blog/codeart/codeart2/Cross_product_parallelogram.svg" alt="pngS" title="Cross Product" />
+<center><em>Figure 1 - Cross Product</em> - <a href="https://upload.wikimedia.org/wikipedia/commons/4/4e/Cross_product_parallelogram.svg" target="_blank">source</a></center></p>
+
+<p><img src="/blog/codeart/codeart2/Right_hand_rule_cross_product.svg" alt="pngS" title="Right-hand rule" />
+<center><em>Figure 2 - Right-hand rule</em> - <a href="https://upload.wikimedia.org/wikipedia/commons/d/d2/Right_hand_rule_cross_product.svg" target="_blank">source</a></center></p>
+
+<p>Since the <a href="https://en.wikipedia.org/wiki/Cross_product#Algebraic_properties" target="_blank">self cross-product</a> of a vector is the zero vector $\vec{\mathbf 0}$, it simplifies to:</p>
+
+<p>$$ \vec{A}\times\vec{AB} = (u\cdot\vec{CD} + \vec{C})\times\vec{AB} $$</p>
+
+<p>$$ (\vec{A}-\vec{C})\times\vec{AB} = u\cdot\vec{CD}\times\vec{AB} $$</p>
+
+<p>$$ \vec{CA}\times\vec{AB} = u\cdot\vec{CD}\times\vec{AB} $$</p>
+
+<p>The first condition to mention here is that:</p>
+
+<p>$$ \vec{CD}\times\vec{AB} = 0 $$</p>
+
+<p>It implies that the two segments are either parallel or collinear.
+We need to treat such conditions in a proper way.</p>
+
+<p>Let&rsquo;s just assume here that they are none of them, so one intersection exists, for which <code>u</code> is defined as:</p>
+
+<p>$$ u = (\vec{CA}\times\vec{AB})/(\vec{CD}\times\vec{AB}) $$</p>
+
+<p>Please note that the cross product of two 2D vectors is a 3D vector whose first two entries are 0 and the last one is the actual cross product:</p>
+
+<p>$$ (w_x, w_y)\times(u_x, u_y) = (0, 0, w_x\cdot u_y - w_y\cdot u_x) $$</p>
+
+<p>The ratio of these two cross products is therefore a standard scalar ratio.</p>
+
+<p>If we apply the same procedure by crossing with $\vec{CD}$:</p>
+
+<p>$$ t = (\vec{AC}\times\vec{CD})/(\vec{AB}\times\vec{CD}) $$</p>
+
+<p>Since the cross product is <a href="https://en.wikipedia.org/wiki/Cross_product#Algebraic_properties" target="_blank">anticommutative</a>, i.e., $\vec{A}\times\vec{B} = - \vec{B}\times\vec{A}$, it returns the same expression as for <code>u</code> where $\vec{CD}$ replaces $\vec{AB}$ in the numerator:</p>
+
+<p>$$ t = (\vec{CA}\times\vec{CD})/(\vec{CD}\times\vec{AB}) $$</p>
+
+<p>The final expression for the intersection <code>I</code>, if there exists any, is:</p>
+
+<p>$$ I = (\vec{CA}\times\vec{CD})/(\vec{CD}\times\vec{AB})\cdot\vec{AB} + \vec{A} $$</p>
+
+<p>There are two additional conditions that need to be handled.
+The two segments are:
+1. collinear, where $(\vec{CD}\times\vec{AB}) = 0$ and $(\vec{CA}\times\vec{AB}) = 0$. This condition translates to the fact that <code>AB</code> is parallel to both <code>CD</code> and <code>CA</code>, which implies they lie all on the same line.
+2. parallel but not-intersecting, where $(\vec{CD}\times\vec{AB}) = 0$ and $(\vec{CA}\times\vec{AB}) \neq 0$.</p>
+
+<pre><code class="language-python">def intersectVis(xI, yI):
+    plt.figure(figsize=(figSize, figSize))
+    circle = plt.Circle((0, 0), radius, color='b', fill=False)
+    plt.plot(xPs, yPs, ls='', marker='o', markersize=10, color=&quot;blue&quot;)
+    plt.plot([xA, xB], [yA, yB], ls='', marker='o', markersize=10, color=&quot;red&quot;)    
+    xP, yP = xPs[idxA], yPs[idxA]
+    plt.plot([xA, xP], [yA, yP], color=&quot;green&quot;, lw=2, alpha=.3)
+    xP, yP = xPs[idxB], yPs[idxB]
+    plt.plot([xB, xP], [yB, yP], color=&quot;green&quot;, lw=2, alpha=.3)
+
+    plt.plot([xI], [yI], ls='', marker='o', markersize=10, color=&quot;green&quot;)    
+
+    ax = plt.gca()
+    ax.add_artist(circle)
+    ax.get_xaxis().set_ticks([])
+    ax.get_yaxis().set_ticks([])
+    ax.axis('off')
+    ax.axis('equal')
+    ax.axis([-margin, margin, -margin, margin]);
+</code></pre>
+
+<pre><code class="language-python">idxA, idxB = 12, 18
+AA, BB = np.array(Pa), np.array([xPs[idxA], yPs[idxA]])
+CC, DD = np.array(Pb), np.array([xPs[idxB], yPs[idxB]])
+AB = BB-AA
+xI, yI = np.cross(AA-CC, DD-CC)/np.cross(DD-CC, AB)*AB+AA
+</code></pre>
+
+<pre><code class="language-python">intersectVis(xI, yI)
+</code></pre>
+
+<p><img src="output_9_0.png" alt="png" /></p>
+
+<h3 id="3-2-homogeneous-method">3.2 Homogeneous method</h3>
+
+<p>The implicit equation of a line is:</p>
+
+<p>$$ L: a\cdot x + b\cdot y + c =0 $$</p>
+
+<p>If a point <code>P=(x,y)</code> lies on that line, then the <a href="https://en.wikipedia.org/wiki/Dot_product" target="_blank">dot product</a> between the line coordinates $(a,b,c)$ and one possible set of <a href="https://en.wikipedia.org/wiki/Homogeneous_coordinates" target="_blank">homogeneous coordinates</a> of the point P $(x, y,1)$ is 0 by definition:</p>
+
+<p>$$ a\cdot x + b\cdot y + c =0 $$</p>
+
+<p>$$ \quad\Rightarrow (a,b,c)\cdot(x,y,1)=0 $$</p>
+
+<p>By definition, a given point $(x, y)$ on the Euclidean plane, for any non-zero real number $z$, is the projection of the triple $(z\cdot x, z\cdot y, z)$, which is called a set of homogeneous coordinates for the point.
+It can be visualized as a 3D line through the origin and point $(x, y,1)$.
+The corresponding point is obtained by slicing such a 3D line with a horizontal plane 1 unit above the origin, whose equation is $z=1$, and by projecting such intersecting point to the 2D space ($z=0$).</p>
+
+<p>If we extend the concept to multiple points of one line $L$, we get a 3D plane that passes through the origin and line $L$ shifted upward by 1 unit.
+The plane coordinates $(a,b,c)$ from the implicit plane equation $a\cdot x + b\cdot y + c\cdot z =0$ represents a vector perpendicular to such a plane.
+Such a vector representing the plane in the homogeneous space and the line in the Euclidean space can be generated as a cross product of the two vectors representing two points of the line in the homogeneous space.
+Indeed, the plane contains these two vectors, since the underlying line contains the corresponding points, and the cross product of two vectors is a vector whose direction is perpendicular to the plane containing the vectors themselves.</p>
+
+<p>This means that we can get the vector representation of a line by taking the cross product of two points on that line, expressed in homogeneous coordinates.</p>
+
+<p>$$ L_{ab}: (a, b, c) = \vec{A^H}\times\vec{B^H} $$</p>
+
+<p>where $\vec{A^H} = (x_A, y_A, 1)$ is the homogeneous coordinates of point A.</p>
+
+<p>Interestingly, the homogeneous coordinates of the <a href="https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection#Using_homogeneous_coordinates" target="_blank">intersection point</a> $P_I$ of two lines $\vec{L_1}$ and $\vec{L_2}$ is then simply got by taking the cross product of the line coordinates.</p>
+
+<p>$$ P_I^H = (x_I^H, y_I^H, z_I^H) = \vec{L_1}\times\vec{L_2} $$</p>
+
+<p>$P_I^H$ is perpendicular to the plane vector \vec{L_1}, so it lies on the plane itself of line $L_1$.
+It means it represents the homogeneous coordinates of a point that lies on line $L_1$.
+In a similar fashion, it is also perpendicular to the plane vector \vec{L_2}, so it represents a point on line $L_2$ as well.
+It is therefore the intersection of the two lines.</p>
+
+<p>If $z_I^H \neq 0$, the intersection point is converted to Euclidean coordinates as:</p>
+
+<p>$$ P_I = \big(\frac{x_I^H}{z_I^H}, \frac{y_I^H}{z_I^H}\big) $$</p>
+
+<pre><code class="language-python">homCoords = np.hstack((np.vstack([AA, BB, CC, DD]), np.ones((4, 1)))) # homogeneous coordinates
+line1 = np.cross(homCoords[0], homCoords[1])
+line2 = np.cross(homCoords[2], homCoords[3])
+z1, z2, z3 = np.cross(line1, line2)
+xI, yI = (z1/z3, z2/z3)
+</code></pre>
+
+<pre><code class="language-python">intersectVis(xI, yI)
+</code></pre>
+
+<p><img src="output_12_0.png" alt="png" /></p>
+
+<h2 id="reference">Reference</h2>
+
+<ol>
+<li><a href="https://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect#565282" target="_blank">How to detect where two line segments intersect</a></li>
+<li><a href="https://stackoverflow.com/questions/3252194/numpy-and-line-intersections" target="_blank">Line intersection with Numpy</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection" target="_blank">Line–line intersection</a></li>
+<li><a href="http://tutorial.math.lamar.edu/Classes/CalcIII/EqnsOfLines.aspx" target="_blank">Equations Of Lines</a></li>
+</ol>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/codeart/codeart1/" style="color: #4ABDAC; font-size: 18px; "> Code art in Python - Spirograph pattern in circle - Part 1</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/codeart/codeart3/" style="color: #4ABDAC; font-size: 18px; ">Code art in Python - Spirograph pattern in circle - Part 3</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

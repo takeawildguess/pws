@@ -11,12 +11,13 @@
    <meta name="author" content="Your name"> 
   
 
-  <meta name="generator" content="Hugo 0.49" />
+  <meta name="generator" content="Hugo 0.59.1" />
   <title>Learning to classify coffee from cappuccino - Part 2 &middot; take a wild guess</title>
 
   
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 
 
  <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
@@ -31,7 +32,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
-<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
 
   
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -40,6 +41,8 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
 
 
 
@@ -54,9 +57,6 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
 
-
-
-<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
 
 
 <script type="text/javascript">
@@ -103,10 +103,11 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
   <![endif]-->
 
   
-  
-  
-  
-  
+    
+    
+    
+    
+    
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -118,6 +119,7 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+    
   
 
   
@@ -196,11 +198,11 @@ if (!doNotTrack) {
       
       <ul class="navbar-nav navbar-right">
         
-          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
         
       </ul>
       
@@ -260,13 +262,13 @@ A dedicated post on model selection, overfitting/underfitting problem and regula
 
 <p>We create an equispaced x grid with 1000 points ranging from -10 to 10.
 Then true y outcome, which represents the class to assign to the input, is defined via the logistic function of the linear transformation of input x with parameters <code>Wgt</code> (2, -12).
-The actual class is assigned by drawing samples from a <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.binomial.html">binomial distribution</a>.
+The actual class is assigned by drawing samples from a <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.binomial.html" target="_blank">binomial distribution</a>.
 A binomial distribution becomes a Bernoulli distribution when the number of trials is 1.
 In other words, we generate data by sampling the <code>y</code> class for each input <code>x</code>, where the probability of success (i.e., of belonging to class 1) is given by:</p>
 
 <p>$$ p = \sigma(\lbrack x, 1\rbrack\cdot \omega) $$</p>
 
-<p>The <a href="https://en.wikipedia.org/wiki/Logistic_function">logistic function</a> is the $\sigma$ operator in the equation.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Logistic_function" target="_blank">logistic function</a> is the $\sigma$ operator in the equation.</p>
 
 <pre><code class="language-python">def logistic(XX, ww, noise=0):
     tt = np.dot(XX, ww) + noise
@@ -335,7 +337,7 @@ plt.show()
 
 <h2 id="4-iteratively-reweighted-least-squares-irls">4. Iteratively reweighted least squares (IRLS)</h2>
 
-<p>A different method to identify the coefficients of a binary logistic regression classifier is to use <em>iteratively reweighted least squares (IRLS)</em>, which is equivalent to minimizing the log-likelihood of a Bernoulli distributed process using Newton&rsquo;s method (see <a href="https://en.wikipedia.org/wiki/Logistic_regression#Iteratively_reweighted_least_squares_(IRLS)">Wiki</a> reference for further details).</p>
+<p>A different method to identify the coefficients of a binary logistic regression classifier is to use <em>iteratively reweighted least squares (IRLS)</em>, which is equivalent to minimizing the log-likelihood of a Bernoulli distributed process using Newton&rsquo;s method (see <a href="https://en.wikipedia.org/wiki/Logistic_regression#Iteratively_reweighted_least_squares_(IRLS)" target="_blank">Wiki</a> reference for further details).</p>
 
 <p>The parameters $\omega_k$ at step $k$ are updated as follows:</p>
 
@@ -361,7 +363,7 @@ wNew = np.dot(T1, np.dot(XX.T, T3))
 <pre><code>((1000, 2), (1000, 1), (1000, 1), (2, 1), (2, 1))
 </code></pre>
 
-<p>Here we plot the initial prediction variance matrix $S_k$, where 0 values have been replaced with NaN to improve readability.</p>
+<p>Here we plot the initial prediction variance matrix $S_k$, where 0 values have been replaced with <code>NaN</code> to improve readability.</p>
 
 <pre><code class="language-python">Sk_vis = Sk
 Sk_vis[Sk_vis==0] = np.nan
@@ -417,7 +419,7 @@ plt.imshow(Sk_vis);
 
 <p>Since we stated that linear regression would fail to handle classification problems, we want to get an idea of how it fails and struggles with this simple toy task.
 To this end, we use the two modules from the linear model package of Scikit-Learn to create the linear and logistic regression models.
-Since the output of the linear regression model is continuous in the real domain, we convert it to boolean (0/1) with a simple $ \geq 0.5$ condition.</p>
+Since the output of the linear regression model is continuous in the real domain, we convert it to boolean (<code>0</code>/<code>1</code>) with a simple $ \geq 0.5$ condition.</p>
 
 <pre><code class="language-python">from sklearn.linear_model import LinearRegression, LogisticRegression
 </code></pre>
@@ -524,14 +526,13 @@ plt.plot(wEvolLSE[-1,0], wEvolLSE[-1,1], 'r', linestyle='none', marker='o', mark
 plt.plot(wEvolLSE[0,0], wEvolLSE[0,1], 'g', linestyle='none', marker='o', markersize=10, alpha=0.75, label='Initial weights')
 plt.xlabel(&quot;$\omega_1$&quot;)
 plt.ylabel(&quot;$\omega_2$&quot;)
-#plt.axis('equal')
 plt.legend()
 plt.show()
 </code></pre>
 
 <p><img src="output_37_0.png" alt="png" /></p>
 
-<p>The final plot shows the trend of ML and LSE functions over the training steps $N_{epoch}$ (1500 in this experiment).</p>
+<p>The final plot shows the trend of ML and LSE functions over the training steps <code>Nepoch</code> (1500 in this experiment).</p>
 
 <pre><code class="language-python">plt.figure(figsize=(10, 5))
 plt.plot(np.log(JevolLSE), lw=2, label='LSE')
@@ -547,23 +548,22 @@ plt.show()
 <h2 id="reference">Reference</h2>
 
 <ol>
-<li><a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf">CS229 notes</a></li>
-<li><a href="https://www.coursera.org/learn/machine-learning">Machine Learning at Coursera</a></li>
-<li><a href="http://people.math.gatech.edu/~ecroot/3225/maximum_likelihood.pdf">Maximum likelihood estimators and least squares</a></li>
-<li><a href="https://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf">An Introduction to Statistical Learning</a></li>
-<li><a href="https://stats.stackexchange.com/questions/46523/how-to-simulate-artificial-data-for-logistic-regression/46525">Generating artificial data</a></li>
-<li><a href="https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc">Logistic Regression overview</a></li>
-<li><a href="https://machinelearningmastery.com/logistic-regression-for-machine-learning/">Logistic Regression for Machine learning</a></li>
-<li><a href="https://data.princeton.edu/wws509/notes/c3.pdf">Princeton notes</a></li>
-<li><a href="https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8">Building A Logistic Regression in Python, Step by Step</a></li>
-<li><a href="https://towardsdatascience.com/logistic-regression-using-python-sklearn-numpy-mnist-handwriting-recognition-matplotlib-a6b31e2b166a">Logistic Regression using Python (scikit-learn)</a></li>
+<li><a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf" target="_blank">CS229 notes</a></li>
+<li><a href="https://www.coursera.org/learn/machine-learning" target="_blank">Machine Learning at Coursera</a></li>
+<li><a href="http://people.math.gatech.edu/~ecroot/3225/maximum_likelihood.pdf" target="_blank">Maximum likelihood estimators and least squares</a></li>
+<li><a href="https://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf" target="_blank">An Introduction to Statistical Learning</a></li>
+<li><a href="https://stats.stackexchange.com/questions/46523/how-to-simulate-artificial-data-for-logistic-regression/46525" target="_blank">Generating artificial data</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc" target="_blank">Logistic Regression overview</a></li>
+<li><a href="https://machinelearningmastery.com/logistic-regression-for-machine-learning/" target="_blank">Logistic Regression for Machine learning</a></li>
+<li><a href="https://data.princeton.edu/wws509/notes/c3.pdf" target="_blank">Princeton notes</a></li>
+<li><a href="https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8" target="_blank">Building A Logistic Regression in Python, Step by Step</a></li>
+<li><a href="https://towardsdatascience.com/logistic-regression-using-python-sklearn-numpy-mnist-handwriting-recognition-matplotlib-a6b31e2b166a" target="_blank">Logistic Regression using Python (scikit-learn)</a></li>
 </ol>
 
         </div>
         <div class="pgNav PageNavigation col-12 text-center">
           <span>
           <p>&laquo; <a class="" href="/blog/logreg/logreg1/" style="color: #4ABDAC; font-size: 18px; "> Learning to classify coffee from cappuccino - Part 1</a>
-
           
           &nbsp;&nbsp; | &nbsp;&nbsp;
           <a class="" href="/blog/logreg/logreg3/" style="color: #4ABDAC; font-size: 18px; ">Learning to classify coffee from cappuccino - Part 3</a>
@@ -571,8 +571,8 @@ plt.show()
           &raquo;</p>
           </span>
           
+          
         </div>
-
       </div>
     </div>
   </div>

@@ -11,12 +11,13 @@
    <meta name="author" content="Your name"> 
   
 
-  <meta name="generator" content="Hugo 0.49" />
+  <meta name="generator" content="Hugo 0.59.1" />
   <title>Learning to classify coffee from cappuccino - Part 6 &middot; take a wild guess</title>
 
   
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 
 
  <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
@@ -31,7 +32,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
-<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
 
   
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -40,6 +41,8 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
 
 
 
@@ -54,9 +57,6 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
 
-
-
-<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
 
 
 <script type="text/javascript">
@@ -103,10 +103,11 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
   <![endif]-->
 
   
-  
-  
-  
-  
+    
+    
+    
+    
+    
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -118,6 +119,7 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+    
   
 
   
@@ -196,11 +198,11 @@ if (!doNotTrack) {
       
       <ul class="navbar-nav navbar-right">
         
-          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
         
       </ul>
       
@@ -251,7 +253,7 @@ Some examples are <em>spam detection</em>, <em>object recognition</em> and <em>t
 
 <p>We analyzed the theory in the <a href="/blog/logreg/logreg1/">first post</a>, implement the algorithm with Numpy in <a href="/blog/logreg/logreg2/">Part 2</a> and using Sklearn and Tensorflow in <a href="/blog/logreg/logreg3/">Part 3</a>.
 We solved a binary classification problem for multivariate non-linear logistic regression in Scikit-learn in <a href="/blog/logreg/logreg4/">Part 4</a> and extended the analysis to multinomial classification in <a href="/blog/logreg/logreg5/">Part 5</a>.
-We now have a look at categorical and numerical inputs (predictors) from a simple but funny gaming example: <a href="https://en.wikipedia.org/wiki/Tic-tac-toe">tic-tac-toe</a>.</p>
+We now have a look at categorical and numerical inputs (predictors) from a simple but funny gaming example: <a href="https://en.wikipedia.org/wiki/Tic-tac-toe" target="_blank">tic-tac-toe</a>.</p>
 
 <p>In this series, we do not split the dataset into training and testing sets, but we assess every model on the training set only.
 A dedicated post on model selection, overfitting/underfitting problem and regularization will be published soon.</p>
@@ -268,7 +270,7 @@ A nominal variable has no intrinsic ordering to its categories. Some examples ar
 
 <h2 id="3-dataset">3. Dataset</h2>
 
-<p>We introduce a new <a href="https://archive.ics.uci.edu/ml/datasets/Tic-Tac-Toe+Endgame">dataset</a> from <a href="https://archive.ics.uci.edu/ml/index.php">UCI Machine Learning repository</a> website to learn how to handle categorical predictors in a classification problem.</p>
+<p>We introduce a new <a href="https://archive.ics.uci.edu/ml/datasets/Tic-Tac-Toe+Endgame" target="_blank">dataset</a> from <a href="https://archive.ics.uci.edu/ml/index.php" target="_blank">UCI Machine Learning repository</a> website to learn how to handle categorical predictors in a classification problem.</p>
 
 <p>This database encodes the complete set of possible board configurations at the end of tic-tac-toe games, where the <code>x</code> player is assumed to have played first.
 The target concept is <em>a win for x</em>, i.e., the response variable is True when <code>x</code> has got one of 8 possible ways to create a <code>three-in-a-row</code> crosses.</p>
@@ -292,7 +294,7 @@ The target concept is <em>a win for x</em>, i.e., the response variable is True 
 <p>The binary problem is slightly skewed to the positive class.
 About 65.3% are positive outcomes, i.e., wins for <code>x</code>.</p>
 
-<p>We use <a href="https://pandas.pydata.org/">Pandas</a> to read in the dataset and we provide full column schema with the <code>names</code> attribute.</p>
+<p>We use <a href="https://pandas.pydata.org/" target="_blank">Pandas</a> to read in the dataset and we provide full column schema with the <code>names</code> attribute.</p>
 
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
@@ -417,7 +419,7 @@ for kk, idx in enumerate(range(0, span*(Nimg-1)+1, span)):
 
 <p>We are going to use encoding functions implemented in Sklearn, namely <code>LabelEncoder</code> and <code>OneHotEncoder</code>.</p>
 
-<p>However, Pandas offers the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html"><code>get_dummies</code></a> method, which makes the procedure to transform the categorical features into dummy variables very straight forward.
+<p>However, Pandas offers the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html" target="_blank"><code>get_dummies</code></a> method, which makes the procedure to transform the categorical features into dummy variables very straight forward.
 It can be directly applied to the dataframe and the internal algorithm will recognize the categorical features.</p>
 
 <pre><code class="language-python">from sklearn.preprocessing import LabelEncoder, OneHotEncoder
@@ -458,7 +460,7 @@ for cc in range(Ncol):
 <p>However, this encoding is still not suitable for a machine-learning algorithm to digest, since this numerical encoding comes with intrinsic ordering, which is something we do not want.
 There is indeed no reason for the algorithm to <em>believe</em> that an <code>o</code> label should be closer to the <code>x</code> one than the blank position, but the numerical representation says that the distance between the <code>x</code> and <code>o</code> codes is less than that one between the <code>x</code> and <code>b</code> codes, i.e., $|1-2| &lt; |0-2|$.</p>
 
-<p>To this end, we introduce the <a href="https://en.wikipedia.org/wiki/One-hot">one-hot</a> encoding to represent the model predictors.</p>
+<p>To this end, we introduce the <a href="https://en.wikipedia.org/wiki/One-hot" target="_blank">one-hot</a> encoding to represent the model predictors.</p>
 
 <p>One-hot encoding can be seen as an array with as many elements as the number of distinct classes.
 All the elements are 0, except the element whose index coincides with the class value.
@@ -475,7 +477,7 @@ XXohe.shape
 </code></pre>
 
 <p>The figure shows two charts, the left-hand side is the original numerical-labelling representation (player x is grey, player o is blue, blank is green), while the right-hand side is the one-hot encoding representation (1 is grey, 0 is green).
-The LHS representation stores the board configuration with 9 values, which are unpacked into $9*3 = 27$ columns since each categorical variable can vary over three discrete values that require three bits each in the one-hot encoding.</p>
+The LHS representation stores the board configuration with 9 values, which are unpacked into $9\cdot 3 = 27$ columns since each categorical variable can vary over three discrete values that require three bits each in the one-hot encoding.</p>
 
 <pre><code class="language-python">window = 10
 plt.figure(figsize=(15,8))
@@ -503,7 +505,7 @@ YY[:10]
 
 <h2 id="6-training-a-logistic-regressor">6. Training a logistic regressor</h2>
 
-<p>We feed the one-hot encoded predictor array and the 1D array response variable to the logistic regression SKlearn module and follow the standard procedure.</p>
+<p>We feed the one-hot encoded predictor array and the 1D array response variable to the logistic regression Scitkit-learn module and follow the standard procedure.</p>
 
 <pre><code class="language-python">XXohe.shape, YY.shape
 </code></pre>
@@ -534,14 +536,16 @@ Recall: 1.0
         </div>
         <div class="pgNav PageNavigation col-12 text-center">
           <span>
-          <p>&laquo; <a class="" href="/blog/logreg/logreg3/" style="color: #4ABDAC; font-size: 18px; "> Learning to classify coffee from cappuccino - Part 3</a>
-
+          <p>&laquo; <a class="" href="/blog/logreg/logreg5/" style="color: #4ABDAC; font-size: 18px; "> Learning to classify coffee from cappuccino - Part 5</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/logreg/logreg7/" style="color: #4ABDAC; font-size: 18px; ">Learning to classify coffee from cappuccino - Part 7</a>
           
           &raquo;</p>
           </span>
           
+          
         </div>
-
       </div>
     </div>
   </div>

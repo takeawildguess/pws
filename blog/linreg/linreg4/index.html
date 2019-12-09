@@ -11,12 +11,13 @@
    <meta name="author" content="Your name"> 
   
 
-  <meta name="generator" content="Hugo 0.49" />
-  <title>Hello world example for Machine learning - Part 4 &middot; take a wild guess</title>
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Hello world for Machine learning - Part 4 &middot; take a wild guess</title>
 
   
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 
 
  <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
@@ -31,7 +32,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
-<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
 
   
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -40,6 +41,8 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
 
 
 
@@ -54,9 +57,6 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
 
-
-
-<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
 
 
 <script type="text/javascript">
@@ -103,13 +103,59 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
   <![endif]-->
 
   
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
 
   
   
-  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
-  <script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  </script>
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
   
 
 </head>
@@ -118,7 +164,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
   
     <a class="navbar-brand abs" href="https://takeawildguess.net/">
-      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Hello world example for Machine learning - Part 4">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Hello world for Machine learning - Part 4">
     </a>
   
   <a class="navbar-brand" href="/blog/linreg/linreg4/" style="font-size: 16px; ">Hello world</a>
@@ -152,11 +198,11 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
       
       <ul class="navbar-nav navbar-right">
         
-          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
         
       </ul>
       
@@ -171,13 +217,13 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <header class="postHead">
   <div class="container-fluid overlay">
     <div class="descr">
-      <img src="https://takeawildguess.net/images/blog/linearRegression/hello.jpeg" class="img-fluid" alt="__">
+      <img src="https://takeawildguess.net/blog/images/hello.jpeg" class="img-fluid" alt="__">
       <div class="card">
         <div class="card-body">
-          <h1 class="card-title text-center">Hello world example for Machine learning - Part 4</h1>
+          <h1 class="card-title text-center">Hello world for Machine learning - Part 4</h1>
           <h5 class="card-title text-center">Hello world</h5>
-          <h6 class="card-text text-center">January 27, 2019</h6>
-          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 22 min read</h6>
+          <h6 class="card-text text-center">February 3, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 13 min read</h6>
           <h6 class="card-text text-center">
             <a href="https://takeawildguess.net/tags/linear-regression"><kbd class="item-tag">linear-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> <a href="https://takeawildguess.net/tags/tensorflow"><kbd class="item-tag">tensorflow</kbd></a> 
           </h6>
@@ -201,13 +247,13 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <h2 id="1-introduction">1. Introduction</h2>
 
-<p>We have introduced the concept of the linear-regression problem and the structure to solve it in a &ldquo;machine-learning&rdquo; fashion in <a href="/blog/linreg/linreg1/">this</a> post, while we have applied the theory to a simple but practical case of linear-behavior identification from a bunch of data that are generated in a synthetic way <a href="/blog/linreg/linreg2/">here</a> and extend the analysis to a multi-linear case where more than one feature (or input) are fed to the model to predict the outcome <a href="/blog/linreg/linreg3/">here</a>.</p>
+<p>We have introduced the concept of the linear-regression problem and the structure to solve it in a &ldquo;machine-learning&rdquo; fashion in <a href="/blog/linreg/linreg1/">this</a> post, while we have applied the theory to a simple but practical case of linear-behaviour identification from a bunch of data that are generated in a synthetic way <a href="/blog/linreg/linreg2/">here</a> and extend the analysis to a multi-linear case where more than one feature (or input) are fed to the model to predict the outcome <a href="/blog/linreg/linreg3/">here</a>.</p>
 
-<p>We now face the implementation process with popular libraries available in the Python framework, namely <a href="https://scikit-learn.org/stable/">Sklearn</a> and <a href="https://www.tensorflow.org/">Tensorflow</a>.</p>
+<p>We now face the implementation process with popular libraries available in the Python framework, namely <a href="https://scikit-learn.org/stable/" target="_blank">Sklearn</a> and <a href="https://www.tensorflow.org/" target="_blank">Tensorflow</a>.</p>
 
 <p>Scikit-learn is a free software machine learning library for the Python programming language. It enables fast implementation of several classification, regression and clustering algorithms including support vector machines, random forests, gradient boosting and k-means, and is designed to interoperate with the Python numerical and scientific libraries NumPy and SciPy.</p>
 
-<p>TensorFlow is an open-source software library for dataflow programming across a range of tasks. It is a symbolic math library, and is mainly employed for machine learning applications and more recently deep learning modeling. It is developed by the <a href="https://ai.google/research/teams/brain">Google Brain</a> team.</p>
+<p>TensorFlow is an open-source software library for dataflow programming across a range of tasks. It is a symbolic math library, and is mainly employed for machine learning applications and more recently deep learning modeling. It is developed by the <a href="https://ai.google/research/teams/brain" target="_blank">Google Brain</a> team.</p>
 
 <p>Code-wise, such libraries let developers focus more on the model itself and achieving an overall better performance by optimizing the model hyper-parameters and by combining different models to deliver an ensemble version out of it.</p>
 
@@ -215,16 +261,19 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <h2 id="2-data-generation">2. Data generation</h2>
 
-<p>We are going to build three datasets:
-1. A multi-linear model of two inputs.
-2. A multi-linear model of two inputs, where one input outscales the other one.
-3. A multi-linear model of two inputs, where one of them represents polynomial features.</p>
+<p>We are going to build three datasets:</p>
+
+<ol>
+<li>A multi-linear model of two inputs.</li>
+<li>A multi-linear model of two inputs, where one input outscales the other one.</li>
+<li>A multi-linear model of two inputs, where one of them represents polynomial features.</li>
+</ol>
 
 <h3 id="2-1-a-multi-linear-model-of-two-inputs">2.1 A multi-linear model of two inputs</h3>
 
 <p>We start generating some synthetic data (<code>Npntx*Npnty=50*50</code> points).
-We assume we know both the slope of the two inputs ($ \omega_1 = 3, \omega_2 = -1 $) and the intercept ($ \omega_0 = 5 $) of the plane we want to indentify, but we also introduce some noise with a gaussian distribution and zero-mean to the plane to make the data source a bit closer to real-world scenarios.
-The chart shows the generated data cloud (see <a href="/blog/linreg/linreg3/">this</a> post for futher details).
+We assume we know both the slope of the two inputs ($ \omega_1 = 3, \omega_2 = -1 $) and the intercept ($ \omega_0 = 5 $) of the plane we want to identify, but we also introduce some noise with a gaussian distribution and zero-mean to the plane to make the data source a bit closer to real-world scenarios.
+The chart shows the generated data cloud (see <a href="/blog/linreg/linreg3/">this</a> post for further details).
 Here follows the mathematical expression of the model:</p>
 
 <p>$$ y = \omega_0 + \omega_1\cdot x_1 + \omega_2\cdot x_2 $$</p>
@@ -262,9 +311,9 @@ ax.view_init(30, 35)
 plt.show()
 </code></pre>
 
-<p><img src="output_4_0.png" alt="png" /></p>
+<p><img src="output_5_0.png" alt="png" /></p>
 
-<p>The dataset is generated by creating two 2D arrays, one for inputs and one for output.
+<p>The dataset is generated by creating two 2D arrays, one for inputs and one for outputs.
 The input array, <code>XX</code>, is the horizontal concatenation of the flattened version of the two input arrays, <code>xx1</code> and <code>xx2</code>.
 There is no need to add the column filled with 1s, as we had to do in the Numpy implementation.</p>
 
@@ -287,10 +336,10 @@ However, the mathematical correlation does not change:</p>
 
 <p>$$ y = \omega_0 + \omega_1\cdot x_1 + \omega_2\cdot x_2 $$</p>
 
-<p>In real-life task, it is common to face such situations. Credit risk management is one example, where some inputs to the model could be how many employees work for the company that should take the loan, and the annual revenue.
+<p>In a real-life task, it is common to face such situations. Credit risk management is one example, where some inputs to the model could be how many employees work for the company that should take the loan, and the annual revenue.
 The order of magnitude of the latter is way too greater than the former, in general.</p>
 
-<p>You can see in the below chart how the second input looks like to have no impact ot the outcome of the model.</p>
+<p>You can see in the below chart how the second input looks like to have no impact on the outcome of the model.</p>
 
 <pre><code class="language-python">Npntx, Npnty = 50, 50 # number of points
 x1_ = np.linspace(-100, 100, Npntx)
@@ -318,7 +367,7 @@ ax.view_init(30, 35)
 plt.show()
 </code></pre>
 
-<p><img src="output_9_0.png" alt="png" /></p>
+<p><img src="output_10_0.png" alt="png" /></p>
 
 <p>The dataset is generated with the same procedure.</p>
 
@@ -339,7 +388,7 @@ The mathematical correlation is as follows:</p>
 
 <p>In real-life task, it is common to face such situations. Joule heating is one example, where the heat released by a light bulb is correlated to the square of the electric current through the wires.</p>
 
-<p>You can see in the below chart how the first input is responsible of the curvature of the generated surface.</p>
+<p>You can see in the below chart how the first input is responsible for the curvature of the generated surface.</p>
 
 <pre><code class="language-python">Npntx, Npnty = 50, 50 # number of points
 x1_ = np.linspace(-5, 5, Npntx)
@@ -368,7 +417,7 @@ ax.view_init(30, 35)
 plt.show()
 </code></pre>
 
-<p><img src="output_14_0.png" alt="png" /></p>
+<p><img src="output_15_0.png" alt="png" /></p>
 
 <p>The dataset is generated with the same procedure.</p>
 
@@ -382,7 +431,7 @@ print([XX3.shape, YY3.shape])
 
 <h2 id="3-linear-regression-with-scikit-learn">3. Linear regression with Scikit-learn</h2>
 
-<p>We import the module required to define the linear model, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html"><strong>LinearRegression</strong></a>, from the <code>linear_model</code> package, and the module to evaluate the performance of the model, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html"><strong>RMSE</strong></a>, from the <code>metrics</code> package.
+<p>We import the module required to define the linear model, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html" target="_blank"><strong>LinearRegression</strong></a>, from the <code>linear_model</code> package, and the module to evaluate the performance of the model, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html" target="_blank"><strong>RMSE</strong></a>, from the <code>metrics</code> package.
 It is enough to fit the model parameters to the first dataset and to calculate the model prediction for the inputs of each sample of the same dataset.</p>
 
 <p>We can realize (and appreciate) how the overall code ends up being much more compact and easier to write and maintain.</p>
@@ -419,9 +468,9 @@ plt.tight_layout()
 plt.show()
 </code></pre>
 
-<p><img src="output_21_0.png" alt="png" /></p>
+<p><img src="output_22_0.png" alt="png" /></p>
 
-<p>In three lines of Pyhton code we are now able to perform what requires a lot of effort and coding when starting from scratch.</p>
+<p>In three lines of Python code, we are now able to perform what requires a lot of effort and coding when starting from scratch.</p>
 
 <h2 id="4-linear-regression-with-tensorflow">4. Linear regression with TensorFlow</h2>
 
@@ -431,7 +480,7 @@ plt.show()
 
 <p>The very first step is to reset the TF to the default graph, which means TF clears the default graph stack and resets the global default graph.</p>
 
-<p>We then define the <code>x</code> and <code>y</code> variables as <a href="https://www.tensorflow.org/api_docs/python/tf/placeholder"><code>placeholder</code></a>, while the <code>ww</code> parameters as <a href="https://www.tensorflow.org/guide/variables"><code>variable</code></a>.</p>
+<p>We then define the <code>x</code> and <code>y</code> variables as <a href="https://www.tensorflow.org/api_docs/python/tf/placeholder" target="_blank"><code>placeholder</code></a>, while the <code>ww</code> parameters as <a href="https://www.tensorflow.org/guide/variables" target="_blank"><code>variable</code></a>.</p>
 
 <p>In short, <code>tf.Variable</code> is used for trainable parameters of the model, while <code>tf.placeholder</code> is used to feed actual training examples.
 That&rsquo;s why we need to assign initial values, often random-generated, to the TF variables only.
@@ -481,10 +530,10 @@ optimizer = tf.train.AdamOptimizer(learning_rate=0.01).minimize(loss=mdlLoss)
 
 <p>The next steps are to:
 1. initialize the variables.
-2. run a new session, which let us perform the actual computation by exploitng the graph structure previousluy defined.
-3. run the optimizer as many steps as the numner of epochs <code>Nepoch</code>.
-4. run the model with the final parameter set and store the mdoel output <code>ymdl</code> into the prediction array.
-5. retrieve the final parameter values by running a dedicated session. A different way would be to call the <a href="https://www.tensorflow.org/api_docs/python/tf/global_variables">global_variables()</a> method and get the variable values by key name.</p>
+2. run a new session, which let us perform the actual computation by exploiting the graph structure previously defined.
+3. run the optimizer as many steps as the number of epochs <code>Nepoch</code>.
+4. run the model with the final parameter set and store the model output <code>ymdl</code> into the prediction array.
+5. retrieve the final parameter values by running a dedicated session. A different way would be to call the <a href="https://www.tensorflow.org/api_docs/python/tf/global_variables" target="_blank">global_variables()</a> method and get the variable values by key name.</p>
 
 <pre><code class="language-python">Nepoch = 5000
 init = tf.global_variables_initializer()
@@ -497,7 +546,7 @@ with tf.Session() as sess:
             Jevol.append((kk, mdl_loss))
         if kk==Nepoch-1:
             print('The final model loss is {}'.format(mdl_loss))
-
+    
     Ypred_tf = sess.run(ymdl, feed_dict={xp: XX1})
     bOpt, wOpt = sess.run([bb, ww])
 </code></pre>
@@ -540,20 +589,28 @@ plt.show()
 
 <p><img src="output_34_0.png" alt="png" /></p>
 
+<h2 id="reference">Reference</h2>
+
+<ol>
+<li><a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf" target="_blank">CS229 notes</a></li>
+<li><a href="https://www.coursera.org/learn/machine-learning" target="_blank">Machine Learning at Coursera</a></li>
+<li><a href="http://people.math.gatech.edu/~ecroot/3225/maximum_likelihood.pdf" target="_blank">Maximum likelihood estimators and least squares</a></li>
+<li><a href="https://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf" target="_blank">An Introduction to Statistical Learning</a></li>
+</ol>
+
         </div>
         <div class="pgNav PageNavigation col-12 text-center">
           <span>
-          <p>&laquo; <a class="" href="/blog/linreg/linreg5/" style="color: #4ABDAC; font-size: 18px; "> Hello world example for Machine learning - Part 5</a>
-
+          <p>&laquo; <a class="" href="/blog/linreg/linreg3/" style="color: #4ABDAC; font-size: 18px; "> Hello world for Machine learning - Part 3</a>
           
           &nbsp;&nbsp; | &nbsp;&nbsp;
-          <a class="" href="/blog/logisticregression_part1/" style="color: #4ABDAC; font-size: 18px; ">How to learn to classify - Part 1</a>
+          <a class="" href="/blog/linreg/linreg5/" style="color: #4ABDAC; font-size: 18px; ">Hello world for Machine learning - Part 5</a>
           
           &raquo;</p>
           </span>
           
+          
         </div>
-
       </div>
     </div>
   </div>

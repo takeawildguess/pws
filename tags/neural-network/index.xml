@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>neural network on take a wild guess</title>
+    <link>https://takeawildguess.net/tags/neural-network/</link>
+    <description>Recent content in neural network on take a wild guess</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://takeawildguess.net/tags/neural-network/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Can we visualize the flow of a regression neural network?</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn16/</link>
+      <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn16/</guid>
+      <description>1. Introduction Welcome back to the FCNN series!
+In this new post, we are going to use the Python visualization class, visFCNN(), developed in the two previous posts. We want to see what happens inside a feed-forward neural network, which has been trained on toy examples with Tensorflow with the previously-developed Python class, trainFCNN(), for a regression problem.
+The Python class, visFCNN(), takes as input a dictionary containing all the information required to visualize the network flow, namely the values of the network parameters and main nodes (inputs, linear outputs and activation outputs).</description>
+    </item>
+    
+    <item>
+      <title>How to build a Python class to visualize a neural network?</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn15/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn15/</guid>
+      <description>1. Introduction Welcome back to the FCNN series!
+In this new post, we are going to develop a Python class to visualize what happens inside a feed-forward neural network, which has been trained on toy examples with Tensorflow with the previously-developed Python class, trainFCNN(). The Python class, visFCNN(), takes as input a dictionary containing all the information required to visualize the network flow, namely the values of the network parameters and main nodes (inputs, linear outputs and activation outputs).</description>
+    </item>
+    
+    <item>
+      <title>Can we see inside a neural network?</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn14/</link>
+      <pubDate>Sun, 24 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn14/</guid>
+      <description>1. Introduction Welcome back to the FCNN series!
+In this new post, we are going to dig in and see what happens inside a feed-forward neural network that has been trained to return the right output.
+We train the neural network on some basic examples with Tensorflow. If you are new to this library, please check these two posts out, 1 and 2, as well as my introductory post on linear regression and that one on neural networks.</description>
+    </item>
+    
+    <item>
+      <title>Multi-hyperparameter analysis of a neural network and computational comparison</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn13/</link>
+      <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn13/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post we are going to:</description>
+    </item>
+    
+    <item>
+      <title>Hyperparameter analysis for regression</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn12/</link>
+      <pubDate>Sun, 10 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn12/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to analyze the hyperparameter (HP) space for a regression problem in Keras.</description>
+    </item>
+    
+    <item>
+      <title>Hyperparameter analysis for multi-class classification</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn11/</link>
+      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn11/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to analyze the hyperparameter (HP) space for a multi-class classification problem in Keras.</description>
+    </item>
+    
+    <item>
+      <title>Meta-learning neural networks over basic tasks</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn10/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn10/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to analyze the hyper-parameter space, which is referred to as meta-learning.</description>
+    </item>
+    
+    <item>
+      <title>How neural networks learn basic features with Pytorch</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn09/</link>
+      <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn09/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to analyze how to train a neural network on toy examples with Pytorch.</description>
+    </item>
+    
+    <item>
+      <title>Key notions of Pytorch</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn08/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn08/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to introduce the key components and modules of Pytorch, while we are going to use and apply to a neural network in the next one.</description>
+    </item>
+    
+    <item>
+      <title>How neural networks learn basic features with Tensorflow</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn07/</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn07/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to analyze how to train a neural network on toy examples with Tensorflow.</description>
+    </item>
+    
+    <item>
+      <title>How neural networks learn basic features with Keras</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn06/</link>
+      <pubDate>Sun, 29 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn06/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to analyze how to train a neural network on toy examples with Keras.</description>
+    </item>
+    
+    <item>
+      <title>How neural networks learn basic features with Scikit-learn</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn05/</link>
+      <pubDate>Sun, 22 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn05/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to analyze how to train a neural network on toy examples with Scikit-learn.</description>
+    </item>
+    
+    <item>
+      <title>How neural networks learn basic features - Create datasets</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn04/</link>
+      <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn04/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In the following posts, we are going to analyze toy examples with advanced deep-learning libraries, namely Scikit-learn, Keras, Tensorflow and Pytorch.</description>
+    </item>
+    
+    <item>
+      <title>FCNN - Geometric intuition behind neural networks</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn03/</link>
+      <pubDate>Sun, 08 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn03/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In the previous post, we gave some geometric insight into what occurs in a single neuron.</description>
+    </item>
+    
+    <item>
+      <title>FCNN - Geometric intuition behind a neuron</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn02/</link>
+      <pubDate>Sun, 01 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn02/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this post, we give some geometric insight into what occurs in a single neuron.</description>
+    </item>
+    
+    <item>
+      <title>Fully connected neural networks - cheat sheet</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn01/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn01/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+Plenty of books, lectures, tutorials and posts are available out there. The scope here is to analyze the topic with a slightly different perceptive.
+The series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!</description>
+    </item>
+    
+  </channel>
+</rss>

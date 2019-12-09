@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Do not overlearn your data too much, learn to generalize - Part 3 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Do not overlearn your data too much, learn to generalize - Part 3">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/mdlsel/mdlsel3/" style="font-size: 16px; ">Learning to learn your data</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/mdlselHead.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Do not overlearn your data too much, learn to generalize - Part 3</h1>
+          <h5 class="card-title text-center">Learning to learn your data</h5>
+          <h6 class="card-text text-center">April 28, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 9.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/model-selection"><kbd class="item-tag">model selection</kbd></a> <a href="https://takeawildguess.net/tags/overfitting"><kbd class="item-tag">overfitting</kbd></a> <a href="https://takeawildguess.net/tags/regularization"><kbd class="item-tag">regularization</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/learning-curve"><kbd class="item-tag">learning curve</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>After two introductory post-series (<a href="/blog/linreg/linreg1/">linear</a> and <a href="/blog/logreg/logreg1/">logistic</a> regression), we dive into a crucial topic that every machine-learning practitioner should be at least aware of: <strong>model selection</strong>.</p>
+
+<p>Basically, we do not want our models to learn our data by heart and then to struggle to handle new unseen data samples.
+We want them to be great at generalizing.</p>
+
+<p>We have introduced the <em>bias</em> and <em>variance</em> concepts in <a href="/blog/mdlsel/mdlsel1/">Part1</a> and the bias-variance dilemma, the model capacity, the training/testing split practice and learning curves analysis in <a href="/blog/mdlsel/mdlsel2/">Part2</a>.</p>
+
+<p>We now go through the hyperparameter optimization for model selection, via cross-validation, and the regularization technique.
+The former topic is more recently referred to as <strong>meta-learning</strong>.</p>
+
+<h2 id="2-hyperparameter-optimization-for-model-selection">2. Hyperparameter optimization for model selection</h2>
+
+<p>We define two levels of parameters of a class of models:</p>
+
+<ol>
+<li>hyperparameter: high-level parameters that define specific properties of the main model type and of the learning algorithm.</li>
+<li>parameters: low-level parameters that describe the actual model itself for a given model type.</li>
+</ol>
+
+<p>For instance, if we build a logistic regression model, we may want to define the odds ratio as a polynomial function of degree $N$, the learning rate of the gradient descent algorithm, the lambda factor that controls the model regulation (see later [section] for further details). They all are hyperparameters, where the first one is at the model level while the remainders are at the learning-algorithm one.
+Instead, the coefficients of the polynomial function of the inputs, which are learned via gradient descent algorithm, are the low-level parameters.</p>
+
+<p>We introduce one promising method to choose/tune the model hyperparameters: random search with cross-validation.
+We apply this powerful technique to select the optimal degree of the polynomial function used to describe the generated dataset.</p>
+
+<p>Here follows the procedure to implement:</p>
+
+<ol>
+<li>Set up a grid of hyperparameters to evaluate. In our case, it could be the integer list ranging from 1 to the maximum admissible degree.</li>
+<li>Randomly sample a combination of hyperparameters. We can start with degree equal to 3.</li>
+<li>Train the model with that specific setting.</li>
+<li>Assess the model with the K-fold cross-validation method.</li>
+<li>Select the best hyperparameters.</li>
+</ol>
+
+<p>Cross-validation entails to split the whole training dataset into multiple permutations of training and validation sets.
+It is referred to as k-fold validation, since the whole dataset is split into <code>k</code> subsets and the validation step is repeated <code>k</code> times.
+Each time, one of the <code>k</code> subsets is selected as validation set while the remaining <code>k-1</code> subsets are combined into the new training set.
+The overall model error will be the average error on each of the <code>k</code> iterations of the cross-validation.</p>
+
+<p>It is often summarized that model parameters are learned on the training set, the hyperparameters are optimized on the validation set and the overall effective model performance is assessed on the test set.</p>
+
+<p>We start generating a dataset and splitting it into the training and test sets, with 80-20% ratio, respectively.
+Since we generate 500 points, training set contains 400 points, while test set the remaining 100.</p>
+
+<p><img src="/blog/mdlsel/mdlsel3/grid_search_cross_validation.png" alt="pngM" title="Cross-validation" />
+<center><em>Figure 1 - Cross-validation</em> - <a href="https://scikit-learn.org/stable/_images/grid_search_cross_validation.png" target="_blank">source</a></center></p>
+
+<pre><code class="language-python">Npnts = 500
+xData, yData = genData(Npnts)
+idxSplit = int(.8*Npnts)
+xTrain, xTest = xData[:idxSplit], xData[idxSplit:]
+yTrain, yTest = yData[:idxSplit], yData[idxSplit:]
+print('Training set size: {}'.format(xTrain.shape[0]))
+print('Test set size: {}'.format(xTest.shape[0]))
+</code></pre>
+
+<pre><code>Training set size: 400
+Test set size: 100
+</code></pre>
+
+<p>We train and assess the model on training set only.
+The error is 3.99. We need to evaluate it on the test to determine its capability of generalizing.
+The test error is greater than the training error by 86.5%.</p>
+
+<pre><code class="language-python">PF = PolynomialFeatures(1)
+lr = LinearRegression()
+lr.fit(PF.fit_transform(xTrain), yTrain)
+errTrain = np.mean((lr.predict(PF.fit_transform(xTrain))-yTrain)**2)
+print('Training error: {}'.format(errTrain))
+</code></pre>
+
+<pre><code>Training error: 3.9894085224268645
+</code></pre>
+
+<pre><code class="language-python">errTest = np.mean((lr.predict(PF.fit_transform(xTest))-yTest)**2)
+print('Testing error: {}'.format(errTest))
+print('Increment: {}'.format((errTest-errTrain)/errTrain*100))
+</code></pre>
+
+<pre><code>Testing error: 7.44277706585903
+Increment: 86.5634222220839
+</code></pre>
+
+<p>The next step is to use the k-fold cross-validation method to choose the best polynomial degree and then assess the final model on the test set one more time.
+If we use <code>k=8</code> subsets, each will be 50-samples big.
+Within a for-loop ranging from 1 to <code>k=8</code>, the <code>k</code>-th slice of 50 training samples from the training set is selected as current validation set, while everything else is transferred to the current training set.
+We use the Numpy <code>delete</code> function to pop the validation set from the training set to obtain the current set.</p>
+
+<p>The validation error is saved for each iteration and the mean is returned as the actual score of that specific setting, which is the first-degree polynomial model.
+We need to repeat these steps for each hyperparameter setting to investigate.</p>
+
+<pre><code class="language-python">def crossValidation(kFold=8, degree=1):
+    valSetSize = int(idxSplit/kFold)
+    errVals = []
+    for kk in range(kFold):
+        xVal = xTrain[kk*valSetSize:(kk+1)*valSetSize, :]
+        yVal = yTrain[kk*valSetSize:(kk+1)*valSetSize]
+        xTrain0 = np.delete(xTrain, range(kk*valSetSize,(kk+1)*valSetSize), axis=0)
+        yTrain0 = np.delete(yTrain, range(kk*valSetSize,(kk+1)*valSetSize))
+        PF = PolynomialFeatures(degree)
+        lr = LinearRegression()
+        lr.fit(PF.fit_transform(xTrain0), yTrain0)
+        errVal = np.mean((lr.predict(PF.fit_transform(xVal))-yVal)**2)
+        errVals.append(errVal)
+
+    return np.mean(np.array(errVals))
+
+errVal = crossValidation(8, 1)
+print('Average model performance on the k-fold validation set: {:.4f}'.format(errVal))
+</code></pre>
+
+<pre><code>Average model performance on the k-fold validation set: 7.0730
+</code></pre>
+
+<pre><code class="language-python">degrees = list(range(1, 10))
+errVals = []
+for degree in degrees:
+    errVals.append(crossValidation(8, degree=degree))
+
+optDegree = degrees[np.argmin(errVals)]
+print('The optimal degree value by applying the k-fold cross-validation is {}'.format(str(optDegree)))
+</code></pre>
+
+<pre><code>The optimal degree value by applying the k-fold cross-validation is 5
+</code></pre>
+
+<p>The figure shows the error trend wrt the model degree.</p>
+
+<pre><code class="language-python">plt.figure()
+plt.plot(degrees, np.log10(errVals))
+</code></pre>
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x1c41cd8a400&gt;]
+</code></pre>
+
+<p><img src="output_12_1.png" alt="png" /></p>
+
+<p>Here we calculate the test error of the best model selected with cross-validation.
+Recall to feed the test set inputs to the polynomial transformation function defined by the optimal degree <code>optDegree</code>, otherwise the <code>predict()</code> method would throw an error.</p>
+
+<pre><code class="language-python">PF = PolynomialFeatures(optDegree)
+lr = LinearRegression()
+lr.fit(PF.fit_transform(xTrain), yTrain)
+errTest = np.mean((lr.predict(PF.fit_transform(xTest))-yTest)**2)
+print('Testing error: {}'.format(errTest))
+</code></pre>
+
+<pre><code>Testing error: 5.733407165800337
+</code></pre>
+
+<h2 id="3-regularization">3. Regularization</h2>
+
+<p>We have seen that model selection is a key practice to avoid either high bias or high variance and at least get a trade-off of the two terms.</p>
+
+<p>If we take the polynomial function as an example, we can set its degree with an hyperparameter or force the learning algorithm to set to 0 some parameters corresponding to the high-degree terms of a given polynomial.</p>
+
+<p>How can we force the learning system to drop some parameters, by setting their values to 0, to achieve best overall trade-off?</p>
+
+<h3 id="reg_ridge">3.1 Ridge</h3>
+
+<p>We can introduce an additional term to the loss function, which is going to penalize very high values of the model parameters.
+Instead of forcing the coefficients to be exactly 0, we can discount for values way too far from 0. In that way, the penalty is continuous in the parameter domain.
+An important conclusion is that this approach will not cancel irrelevant features out of the model but rather will minimize their impact on the trained model.
+This penalty is related to the magnitude of each parameter of the model inputs, so the penalty is not affected by the bias.
+The penalty definition is then as follows:</p>
+
+<p>$$ P(\theta) = \frac{1}{2\cdot m}\sum_{k=1}^{N} \theta_k^2 $$</p>
+
+<p>which is continuous and differentiable. The learning process would not be stable if the penalty definition were as:</p>
+
+<p>$$ P(\theta) =
+\begin{cases}
+    10,&amp; \text{if any } \theta_k\neq 0\\<br />
+    0, &amp; \text{otherwise}
+\end{cases} $$</p>
+
+<p>because the gradient would be 0 everywhere and take huge values at 0.</p>
+
+<p>This model is called <strong>Ridge regression</strong> and the overall loss function is:</p>
+
+<p>$$ J = \frac{1}{2\cdot m}\big(\underbrace{\sum_{j=1}^{m} (y^j-\theta^T \cdot x^j)^2}_\text{OLS} + \lambda\cdot\underbrace{\sum_{k=1}^{N} \theta_k^2}_\text{Penalty}\big) $$</p>
+
+<p>Please refer to <a href="lR" target="_blank">this</a> post to get the OLR (ordinary linear regression) loss definition, where ordinary implies no regularization.</p>
+
+<p>The $\lambda$ parameter is a weighting factor that plays the role of balancing the importance of the two terms. The higher its value, the higher the regularization impact, the simpler the model. At limit, $\lambda = 0$ gives us the OLR.</p>
+
+<p>We need to calculate the gradient of the loss function to apply the <strong>gradient descent</strong> algorithm to the regularized linear regression problem.
+We split the gradient calculus into two steps, one for the OLS term, the other for the penalty term.
+The gradient of the first term for the $\theta_k$ parameter is as follows (Eq. 1):</p>
+
+<p>$$\frac{\partial J_{OLS}}{\partial \theta_k} = \frac{1}{m}\sum_{j=1}^{m} (y^j-\theta^T \cdot x^j)\cdot x_k^j $$</p>
+
+<p>Please have a look at <a href="bloglinreglinreg2" target="_blank">this post</a> for further details about the gradient calculation.</p>
+
+<p>The gradient of the penalty term is:</p>
+
+<p>$$ \frac{\partial P(\theta)}{\partial \theta_k} = \frac{\partial}{\partial \theta_k}\big(\frac{1}{2\cdot m}\sum_{j=1}^{N} \theta_j^2 \big) = \frac{1}{m} \theta_k $$</p>
+
+<p>Keep in mind that the input feature associated to the first parameter $\theta_0$, which is the intercept, is always 1, and that the penalty loss gradient is 0 for $\theta_0$ since we are summing from $j=1$ to $N$.</p>
+
+<h3 id="3-2-lasso">3.2 Lasso</h3>
+
+<p>The second approach, referred to as Least Absolute Shrinkage and Selection Operator (<a href="https://en.wikipedia.org/wiki/Lasso_(statistics)" target="_blank"><strong>Lasso</strong></a>), defines the penalty as the mean of the absolute value of the model parameters:</p>
+
+<p>$$ P(\theta) = \frac{1}{2\cdot m}\sum_{k=1}^{N} |\theta_k| $$</p>
+
+<p>This minor change has a huge impact on the model trade-off since the Lasso method pushes the model parameters to be exactly 0 if they are not beneficial for significant model performance improvements.
+The final model could have fewer features since the effect of some has been cancelled out by 0 parameters.
+Fewer features could mean that the overall degree of the function is reduced, which has a similar effect to reducing the model degree (hyperparameter), or at least that the final model is less sensitive to the noise of any of the inputs.</p>
+
+<h3 id="3-3-comparing-ridge-and-lasso">3.3 Comparing Ridge and Lasso</h3>
+
+<p>Ridge and Lasso regressions are both forms of regularized linear regressions.
+The regularization can also be interpreted as prior in a maximum a posteriori estimation method.
+Under this interpretation, the ridge and the lasso make different assumptions on the class of linear transformation they infer to relate input and output data.
+In the ridge, the coefficients of the linear transformation are normal distributed and in the lasso, they are Laplace distributed.
+In the lasso, this makes it easier for the coefficients to be zero and therefore easier to eliminate some of your input variables as not contributing to the output.</p>
+
+<p>Lasso tends to do well if there are a small number of significant parameters and the others are close to zero
+Ridge works well if there are many large parameters of about the same value.</p>
+
+<p>In practice, just run cross-validation to select the more suited model for a specific case.
+See <a href="https://stats.stackexchange.com/questions/866/when-should-i-use-lasso-vs-ridge/874#874" target="_blank">this</a> answer on StackExchange for further details.</p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/mdlsel/mdlsel2/" style="color: #4ABDAC; font-size: 18px; "> Do not overlearn your data too much, learn to generalize - Part 2</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/mdlsel/mdlsel4/" style="color: #4ABDAC; font-size: 18px; ">Do not overlearn your data too much, learn to generalize - Part 4</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

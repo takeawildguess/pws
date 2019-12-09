@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>How neural networks learn basic features with Keras &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="How neural networks learn basic features with Keras">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/fcnn/fcnn06/" style="font-size: 16px; ">FCNN with Keras</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/fcnnHead.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">How neural networks learn basic features with Keras</h1>
+          <h5 class="card-title text-center">FCNN with Keras</h5>
+          <h6 class="card-text text-center">September 29, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 12 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/neural-network"><kbd class="item-tag">neural network</kbd></a> <a href="https://takeawildguess.net/tags/keras"><kbd class="item-tag">keras</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts related to a huge and popular topic in machine learning: <strong>fully connected neural networks</strong>.</p>
+
+<p>The general series scope is three-fold:</p>
+
+<ol>
+<li>visualize the model features and characteristics with schematic pictures and charts</li>
+<li>learn to implement the model with different levels of abstraction, given by the framework used</li>
+<li>have some fun with one of the hottest topics right now!</li>
+</ol>
+
+<p>In this new post, we are going to analyze how to train a neural network on toy examples with <strong>Keras</strong>.
+We are going through the following steps:</p>
+
+<ol>
+<li>training setting</li>
+<li>define the network architecture: dense layer, activation function and stack of layers</li>
+<li>train: loss and accuracy functions, optimizer and learning process</li>
+<li>visualize prediction</li>
+</ol>
+
+<p>Point 2 implies to create a layer class with corresponding weights and biases that need to be learned during <em>train</em> step.</p>
+
+<p>The whole code to create a synthetic dataset and learn a neural network model with any of the four libraries mentioned above is wrapped into a Python class, <code>trainFCNN()</code>, and can be found in my Github <a href="https://github.com/takeawildguess/FCNNlib" target="_blank">repo</a>.</p>
+
+<h2 id="2-installing-and-importing">2. Installing and importing</h2>
+
+<p>First of all, we need to install this library with the <code>pip</code> command and to import the required package.</p>
+
+<p><img src="/blog/fcnn/fcnn06/keras.png" alt="pngS" title="Keras logo" />
+<center><em>Figure 1 - Keras logo</em></center></p>
+
+<pre><code class="language-python">$ pip install numpy matplotlib keras tensorflow
+</code></pre>
+
+<pre><code class="language-python">import numpy as np
+%matplotlib inline
+import matplotlib.pyplot as plt
+
+import tensorflow as tf
+import keras as ks
+from keras.models import Sequential
+from keras.layers import Dense, Activation
+from keras.optimizers import SGD, RMSprop, Adam
+from keras.utils import np_utils
+</code></pre>
+
+<pre><code>C:\Users\u21f73\anaconda3\lib\site-packages\h5py\__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using TensorFlow backend.
+</code></pre>
+
+<h2 id="3-train-function">3. <code>Train</code> function</h2>
+
+<p>Now we need to define the network itself with any of the four different libraries.
+The functionalities and the process are created and handled within the <code>train</code> function.</p>
+
+<p>We initialize the main parameters for this function as follows:</p>
+
+<pre><code class="language-python">def train(self, nb_epochs=100, dims=[2], activation='sigmoid'):
+        self.LR = 0.005 # learning_rate
+        self.nb_epochs = nb_epochs
+        self.nb_batch = 100
+        self.activation = activation
+        self.nb_layer = len(self.dims)-1 # number of layers in the network with learnable parameters
+</code></pre>
+
+<p><code>dims</code> helps us to define the dimensions of the number of units for every hidden layer.
+This is a list of integers where each integer specifies the number of units for every hidden layer.</p>
+
+<p>If we want to have 1-input layer, 3-hidden layer and 1-output layer neural network, then we can just feed a list of 3 integers,  such as <code>[2, 4, 4]</code>, because internally the code is going to also append one dimension for the input, whose number of units is fixed and equal to <code>2</code> for the two inputs only, and, at the end, one for the output, which can be either <code>1</code>, if you have a regression or a binary classification, or the number of output layer units equal to the number of classes <code>self.nb_class</code>, if we have multi-class problem.</p>
+
+<p>Just recall that, if we have a binary problem, we just need to output the probability of the input to belong to one of the two classes, that&rsquo;s why we only need one output!</p>
+
+<pre><code class="language-python">self.dims = [2] + dims + [self.nb_class if self.kind=='multiCls' else 1]
+</code></pre>
+
+<p>We want to differentiate the activation function for the output layer <code>self.lastActFun</code>.
+For <em>regression</em> that has to be a linear activation, since we just need to take the dense layer output and use it as the response variable.</p>
+
+<p>We need a sigmoid function for a <em>binary classification</em> because we want to squeeze the dense layer output to <code>0-1</code> range and that is going to represent the probability of the input to belong to any of the two classes.</p>
+
+<p>In the last case, a <em>multi-class</em> problem, we need a softmax function for the last layer.</p>
+
+<pre><code class="language-python">self.lastActFun = 'sigmoid' if self.kind == 'binCls' else 'softmax' if self.kind == 'multiCls' else 'linear'
+</code></pre>
+
+<h2 id="4-building-and-training-the-model-with-keras">4. Building and training the model with <code>Keras</code></h2>
+
+<p>Now we move to <code>Keras</code>!
+Since Keras is also a high-level library, it is going to be a bit more verbose than Sklearn but still quite comfortable.</p>
+
+<p>We need to build the model structure first and we are going to use <code>sequential()</code>.
+Basically, a feed-forward network is just a sequential process of the input as many times as many layers we do have.
+<code>sequential()</code> is a method to stack different layers.
+That&rsquo;s why we need to initiate the model instance using it.</p>
+
+<p>The dense creation process is handled within a for-loop repeated as many layers <code>nb_layer</code> we need to stack.
+But we treat the last layer in a different way.
+so whenever the output is not the last one, the activation function is just what the user specified into the <code>train</code> function.
+Otherwise, we&rsquo;re going to use either a <code>linear</code> if your regression problem or <code>sigmoid</code> for binary or <code>softmax</code> for multi-class as activation function, which has already been identified according to the problem to solve and stored into <code>self.lastActFun</code>.</p>
+
+<p>Here you can see that this kind of understanding was not necessary for Sklearn so you just need to specify the attribute for the hidden layers but a Sklearn is going to understand which activation is required for the last output automatically.</p>
+
+<p>After that we just need to use the dense object <code>Dense()</code> and we need to specify <code>units</code> as the number of output units and <code>input_dim</code> as the input dimension.
+By default we just need to give the input dimension only for the first dense layer.
+Afterwards, Keras is able to automatically determine that the input dimension of the new dense layer is going to have the units of the previous dense layer.
+But here we want to have control of the dense creation process within a for loop, so we specify the input dimension for each layer.</p>
+
+<p>We specify that bias has to be initialized as zeros using the attribute <code>bias_initializer=&quot;zeros&quot;</code> and we make use of random uniform generation process for weights with <code>kernel_initializer=&quot;random_uniform&quot;</code>.
+At the end of this for-loop, we can visualize the structure using the <code>summary</code> attribute.</p>
+
+<pre><code class="language-python">mdl = Sequential() # model initialization
+for kk in range(self.nb_layer):
+    actFun = self.activation if kk&lt;self.nb_layer-1 else self.lastActFun
+    mdl.add(Dense(units=self.dims[kk+1], input_dim=self.dims[kk], activation=actFun,\
+                  kernel_initializer=&quot;random_uniform&quot;, bias_initializer=&quot;zeros&quot;))
+if self.display: print(mdl.summary()) # Print out the network configuration
+</code></pre>
+
+<p>We specify the optimizer <code>optimizer</code> that we need to use to get the optimal set of parameters, the <code>loss</code> function and the metric <code>metrics</code>.</p>
+
+<p><code>loss</code> is going to be the function that Keras uses to find the optimal weights.
+So optimal is <em>relative</em> to this function.
+<code>metrics</code> instead is what we are going to use to assess the model at the end.</p>
+
+<p><code>optimizer</code> is just the optimizer itself. It could be <code>Adam</code>, <code>SGD</code> or anything else available in Keras.
+<a href="https://keras.io/optimizers/" target="_blank">Here</a> you can find the full list of optimizers.</p>
+
+<p>Please remember that if you want to specify the learning rate in Keras you have to specify it as an attribute to the optimizer itself that you&rsquo;re going to feed to the compile function.</p>
+
+<pre><code class="language-python">if self.opt=='sgd':
+    optimizer = SGD(lr=self.LR)
+elif self.opt=='adam':
+    optimizer = Adam(lr=self.LR)
+elif self.opt=='rmsprop':
+    optimizer = RMSprop(lr=self.LR)
+elif self.opt=='adagrad':
+    optimizer = Adagrad(lr=self.LR)
+</code></pre>
+
+<pre><code class="language-python">if self.kind == 'regr':
+    mdl.compile(loss='mse', optimizer=optimizer, metrics=['mse'])
+elif self.kind == 'binCls':
+    mdl.compile(loss=&quot;binary_crossentropy&quot;, optimizer=optimizer, metrics=[&quot;accuracy&quot;])
+elif self.kind == 'multiCls':
+    mdl.compile(loss=&quot;categorical_crossentropy&quot;, optimizer=optimizer, metrics=[&quot;accuracy&quot;])
+else:
+    pass
+</code></pre>
+
+<p><strong>A critical remark!</strong>
+We define the loss for regression as <code>mse</code> to minimize the mean square error of the output with respect to the actual output.
+The structure of <code>Y</code> is going to be <code>(nb_pnt, 1)</code>, where <code>nb_pnt</code> is the number of samples, and the only column is used for the output.</p>
+
+<p>In the second case, we have a binary classification, so <code>loss</code> is going to be the binary cross-entropy (in <a href="/blog/logreg/logreg1/">this</a> post, we saw what cross-entropy means) and <code>Y</code> structure is still <code>(nb_pnt, 1)</code> because we do only have one output.</p>
+
+<p>But in the last case, the multi-class problem <code>multiCls</code>, we have two options for categorical cross-entropy:</p>
+
+<ol>
+<li><code>sparse_categorical_crossentropy</code>: initially we generate the <code>Y</code> variable as <code>(nb_pnt, 1)</code>, with one column for the class integer. We can solve the problem in Keras using this loss function definition without changing the structure of <code>Y</code> output.</li>
+<li><code>categorical_crossentropy</code>: the other option is to convert the integer representation of <code>Y</code> output into a one-hot encoding. If we have 5 classes then we end up with <code>Y</code> being <code>(nb_pnt, 5)</code>.</li>
+</ol>
+
+<p>Here you can find an example of converting integer representation to the corresponding one-hot encoding.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">Integer</th>
+<th align="center">One-hot</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">2</td>
+<td align="center">[0, 0, 1, 0, 0]</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">[0, 1, 0, 0, 0]</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">[1, 0, 0, 0, 0]</td>
+</tr>
+
+<tr>
+<td align="center">3</td>
+<td align="center">[0, 0, 0, 1, 0]</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">[0, 1, 0, 0, 0]</td>
+</tr>
+
+<tr>
+<td align="center">5</td>
+<td align="center">[0, 0, 0, 0, 1]</td>
+</tr>
+</tbody>
+</table>
+
+<p>To summarize, if we use this one-hot encoding, then the loss is categorical cross-entropy.
+Otherwise, it has to be <strong>sparse</strong> categorical cross-entropy.
+Here is the code to transform the response variable <code>YY</code> into one-hot encoding representation <code>YYohe</code>.</p>
+
+<pre><code class="language-python">YYohe = np_utils.to_categorical(YY, num_classes=self.nb_class)
+</code></pre>
+
+<p>This is actually applied within <code>toOneHotEncoding()</code> if the problem is multi-class.</p>
+
+<pre><code class="language-python">YY = self.toOneHotEncoding(self.YY)
+history = mdl.fit(self.XX, YY, epochs=self.nb_epochs, batch_size=self.nb_batch, verbose=0)
+</code></pre>
+
+<p>Now we just go to the next step, where the actual training and learning process is going to happen.
+It is the <code>fit()</code> method, as it happened for Sklearn.
+We feed <code>X</code> input, <code>Y</code> output, specify number of epochs <code>nb_epochs</code> and of batches <code>nb_batch</code> and whether we want Keras to show how the training process is going to evolve <code>verbose=1</code>.
+This is useful for instance if the process is super slow and we need to monitor it from time to time by checking what is the current status, what is the current loss and what is the current accuracy of the model.
+But in our case we are just solving a super-fast toy problem, so we don&rsquo;t need that (<code>verbose=0</code>)!</p>
+
+<pre><code class="language-python">(loss, accuracy) = mdl.evaluate(self.XX, YY, verbose=1)
+print(&quot;[INFO] loss={:.4f}, accuracy: {:.4f}%&quot;.format(loss, accuracy * 100))
+if self.kind == 'multiCls':
+    Ygrd = np.argmax(mdl.predict(self.XXgrd), axis=1)
+else:
+    Ygrd = mdl.predict(self.XXgrd)
+</code></pre>
+
+<p>At the end of the process, we can evaluate the model by using <code>evaluate</code> and get the final loss and accuracy.
+Also, we need to predict the model behaviour for the input grid.
+We&rsquo;re going to apply <code>predict()</code> to the <code>XXgrd</code> input.</p>
+
+<p>But if we do have a multi-class problem then the output is going to be a 2D array, while we need a 1D array with the model prediction for each input.
+This 2D structure is required to return the probability distribution of every input to belong to any of the classes.
+We take the column index where we do the highest probability for that input.
+We apply the <code>argmax()</code> function column-wise by using the additional attribute <code>axis=1</code>.
+It means that if we take the output of <code>predict()</code> with respect to the input grid <code>XXgrd</code>, we do have <code>(nb_pnt, nb_class)</code> output, where <code>nb_class</code> is the number of different classes.
+How should we interpret that?
+If we take one row from a <code>nb_class=4</code> problem, then we could have a row array such as <code>[.15, .1, .7, .05]</code>.
+This array is just the probability of the input to belong to any of those 4 classes.
+For the $n$-classes case, we end up with the probability distribution across $n$ classes.
+The predicted class from our model is the class/column with the highest probability, which is the third class in the above <code>nb_class=4</code> problem.
+That&rsquo;s why we need to use <code>argmax()</code>.</p>
+
+<pre><code class="language-python">self.nn_Ygrd = Ygrd
+self.lossHistory = history.history['loss']
+</code></pre>
+
+<p>Finally, we save the output of the <code>fit</code> method into <code>history</code> and select one of the attributes, the dictionary <code>history.history</code>, and retrieve the loss history by using the <code>loss</code> key.</p>
+
+<h2 id="5-visualize-some-results">5. Visualize some results</h2>
+
+<h3 id="5-1-nn-model-with-a-regression-problem">5.1 NN model with a regression problem</h3>
+
+<p>We visualize the loss history and the model prediction throughout the 2D grid for a regression problem (the sum of squared terms).</p>
+
+<pre><code class="language-python">tnn = trainFCNN(nb_pnt=2500, dataset='sumSquares')
+</code></pre>
+
+<pre><code class="language-python">tnn.train(lib='ks', dims=[6], activation='relu', nb_epochs=200, lr=0.005)
+</code></pre>
+
+<pre><code class="language-python">plt.plot(tnn.lossHistory)
+plt.title(tnn.mdlDescription());
+</code></pre>
+
+<p><img src="output_28_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_29_0.png" alt="png" /></p>
+
+<h3 id="5-2-nn-model-with-binary-classification">5.2 NN model with binary classification</h3>
+
+<p>We visualize the loss history and the model prediction throughout the 2D grid for the <code>square</code> problem (binary-classification).</p>
+
+<pre><code class="language-python">tnn = trainFCNN(nb_pnt=2500, dataset='square')
+</code></pre>
+
+<pre><code class="language-python">tnn.train(lib='ks', dims=[6], activation='relu', nb_epochs=250, lr=0.005)
+</code></pre>
+
+<pre><code class="language-python">plt.plot(tnn.lossHistory)
+plt.title(tnn.mdlDescription());
+</code></pre>
+
+<p><img src="output_33_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_34_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/fcnn/fcnn05/" style="color: #4ABDAC; font-size: 18px; "> How neural networks learn basic features with Scikit-learn</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/fcnn/fcnn07/" style="color: #4ABDAC; font-size: 18px; ">How neural networks learn basic features with Tensorflow</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

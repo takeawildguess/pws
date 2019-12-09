@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Fully connected neural networks - cheat sheet &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Fully connected neural networks - cheat sheet">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/fcnn/fcnn01/" style="font-size: 16px; ">FCNN cheat-sheet</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/fcnnHead.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Fully connected neural networks - cheat sheet</h1>
+          <h5 class="card-title text-center">FCNN cheat-sheet</h5>
+          <h6 class="card-text text-center">August 25, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 14.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/neural-network"><kbd class="item-tag">neural network</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts related to a huge and popular topic in machine learning: <strong>fully connected neural networks</strong>.</p>
+
+<p>Plenty of books, lectures, tutorials and posts are available out there.
+The scope here is to analyze the topic with a slightly different perceptive.</p>
+
+<p>The series scope is three-fold:</p>
+
+<ol>
+<li>visualize the model features and characteristics with schematic pictures and charts</li>
+<li>learn to implement the model with different levels of abstraction, given by the framework used</li>
+<li>have some fun with one of the hottest topics right now!</li>
+</ol>
+
+<p>This post&rsquo;s structure resembles a bit a cheat sheet.
+It gives an overview of the topic content, so it could be good either for a fresher to understand what to expect from it when he/she starts embarking at this interesting journey and for a practitioner to quickly review the key points.</p>
+
+<h2 id="2-what-is-a-neural-network">2. What is a neural network?</h2>
+
+<p>When we talk about neural networks, we need to specify the inner structure of the network itself that is going to transform the fed input into the output.
+In this post series, we tackle the quintessential model in <em>deep learning</em>: <strong>deep feedforward neural network</strong> (DFNN).
+It is also referred to as <strong>multi-layer perceptron</strong> (MLP).</p>
+
+<p>A DFNN is a stack of connected units or nodes called <em>neurons</em>. Each connection can transmit a signal from one neuron of a layer to another neuron in the next layer.
+The incoming signal to a neuron is first processed and then transmitted to the following neurons connected to it. Each signal strength is either amplified, derated or inverted according to the link weight magnitude and sign.</p>
+
+<p><strong>Deep</strong> refers to the structure of the network, like a stack of layers.
+The number of layers (excluded the input layer) gives the depth of the model.</p>
+
+<p><strong>Feedforward</strong> means that information flows through the model from the left (input) to the rightmost layer (output).
+There is no feedback connection within the model.</p>
+
+<p>These networks are called <em>neural</em> since they have been loosely inspired by neuroscience.
+If the combination of signals coming into a node (<em>neuron</em>) is strong enough, the neuron <em>fires</em> and sends the result (1) to the connected outgoing neurons. If it doesn&rsquo;t, they won&rsquo;t receive anything from it.
+However, modern research is focused on the mathematical and engineering theory to extend the capability of such models, rather than perfectly modelling or mimicking the human brain.</p>
+
+<p>I would argue it also held for aerospace engineering when they started getting into the understanding of aerodynamics phenomena rather than duplicating birds!
+Still, some concepts and ideas have been taken from one discipline to another.</p>
+
+<p>To summarize, DFNNs can be thought of as function approximation machines that can excel at given tasks in a wide range of statistical conditions.</p>
+
+<h2 id="3-benefits-and-drawbacks">3. Benefits and drawbacks</h2>
+
+<h3 id="3-1-benefits">3.1 Benefits</h3>
+
+<p>DFNNs are a universal function <a href="https://en.wikipedia.org/wiki/Artificial_neural_network#Computational_power" target="_blank">approximator</a>, as proven by the universal approximation theorem.
+In other words, they are able to learn every function from a given pair of input/output.
+However, the proof is not constructive regarding the number of neurons required, the network topology, the weights and the learning parameters.</p>
+
+<p>It can also handle both regression and classification problems without changing the network structure but the last layer.
+Indeed, the output layer, combined with the loss definition, is responsible for defining the type of problem: 1) a linear layer returns the output model estimate and RMSE loss is employed for <em>regression</em>, 2) a linear layer gives the logit of one class (<em>binary classification</em>) or the logits of the set of classes (<em>multi-classification</em>).</p>
+
+<p>DFNNs scale to large datasets. This property has been a key factor for their success while <a href="https://en.wikipedia.org/wiki/Support-vector_machine" target="_blank">SVMs</a> suffer to handle datasets with more than $10^5$ examples.</p>
+
+<p>The simple feedforward mapping structure from input $X$ to output $Y$ eases many developers and practitioners to enter this field and start building powerful applications.</p>
+
+<p>The internal structure (stack of hidden layers) is responsible for learning meta-features that are finally used to generate the output. This concept is so powerful that represents one of the central points of deep learning. We as developers need to focus less on feature engineering but more on collecting properly-distributed data and on making sure they are representative of the <em>world</em> to capture.</p>
+
+<p>They are differentiable, so reliable learning algorithms can be applied to maximise performances.
+They are also fast to train, with respect to other NN structures or machine learning algorithms.</p>
+
+<p>The optimized final model is also light to implement in production, since only weights and biases of each layer need to be saved and the forward process requires matrix multiplication and element-wise nonlinear functions.</p>
+
+<p>One of the critical (but very interesting) points of deep learning is the higher level of <em>meta-learning</em>, i.e., finding the best hyperparameters of the model.
+DFNNs come with a few hyperparameters: number of layers, number of units per layer, weight initialization method, activation function, optimizer, regularization to name the most relevant ones.</p>
+
+<p>They can also be easily stacked or embedded into other models</p>
+
+<h3 id="3-2-drawbacks">3.2 Drawbacks</h3>
+
+<p>DFNNs can, however, struggle to handle more complex input structure with higher space dimensions, such as 2D images, 2D time-series text (one dimension for the <a href="https://en.wikipedia.org/wiki/Word_embedding" target="_blank">word embedding</a>, one for the sentence, a sequence of words), 3D video and 2D time-series audio.</p>
+
+<p>They tend to overfit if no regulation techniques are applied, such as dropout, L1/L2 penalty, noise injection and early stopping.</p>
+
+<p>Feature space generation can be large but sparse due to lack of data.</p>
+
+<p>They are, as pretty much every model in deep learning, extremely challenging to interpret and debug.
+A newly emerging area of research is investigating how such models can be understood by human beings and be tested to prevent them from unexpected and undesired behaviour.</p>
+
+<h2 id="4-applications">4. Applications</h2>
+
+<p>DFNNs can be directly applied to input if its space can be mapped to the output space. Otherwise, they can be stacked to the end of a feature-extracting (or encoding) step to generate the actual output distribution over the classes, if the problem is to classify the input.
+In practice, the last layer or set of layers of a large network, such as a <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network" target="_blank">convolutional neural network</a>, is a DFNN.</p>
+
+<p>Application areas include vehicle control, trajectory prediction, process control, natural resource management, quantum chemistry, general game playing, pattern recognition, face recognition, 3D reconstruction, object recognition, sequence recognition, medical diagnosis, finance, data mining, visualization, machine translation, social network filtering and email spam filtering.</p>
+
+<h2 id="5-structure">5. Structure</h2>
+
+<p>The building block of DFNNs is the <em>neuron</em>.
+Figure shows how the two inputs (blue dots), $x_1$ and $x_2$, are fed to the neuron (red circle) to generate the output $a$.
+Inside the neuron the affine transformation is applied by using the network parameters that has to be learnt:</p>
+
+<p>$$ z = w_1\cdot x_1 + w_2\cdot x_2 + b $$</p>
+
+<p>where $w_1$ and $w_2$ are the weights whose magnitude is related to the cyan arrow width, $b$ is the bias (orange square) and z is the intermediate result (green dot).</p>
+
+<p>Since stacking multiple linear operators does not change the model structure, here a non-linear function is placed to transform $z$ to $a = f(z)$, the actual neuron output (red dot).</p>
+
+<p>The function $f$ has to be non-linear.
+We will see the activation section later for further details.</p>
+
+<p><img src="/blog/fcnn/fcnn01/fcnn_neuron.png" alt="pngM" title="Neural network neuron scheme" />
+<center><em>Figure 1 - Neural network neuron scheme</em></center></p>
+
+<p>Now we stack many units (neurons) to get a layer and many layers to get a <em>deep</em> network.</p>
+
+<p>Here the scheme of a two layer NN, with 2 inputs and 2 outputs, while the hidden layer has 3 units.</p>
+
+<p><img src="/blog/fcnn/fcnn01/fcnn_neuralNetwork.png" alt="pngM" title="Neural network scheme" />
+<center><em>Figure 2 - Neural network scheme</em></center></p>
+
+<p>The affine transformation is applied to the vector of inputs $\vec{a^{l-1}}$, which are outputs of the previous layer, to get the intermediate neuron variable $z_j^l$ of unit $j$ at layer $l$:</p>
+
+<p>$$ z_j^l = W_{:,j}^{l^T} \cdot \vec{a^{l-1}} + b_j^l $$</p>
+
+<p>The weight matrix $W$ size is $(I_l, O_l) = (O_{l-1}, O_l)$, where $I_l$ and $O_l$ are the number of units of the previous and current layer, respectively.</p>
+
+<p>If we vectorize the above expression, we get:</p>
+
+<p>$$ z^l = W^{l^T} \cdot \vec{a^{l-1}} + \vec{b^l} $$</p>
+
+<p>Let&rsquo;s say we take the first layer $l=1$. From the above picture, we can see 2 inputs coming in, $dim(\vec{a^{0}}) = (2, 1)$, weight matrix size is $dim(W^l) = (2, 3)$, therefore $dim(W^{l^T}) = (3, 2)$ and both bias and output sizes match, $dim(\vec{b^{1}}) = dim(z^{1}) = (3, 1)$.</p>
+
+<p>The layer output $a$ is simply got as:</p>
+
+<p>$$ a_j^l = f(z_j^l) $$</p>
+
+<h2 id="6-output-layer">6. Output layer</h2>
+
+<p>The output layer is where we define the problem to solve: either <em>regression</em> or <em>classification</em>.</p>
+
+<p>Regression needs a linear function as output layer:</p>
+
+<p>$$ y = W^T\cdot \vec{h} + b $$</p>
+
+<p>where $h$ is the output of the last hidden layer.</p>
+
+<p>Classification is handled into two different ways: <em>binary</em> and <em>multi-class</em>.
+For binary classification, the network outcome has simply to be a Bernoulli distribution $P(\hat{y}=1 | x)$.
+The sigmoid function squashes the outcome into the $[0,1]$ interval to be a valid probability and it is differentiable:</p>
+
+<p>$$ P(\hat{y}=1 | x) = y = \sigma(W^T\cdot \vec{h} +b) $$</p>
+
+<p>For a multi-class problem, the network has to return a vector $\vec{y}$ of probabilities summing up to 1, where each element is the probability of input $x$ of belonging to class $k$:</p>
+
+<p>$$ P(\hat{y}=k | x) = \vec{y}_k = softmax(\vec{z})_k = \frac{e^{z_k}}{\sum_j e^{z_j}} $$</p>
+
+<p>where $\vec{z}$ is the output of the last affine transformation:</p>
+
+<p>$$ \vec{z} = W^T \cdot \vec{h} + \vec{b} $$</p>
+
+<p>The weight matrix $W$ linearly transforms the space of the last hidden layer into the k-dimensional space of the class probability distribution.</p>
+
+<h2 id="actfun">7. Hidden layer and activation function</h2>
+
+<p>One or more hidden layers are meant to <em>learn</em> features that help the problem to be solved with a linear function.</p>
+
+<p>Stacking linear affine transformations is useless if the goal is to capture non-linear behaviour.
+We need to add an activation function.
+Activation comes from the idea that the neuron <em>fires</em> if a combination of its inputs exceeds a certain threshold.
+In modern DFNNs, continuous and differentiable functions are used.
+In particular, it is preferred not to use a function whose derivative is nearly everywhere 0, otherwise, it is hard to propagate the loss information.
+Activation functions typically have to squash the input data into a narrow range that makes training the model more stable and efficient.
+However, <em>ReLU</em> is an example of a function that introduces only a lower bound.</p>
+
+<p>Main functions used in practice are:</p>
+
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Hyperbolic_function#Tanh" target="_blank">Tanh</a>: Hyperbolic tangent</li>
+<li><a href="https://en.wikipedia.org/wiki/Sigmoid_function" target="_blank">Sigmoid</a>: &ldquo;S&rdquo;-shaped curve</li>
+<li><a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)" target="_blank">ReLU</a>: Rectified Linear Unit</li>
+<li><a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)#Leaky_ReLUs" target="_blank">leakyReLU</a>: Leaky Rectified Linear Unit</li>
+</ol>
+
+<p>First, we import the necessary libraries.</p>
+
+<pre><code class="language-python">import numpy as np
+%matplotlib inline
+import matplotlib.pyplot as plt
+</code></pre>
+
+<pre><code class="language-python">xx = np.linspace(-4, 4, 51)
+tanh = lambda xx: (np.exp(xx) - np.exp(-xx))/(np.exp(xx) + np.exp(-xx)) # np.tanh(xx)
+sigmoid = lambda xx: 1/(1+np.exp(-xx))
+relu = lambda xx: np.maximum(0, xx)
+leakyRelu = lambda xx: np.maximum(0.1*xx, xx)
+actFuns = [tanh, sigmoid, relu, leakRelu]
+ylimits = {'Tanh': ([-1, 0, 1], r&quot;$\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}$&quot;), 'Sigmoid': ([0, .5, 1], r&quot;$\frac{1}{1+e^{-x}}$&quot;),\
+           'ReLU': ([0, 4], r&quot;$max(0, x)$&quot;), 'Leaky ReLU': ([-1, 0, 4], r&quot;$max(\varepsilon\cdot x, x)$&quot;)}
+colors = 'bgyr'
+
+plt.figure(figsize=(9, 9))
+for kk, (fun, name, col) in enumerate(zip(actFuns, ylimits.keys(), colors)):
+    plt.subplot(2, 2, kk+1)
+    plt.plot(xx, fun(xx), color=col, lw=2)
+    plt.grid()
+    plt.title(name, color=col,)
+    plt.xticks(np.r_[-4, 0, 4])
+    plt.yticks(ylimits[name][0])
+    plt.xlabel('x')
+    plt.text(-4, fun(xx).max()*.8, &quot;y = &quot; + ylimits[name][1], fontsize=18, color=col)
+plt.tight_layout()
+</code></pre>
+
+<p><img src="output_13_0.png" alt="png" /></p>
+
+<h2 id="8-learning">8. Learning</h2>
+
+<p>We need to tell the computer how good/bad it is doing.
+It is translated into a mathematical expression, <strong>loss function</strong>.</p>
+
+<p>The standard loss function for regression problems is the Root Mean Square Error (RMSE):</p>
+
+<p>$$ L = \frac{1}{2\cdot m}\cdot \sum_i (y_i^{gt}-y_i)^2 $$</p>
+
+<p>where $y_i^{gt}$ and $y_i$ are the ground-truth and model prediction for the <code>i</code>-th example, respectively, and $m$ is the number of examples.</p>
+
+<p>The standard loss function for binary classification is the cross-entropy, which comes from the maximum likelihood principle:</p>
+
+<p>$$ L = - \frac{1}{m} \sum_i (y_i^{gt}\cdot \log(y) + (1-y_i^{gt})\cdot \log(1-y)) $$</p>
+
+<p>This function extends to the following expression for multi-class cases:</p>
+
+<p>$$ L = - \frac{1}{m} \sum_i \big( \sum_k y_{i,k}^{gt}\cdot \log(y_{i,k}) \big) $$</p>
+
+<p>where $y_{i,k}^{gt}$ and $y_{i,k}$ are the <code>k</code>-th class ground-truth and model prediction for the <code>i</code>-th example, respectively.</p>
+
+<p>Then the goal is to make sure it can improve with experience.
+This is equivalent to minimizing the loss function by adjusting the model degrees of freedom, i.e., the network trainable parameters.</p>
+
+<p>If the function to minimize is differentiable, we can use the <strong>gradient</strong> wrt the model parameters to adjust them to converge from the initial <em>guess</em> toward the <em>optimal solution</em>.</p>
+
+<pre><code class="language-python">yys = [np.linspace(-2, 2, 51), np.arange(.01, 1, 0.01)]
+rmse = lambda yy: 0.5*(yy)**2
+xentropy = lambda yy: -np.log(yy)
+lossFuns = [rmse, xentropy]
+limits = {'RMSE': ([-2, 0, 2], [0, 2, 4], r&quot;$\frac{1}{2}\cdot (y^*-y), y^*=0$&quot;),\
+          'Cross-entropy': ([0, 1], [0, 2, 4, 8], r&quot;$ - (y_i^*\dot \log(y), y^*=1 $&quot;)}
+colors = 'bg'
+
+plt.figure(figsize=(9, 7))
+for kk, (yy, fun, name, col) in enumerate(zip(yys, lossFuns, limits.keys(), colors)):
+    plt.subplot(2, 2, kk+1)
+    plt.plot(yy, fun(yy), color=col, lw=2)
+    plt.grid()
+    plt.title(name, color=col,)
+    plt.xticks(limits[name][0])
+    plt.yticks(limits[name][1])
+    plt.xlabel('y')
+    plt.text(yy.min(), limits[name][1][-1]*.8, &quot;y = &quot; + limits[name][-1], fontsize=18, color=col)
+plt.tight_layout()
+</code></pre>
+
+<p><img src="output_15_0.png" alt="png" /></p>
+
+<p><strong>Learning</strong> means to change weights that reduce the loss function.
+In maths, it translates to:</p>
+
+<p>$$ \min_{\theta} \sum_{x, y^{gt}} L\big(y^{gt}, y=nn(x, \theta)\big) $$</p>
+
+<p>where $\theta = (W^{(k)}, b^{(k)}) \quad \forall k = [1, N_{layer}] $ is the set of weights and biases for every hidden and output layer, $(x, y^{gt})$ is a pair of input/output drawn from the dataset, $nn$ is the DFNN function and $L$ is the loss function.</p>
+
+<h2 id="9-gradient-of-a-vector-based-function">9. Gradient of a vector-based function</h2>
+
+<p><strong>Backpropagation</strong> comes into play now to calculate the gradient of the loss function wrt the model parameters $\theta$.
+If the gradient is known, the gradient descent algorithm:</p>
+
+<p>$$ \theta = \theta - \lambda\cdot\nabla_{\theta} L $$</p>
+
+<p>can be applied as many times as the number of <em>epochs</em> to converge to an optimal set of parameters $\theta^{opt}$.
+In the above equation $\lambda$ is the <em>learning rate</em>, which gives, combined with the gradient magnitude, the amount of step to take into the gradient direction.</p>
+
+<p>The gradient is calculated from the loss function back to the output layer, back to every intermediate hidden layer and from there to the corresponding weights and biases.
+However, this backward procedure requires to know the current values of activation nodes.
+Those values can be determined by executing the function from the input to the output and to the loss.
+This concept is depicted in the below figure.
+Here we have three inputs ($I_1=3$), two hidden layers (5 and 6 units each) and 1 output that gives the probability of input $x$ belonging to the first class.</p>
+
+<p><img src="/blog/fcnn/fcnn01/fcnn_forwardPass.png" alt="pngM" title="Neural network forward pass" />
+<center><em>Figure 3 - Neural network forward pass</em></center></p>
+
+<p>The backward procedure can now be executed (see below scheme).
+In the scheme, $g_x^{(k)}$ is the gradient at the $k$-th layer with respect to $x$ variable.</p>
+
+<p>We exploit:</p>
+
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Chain_rule" target="_blank">chain rule of calculus</a> to handle this composition of more than 2 functions (in this case, 7 functions, 6 layer steps + 1 loss function).</li>
+<li><a href="https://en.wikipedia.org/wiki/Matrix_calculus" target="_blank">matrix derivative</a> for the dense layers (affine transformation).</li>
+<li>element-wise derivative for the activation layers.</li>
+</ol>
+
+<p>The first step is related to the loss function (dark red box).
+We need to know the derivative of such a function.</p>
+
+<p>$$ g_h^{(3)} = \frac{\partial L}{\partial y} = \frac{y-y^{gt}}{y\cdot(1-y)} $$</p>
+
+<p>Then, if we encounter an activation layer, we apply the <em>element-wise</em> operation:</p>
+
+<p>$$ g_z^{(k)} = g_z^{(k)}\odot h^{(k)&lsquo;}(z^{(k)}) $$</p>
+
+<p>and we apply the <em>matrix derivative</em> if we encounter a dense layer. Three steps have to be performed:
+1. backpropagate the gradient information to the previous layer:</p>
+
+<p>$$ g_h^{(k-1)} = W^{(k)}\cdot g_z^{(k)} $$</p>
+
+<ol>
+<li>backpropagate the gradient information to the layer weights:</li>
+</ol>
+
+<p>$$ g_W^{(k)} = a^{(k-1)}\cdot g_z^{(k)^T} $$</p>
+
+<ol>
+<li>backpropagate the gradient information to the layer biases:</li>
+</ol>
+
+<p>$$ g_b^{(k)} = g_z^{(k)^T} $$</p>
+
+<p>The below figure shows the scheme of the backward pass through the network.</p>
+
+<p><img src="/blog/fcnn/fcnn01/fcnn_backwardPass.png" alt="pngM" title="Neural network backward pass" />
+<center><em>Figure 4 - Neural network backward pass</em></center></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/codeart/codeart6/" style="color: #4ABDAC; font-size: 18px; "> Code art in Python - Spirograph pattern in a rectangle - Part 2</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/fcnn/fcnn02/" style="color: #4ABDAC; font-size: 18px; ">FCNN - Geometric intuition behind a neuron</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

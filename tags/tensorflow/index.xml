@@ -1,15 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tensorflow on take a wild guess</title>
+    <title>tensorflow on take a wild guess</title>
     <link>https://takeawildguess.net/tags/tensorflow/</link>
-    <description>Recent content in Tensorflow on take a wild guess</description>
+    <description>Recent content in tensorflow on take a wild guess</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://takeawildguess.net/tags/tensorflow/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How neural networks learn basic features with Tensorflow</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn07/</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn07/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to analyze how to train a neural network on toy examples with Tensorflow.</description>
+    </item>
     
     <item>
       <title>Learning to classify coffee from cappuccino - Part 3</title>
@@ -19,6 +30,15 @@
       <guid>https://takeawildguess.net/blog/logreg/logreg3/</guid>
       <description>1. Introduction and assumptions In this post-series, we are going to study the very basic modelling for classification problems, the logistic regression. Classification entails that the output is a discrete variable taking values on a pre-defined limited set, where the set dimension is the number of classes. Some examples are spam detection, object recognition and topic identification.
 In this post, we implement the simple logistic regression case that we have analyzed in the first two posts (Part 1 and Part 2) using Sklearn first and Tensorflow then.</description>
+    </item>
+    
+    <item>
+      <title>Hello world for Machine learning - Part 4</title>
+      <link>https://takeawildguess.net/blog/linreg/linreg4/</link>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/linreg/linreg4/</guid>
+      <description>1. Introduction We have introduced the concept of the linear-regression problem and the structure to solve it in a &amp;ldquo;machine-learning&amp;rdquo; fashion in this post, while we have applied the theory to a simple but practical case of linear-behaviour identification from a bunch of data that are generated in a synthetic way here and extend the analysis to a multi-linear case where more than one feature (or input) are fed to the model to predict the outcome here.</description>
     </item>
     
   </channel>

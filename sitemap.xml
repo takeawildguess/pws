@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -31,8 +31,313 @@
   </url>
   
   <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn16/</loc>
+    <lastmod>2019-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/hyperparameter/</loc>
+    <lastmod>2019-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/meta-learning/</loc>
+    <lastmod>2019-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/neural-network/</loc>
+    <lastmod>2019-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/python/</loc>
+    <lastmod>2019-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/</loc>
+    <lastmod>2019-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/</loc>
+    <lastmod>2019-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn15/</loc>
+    <lastmod>2019-12-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn14/</loc>
+    <lastmod>2019-11-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/matplotlib/</loc>
+    <lastmod>2019-11-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/visualization/</loc>
+    <lastmod>2019-11-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn13/</loc>
+    <lastmod>2019-11-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn12/</loc>
+    <lastmod>2019-11-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn11/</loc>
+    <lastmod>2019-11-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn10/</loc>
+    <lastmod>2019-10-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn09/</loc>
+    <lastmod>2019-10-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/pytorch/</loc>
+    <lastmod>2019-10-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn08/</loc>
+    <lastmod>2019-10-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn07/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/tensorflow/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn06/</loc>
+    <lastmod>2019-09-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/keras/</loc>
+    <lastmod>2019-09-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn05/</loc>
+    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn04/</loc>
+    <lastmod>2019-09-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn03/</loc>
+    <lastmod>2019-09-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn02/</loc>
+    <lastmod>2019-09-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/fcnn01/</loc>
+    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/codeart/codeart6/</loc>
+    <lastmod>2019-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/code-art/</loc>
+    <lastmod>2019-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/coding/</loc>
+    <lastmod>2019-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/codeart/codeart5/</loc>
+    <lastmod>2019-08-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/codeart/codeart4/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/codeart/codeart3/</loc>
+    <lastmod>2019-07-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/codeart/codeart2/</loc>
+    <lastmod>2019-07-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/codeart/codeart1/</loc>
+    <lastmod>2019-07-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/kata/kata5/</loc>
+    <lastmod>2019-07-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/kata/kata4/</loc>
+    <lastmod>2019-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/kata/kata3/</loc>
+    <lastmod>2019-06-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/kata/kata2/</loc>
+    <lastmod>2019-06-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/kata/kata1/</loc>
+    <lastmod>2019-06-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/mdlsel/mdlsel8/</loc>
+    <lastmod>2019-06-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/learning-curve/</loc>
+    <lastmod>2019-06-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/machine-learning/</loc>
+    <lastmod>2019-06-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/model-selection/</loc>
+    <lastmod>2019-06-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/numpy/</loc>
+    <lastmod>2019-06-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/overfitting/</loc>
+    <lastmod>2019-06-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/regularization/</loc>
+    <lastmod>2019-06-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/scikit-learn/</loc>
+    <lastmod>2019-06-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/mdlsel/mdlsel7/</loc>
+    <lastmod>2019-05-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/mdlsel/mdlsel6/</loc>
+    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/mdlsel/mdlsel5/</loc>
+    <lastmod>2019-05-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/mdlsel/mdlsel4/</loc>
+    <lastmod>2019-05-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/algorithm/</loc>
+    <lastmod>2019-04-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/mdlsel/mdlsel3/</loc>
+    <lastmod>2019-04-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/mdlsel/mdlsel2/</loc>
+    <lastmod>2019-04-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/mdlsel/mdlsel1/</loc>
+    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/logreg/logreg8/</loc>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/logistic-regression/</loc>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/logreg/logreg7/</loc>
+    <lastmod>2019-03-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://takeawildguess.net/blog/logreg/logreg6/</loc>
     <lastmod>2019-03-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/logreg/logreg5/</loc>
+    <lastmod>2019-03-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/logreg/logreg4/</loc>
+    <lastmod>2019-03-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -51,6 +356,26 @@
   </url>
   
   <url>
+    <loc>https://takeawildguess.net/blog/linreg/linreg5/</loc>
+    <lastmod>2019-02-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/linear-regression/</loc>
+    <lastmod>2019-02-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/linreg/linreg4/</loc>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/gradient-descent/</loc>
+    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://takeawildguess.net/blog/linreg/linreg3/</loc>
     <lastmod>2019-01-27T00:00:00+00:00</lastmod>
   </url>
@@ -63,6 +388,46 @@
   <url>
     <loc>https://takeawildguess.net/blog/linreg/linreg1/</loc>
     <lastmod>2019-01-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/tags/maximum-likelihood/</loc>
+    <lastmod>2019-01-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/</loc>
+    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/codeart/</loc>
+    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/fcnn/</loc>
+    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/kata/</loc>
+    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/linreg/</loc>
+    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/logreg/</loc>
+    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://takeawildguess.net/blog/mdlsel/</loc>
+    <lastmod>2018-12-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -79,142 +444,66 @@
   
   <url>
     <loc>https://takeawildguess.net/about/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/ai-enthusiast/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/tags/algorithm/</loc>
-    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/blogger/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/blog/</loc>
-    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/bootstrap/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/categories/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/css/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/development-engineer/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/go/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/golang/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/tags/gradient-descent/</loc>
-    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/highlight-js/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/html/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/hugo/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/js/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/tags/linear-regression/</loc>
-    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/tags/logistic-regression/</loc>
-    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/tags/machine-learning/</loc>
-    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/tags/maximum-likelihood/</loc>
-    <lastmod>2019-01-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/meetup-speaker/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/tags/numpy/</loc>
-    <lastmod>2019-02-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/project/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/tags/python/</loc>
-    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/responsive/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/tags/scikit-learn/</loc>
-    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -223,29 +512,10 @@
   
   <url>
     <loc>https://takeawildguess.net/tags/software-developer/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://takeawildguess.net/tags/syntax-highlighting/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/tags/</loc>
-    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/tags/tensorflow/</loc>
-    <lastmod>2019-03-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://takeawildguess.net/</loc>
-    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>

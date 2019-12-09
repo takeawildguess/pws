@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>How neural networks learn basic features with Pytorch &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="How neural networks learn basic features with Pytorch">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/fcnn/fcnn09/" style="font-size: 16px; ">FCNN with Pytorch</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/fcnnHead.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">How neural networks learn basic features with Pytorch</h1>
+          <h5 class="card-title text-center">FCNN with Pytorch</h5>
+          <h6 class="card-text text-center">October 20, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 17 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/neural-network"><kbd class="item-tag">neural network</kbd></a> <a href="https://takeawildguess.net/tags/pytorch"><kbd class="item-tag">pytorch</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts related to a huge and popular topic in machine learning: <strong>fully connected neural networks</strong>.</p>
+
+<p>The general series scope is three-fold:</p>
+
+<ol>
+<li>visualize the model features and characteristics with schematic pictures and charts</li>
+<li>learn to implement the model with different levels of abstraction, given by the framework used</li>
+<li>have some fun with one of the hottest topics right now!</li>
+</ol>
+
+<p>In this new post, we are going to analyze how to train a neural network on toy examples with <strong>Pytorch</strong>.
+If you are new to this library, please check out the <a href="/blog/fcnn/fcnn08/">previous</a> post.</p>
+
+<p><img src="/blog/fcnn/fcnn09/pytorch.jpg" alt="pngS" title="PyTorch logo" />
+<center><em>Figure 1 - PyTorch logo</em></center></p>
+
+<p>We are going through the following steps:</p>
+
+<ol>
+<li>training setting</li>
+<li>define the network architecture: dense layer, activation function and stack of layers</li>
+<li>train: loss and accuracy functions, optimizer and learning process</li>
+<li>visualize prediction</li>
+</ol>
+
+<p>Point 2 implies to create a layer class with corresponding weights and biases that need to be learned during <em>train</em> step.</p>
+
+<p>The whole code to create a synthetic dataset and learn a neural network model with any of the four libraries mentioned above is wrapped into a Python class, <code>trainFCNN()</code>, and can be found in my Github <a href="https://github.com/takeawildguess/FCNNlib" target="_blank">repo</a>.</p>
+
+<h2 id="2-showcase">2. Showcase</h2>
+
+<p>We start using our <code>trainFCNN</code> class to handle three showcases: <em>regression</em>, <em>binary classification</em> and <em>multi-class classification</em>.</p>
+
+<p>For each case we select one dataset that belongs to that category, show the 2D dataset, train the model, whose parameters&rsquo; tensors are shown along with the final loss value, plot the 1D loss history over the number of epochs and visualize the 2D model output alongside the dataset.</p>
+
+<p>Please recall that the training process runs multiple steps (<code>nb_pnt//batchSize</code>) of the optimizer within a single epoch, where <code>nb_pnt</code> is the number of data points and <code>batchSize</code> is the batch size fed to the model at each step of the nested for loop.</p>
+
+<h3 id="2-1-nn-model-with-a-regression-problem">2.1 NN model with a regression problem</h3>
+
+<p>We visualize the loss history and the model prediction throughout the 2D grid for a regression problem (product of two terms).</p>
+
+<pre><code class="language-python">tnn = trainFCNN(nb_pnt=2500, dataset='prod')
+tnn.plotPoints()
+</code></pre>
+
+<p><img src="output_6_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.train(lib='pt', dims=[6], activation='relu', nb_epochs=200, lr=0.01, display=True)
+</code></pre>
+
+<pre><code>[Parameter containing:
+tensor([[ 0.1063, -0.5238],
+        [ 0.0551, -0.0689],
+        [ 0.6969, -0.4553],
+        [-0.2716, -0.2160],
+        [ 0.5962, -0.6853],
+        [-0.5633,  0.5369]], requires_grad=True), Parameter containing:
+tensor([-0.3887,  0.5459, -0.5066,  0.4369,  0.3743, -0.3240],
+       requires_grad=True), Parameter containing:
+tensor([[ 0.1909,  0.2403,  0.1209,  0.1296,  0.2534, -0.3480]],
+       requires_grad=True), Parameter containing:
+tensor([0.2771], requires_grad=True)]
+The final model loss is 0.000740227522328496
+</code></pre>
+
+<pre><code class="language-python">plt.plot(tnn.lossHistory)
+plt.title(tnn.mdlDescription());
+</code></pre>
+
+<p><img src="output_8_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_9_0.png" alt="png" /></p>
+
+<h3 id="2-2-nn-model-with-binary-classification">2.2 NN model with binary classification</h3>
+
+<p>We visualize the loss history and the model prediction throughout the 2D grid for the <code>XOR</code> problem (binary-classification).</p>
+
+<pre><code class="language-python">tnn = trainFCNN(nb_pnt=2500, dataset='xor')
+tnn.plotPoints()
+</code></pre>
+
+<p><img src="output_11_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.train(lib='pt', dims=[6], activation='relu', nb_epochs=200, lr=0.01, display=True)
+</code></pre>
+
+<pre><code>[Parameter containing:
+tensor([[-0.2502, -0.1319],
+        [-0.4137,  0.6049],
+        [-0.4000, -0.4091],
+        [ 0.6447,  0.0499],
+        [ 0.2987, -0.2987],
+        [-0.1666, -0.0770]], requires_grad=True), Parameter containing:
+tensor([ 0.6503, -0.0564, -0.1120,  0.0814, -0.3941,  0.1590],
+       requires_grad=True), Parameter containing:
+tensor([[ 0.1247, -0.3988,  0.2761, -0.3470,  0.3526, -0.3235]],
+       requires_grad=True), Parameter containing:
+tensor([0.3743], requires_grad=True)]
+The final model loss is 0.024880046024918556
+Final accuracy: 99.8000%
+</code></pre>
+
+<pre><code class="language-python">plt.plot(tnn.lossHistory)
+plt.title(tnn.mdlDescription());
+</code></pre>
+
+<p><img src="output_13_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_14_0.png" alt="png" /></p>
+
+<h3 id="2-3-nn-model-with-binary-classification">2.3 NN model with binary classification</h3>
+
+<p>We visualize the loss history and the model prediction throughout the 2D grid for the <code>quadrants</code> problem (multi-class classification).</p>
+
+<pre><code class="language-python">tnn = trainFCNN(nb_pnt=2500, dataset='quadrants')
+tnn.plotPoints()
+</code></pre>
+
+<p><img src="output_16_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.train(lib='pt', dims=[6], activation='relu', nb_epochs=200, lr=0.01, display=True)
+</code></pre>
+
+<pre><code>[Parameter containing:
+tensor([[-0.1184, -0.5458],
+        [ 0.4397,  0.6490],
+        [-0.4052, -0.6246],
+        [-0.1402, -0.6364],
+        [ 0.1619,  0.0099],
+        [-0.4721, -0.1020]], requires_grad=True), Parameter containing:
+tensor([-0.5166, -0.6357,  0.4347,  0.0889,  0.5171, -0.4746],
+       requires_grad=True), Parameter containing:
+tensor([[-0.2764,  0.2313, -0.0404,  0.0681, -0.1637,  0.0032],
+        [-0.1885,  0.0681,  0.1812, -0.2893,  0.1377,  0.3788],
+        [ 0.3682,  0.3957, -0.0139, -0.2845, -0.0564,  0.1430],
+        [ 0.3245,  0.3175,  0.1089, -0.3239,  0.3517,  0.1792]],
+       requires_grad=True), Parameter containing:
+tensor([ 0.0023,  0.2653, -0.0690, -0.0697], requires_grad=True)]
+The final model loss is 0.008348659612238407
+Final accuracy: 99.8400%
+</code></pre>
+
+<pre><code class="language-python">plt.plot(tnn.lossHistory)
+plt.title(tnn.mdlDescription());
+</code></pre>
+
+<p><img src="output_18_0.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_19_0.png" alt="png" /></p>
+
+<h2 id="3-model-setting">3. Model setting</h2>
+
+<p>The actual process of creating the model and training it over the dataset takes place in the function <code>pytorchModel</code>.</p>
+
+<p>However, the actual code required to create the model graph is wrapped into the <code>ptFCNN</code> class.
+It inherits the functionality from the <code>tnn.Module</code> module.
+We need to overwrite two methods only:</p>
+
+<ol>
+<li><code>__init__()</code>: here we define the constructor main components, such as the linear module.</li>
+<li><code>forward()</code>: here we construct the actual model graph by connecting the network layers.</li>
+</ol>
+
+<p>The overall process of initializing hyper-parameters, creating the model graph, training the model parameters and defining the model description to easily compare different settings, is controlled with the <code>train</code> function, which is here reported without the <code>if</code> statement used to select one of the four libraries.</p>
+
+<pre><code class="language-python">def train(self, nb_epochs=100, dims=[2], activation='sigmoid'):
+    # settings
+    self.lib = lib
+    self.LR = lr
+    self.nb_epochs = nb_epochs
+    self.batchSize = batchSize
+    self.activation = activation
+    self.display = display
+    self.opt = opt
+    self.dims = [2] + dims + [self.nb_class if self.kind=='multiCls' else 1]
+    self.nb_layer = len(self.dims)-1 # number of network layers with learnable parameters
+    self.lastActFun = 'sigmoid' if self.kind == 'binCls' else 'softmax' \ 
+        if self.kind == 'multiCls' else 'linear'
+    self.pytorchModel()
+    
+    unitLabel = '-'.join([str(u) for u in self.dims])
+    self.descrs = {'lib': self.lib, 'units': unitLabel, 'depth': str(len(dims)),\
+        'activation': activation, 'learning_rate': lr, 'optimizer': opt,\
+        'epochs': nb_epochs, 'batchSize': batchSize}
+</code></pre>
+
+<h2 id="4-model-creation">4. Model creation</h2>
+
+<p>The model instance is created by simply calling the <code>ptFCNN</code> class with three attributes that define the model architecture:</p>
+
+<ol>
+<li><code>dims</code>: a list containing the number of neurons for each network layer. The first element gives the input dimension (always 2 in our toy tutorial), whilst the last one is the output dimension.</li>
+<li><code>activation</code>: the activation function name used in any hidden layer.</li>
+<li><code>lastActFun</code>: the activation function name used for the output layer. It is the <code>linear</code>, <code>sigmoid</code> or <code>softmax</code> function for the <em>regression</em>, <em>binary-classification</em> or  <em>multi-class classification</em> problem, respectively.</li>
+</ol>
+
+<p>The model instance is <code>mdl</code>.</p>
+
+<pre><code class="language-python">mdl = ptFCNN(self.dims, self.activation, self.lastActFun)
+</code></pre>
+
+<p>In Pytorch there is no need to reset the default graph, as it was the case with Tensorflow.
+This point alleviates some issues during development and debugging.</p>
+
+<p>A second strong benefit relates to how the input/output data can be fed to the model.
+We simply need to convert them to Pytorch <code>tensor</code>s, that&rsquo;s it.
+Since the process is dynamic, we can inspect the tensor content (actual data) at any time while constructing the model.</p>
+
+<p>It is not necessary anymore to go through the process of defining <code>placeholder</code>s in Tensorflow, waiting for the model to be built, starting a new session and use the graph or a part of it to get the actual content for an output variable given input data with the <code>run()</code> callback.</p>
+
+<p>However, the tensor structure of both input/outputs is still a 2D array, except for the output tensor in the <em>multi-class classification</em> (<code>kind == 'multiCls'</code>), since <a href="https://pytorch.org/docs/stable/nn.html#crossentropyloss" target="_blank"><code>CrossEntropyLoss</code></a> does not expect a one-hot encoded vector as the target, but class indices.
+Further details on this topic can be found <a href="https://discuss.pytorch.org/t/runtimeerror-multi-target-not-supported-newbie/10216" target="_blank">here</a>.</p>
+
+<p>The first dimension size is either the batch size during training or the full dataset during accuracy evaluation and model prediction for the 2D grid.</p>
+
+<p>The second dimension is the number of input units of the first layer for <code>xx</code> and the number of output units of the last layer for <code>yy</code>.</p>
+
+<pre><code class="language-python">Xb = torch.Tensor(XX)
+if kind == 'multiCls':
+    Yb = torch.Tensor(YY).long().reshape(-1)
+else:
+    Yb = torch.Tensor(YY)
+</code></pre>
+
+<p>As mentioned earlier, the model graph is wrapped into the <code>ptFCNN</code> class.</p>
+
+<p>In the <code>__init__()</code> method we create a list of linear modules using <a href="https://pytorch.org/docs/stable/nn.html#linear" target="_blank"><code>tnn.Linear</code></a>.
+In general, any layer is going to receive the output of the previous layer as input and return what is coming out of the activation function as output.
+We create the stack of dense layers by appending a linear transformation <code>tnn.Linear(dIn, dOut)</code> in a for-loop <code>nb_layer</code> times.
+The weights and biases of each linear module are initialized with normal distribution with standard deviation <code>stddev</code> to be equal to:</p>
+
+<p>$$ \sigma = \frac{1}{dIn} $$</p>
+
+<p>where <code>dIn</code> the number of inputs of the current layer.</p>
+
+<p>If we want to create the network by feeding a list of module objects that defines the architecture, we can have a more compact code but Pytorch will have a hard time finding the <code>Parameter</code>s of the model, i.e., <code>mdl.parameters()</code> will return an empty list.
+That&rsquo;s because appending the module objects to a Python List doesn&rsquo;t <em>register</em> its parameters.
+To fix it, we wrap the list with the <code>ModuleList</code> class and then assign it as a member of the network class.
+Thanks <a href="https://blog.paperspace.com/pytorch-101-advanced/" target="_blank">Ayoosh Kathuria</a>!</p>
+
+<pre><code class="language-python">self.fcs = []
+self.nb_layer = len(dims)-1
+for kk in range(self.nb_layer):
+    dIn, dOut = dims[kk], dims[kk+1]
+    self.fcs.append(tnn.Linear(dIn, dOut))
+self.fcs = tnn.ModuleList(self.fcs)
+</code></pre>
+
+<p>We can see the parameter structure with example.</p>
+
+<pre><code class="language-python">mdl = ptFCNN([2, 3, 5, 6], 'relu', 'sigmoid')
+</code></pre>
+
+<p>The weights are to be 2D arrays, whose size is the number of outputs and number of inputs.
+In Pytorch the weight array is exactly the transpose of the weight array in Tensorflow.
+For a network of size <code>dims=[2, 3, 5, 6]</code>, the first layer should transform 2 inputs to 3 units, the second layer should transform 3 inputs to 5 outputs and so on so forth.
+The biases are to be a 1D arrays, whose size is the number of outputs.</p>
+
+<p>This is what we can get from <code>dims[kk]</code> and <code>dims[kk+1]</code> for the <code>kk</code> layer.</p>
+
+<pre><code class="language-python">for kk, prm in enumerate(mdl.parameters()):
+    text = &quot;Weight&quot; if kk%2==0 else &quot;Bias&quot;
+    print(text + &quot; array size: {}&quot;.format(prm.shape))
+</code></pre>
+
+<pre><code>Weight array size: torch.Size([3, 2])
+Bias array size: torch.Size([3])
+Weight array size: torch.Size([5, 3])
+Bias array size: torch.Size([5])
+Weight array size: torch.Size([6, 5])
+Bias array size: torch.Size([6])
+</code></pre>
+
+<p>In the <code>forward()</code> method we construct the actual model graph by connecting the network layers.</p>
+
+<p>Since the previous layer of the first layer is actually the input itself.
+we initialize the activation <code>act</code> with the input <code>xx</code>.</p>
+
+<p>The for-loop process is similar to Tensorflow, but it is a bit less verbose in this case.
+We get the actual output of the affine transformation <code>zz</code>:</p>
+
+<p>$$ z = W_{k}\cdot a^{k-1} + b_k $$</p>
+
+<p>by retrieving the <code>kk</code> linear module and feeding <code>act_prev</code> as input.</p>
+
+<p>We still need to select the activation function and applied that to <code>zz</code> to get the actual layer output.</p>
+
+<p>The activation coming from the previous layer <code>act_prev</code> is a 2D array with the number of samples as rows and number of inputs into the current layer as columns.
+The current weight array has instead the number of outputs as rows and the number of inputs as columns.
+The linear module placed in <code>self.fcs[kk]</code> returns the number of samples as rows and the number of outputs as columns.</p>
+
+<pre><code class="language-python">act = xx # network inputs are the previous layer activations to the first layer
+for kk in range(self.nb_layer):
+    act_prev = act
+    zz = self.fcs[kk](act_prev)
+    actFun = self.activation if kk&lt;self.nb_layer-1 else self.lastActFun
+    if actFun == 'relu':
+        act = F.relu(zz)
+    elif actFun == 'sigmoid':
+        act = torch.sigmoid(zz)
+    elif actFun == 'tanh':
+        act = torch.tanh(zz)
+    elif actFun == 'softmax':
+        act = F.softmax(zz, dim=1)
+    elif actFun == 'linear':
+        act = zz
+</code></pre>
+
+<p>We use the same logic as previously used for Keras and Tensorflow to define the activation function.
+It can be either the user-defined activation or the activation function specified for the last layer.
+Any of the activation functions available to the user can be found in the <code>torch</code> or <code>torch.nn.functional</code> module.
+However, the two functions <code>sigmoid</code> and <code>tanh</code> have been deprecated in the <code>torch.nn.functional</code> module.
+<a href="https://pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity" target="_blank">Here</a> you can find the full list of non-linear functions available in the <code>nn</code> module.</p>
+
+<p>The activation function is going to take the output of the previous layer, <code>zz</code>, and return its own output into <code>act</code>.</p>
+
+<h2 id="5-loss-function">5. Loss function</h2>
+
+<p>This step is meant to define the loss function.</p>
+
+<p>We have three different cases:</p>
+
+<ol>
+<li>regression: we use mean square error from <code>nn.MSELoss()</code>.</li>
+<li>binary classification: we&rsquo;re going to use binary cross-entropy <code>nn.BCEWithLogitsLoss()</code> with logits. That&rsquo;s why we do not take the last activation output but the last <code>z_pred</code> instance. <a href="https://discuss.pytorch.org/t/bceloss-vs-bcewithlogitsloss/33586/3" target="_blank">Check it out</a> to get the difference with <code>nn.BCELoss()</code>.</li>
+<li>multi-classification: we use softmax cross-entropy <a href="https://discuss.pytorch.org/t/usage-of-cross-entropy-loss/14841/5" target="_blank"><code>nn.CrossEntropyLoss</code></a>. Feeding the logit output <code>z_pred</code> to <code>CrossEntropyLoss</code> or <code>LogSoftmax</code> and then the negative log-likelihood loss <code>NLLLoss</code> yield <a href="https://discuss.pytorch.org/t/pytorch-equivalence-to-sparse-softmax-cross-entropy-with-logits-in-tensorflow/18727" target="_blank">identical results</a>.</li>
+</ol>
+
+<p>In every case, we feed the model prediction <code>z_pred</code> and the ground-truth <code>ytb</code> as arguments to the loss function <code>lossFun</code>, to get the final loss, which is what we want to minimize with respect to model parameters with the optimizer.
+Please note that <code>z_pred</code> is identical to <code>y_pred</code> in the regression problem.</p>
+
+<pre><code class="language-python">if self.kind == 'regr':
+    lossFun = tnn.MSELoss()
+elif self.kind == 'binCls':
+    lossFun = tnn.BCEWithLogitsLoss()
+elif self.kind == 'multiCls':
+    #https://discuss.pytorch.org/t/runtimeerror-multi-target-not-supported-newbie/10216/11
+    lossFun = tnn.CrossEntropyLoss()
+
+loss = lossFun(z_pred, ytb)
+</code></pre>
+
+<h2 id="6-optimizer">6. Optimizer</h2>
+
+<p>The optimizer is going to take care of the <em>learning</em> process.
+According to the kind of optimizer we choose, it is going to use a specific strategy to optimize the network parameters step by step.
+The list of different optimizers can be found <a href="https://pytorch.org/docs/stable/optim.html#algorithms" target="_blank">here</a> and a detailed review of those methods has been published in <a href="http://ruder.io/optimizing-gradient-descent/" target="_blank">this</a> great post.</p>
+
+<p>We can use any of the <code>SGD</code>, <code>Adam</code>, <code>RMSprop</code> or <code>Adagrad</code> optimizers, in which we need to feed the model parameters and specify the learning rate <code>LR</code>.
+In some optimizers, it is also possible to specify further attributes such as weight decay, momentum and smoothing constant when they apply.</p>
+
+<pre><code class="language-python"># optimizer
+if self.opt=='sgd':
+    optimizer = torch.optim.SGD(mdl.parameters(), lr=self.LR)
+elif self.opt=='adam':
+    optimizer = torch.optim.Adam(mdl.parameters(), lr=self.LR)
+elif self.opt=='rmsprop':
+    optimizer = torch.optim.RMSprop(mdl.parameters(), lr=self.LR)
+elif self.opt=='adagrad':
+    optimizer = torch.optim.Adagrad(mdl.parameters(), lr=self.LR)
+</code></pre>
+
+<h2 id="7-training">7. Training</h2>
+
+<p>The final step is the <em>training</em> process, where Pytorch is going to actually play with data. This is the computational step that requires some time and hardware resources such as GPUs.
+So far nothing has been calculated, we have just created the model graph structure.</p>
+
+<p>We use our self-made <code>ptNextBatch</code> function to get a batch of examples to perform a forward/backward pass through the model graph and update its parameters to minimize the loss (hopefully!).</p>
+
+<p>The <code>ptNextBatch</code> function selects the next batch of <code>size</code> examples at every iteration <code>jj</code> from the entire dataset and feeds the input/output batch to the model to get the current loss and the new weights.</p>
+
+<p>If we have a multi-class problem, we have to transform the output tensor into the <code>long</code> format and reshape it to a 1D tensor, since the <code>nn.CrossEntropyLoss</code> loss expects the ground-truth class indices as the target, rather than its one-hot encoding representation.</p>
+
+<pre><code class="language-python">def ptNextBatch(XX, YY, kind, jj=0, size=None):
+    if size:
+        XX = XX[jj*size:(jj+1)*size, :]
+        YY = YY[jj*size:(jj+1)*size, :]
+    Xb = torch.Tensor(XX)
+    if kind == 'multiCls':
+        Yb = torch.Tensor(YY).long().reshape(-1)
+    else:
+        Yb = torch.Tensor(YY)
+    return Xb, Yb
+</code></pre>
+
+<p>The model is going to <em>learn</em> only when we backpropagate the loss <code>loss.backward()</code> and call the optimizer object, <code>optimizer.step()</code>, that aims at minimizing the loss wrt the parameters.</p>
+
+<p>We train the model for as many epochs <code>nb_epochs</code> and many batches <code>nb_pnt//nb_batch</code> we have initially specified.
+At the end of each epoch, we store the current loss into the <code>lossHistory</code> history variable.</p>
+
+<pre><code class="language-python">lossHistory = []
+for epoch in range(self.nb_epochs):
+    for jj in range(self.nb_pnt//self.batchSize):
+        optimizer.zero_grad() # zero gradients
+        xtb, ytb = ptNextBatch(self.XX, self.YY, self.kind, jj, self.batchSize) # batch
+        y_pred, z_pred = mdl(xtb) # Forward pass
+        loss = lossFun(z_pred, ytb) # Compute loss
+        loss.backward() # backpropagation
+        optimizer.step() # parameter update
+    lossHistory.append(loss.item())
+</code></pre>
+
+<h2 id="8-accuracy">8. Accuracy</h2>
+
+<p>For a classification problem, we do also want to have an <em>accuracy</em> metric.</p>
+
+<p>We take the prediction and the actual output and we count how many time they are equal, i.e., they match each other.
+The accuracy is just the average of correctly predicted outputs.</p>
+
+<p>If we have a multi-class problem, we have to perform the same step that we did for Keras and Tensorflow.
+Let&rsquo;s retrieve the first output of the model, <code>mdl(xt)[0]</code>.
+It is <code>y_pred</code>, i.e., the last activation output that gives us the distribution of probabilities over classes and takes the maximum probability index over columns.
+That&rsquo;s why we have to specify <code>torch.max(_, 1)</code>, the maximum index has to be column-wise.</p>
+
+<p>For the binary case, we use <code>torch.round</code> to convert the probability of the input to belong to the second class (class <code>1</code>) into the 2-class index.
+For the multi-class case, we use <code>torch.max().indices</code> to get the N-class index.</p>
+
+<pre><code class="language-python">xt, yt = ptNextBatch(self.XX, self.YY, self.kind)
+if self.kind == 'multiCls':
+    y_pred = torch.max(mdl(xt)[0].data, 1).indices
+elif self.kind == 'binCls':
+    y_pred = torch.round(mdl(xt)[0].data)
+
+if self.kind in ['binCls', 'multiCls']:
+    correct = (y_pred == yt).sum().item()
+    self.accuracy = correct/xt.shape[0]
+    if self.display: print(&quot;Final accuracy: {:.4f}%&quot;.format(self.accuracy * 100))
+</code></pre>
+
+<h2 id="9-model-predictions-for-the-grid-points">9. Model predictions for the grid points</h2>
+
+<p>We want to see how the model behaves across the entire 2D domain.
+So we take the 2D grid points <code>XXgrd</code> as a batch of examples, convert it into a tensor and feed it to the Pytorch model <code>mdl</code>.</p>
+
+<p>If we have a multi-class problem, we have again to perform the step that returns the index over columns of the highest likely class.
+For binary classification and regression, we just have to detach the prediction <code>y_pred</code> and convert it to Numpy.
+We then can visualize the 2D array <code>nn_Ygrd</code> with <code>plotModelEstimate</code>.</p>
+
+<pre><code class="language-python"># grid output
+xtest = torch.Tensor(self.XXgrd)
+y_pred, z_pred = mdl(xtest)
+if self.kind == 'multiCls':
+    nn_Ygrd = torch.max(y_pred.data, 1).indices.numpy()
+else:
+    nn_Ygrd = y_pred.detach().numpy()
+self.nn_Ygrd = nn_Ygrd
+</code></pre>
+
+<p>We finally save the loss history and the model parameters.</p>
+
+<pre><code class="language-python">self.lossHistory = np.array(lossHistory)
+self.nn_prms = list(mdl.parameters())
+</code></pre>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/fcnn/fcnn08/" style="color: #4ABDAC; font-size: 18px; "> Key notions of Pytorch</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/fcnn/fcnn10/" style="color: #4ABDAC; font-size: 18px; ">Meta-learning neural networks over basic tasks</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

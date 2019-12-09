@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Do not overlearn your data too much, learn to generalize - Part 1 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Do not overlearn your data too much, learn to generalize - Part 1">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/mdlsel/mdlsel1/" style="font-size: 16px; ">Learning to learn your data</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/mdlselHead.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Do not overlearn your data too much, learn to generalize - Part 1</h1>
+          <h5 class="card-title text-center">Learning to learn your data</h5>
+          <h6 class="card-text text-center">April 14, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 14 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/model-selection"><kbd class="item-tag">model selection</kbd></a> <a href="https://takeawildguess.net/tags/overfitting"><kbd class="item-tag">overfitting</kbd></a> <a href="https://takeawildguess.net/tags/regularization"><kbd class="item-tag">regularization</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/learning-curve"><kbd class="item-tag">learning curve</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>In the two previous post-series about (<a href="/blog/linreg/linreg1/">linear</a> and (<a href="/blog/logreg/logreg1/">logistic</a> regression, we have used the whole dataset to train the model and to assess the final performance.</p>
+
+<p>We now have the chance to go a bit deeper to get some understanding about model selection, why it is so crucial in the machine-learning field to prevent that expected-to-work-amazingly models or applications could miserably and/or dangerously fail.</p>
+
+<p>A failure in a machine-learning application is not always the end of the world, especially if we want to classify whether a cat is in an uploaded picture or not.
+But it can be very critical in some other scenarios, such as cancer detection, text generation (do you recall the chat-bot developed by Microsoft, <a href="https://en.wikipedia.org/wiki/Tay_(bot)" target="_blank">Tay</a>?) or object recognition for autonomous driving cars, just to name a few.</p>
+
+<p>Basically, we do not want our models to learn our data by heart and then to struggle to handle new unseen data samples.
+We want them to be great at generalizing.</p>
+
+<p>This post series reviews different techniques that can be useful to properly evaluate and select a machine-learning model.</p>
+
+<p>We will analyse each and every aspect with some theory first and practical examples with Python, Numpy and Scikit-learn in order to grasp and visualize those concepts in a more straightforward way.</p>
+
+<p>Here follow the main post-series steps:</p>
+
+<ol>
+<li>Define the bias and variance concepts and apply it to both a linear and a non-linear model (<a href="/blog/mdlsel/mdlsel1/">Part 1</a>).</li>
+<li>Visualize the bias-variance dilemma, understand how the model capacity relates to its performance and why it is common practice to split the dataset into training and testing, create some learning curves that should clarify whether gathering additional data might be worthy (<a href="/blog/mdlsel/mdlsel2/">Part 2</a>).</li>
+<li>Go through the hyperparameter optimization for model selection, via cross-validation, and the regularization technique, also known as <strong>meta-learning</strong> (<a href="/blog/mdlsel/mdlsel3/">Part 3</a>).</li>
+<li>Implement the Ridge regression in Python from scratch, apply it to a low-degree and high-degree model and optimize its weight with validation curves. (<a href="/blog/mdlsel/mdlsel4/">Part 4</a>).</li>
+<li>Apply the model selection theory and practise to a linear binary classification problem, with two models with different complexity (<a href="/blog/mdlsel/mdlsel5/">Part 5</a>).</li>
+<li>Inspect the model accuracy variability, the application of learning and validation curves with Scikit-learn, selection of the best model capacity with cross-validation with different regularization loss definitions (<a href="/blog/mdlsel/mdlsel6/">Part 6</a>).</li>
+<li>Apply the same workflow to a non-linear binary classification problem (<a href="/blog/mdlsel/mdlsel7/">Part 7</a>).</li>
+<li>Apply the full model selection procedure to this case (<a href="/blog/mdlsel/mdlsel8/">Part 8</a>).</li>
+</ol>
+
+<h2 id="2-importing-the-required-libraries">2. Importing the required libraries</h2>
+
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from mpl_toolkits import mplot3d
+</code></pre>
+
+<pre><code class="language-python">from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn import metrics
+from sklearn.model_selection import train_test_split, learning_curve, validation_curve, cross_val_score
+from sklearn.pipeline import make_pipeline
+from sklearn.datasets import make_circles
+</code></pre>
+
+<h2 id="3-bias-and-variance">3. Bias and variance</h2>
+
+<p>Let&rsquo;s assume that there is a function $f(x)$, the ground-truth, that generates the data $y$, with same noise $\varepsilon$.
+We want to learn a model, $\hat{f}(x)$, that gets as close as possible to the data $y = f(x) + \varepsilon$.</p>
+
+<h3 id="3-1-bias">3.1 Bias</h3>
+
+<p>The bias of an estimator is the difference between the expected prediction of the estimator over the data (samples from a random variable) and the truth underlying value that define the data generating distribution.
+It describes the systematic error.
+It is higher when the model introduces more assumptions about the target function and oversimplify the underlying model.
+The higher the bias is, the higher the error on training and test sets.</p>
+
+<h3 id="3-2-variance">3.2 Variance</h3>
+
+<p>The variance of an estimator indicates how much the model prediction can vary over different training datasets.
+Our goal is to get a model whose performance does not change too much from one training set to another one.
+That means that models with high variance are strongly affected by the specific properties of the actual training set used to train the model.
+One of the main consequences is that it would poorly generalize to new unseen samples.</p>
+
+<h3 id="3-3-error">3.3 Error</h3>
+
+<p>The error of the model $\hat{f}(x)$ is defined as:</p>
+
+<p>$$ err(x) = E[(y-\hat{f}(x))^2] $$</p>
+
+<p>This step is a bit tricky to get since the expected value $E[h]$ of a variable $h$ requires that several samples of that random variable are available, while the model error associated to input $x$ is calculated on the single trained model.
+However, the training/testing procedure could be repeated several times.
+At first, new samples are randomly drawn from the data-generating distribution to create the training dataset.
+The model is trained over the new training set and stored in a list.
+The error is then estimated over the entire list of trained models.</p>
+
+<p>The error can be decomposed into bias, variance and noise:</p>
+
+<p>$$ err(x) = \big(E[\hat{f}(x)]-f(x)\big)^2 + E\big[\big(\hat{f}(x)-E[\hat{f}(x)]\big)^2\big] + \varepsilon $$</p>
+
+<p>$$ err(x) = bias^2 + variance + noise $$</p>
+
+<p>Please read <a href="https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff#Bias%E2%80%93variance_decomposition_of_squared_error" target="_blank">this</a> section for further details.</p>
+
+<h3 id="3-4-bull-eye-diagram-of-low-high-capacity-model">3.4 Bull-eye diagram of low/high-capacity model</h3>
+
+<p>We can create a graphical visualization of bias and variance using a bulls-eye diagram.
+The central point of the target is the optimal achievable model.
+The model performance gets worse and worse when corresponding points move away from the bulls-eye.</p>
+
+<p>Since bias and variance values come from the expectation over a set of trials, where the training set is brand-new generated at each trial, we need to repeat the whole model building process, which corresponds to a specific point on the target.
+It may happen that we get a good distribution of training data and the model overperforms (point close to the bulls-eye), while sometimes training data are such that the trained model leads to different outcomes and behaviour.
+The scatter plot shows how the model performs over the set of trials.</p>
+
+<p>We illustrate four scenarios in a 4-chart figure:</p>
+
+<ol>
+<li><strong>low bias/low variance</strong> in the top-left most chart</li>
+<li><strong>low bias/high variance</strong> in the top-right most chart</li>
+<li><strong>high bias/low variance</strong> in the bottom-left most chart</li>
+<li><strong>high bias/high variance</strong> in the bottom-right most chart</li>
+</ol>
+
+<p>We control the data generation process by feeding different mean and variance values to a multivariate normal distribution <code>multivariate_normal</code> from the Numpy <code>random</code> module.</p>
+
+<pre><code class="language-python"># bias/variance: low-low, low-high, high-low, high-high
+a, b, c = 3, 5, 7
+e = c*1.2
+dataMeans = [[0,0], [0,0], [2,2], [2,2]]
+dataVars = [0.1, 1.5, 0.1, 1.5]
+titles = ['low/low', 'low-high', 'high-low', 'high-high']
+def getData(mean, var):
+    data = np.random.multivariate_normal(mean, var*np.eye(2), (20,2))
+    return data[:,0], data[:,1]
+
+fig, axs = plt.subplots(2, 2, figsize=(10, 10))
+for kk, ax in enumerate(axs.reshape(-1)):
+    xx, yy = getData(dataMeans[kk], dataVars[kk])
+    circle1 = plt.Circle((0, 0), a, color='green', alpha=0.3)
+    circle2 = plt.Circle((0, 0), b, color='yellow', alpha=0.3)
+    circle3 = plt.Circle((0, 0), c, color='red', alpha=0.3)
+    ax.add_artist(circle3)
+    ax.add_artist(circle2)
+    ax.add_artist(circle1)
+    ax.scatter(xx, yy, c='r', s=30)
+    ax.set_title('Bias/Variance: '+titles[kk])
+    ax.get_xaxis().set_ticks([])
+    ax.get_yaxis().set_ticks([])
+    ax.axis('off')
+    ax.axis('equal')
+    ax.axis([-e, e, -e, e])
+plt.show()
+</code></pre>
+
+<p><img src="output_6_0.png" alt="png" /></p>
+
+<p>If you are interested to dive in the Matplotlib graphics capabilities, please consider visiting the upcoming series about <strong>code-art</strong> in Python.
+Right now, we can simply summarize that we draw circles with <code>plt.Circle</code>, we attach them to the current axis with <code>add_artist</code>, we add a scatter plot for the data distribution, we get rid of axis ticks to clear it up a bit and we set equal axis.</p>
+
+<h2 id="4-dataset-generation">4. Dataset generation</h2>
+
+<p>We generate some synthetic data using the <code>func</code> function, which combines a line with a sine wave, as follows:</p>
+
+<p>$$ y = m\cdot x + a\cdot\sin (\pi\cdot x) + q $$</p>
+
+<p>We need two other functions now:</p>
+
+<ol>
+<li><code>genData</code> generates noisy data but adding some noise drawn from a random normal distribution.</li>
+<li><code>groundTruth</code> generates the ground-truth data that corresponding to the cleaned function defined above.</li>
+</ol>
+
+<p>The figure shows 50 points from the noisy data.</p>
+
+<pre><code class="language-python">def func(xx):
+    mm, qq, aa = 4, -1, 4
+    return mm*xx + aa*np.sin(np.pi*xx) + qq
+
+def genData(Npnts=50):
+    xx = np.sort(2*np.random.rand(Npnts)-1)
+    yy = func(xx) + 1*np.random.randn(Npnts) # 0.4
+    return xx.reshape(-1,1), yy
+
+def groundTruth(Npnts=50):
+    xTruth = np.linspace(-1, 1, Npnts)
+    yTruth = func(xTruth)
+    return xTruth.reshape(-1,1), yTruth
+
+xx, yy = genData()
+plt.figure(figsize=(10, 5))
+plt.scatter(xx, yy, alpha=0.75)
+plt.xlabel(&quot;X&quot;)
+plt.ylabel(&quot;Y&quot;)
+plt.show()
+</code></pre>
+
+<p><img src="output_9_0.png" alt="png" /></p>
+
+<h2 id="5-bias-and-variance-of-a-linear-model">5. Bias and variance of a linear model</h2>
+
+<p>Let&rsquo;s get started!
+We create <code>Nsim=150</code> models trained with <code>LinearRegression</code> over the same data-generating distribution <code>genData()</code>.</p>
+
+<p>The Numpy array <code>estimates</code> contains 150 arrays of 50 points.
+The element <code>(i, j)</code> stores the output for the <code>j</code> element of the input array <code>xTruth</code> with the model trained with the <code>i</code>-th generated dataset.</p>
+
+<pre><code class="language-python">xTruth, yTruth = groundTruth()
+
+Nsim = 150
+Ys = []
+for kk in range(Nsim):
+    xTrain, yTrain = genData()
+    lr = LinearRegression()
+    lr.fit(xTrain, yTrain)
+    ypred = lr.predict(xTruth)
+    Ys.append(ypred)
+
+estimates = np.array(Ys)
+print('model estimates for {} simulations and for {} points'.format(*estimates.shape))
+</code></pre>
+
+<pre><code>model estimates for 150 simulations and for 50 points
+</code></pre>
+
+<h3 id="5-1-bias">5.1 Bias</h3>
+
+<p>Let&rsquo;s recall the bias definition:</p>
+
+<p>$$ bias^2 = \big(E[\hat{f}(x)]-f(x)\big)^2 $$</p>
+
+<p>The bias represents how much the average estimate deviates from the ground truth.</p>
+
+<p>The bias is evaluated over multiple instances of the training set (<code>Nsim=150</code>), drawn from the same data-generating distribution.
+The expected outcome of the model $\hat{f}(x)$ for input x is the average of the different outcomes of the <code>Nsim=150</code> functions, each trained on one instance of the <code>Nsim=150</code> generated training sets.
+We apply the mean function over the 0-axis of the 2D <code>estimates</code> since it stores the model outcome for the j-th input and the i-th simulation run at row $i$ and column $j$.</p>
+
+<pre><code class="language-python">yexp = np.mean(estimates, axis=0)
+sqBiases = (yexp - yTruth)**2
+meanSqBias = np.mean(sqBiases)
+maxSqBias = np.max(sqBiases)
+
+plt.figure()
+plt.hist(sqBiases, bins=100);
+</code></pre>
+
+<p><img src="output_13_0.png" alt="png" /></p>
+
+<pre><code class="language-python">print('The average squared bias over input range is {:.2f}'.format(meanSqBias))
+print('The maximum squared bias over input range is {:.2f}'.format(maxSqBias))
+</code></pre>
+
+<pre><code>The average squared bias over input range is 3.38
+The maximum squared bias over input range is 14.45
+</code></pre>
+
+<h3 id="5-2-variance">5.2 Variance</h3>
+
+<p>The variance represents how much the estimate varies upon changing the data sample, i.e., it describes how much the model outcome varies from one training sample to another.</p>
+
+<p>$$ variance = E\big[\big(\hat{f}(x)-E[\hat{f}(x)]\big)^2\big] $$</p>
+
+<p>The variance is evaluated over multiple instances of the training set (<code>Nsim=150</code>), drawn from the same data-generating distribution.
+The expected outcome of the model $\hat{f}(x)$ for input x is the average of the different outcomes of the <code>Nsim=150</code> functions, each trained on one instance of the <code>Nsim=150</code> generated training sets.
+We apply the mean function over the 0-axis of the 2D <code>estimates</code> since it stores the model outcome for the j-th input and the i-th simulation run at row $i$ and column $j$.</p>
+
+<pre><code class="language-python">yexp = np.mean(estimates, axis=0)
+variances = np.mean((estimates-yexp)**2, axis=0)
+meanVar = np.mean(variances)
+maxVar = np.max(variances)
+
+plt.figure()
+plt.hist(variances, bins=100);
+</code></pre>
+
+<p><img src="output_16_0.png" alt="png" /></p>
+
+<pre><code class="language-python">print('The average variance over input range is {:.2f}'.format(meanVar))
+print('The maximum variance over input range is {:.2f}'.format(maxVar))
+</code></pre>
+
+<pre><code>The average variance over input range is 0.20
+The maximum variance over input range is 0.43
+</code></pre>
+
+<h3 id="5-3-model-error">5.3 Model error</h3>
+
+<p>Let&rsquo;s implement the code for the model error with these two definitions:</p>
+
+<p>$$ err(x) = \big(E[\hat{f}(x)]-f(x)\big)^2 + E\big[\big(\hat{f}(x)-E[\hat{f}(x)]\big)^2\big] + \varepsilon $$</p>
+
+<p>$$ err(x) = bias^2 + variance + noise $$</p>
+
+<pre><code class="language-python">noise = 1*np.random.randn(yTruth.shape[0])
+yexp = np.mean(estimates, axis=0)
+mse = np.mean((yTruth + noise - yexp)**2)
+</code></pre>
+
+<pre><code class="language-python">print('The model MSE over input range is {:.2f}'.format(mse))
+</code></pre>
+
+<pre><code>The model MSE over input range is 3.96
+</code></pre>
+
+<p>The figure compares the generated data with red dots, the ground-truth profile with a dashed blue line and the expected output with a dotted green line.
+This example clearly shows how the bias affects the model behaviour: it is oversimplified!
+The technical term for this phenomenon is <a href="https://machinelearningmastery.com/overfitting-and-underfitting-with-machine-learning-algorithms/" target="_blank">underfitting</a>.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+plt.scatter(xTrain, yTrain, c='r', alpha=0.75)
+plt.plot(xTruth, yTruth, '--b', lw=2, alpha=0.75)
+plt.plot(xTruth, yexp, ':g', lw=2, alpha=0.75)
+plt.xlabel(&quot;X&quot;)
+plt.ylabel(&quot;Y&quot;)
+plt.show()
+</code></pre>
+
+<p><img src="output_22_0.png" alt="png" /></p>
+
+<h2 id="6-bias-and-variance-of-a-non-linear-model">6. Bias and variance of a non-linear model</h2>
+
+<p>We create <code>Nsim=150</code> models trained with <code>LinearRegression</code> with <strong>non-linear</strong> inputs over the same data-generating distribution <code>genData()</code>.</p>
+
+<p>We transform the linear input <code>xTrain</code> into an 8-degree polynomial with the class <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html" target="_blank"><code>PolynomialFeatures()</code></a> from Scikit-learn.</p>
+
+<p>The Numpy array <code>estimates</code> structure does not change, it does contain 150 arrays of 50 points.</p>
+
+<pre><code class="language-python">Ys = []
+for kk in range(Nsim):
+    xTrain, yTrain = genData()
+    PF = PolynomialFeatures(8)
+    Xpf = PF.fit_transform(xTrain)
+    lr = LinearRegression()
+    lr.fit(Xpf, yTrain)
+    ypred = lr.predict(PF.fit_transform(xTruth))
+    Ys.append(ypred)
+
+estimates = np.array(Ys)
+</code></pre>
+
+<p>Let&rsquo;s apply the same code to estimate the average and maximum biases over the new <code>estimates</code> outcome.
+It has dramatically dropped off.</p>
+
+<pre><code class="language-python">yexp = np.mean(estimates, axis=0)
+sqBiases = (yexp - yTruth)**2
+meanSqBias = np.mean(sqBiases)
+maxSqBias = np.max(sqBiases)
+print('The average squared bias over input range is {:.2f}'.format(meanSqBias))
+print('The maximum squared bias over input range is {:.2f}'.format(maxSqBias))
+</code></pre>
+
+<pre><code>The average squared bias over input range is 0.01
+The maximum squared bias over input range is 0.32
+</code></pre>
+
+<p>However, this comes with a side-effect.
+The new average variance has increased and the maximum value is skyrocketing.</p>
+
+<pre><code class="language-python">yexp = np.mean(estimates, axis=0)
+variances = np.mean((estimates-yexp)**2, axis=0)
+meanVar = np.mean(variances)
+maxVar = np.max(variances)
+print('The average variance over input range is {:.2f}'.format(meanVar))
+print('The maximum variance over input range is {:.2f}'.format(maxVar))
+</code></pre>
+
+<pre><code>The average variance over input range is 2.34
+The maximum variance over input range is 44.63
+</code></pre>
+
+<p>Since the bias affects the final error quadratically, the mean squared error gets lower.</p>
+
+<pre><code class="language-python">noise = 1*np.random.randn(yTruth.shape[0])
+yexp = np.mean(estimates, axis=0)
+mse = np.mean((yTruth + noise - yexp)**2)
+print('The model MSE over input range is {:.2f}'.format(mse))
+</code></pre>
+
+<pre><code>The model MSE over input range is 1.07
+</code></pre>
+
+<p>The figure compares the generated data with red dots, the ground-truth profile with a dashed blue line and the expected output with a dotted green line.</p>
+
+<p>This example clearly shows how the variance affects the model behaviour: it is too complex!
+Indeed the model is <em>perfect</em> within the input range of the data used to train the set of models, but it starts to move away at the extreme boundaries.
+The technical term for this phenomenon is <a href="https://machinelearningmastery.com/overfitting-and-underfitting-with-machine-learning-algorithms/" target="_blank">overfitting</a>.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+plt.scatter(xTrain, yTrain, c='r', alpha=0.75)
+plt.plot(xTruth, yTruth, '--b', lw=2, alpha=0.75)
+plt.plot(xTruth, yexp, ':g', lw=2, alpha=0.75)
+plt.xlabel(&quot;X&quot;)
+plt.ylabel(&quot;Y&quot;)
+plt.show()
+</code></pre>
+
+<p><img src="output_32_0.png" alt="png" /></p>
+
+<h2 id="reference">Reference</h2>
+
+<ol>
+<li><a href="https://sebastianraschka.com/pdf/manuscripts/model-eval.pdf" target="_blank">Model Evaluation, Model Selection, and Algorithm Selection in Machine Learning</a></li>
+<li><a href="https://towardsdatascience.com/a-short-introduction-to-model-selection-bb1bb9c73376" target="_blank">A short introduction to model selection</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Model_selection" target="_blank">Model selection</a></li>
+<li><a href="https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229" target="_blank">Understanding the Bias-Variance Tradeoff</a></li>
+<li><a href="https://www.cs.upc.edu/~belanche/Docencia/dm2/MATERIAL/1.%20ParamEst%20-%20Bias%20&amp;%20Var/DMII-Class1.pdf" target="_blank">Parameter estimation, Bias and Variance</a></li>
+<li><a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" target="_blank">Bias and Variance tradeoff</a></li>
+<li><a href="https://people.eecs.berkeley.edu/~jegonzal/assets/slides/linear_regression.pdf" target="_blank">Linear Regression and the Bias Variance Tradeoff</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff" target="_blank">Bias and Variance tradeoff</a></li>
+<li><a href="https://towardsdatascience.com/overfitting-vs-underfitting-a-conceptual-explanation-d94ee20ca7f9" target="_blank">Overfitting vs underfitting</a></li>
+<li><a href="https://www.dataquest.io/blog/learning-curves-machine-learning/" target="_blank">Learning curves</a></li>
+<li><a href="https://machinelearningmastery.com/k-fold-cross-validation/" target="_blank">Cross-validation</a></li>
+<li><a href="https://www.analyticsvidhya.com/blog/2018/05/improve-model-performance-cross-validation-in-python-r/" target="_blank">Cross-validation</a></li>
+<li><a href="https://www.datacamp.com/community/tutorials/tutorial-ridge-lasso-elastic-net" target="_blank">Regularization: Ridge, Lasso and Elastic Net</a></li>
+<li><a href="https://scikit-learn.org/stable/auto_examples/exercises/plot_cv_digits.html#sphx-glr-auto-examples-exercises-plot-cv-digits-py" target="_blank">Cross-validation on Digits Dataset Exercise</a></li>
+<li><a href="https://sebastianraschka.com/blog/2016/model-evaluation-selection-part1.html" target="_blank">Model evaluation, model selection, and algorithm selection in machine learning</a></li>
+<li><a href="https://www.ritchieng.com/machine-learning-evaluate-linear-regression-model/" target="_blank">Evaluating a Linear Regression Model</a></li>
+</ol>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/logreg/logreg8/" style="color: #4ABDAC; font-size: 18px; "> Learning to classify coffee from cappuccino - Part 8</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/mdlsel/mdlsel2/" style="color: #4ABDAC; font-size: 18px; ">Do not overlearn your data too much, learn to generalize - Part 2</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

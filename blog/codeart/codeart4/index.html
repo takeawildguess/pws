@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Code art in Python - Spirograph pattern in circle - Part 4 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Code art in Python - Spirograph pattern in circle - Part 4">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/codeart/codeart4/" style="font-size: 16px; ">Code art</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/codeartHead.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Code art in Python - Spirograph pattern in circle - Part 4</h1>
+          <h5 class="card-title text-center">Code art</h5>
+          <h6 class="card-text text-center">August 4, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 12 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/coding"><kbd class="item-tag">coding</kbd></a> <a href="https://takeawildguess.net/tags/code-art"><kbd class="item-tag">code-art</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts where I intend to face the challenge of drawing both static and dynamic pictures with a programming language.
+This practise is commonly referred to as <strong>code art</strong>, where art is built with code.</p>
+
+<p>The first four posts will aim at defining a function to create a geometric pattern, a <strong>spirograph</strong> pattern in circle, inspired by this <a href="https://www.youtube.com/watch?v=VMOGIaS0GaE" target="_blank">video</a>, with Python libraries.</p>
+
+<p>We will follow these steps:</p>
+
+<ol>
+<li>Problem definition and visualization basics in <a href="/blog/codeart/codeart1">Part1</a>.</li>
+<li>Line definition through two points and intersection of two lines in <a href="/blog/codeart/codeart2">Part2</a>.</li>
+<li>Polygon vertex detection and postprocessing of intersection points <a href="/blog/codeart/codeart3">Part3</a>.</li>
+<li>Polygon drawing, colour scheme definition, global function implementation and final drawings in <a href="/blog/codeart/codeart4">Part4</a>.</li>
+</ol>
+
+<h2 id="2-draw-the-polygon-with-a-chess-texture">2. Draw the polygon with a chess texture</h2>
+
+<p>We want to colour the grid in a chess fashion.</p>
+
+<p>The grid is built by connecting two adjacent points on the circle at index <code>ka</code> clockwise with respect to the first generator <code>A</code> and two other adjacent points at index <code>kb</code> anticlockwise with respect to the second generator <code>B</code>.</p>
+
+<p>The logic to colour the grid is the following:</p>
+
+<ol>
+<li>if the polygon lies on the left-hand side of the vector connecting A to B, we use an alternate pattern, i.e., if <code>ka</code> is <strong>even</strong>, we fill the polygon for each <strong>odd</strong> <code>kb</code>, if <code>ka</code> is <strong>odd</strong>, we fill the polygon for each <strong>even</strong> <code>kb</code>.</li>
+<li>Contrarily, if the polygon lies on the right-hand side, we use the opposite pattern, namely we draw if both <code>ka</code> and <code>kb</code> are either <strong>even</strong> or <strong>odd</strong>.</li>
+</ol>
+
+<p>If a number <code>n</code> is even, the modulus operation <code>n%2</code>, which gives the remainder of the left value <code>n</code> divided by the right value <code>2</code>, returns <code>0</code>. Otherwise, it returns <code>1</code>.</p>
+
+<p>A compact way to check the two above situations for the RHS case is <code>(kb+1-(ka%2))%2 == 0</code>.
+In the first case, <code>(ka%2)</code> is <code>0</code> since <code>ka</code> is even. <code>(kb+1-(ka%2))</code> becomes <code>(kb+1)</code>.
+The quantity <code>(kb+1)%2 == 0</code> is true only if the left value of the modulus <code>kb+1</code> is even. That finally implies that <code>kb</code> needs to be odd.</p>
+
+<p>Similarly, in the second case, <code>ka</code> is odd and <code>(ka%2)</code> becomes <code>1</code>; <code>(kb+1-(ka%2))</code> becomes <code>(kb+1-1) = kb</code>.
+The quantity <code>kb%2 == 0</code> is true only if <code>kb</code> is even.</p>
+
+<p>The polygon lies on the right-hand side of the vector connecting A to B if <code>ka</code> has reached the index of <code>B</code> anticlockwise:</p>
+
+<p>$$ idx_{AB} = Npnt - [\theta_{AB}\cdot\pi/180] -1 $$</p>
+
+<p>We introduce the <code>1</code> bias only for the RHS case, which occurs when <code>ka &gt;= (Npnts-idxAB-1)</code>.
+The variable <code>chessOrder</code> equals 1 and 0 for RHS and LHS, respectively (<code>1 if ka&gt;=(Npnts-idxAB-1) else 0</code>)</p>
+
+<p>This logic is applied for the two nested <code>for</code> loops of <code>ka</code> and <code>kb</code> and its values stored to <code>isDraw</code>.</p>
+
+<p>The heavier computation to determine the polygon coordinates is thus executed only if <code>isDraw</code> is true.</p>
+
+<h2 id="3-colour-scheme">3. Colour scheme</h2>
+
+<p>There are many interesting ways to colour this texture.</p>
+
+<h3 id="3-1-fix-colour-scheme">3.1 Fix colour scheme</h3>
+
+<p>One simple way could be to set the same colour for each polygon.</p>
+
+<p>This is very easy to do in Matplotlib as <code>pc.set_color([0, 0, 0])</code>, where <code>pc</code> is the patch collection and the 1D array is the RGB colour code.</p>
+
+<h3 id="3-2-distance-from-origin-based-colour-scheme">3.2 Distance-from-origin-based colour scheme</h3>
+
+<p>A second way could be to develop a colour function that returns a score proportional to the distance from the origin <code>centrDist  = np.sum(centroid**2)</code>.
+The patches are then coloured with solid fill but their colours are picked from a colour palette with respect to the scores stored in the <code>colors</code> list (<code>colors.append(centrDist)</code>), as <code>pc.set_array(np.array(colors))</code>.</p>
+
+<h3 id="3-3-area-based-colour-scheme">3.3 Area-based colour scheme</h3>
+
+<p>A third way is to assign colours from the same palette with respect to the polygon area instead of the distance from origin.</p>
+
+<p>To calculate the area of a 3-vertex polygon we use the cross product <a href="https://en.wikipedia.org/wiki/Cross_product#Geometric_meaning" target="_blank">property</a>:</p>
+
+<p>$$ |\vec{AB}\times \vec{AC}| = AB\cdot AC\sin\theta = 2\cdot area(ABC) $$</p>
+
+<p>where $\theta$ is the angle between the two vectors.</p>
+
+<p>Below we take the first three vertexes from <code>polygCoord2</code> and write them to <code>poly3vert</code>.
+The first segment <code>AB</code> is the vertical difference between the first two rows, the second segment <code>AC</code> is the difference between the third and first rows.
+The cross product gives double the magnitude of the area.</p>
+
+<pre><code class="language-python">poly3vert = polygCoord2[:3,:]
+def poly3area(poly3vert):
+    AB = np.diff(poly3vert[:2,:], axis=0)
+    AC = np.diff(poly3vert[[0, 2],:], axis=0)
+    return np.cross(AB, AC)[0]/2
+area = poly3area(poly3vert)
+print('From this 3 vertexes\n{}\nwe get the following area: {:.2f}'.format(poly3vert, area))
+</code></pre>
+
+<pre><code>From this 3 vertexes
+[[-6.  -1.5]
+ [-3.  -1. ]
+ [-4.   1.5]]
+we get the following area: 4.00
+</code></pre>
+
+<p>To calculate the area of a 4-vertex polygon, we split it into two adjacent 3-vertex polygons and apply the same procedure as above.</p>
+
+<p>$$ area(ABCD) = area(ABD) + area(BCD) = $$</p>
+
+<p>$$ = \frac{1}{2}\cdot(|\vec{AB}\times \vec{AD}| + |\vec{BC}\times \vec{BD}|) $$</p>
+
+<p>The segment <code>AB</code> is the vertical difference between the first two rows, <code>AD</code> is the difference between the last and first rows, <code>BC</code> between the third and second rows and <code>BD</code> between the last and second and rows.</p>
+
+<pre><code class="language-python">poly4vert = polygCoord2.copy()
+def poly4area(poly4vert):
+    areaABD = poly3area(poly4vert[[0, 1, -1], :])
+    areaBCD = poly3area(poly4vert[[1, 2, -1], :])
+    return areaABD+areaBCD
+
+area = poly4area(poly4vert)
+print('From this 4 vertexes\n{}\nwe get the following area: {:.2f}'.format(poly4vert, area))
+</code></pre>
+
+<pre><code>From this 4 vertexes
+[[-6.  -1.5]
+ [-3.  -1. ]
+ [-4.   1.5]
+ [-5.   1. ]]
+we get the following area: 5.00
+</code></pre>
+
+<p>The patches are then coloured with solid fill with colours picked from the palette according to the <code>area</code>.</p>
+
+<h3 id="3-4-distance-from-generators-based-colour-scheme">3.4 Distance-from-generators-based colour scheme</h3>
+
+<p>A fourth way is to assign a colour proportional to the minimum distance from the origin <code>generDist</code>.
+The patches are then coloured with solid fill with colours from palette with respect to such a distance.</p>
+
+<pre><code class="language-python">distGenerA = np.sum((centroid-np.array(Pa))**2)
+distGenerB = np.sum((centroid-np.array(Pb))**2)
+generDist = min(distGenerA, distGenerB)
+</code></pre>
+
+<h2 id="4-final-function-development">4. Final function development</h2>
+
+<p>We develop the general function which is responsible to draw the spirograph pattern art in circle.</p>
+
+<p>The hyperparameters are:</p>
+
+<ol>
+<li><code>radius</code>, the circle radius</li>
+<li><code>Npnt</code>, the number of points over the circle</li>
+<li><code>alpha_ab</code>, the angular distance from A to B (degrees)</li>
+<li><code>kind</code>, the kind of colour scheme, which can be one among generator-distance based <code>genDist</code>, fix-colour <code>fix-(green|red|blue|gray|black)</code>, polygon-area-based <code>area</code> and origin-distance-based <code>origiDist</code> schemes.</li>
+<li><code>figSize</code>, the figure size</li>
+<li><code>palette</code>, the colour palette from Matplotlib.</li>
+<li><code>patchAlpha</code>, the polygon colour transparency.</li>
+</ol>
+
+<p>We use some functions to make the drawing code more compact.</p>
+
+<p>From the indexes <code>ka</code> and <code>kb</code> we get the coordinates of the two pairs of adjacent points that are then connected to the two generators to design the polygon. This logic is in <code>index2coords</code>.</p>
+
+<p>When we have the coordinates of the 4 points (A, B, C, D) we calculate the coordinates of the intersecting points with <code>seg2intersection</code>.</p>
+
+<pre><code class="language-python">def index2coords(theta_A, theta_B, radius, Lseg, ka=0, kb=0):
+    theta_Cs = theta_A - (np.r_[ka, ka+1]+1)*Lseg
+    Pcs = np.array(polar2cartesian(theta_Cs, radius)).T
+    CCs = np.repeat(Pcs, 2, axis=0)
+    theta_Ds = theta_B + (np.r_[kb, kb+1]+1)*Lseg
+    Pds = np.array(polar2cartesian(theta_Ds, radius)).T
+    DDs = np.tile(Pds, (2,1))
+    return CCs, DDs
+
+def seg2intersection(AAs, BBs, CCs, DDs):
+    toHomCoords = lambda pnts: np.hstack((pnts, np.ones((4, 1))))
+    AHs = toHomCoords(AAs)
+    BHs = toHomCoords(BBs)
+    CHs = toHomCoords(CCs)
+    DHs = toHomCoords(DDs)
+    L1 = np.cross(AHs, CHs)
+    L2 = np.cross(BHs, DHs)
+    PIHs = np.cross(L1, L2) # homogeneous coordinates for intersecting point
+    xIHs, yIHs, zIHs = np.split(PIHs, 3, axis=1)
+    paralSeg = np.abs(zIHs)&lt;1e-5
+    zIHs[paralSeg] = 1
+    xIs, yIs = xIHs/zIHs, yIHs/zIHs
+    xIs, yIs = xIs[paralSeg==0], yIs[paralSeg==0]
+    polygonalPoints = np.vstack((xIs, yIs)).T
+    return polygonalPoints
+</code></pre>
+
+<p>The filtering process to get rid of duplicates and points outside the circle, is in <code>pointFiltering</code>.
+The polygon is anticlockwise sorted in <code>polygonSorting</code>.
+Its area is determined with <code>poly3area</code> if it has 3 vertexes or with <code>poly4area</code> if it has 4 vertexes.</p>
+
+<pre><code class="language-python">def pointFiltering(polygonalPoints, radius):
+    polygonalPoints1 = np.unique(np.around(polygonalPoints, decimals=6), axis=0)
+    distance = np.sqrt(np.sum(polygonalPoints1**2, axis=1))
+    criteria = np.around(distance, decimals=3)&lt;=radius
+    return polygonalPoints1[criteria, :]
+
+def polygonSorting(polygonalPoints):
+    centroid = np.mean(polygonalPoints, axis=0)
+    polygCoord_ = list(polygonalPoints)
+    polygCoord_.sort(key=lambda pnt: math.atan2(pnt[1]-centroid[1], pnt[0]-centroid[0]))
+    return np.array(polygCoord_), centroid
+
+def poly3area(poly3vert):
+    AB = np.diff(poly3vert[:2,:], axis=0)
+    AC = np.diff(poly3vert[[0, 2],:], axis=0)
+    return np.cross(AB, AC)[0]/2
+
+def poly4area(poly4vert):
+    areaABD = poly3area(poly4vert[[0, 1, -1], :])
+    areaBCD = poly3area(poly4vert[[1, 2, -1], :])
+    return areaABD + areaBCD
+</code></pre>
+
+<p>The patch colour can be defined with many criteria:</p>
+
+<ol>
+<li><code>fix-(green|red|blue|gray|black)</code>, where every polygon colour is same and equal to what user selects in the available list</li>
+<li><code>area</code>, where the colour is related to the polygon area</li>
+<li><code>genDist</code>, where the colour is proportional to the minimum distance from any of the two generators.</li>
+<li><code>origiDist</code>, where the colour is proportional to the distance from the origin.</li>
+</ol>
+
+<p>For cases 2-4, the colour is chosen from a palette by Matplotlib, according to the polygon <code>score</code> that is assigned with the function <code>colorCriteria</code>.</p>
+
+<pre><code class="language-python">def colorCriteria(polygs, centroid, kind):
+    if kind=='area':
+        area = poly3area(polygs) if polygs.shape[0]==3 else poly4area(polygs) # polygon area
+        score = np.log(area)
+    elif kind=='originDist':
+        score = np.sum(centroid**2) # square distance from origin
+    elif kind=='genDist':
+        distGenerA = np.sum((centroid-np.array(Pa))**2)
+        distGenerB = np.sum((centroid-np.array(Pb))**2)
+        score = min(distGenerA, distGenerB) # minimum square distance from any of the two generators
+    else:
+        score = 0
+    return score
+</code></pre>
+
+<p>The final drawing logic is placed in <code>drawingSpirograph</code>, where the 4 hyperparameters are assigned.</p>
+
+<p>Here a list of different <a href="https://matplotlib.org/users/colormaps.html" target="_blank">colormaps</a> available in Matplotlib.</p>
+
+<pre><code class="language-python">def drawingSpirograph(Npnts=20, alpha_ab=120, kind = 'fix-green', figSize = 5, radius=1, palette='RdYlBu', patchAlpha=.3):
+    margin = radius * 1.25
+    #kind = 'genDist' # fix-green, area, originDist, genDist
+    colDict = {'green': [0, 1, 0], 'red': [1, 0, 0], 'blue': [0, 0, 1], 'gray': [.5, .5, .5], 'black': [0, 0, 0]}
+
+    Lseg = 2*np.pi/Npnts
+    theta_A = 0
+    idxAB = int(np.round(alpha_ab/180*np.pi/Lseg))
+    theta_B = np.round((theta_A+alpha_ab/180*np.pi)/Lseg)*Lseg
+    Pa = polar2cartesian(theta_A, radius)
+    Pb = polar2cartesian(theta_B, radius)
+    AAs = np.tile(np.array(Pa), (4,1))
+    BBs = np.tile(np.array(Pb), (4,1))
+
+    plt.figure(figsize=(figSize, figSize))
+    circle = plt.Circle((0, 0), radius, color='g', fill=False, alpha=.4, lw=1)
+    patches, patchColors = [], []
+    for ka in range(Npnts-2):
+        for kb in range(Npnts-2):
+            chessOrder = 1 if ka&gt;=(Npnts-idxAB-1) else 0
+            isDraw = (kb-(ka%2)+chessOrder)%2 == 0
+            if isDraw:
+                CCs, DDs = index2coords(theta_A, theta_B, radius, Lseg, ka, kb)
+                polygonalPoints = seg2intersection(AAs, BBs, CCs, DDs)
+                polygonalPoints2 = pointFiltering(polygonalPoints, radius)
+                if polygonalPoints2.shape[0]&gt;=3:
+                    polygonalPoints3, centroid = polygonSorting(polygonalPoints2)
+                    centrDist = np.sum(centroid**2)*100
+                    polygon = Polygon(np.array(polygonalPoints3), True)
+                    patches.append(polygon)
+                    if not kind.startswith('fix'):
+                        score = colorCriteria(polygonalPoints3, centroid, kind)
+                        patchColors.append(score)
+
+    pc = PatchCollection(patches, alpha=patchAlpha, cmap=getattr(plt.cm, palette)) #plt.cm.RdYlBu
+    if kind.startswith('fix'):
+        fixColor = colDict[kind.split('-')[-1]]
+        pc.set_color(fixColor)
+    else:
+        pc.set_array(np.array(patchColors))
+
+    ax = plt.gca()
+    ax.add_collection(pc)
+    ax.add_artist(circle)
+    ax.get_xaxis().set_ticks([])
+    ax.get_yaxis().set_ticks([])
+    ax.axis('off')
+    ax.axis('equal')
+    ax.axis([-margin, margin, -margin, margin]);
+</code></pre>
+
+<h2 id="5-final-drawings">5. Final drawings</h2>
+
+<p>We list here some examples of spirograph patterns in a circle with our Python function.</p>
+
+<pre><code class="language-python">drawingSpirograph(kind='originDist', Npnts=60, palette='gist_rainbow', figSize=12)
+</code></pre>
+
+<p><img src="output_18_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(kind='genDist', Npnts=60, palette='gist_rainbow', figSize=12)
+</code></pre>
+
+<p><img src="output_19_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(kind='area', Npnts=60, palette='gist_rainbow', figSize=12)
+</code></pre>
+
+<p><img src="output_20_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(kind='fix-green', Npnts=60, figSize=12)
+</code></pre>
+
+<p><img src="output_21_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(kind='fix-red', Npnts=60, figSize=12)
+</code></pre>
+
+<p><img src="output_22_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(kind='fix-black', Npnts=60, figSize=12, patchAlpha=.9)
+</code></pre>
+
+<p><img src="output_23_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(kind='fix-blue', Npnts=60, figSize=12, alpha_ab=45)
+</code></pre>
+
+<p><img src="output_24_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(kind='fix-blue', Npnts=60, figSize=12, alpha_ab=180)
+</code></pre>
+
+<p><img src="output_25_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(kind='fix-blue', Npnts=60, figSize=12, alpha_ab=90)
+</code></pre>
+
+<p><img src="output_26_0.png" alt="png" /></p>
+
+<p>Please don&rsquo;t hesitate to send me your comments to improve this concept and/or ideas to create different drawings with some new fancy colour scheme and geometric parameter settings.</p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/codeart/codeart3/" style="color: #4ABDAC; font-size: 18px; "> Code art in Python - Spirograph pattern in circle - Part 3</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/codeart/codeart5/" style="color: #4ABDAC; font-size: 18px; ">Code art in Python - Spirograph pattern in a rectangle - Part 1</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

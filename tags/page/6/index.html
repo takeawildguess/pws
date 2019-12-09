@@ -11,12 +11,13 @@
    <meta name="author" content="Your name"> 
   
 
-  <meta name="generator" content="Hugo 0.49" />
+  <meta name="generator" content="Hugo 0.59.1" />
   <title>Tags &middot; take a wild guess</title>
 
   
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 
 
  <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
@@ -31,7 +32,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
-<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
 
   
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -40,6 +41,8 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
 
 
 
@@ -54,9 +57,6 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
 
-
-
-<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
 
 
 <script type="text/javascript">
@@ -103,13 +103,59 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
   <![endif]-->
 
   
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
 
   
   
-  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
-  <script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  </script>
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
   
 
 </head>
@@ -148,27 +194,16 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
           </div>
         </li>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/project/">Prevision</a>
-            <a class="dropdown-item" href="/project/">Avenew</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/project/">Treecky</a>
-          </div>
-        </li>
+        
       </ul>
       
       <ul class="navbar-nav navbar-right">
         
-          <li class="nav-item navbar-icon"><a href="mailto:mattia.venditti@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://github.com/username/"><i class="fa fa-github"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://twitter.com/username/"><i class="fa fa-twitter"></i></a></li>
-        
-          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
         
       </ul>
       
@@ -178,22 +213,118 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
   </div>
 </nav>
 
-    <h2>Tags</h2>
+    <header class="tagHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <h1 class="text-center">Tags</h1>
+    </div>
+  </div>
+</header>
 
-    
-      <div class="item">
+<section class="">
+  <div class="blog">
+    <div class="container">
+      <div class="row">
+        
           
+          <div class="col-md-4 col-lg-4 col-sm-12 cardbox">
+            <div class="card">
+              <div class="card-img">
+                <img src="https://takeawildguess.net/" class="img-fluid" alt="__">
+              </div>
+              <div class="card-body">
+                <hr style="border: 3px solid #4ABDAC; min-width: 200px; border-radius: 3px; " />
+                <h4 class="card-title"><a class="" href="/tags/bootstrap/">bootstrap</a></h4>
+                <h6>January 1, 0001</h6>
+                <p class="card-text"></p>
+              </div>
+              <div class="card-footer">
+                
+              </div>
+            </div>
+          </div>
           
+        
           
-
+          <div class="col-md-4 col-lg-4 col-sm-12 cardbox">
+            <div class="card">
+              <div class="card-img">
+                <img src="https://takeawildguess.net/" class="img-fluid" alt="__">
+              </div>
+              <div class="card-body">
+                <hr style="border: 3px solid #4ABDAC; min-width: 200px; border-radius: 3px; " />
+                <h4 class="card-title"><a class="" href="/tags/css/">css</a></h4>
+                <h6>January 1, 0001</h6>
+                <p class="card-text"></p>
+              </div>
+              <div class="card-footer">
+                
+              </div>
+            </div>
+          </div>
           
+        
           
-
-          <h4><a href="/blog/goisforlovers/">Themes</a></h4>
-          <h5>September 28, 2014</h5>
+          <div class="col-md-4 col-lg-4 col-sm-12 cardbox">
+            <div class="card">
+              <div class="card-img">
+                <img src="https://takeawildguess.net/" class="img-fluid" alt="__">
+              </div>
+              <div class="card-body">
+                <hr style="border: 3px solid #4ABDAC; min-width: 200px; border-radius: 3px; " />
+                <h4 class="card-title"><a class="" href="/tags/development-engineer/">development engineer</a></h4>
+                <h6>January 1, 0001</h6>
+                <p class="card-text"></p>
+              </div>
+              <div class="card-footer">
+                
+              </div>
+            </div>
+          </div>
           
+        
+          
+          <div class="col-md-4 col-lg-4 col-sm-12 cardbox">
+            <div class="card">
+              <div class="card-img">
+                <img src="https://takeawildguess.net/" class="img-fluid" alt="__">
+              </div>
+              <div class="card-body">
+                <hr style="border: 3px solid #4ABDAC; min-width: 200px; border-radius: 3px; " />
+                <h4 class="card-title"><a class="" href="/tags/go/">go</a></h4>
+                <h6>January 1, 0001</h6>
+                <p class="card-text"></p>
+              </div>
+              <div class="card-footer">
+                
+              </div>
+            </div>
+          </div>
+          
+        
+          
+          <div class="col-md-4 col-lg-4 col-sm-12 cardbox">
+            <div class="card">
+              <div class="card-img">
+                <img src="https://takeawildguess.net/" class="img-fluid" alt="__">
+              </div>
+              <div class="card-body">
+                <hr style="border: 3px solid #4ABDAC; min-width: 200px; border-radius: 3px; " />
+                <h4 class="card-title"><a class="" href="/tags/golang/">golang</a></h4>
+                <h6>January 1, 0001</h6>
+                <p class="card-text"></p>
+              </div>
+              <div class="card-footer">
+                
+              </div>
+            </div>
+          </div>
+          
+        
       </div>
-    
+    </div>
+  </div>
+</section>
 
     <footer class="pgFoot">
   <div class="container-fluid">
@@ -201,7 +332,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
       <div class="col-12 text-center icons">
         
         <span>
-          <a href="mailto:mattia.venditti@gmail.com"><i class="fa fa-envelope-o"></i></a><a href="https://github.com/username/"><i class="fa fa-github"></i></a><a href="https://twitter.com/username/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
         </span>
         
       </div>

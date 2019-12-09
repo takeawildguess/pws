@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>FCNN - Geometric intuition behind a neuron &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="FCNN - Geometric intuition behind a neuron">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/fcnn/fcnn02/" style="font-size: 16px; ">FCNN intuition</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/fcnnHead.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">FCNN - Geometric intuition behind a neuron</h1>
+          <h5 class="card-title text-center">FCNN intuition</h5>
+          <h6 class="card-text text-center">September 1, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 8 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/neural-network"><kbd class="item-tag">neural network</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts related to a huge and popular topic in machine learning: <strong>fully connected neural networks</strong>.</p>
+
+<p>The series scope is three-fold:</p>
+
+<ol>
+<li>visualize the model features and characteristics with schematic pictures and charts</li>
+<li>learn to implement the model with different levels of abstraction, given by the framework used</li>
+<li>have some fun with one of the hottest topics right now!</li>
+</ol>
+
+<p>In this post, we give some geometric insight into what occurs in a single neuron.
+Note that, if the activation is a sigmoid function, it performs a logistic regression to the inputs.
+In the following <a href="/blog/fcnn/fcnn03/">post</a>, we extend this geometric intuition to a neuron network.</p>
+
+<h2 id="2-what-is-a-neural-network">2. What is a neural network</h2>
+
+<p>We start analyzing a toy problem and understanding why logistic regression (LR) is no suitable and we need more powerful and advanced functions to try to solve the problem.
+Below there is a chart showing nine points.
+Different colours mean different classes, so is a binary classification because we have only two colours, blue and red.
+It&rsquo;s easy to see it would be impossible to separate the two regions, blue and red, with only one line and this is why we need a more complex and advanced function.
+We, in fact, need to find a narrow area between the two blue regions where we are going to specify the red class.
+For that, we need to combine multiple logistic regressions.</p>
+
+<p><img src="/blog/fcnn/fcnn02/fcnn1_intuition.png" alt="pngM" title="NN neuron intuition" />
+<center><em>Figure 1 - NN neuron intuition</em></center></p>
+
+<p>The main idea is to try to overcome the limit and see how far we can go by just combining more of such functions.
+If you want to understand more about logistic regression, please see my previous series.</p>
+
+<p>Now we are going to focus on how we can interpret LR geometrically and what we need to understand if you want to combine multiple regressions altogether.</p>
+
+<h2 id="3-decision-boundary">3.  Decision boundary</h2>
+
+<p>Geometrically we can interpret this function as a simple classifier that is going to draw a line, which is called <strong>decision boundary</strong>.
+That line is going to split the entire domain into two sub-areas, one for each class.
+This decision line is perpendicular to the direction given by the weights if you interpret the weights as a vector.</p>
+
+<p>We can have a look at the below chart and see that we have two weights, one for each input, $x_1$  and $x_2$, in the 2D domain.
+That weight vector is giving the direction (line <em>r</em> in the chart).</p>
+
+<p><img src="/blog/fcnn/fcnn02/fcnn1_decisionBoundary.png" alt="pngM" title="Decision boundary" />
+<center><em>Figure 2 - Decision boundary</em></center></p>
+
+<p>How a combination of weights and biases is going to define the decision line?
+Mathematically we know that the line defining the decision boundary is:</p>
+
+<p>$$ z = w\cdot X + b = $$</p>
+
+<p>$$ = w_1\cdot x_1 + w_2\cdot x_2 + b = 0 $$</p>
+
+<p>This set of points represents where we don&rsquo;t know exactly how we can classify the input.
+But if $z$ becomes greater than 0, we get more confident that it belongs to the first class and if $z$ becomes less than 0, to the other class.</p>
+
+<p>Now we draw a line $s$, which is perpendicular to the previous line and is crossing the origin $(0, 0)$, whose equation is:</p>
+
+<p>$$ s: x_2 = \frac{w_2}{w_1}\cdot x_1 $$</p>
+
+<p>You can prove it that the vector along $s$ is $\big(1, \frac{w_2}{w_1}\big)$ and that it is perpendicular to $r$ since the perpendicular vector of $r$, $(w_1, w_2)$ is proportional to $\big(1, \frac{w_2}{w_1}\big)$.</p>
+
+<p>We got a system of two equations in $x_1$ and $x_2$.
+We can solve it using very simple mathematical steps and find out that the intersection of these two lines is giving us the point B which is exactly at the point on our decision line and whose distance from the origin is the minimum possible.</p>
+
+<p>We end up with:</p>
+
+<p>$$ r\cap s: x_1 = -\frac{w_1\cdot b}{w^2} $$</p>
+
+<p>$$ x_2 = -\frac{w_2\cdot b}{w^2} $$</p>
+
+<p>We combine these two coordinates into the point P and realize that direction is given by the weight unit vector $\vec{u_w} = \vec{w}/w$ and distance from the origin is the ratio of bias and weight module $b/w$:</p>
+
+<p>$$ P = (x_1, x_2) = -\frac{b}{w^2}\cdot \vec{w} = $$</p>
+
+<p>$$ = -\frac{b}{w}\cdot \vec{u_w} $$</p>
+
+<p>We can also determine the distance of P from origin by using the two coordinates of P and the Euclidean formulation:</p>
+
+<p>$$ d = \sqrt{\frac{(w_1\cdot b)^2+(w_2\cdot b)^2}{w^4}} $$</p>
+
+<p>$$ = \sqrt{\frac{b^2\cdot w^2}{w^4}} = \sqrt{\frac{b^2}{w^2}} $$</p>
+
+<p>$$ d = \frac{|b|}{w} $$</p>
+
+<p>It means that, given a certain level of bias, if we increase the weight magnitude $w$ we are going to shift your decision line toward the origin; if we instead fix the weights&rsquo; magnitude and increase bias, the decision line moves away from the origin
+The direction will always be defined by the weight vector.</p>
+
+<h2 id="4-affine-transformation">4. Affine transformation</h2>
+
+<p>Here we see how to draw the decision line.
+The weights&rsquo; vector direction is perpendicular to the decision line.
+There are two points on such a line whose distance is $\frac{|b|}{w}$, one is $P(b<0)$ on the right-hand side when bias is negative, the other is $P(b>0)$ on the left-hand side when bias is positive.</p>
+
+<p><img src="/blog/fcnn/fcnn02/fcnn1_affineTransformation.png" alt="pngM" title="Affine transformation" />
+<center><em>Figure 3 - Affine transformation</em></center></p>
+
+<p>Another property that we can see in the next figure is that if you collect as many points as you want on the same line $s_1$ perpendicular to $r$, say $x^{(1)}$, $x^{(2)}$, $x^{(3)}$, and feed those points to the affine transformation (geometric projection), we end up with the same output.
+If we instead take the yellow points $x^{(4)}$, $x^{(5)}$, $x^{(6)}$ that lie on $s_2$ and feed those points to the same transformation, we got a common projected point again.</p>
+
+<p>It means that basically what our logistic regression is doing is projecting every point on a given line perpendicular to $r$ to the same point.
+It just squishes the 2-dimensional space into 1-dimensional space.</p>
+
+<p>That&rsquo;s the idea to get the decision line.
+We know we still need to do one step.
+If we apply the <em>activation function</em>, say a sigmoid, to the output of the affine transformation, we really got the complete process output of a network layer.</p>
+
+<h2 id="5-uncertainty-area">5. Uncertainty area</h2>
+
+<p>By analyzing the sigmoid function with respect to the received input, it squishes to $(0, 1)$. The output is either zero or one for most of the input domain and is continuously moving from 0 to 1 only in a really narrow area.</p>
+
+<p><img src="/blog/fcnn/fcnn02/fcnn1_sigmoid2D.png" alt="pngM" title="2D visualization of the sigmoid function" />
+<center><em>Figure 4 - 2D visualization of the sigmoid function</em></center></p>
+
+<p>In practice, we can just assume the function returns 0 for input less than -5, continuously increases from 0 to 1 in the area ranging from -5 to 5 and returns 1 for input greater than 5.
+In the above chart, there are three lines:</p>
+
+<p>$$ r: w\cdot \vec{x} + b = -5 \quad \text{red} $$</p>
+
+<p>$$ y: w\cdot \vec{x} + b = 0 \quad \text{yellow} $$</p>
+
+<p>$$ g: w\cdot \vec{x} + b = +5 \quad \text{green} $$</p>
+
+<p>Line $r$ defines the area where the model is very confident to assign the 0-class.
+The decision boundary, $y$, is the yellow line where we are completely uncertain about the two classes (50-50% chances).
+The third line, $g$, delimits the area where we are quite confident the points there belong to the other class.</p>
+
+<p>The point of this chart is to show this yellow stripe, which could be narrower or wider according to the model parameters, where we are less sure about anything.</p>
+
+<p>we can still say that, if a point is on the left-hand side of the yellow line, it belongs to class <code>0</code> and to class <code>1</code> if it is on the other side, but the probability of this statement is lower.</p>
+
+<p>The yellow area is confined between the two lines <code>r</code> and <code>g</code>, whose distance is double the distance from the central line and one of the two lines, $2\cdot \frac{5}{w}$.</p>
+
+<p>This means that, if the weight magnitude increases, the area in which we are somehow uncertainty is going to decrease to become really narrow.
+If weights go down closer to 0, the yellow area is going to be wider, i.e., the model becomes more confident.
+The tradeoff can be determined with a proper regularization technique, which usually tends to keep weights as close as possible to 0 to prevent weights to become extremely large and, therefore, unreliable to generalize to unseen data.</p>
+
+<p>From this geometrical interpretation we derive that, if we want to keep weights small, we need to prevent the neural networks to build some super narrow and confident decision boundaries, which then translates into overfitting over new data points.
+As soon as there is a new point from one class which is slightly shifting to the other class decision area, the model immediately switches to the other class, since there is no uncertain area in between (yellow).
+This behaviour reflects the inability of the model to <em>generalize</em> to new scenarios.</p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/fcnn/fcnn01/" style="color: #4ABDAC; font-size: 18px; "> Fully connected neural networks - cheat sheet</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/fcnn/fcnn03/" style="color: #4ABDAC; font-size: 18px; ">FCNN - Geometric intuition behind neural networks</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

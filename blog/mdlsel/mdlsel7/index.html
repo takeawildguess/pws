@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Do not overlearn your data too much, learn to generalize - Part 7 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Do not overlearn your data too much, learn to generalize - Part 7">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/mdlsel/mdlsel7/" style="font-size: 16px; ">Learning to learn your data</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/mdlselHead.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Do not overlearn your data too much, learn to generalize - Part 7</h1>
+          <h5 class="card-title text-center">Learning to learn your data</h5>
+          <h6 class="card-text text-center">May 26, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 6 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/model-selection"><kbd class="item-tag">model selection</kbd></a> <a href="https://takeawildguess.net/tags/overfitting"><kbd class="item-tag">overfitting</kbd></a> <a href="https://takeawildguess.net/tags/numpy"><kbd class="item-tag">numpy</kbd></a> <a href="https://takeawildguess.net/tags/regularization"><kbd class="item-tag">regularization</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/learning-curve"><kbd class="item-tag">learning curve</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>After two introductory post-series (<a href="/blog/linreg/linreg1/">linear</a> and <a href="/blog/logreg/logreg1/">logistic</a> regression), we dive into a crucial topic that every machine-learning practitioner should be at least aware of: <strong>model selection</strong>.</p>
+
+<p>Basically, we do not want our models to learn our data by heart and then to struggle to handle new unseen data samples.
+We want them to be great at generalizing.</p>
+
+<p>We have introduced the <em>bias</em> and <em>variance</em> concepts in <a href="/blog/mdlsel/mdlsel1/">Part1</a> and the bias-variance dilemma, the model capacity, the training/testing split practice and learning curves analysis in <a href="/blog/mdlsel/mdlsel2/">Part2</a>.
+We moved to the cross-validation and regularization techniques in <a href="/blog/mdlsel/mdlsel3/">Part3</a>, implemented the Ridge regression in Python in <a href="/blog/mdlsel/mdlsel4/">Part4</a>.</p>
+
+<p>We apply the same workflow of the mini-series about model selection for a linear binary classification problem (<a href="/blog/mdlsel/mdlsel5/">first</a> and <a href="/blog/mdlsel/mdlsel6/">second</a> posts) to a non-linear case, where the model needs to separate two circular clouds with a circle.
+Here we start with the comparison of two models with different complexity.</p>
+
+<h2 id="2-dataset">2. Dataset</h2>
+
+<p>We start by generating a synthetic dataset for a non-linear binary classification problem.
+We use <a href="http://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html" target="_blank"><code>make_circles</code></a> to have two concentric rings that slightly overlap with some noise.
+The model output is the class of the cloud, either 0 for purple data points or 1 for yellow points.</p>
+
+<pre><code class="language-python">from sklearn.datasets import make_circles
+</code></pre>
+
+<pre><code class="language-python">def genCircles(Npnt=100):
+    return make_circles(n_samples=Npnt, shuffle=True, noise=0.15, random_state=None, factor=0.7)
+
+XX, YY = genCircles()
+</code></pre>
+
+<pre><code class="language-python">plt.figure()
+plt.scatter(XX[:,0], XX[:,1], c=YY, alpha=0.5)
+plt.axis('equal')
+plt.tight_layout()
+</code></pre>
+
+<p><img src="output_5_0.png" alt="png" /></p>
+
+<h2 id="3-low-degree-model">3. Low-degree model</h2>
+
+<p>We start classifying our data with a low-degree model:</p>
+
+<p>$$ y = \sigma\big( X\cdot W \big) \quad X = [x_1, x_2, 1s] $$</p>
+
+<p>where the dimension of the weight matrix $W$ is <code>(3, 1)</code> and $X$ (<code>X</code> in the code) is the horizontal concatenation of the two coordinates and the bias <code>1s</code>.
+We train a logistic regression with no regularization by setting a very high <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html" target="_blank"><code>C</code></a> factor as the inverse of regularization strength.</p>
+
+<pre><code class="language-python"># multi-nomial
+lgr = LogisticRegression(C=1e5) # we want to ignore regularization
+lgr.fit(XX, YY)
+Ypred = lgr.predict(XX)
+print('Model accuracy: {}'.format(metrics.accuracy_score(YY, Ypred)))
+</code></pre>
+
+<pre><code>Model accuracy: 0.52
+</code></pre>
+
+<p>We want to explore the trained model behaviour across the whole 2D domain.
+We use the <code>meshgrid</code> function to create a 2D grid from two 1D arrays, ravel the two 2D coordinates&rsquo; arrays <code>x1grd</code> and <code>x2grd</code> and vertically stack them to a <code>(2, Npnt*Npnt)</code> array and transpose it to have an array structure that the <code>predict</code> function expects, <code>(_, 2)</code>, since the model has learnt two weights for the two features.
+The final step is to reshape the model prediction to the 2D grid shape to visualize it as a <code>contour</code> plot.</p>
+
+<p>Be aware the bias is internally inserted into the model, so there is no need to feed a column of <code>1s</code> together with the <code>XX</code> array.</p>
+
+<pre><code class="language-python">Npnt = 50  # number of points of the mesh
+mrg = .5
+xx, yy = XX[:,0], XX[:,1]
+x1min, x1max = xx.min() - mrg, xx.max() + mrg
+x2min, x2max = yy.min() - mrg, yy.max() + mrg
+x1grd, x2grd = np.meshgrid(np.linspace(x1min, x1max, Npnt), np.linspace(x2min, x2max, Npnt))
+ygrd = lgr.predict(np.vstack((x1grd.ravel(), x2grd.ravel())).T)
+ygrd = ygrd.reshape(x1grd.shape)
+</code></pre>
+
+<p>The figure shows the dataset points from the two classes with yellow and purple colours, the contour plot of the model outcome for the 2D grid and the decision boundary as a red line.</p>
+
+<p>It can be easily achieved with the <code>contour</code> plot itself, by setting the <code>levels</code> attribute to the output level we want to highlight.
+A logistic regression shifts from one class to the other one when the probability exceeds <code>0.5</code>.</p>
+
+<p>It is quite evident how this first-order model cannot classify the dataset, as it is not possible to separate two concentric circles with a line.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+# contour
+plt.contourf(x1grd, x2grd, ygrd, cmap=plt.cm.Paired, alpha=0.4)
+plt.title(&quot;Decision surface of Binomial classification with Logistic Regression&quot;)
+plt.axis('tight')
+# dataset
+plt.scatter(XX[:,0], XX[:,1], c=YY, cmap='viridis')
+plt.xlabel(&quot;X1&quot;)
+plt.ylabel(&quot;X2&quot;)
+# decision boundary
+cs = plt.contour(x1grd, x2grd, ygrd, levels = [0.5], colors=('r',), linestyles=('-',),linewidths=(3,));
+</code></pre>
+
+<p><img src="output_11_0.png" alt="png" /></p>
+
+<h2 id="3-high-degree-model">3. High-degree model</h2>
+
+<p>We repeat the same classification procedure with a full five-degree model:</p>
+
+<p>$$ y = \sigma\big( X\cdot W \big) $$</p>
+
+<p>where the dimension of the weight matrix $W$ is <code>(21, 1)</code> and $X$ (<code>X</code> in the code) is the horizontal concatenation of twenty polynomial coordinates&rsquo; terms (such as $x_1^k$ and $x_2^k$ for $k \in (1, 5)$ and $x_2^k\cdot x_2^{m-k}$ for $m \in (1, 5), k \in (1, m)$) and the bias <code>1s</code>.
+Check the <a href="https://en.wikipedia.org/wiki/Pascal%27s_triangle" target="_blank">Pascal triangle</a> to easily visualize that 21 terms come from one 0-degree term, two 1-degree terms, three 2-degree terms, up to six 5-degree terms, that sum up to $1+2+3+4+5+6 = 21$.</p>
+
+<p>We transform the linear input, scale and feed it into the logistic model with no regularization.</p>
+
+<pre><code class="language-python">dgr = 5
+pf = PolynomialFeatures(dgr, include_bias=False)
+scl = StandardScaler()
+XXnl = pf.fit_transform(XX) # not-linear
+XXnl = scl.fit_transform(XXnl)
+
+# multi-nomial
+lgr = LogisticRegression(C=1e5)
+lgr.fit(XXnl, YY)
+Ypred = lgr.predict(XXnl)
+print('Model accuracy: {}'.format(metrics.accuracy_score(YY, Ypred)))
+</code></pre>
+
+<pre><code>Model accuracy: 0.85
+</code></pre>
+
+<p>We use the <a href="/blog/mdlsel/mdlsel5/">earlier-defined</a> 2D meshgrid, preprocess it to get the input array,
+Before feeding it to the <code>predict</code> function, we need to transform and scale the grid input data as well.</p>
+
+<pre><code class="language-python">Npnt = 50  # number of points of the mesh
+mrg = .5
+x1min, x1max = xx.min() - mrg, xx.max() + mrg
+x2min, x2max = yy.min() - mrg, yy.max() + mrg
+x1grd, x2grd = np.meshgrid(np.linspace(x1min, x1max, Npnt), np.linspace(x2min, x2max, Npnt))
+
+XXgrd = np.vstack((x1grd.ravel(), x2grd.ravel())).T
+ygrd = lgr.predict(scl.transform(pf.fit_transform(XXgrd)))
+ygrd = ygrd.reshape(x1grd.shape)
+</code></pre>
+
+<p>The figure shows the same comparison as before.
+The only difference is the decision boundary between the two classes.
+It is much more sensitive to the data points in the overlapping region and extends the inner class (yellow dots) to the south-west and -east areas.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+# contour
+plt.contourf(x1grd, x2grd, ygrd, cmap=plt.cm.Paired, alpha=0.4)
+plt.title(&quot;Decision surface of Multinomial classification with Logistic Regression&quot;)
+plt.axis('tight')
+# dataset
+plt.scatter(XX[:,0], XX[:,1], c=YY, cmap='viridis')
+plt.xlabel(&quot;X1&quot;)
+plt.ylabel(&quot;X2&quot;)
+# decision boundary
+cs = plt.contour(x1grd, x2grd, ygrd, levels = [0.5], colors=('r',), linestyles=('-',),linewidths=(3,));
+</code></pre>
+
+<p><img src="output_17_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/mdlsel/mdlsel6/" style="color: #4ABDAC; font-size: 18px; "> Do not overlearn your data too much, learn to generalize - Part 6</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/mdlsel/mdlsel8/" style="color: #4ABDAC; font-size: 18px; ">Do not overlearn your data too much, learn to generalize - Part 8</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Code art in Python - Spirograph pattern in circle - Part 1 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Code art in Python - Spirograph pattern in circle - Part 1">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/codeart/codeart1/" style="font-size: 16px; ">Code art</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/codeartHead.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Code art in Python - Spirograph pattern in circle - Part 1</h1>
+          <h5 class="card-title text-center">Code art</h5>
+          <h6 class="card-text text-center">July 14, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 8 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/coding"><kbd class="item-tag">coding</kbd></a> <a href="https://takeawildguess.net/tags/code-art"><kbd class="item-tag">code-art</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts where I intend to face the challenge of drawing both static and dynamic pictures with a programming language.
+This practise is commonly referred to as <strong>code art</strong>, where art is built with code.</p>
+
+<p>One of the most popular languages I have seen so far to create some code art is <a href="https://en.wikipedia.org/wiki/JavaScript" target="_blank"><code>Javascript</code></a>, but I wish to investigate how Python libraries to reach the same goal.</p>
+
+<p>The first four posts will aim at defining a function to create a geometric pattern, a <strong>spirograph</strong> pattern in circle, inspired by this <a href="https://www.youtube.com/watch?v=VMOGIaS0GaE" target="_blank">video</a>.</p>
+
+<p>The series purpose is three-fold:</p>
+
+<ol>
+<li>Plotting skills that are extremely useful for data science visualization</li>
+<li>Geometric algebra basic skills that are required to better understand the domain space in many machine learning applications</li>
+<li>Have some fun by creating art!</li>
+</ol>
+
+<p>We will follow these steps:</p>
+
+<ol>
+<li>Problem definition and visualization basics in <a href="/blog/codeart/codeart1">Part1</a>.</li>
+<li>Line definition through two points and intersection of two lines in <a href="/blog/codeart/codeart2">Part2</a>.</li>
+<li>Polygon vertex detection and postprocessing of intersection points <a href="/blog/codeart/codeart3">Part3</a>.</li>
+<li>Polygon drawing, colour scheme definition, global function implementation and final drawings in <a href="/blog/codeart/codeart4">Part4</a>.</li>
+</ol>
+
+<h2 id="2-description">2. Description</h2>
+
+<p>We start drawing a circle and we set two distinct points on the circumference as generators.
+The generator is intended to generate a discrete set of lines crossing the generator point itself.</p>
+
+<p>We start setting the main parameters that define the final geometry of the spirograph pattern, i.e., the circle radius <code>radius</code>, the number of points on the circle <code>Npnts</code>, the angle <code>alpha_ab</code> that separate the two generators A and B (in degrees).</p>
+
+<p>We split the circumference into discrete equi-spaced segments whose length is controlled by one of the pattern function arguments, the number of points <code>Npnts</code>, as:</p>
+
+<p>$$ L_{seg} = \frac{2\cdot\pi}{Npnts} $$</p>
+
+<p>We assign the first generator, <code>A</code>, to the east point, which is expressed in a <a href="https://en.wikipedia.org/wiki/Polar_coordinate_system" target="_blank">polar system</a> with $\theta_A = 0$.
+The second generator, <code>B</code>, is assigned to the closest point of the discretized circumference that creates an angle <code>alpha_ab</code> (in degrees) with A, anticlockwise.
+It means that its location is defined as follows:</p>
+
+<p>$$ \theta_B = \lfloor(\theta_A+\Delta\theta_{AB})/L_{seg}\rceil\cdot L_{seg} $$</p>
+
+<p>The <code>Npnts</code> points on the discretized circle are instead defined as follows:</p>
+
+<p>$$ \theta_{P_k} = k\cdot L_{seg}, \forall k \in [0, Npnts-1] $$</p>
+
+<pre><code class="language-python">import sys, random, math
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Circle, Wedge, Polygon, Rectangle
+from matplotlib.collections import PatchCollection
+%matplotlib inline
+import itertools
+</code></pre>
+
+<pre><code class="language-python">radius = 1
+margin = radius * 1.25
+Npnts = 20
+alpha_ab = 120
+</code></pre>
+
+<p>Please note that the <code>linspace</code> method requires the number of points to generate from initial and final points included.
+Since $\theta=0$ and $\theta=2\pi$ coincide, we need to increase the attribute <code>num</code> by 1.</p>
+
+<pre><code class="language-python">Lseg = 2*np.pi/Npnts
+theta_A = 0
+theta_B = np.round((theta_A+alpha_ab/180*np.pi)/Lseg)*Lseg
+theta_Ps = np.linspace(0, 2*np.pi, num=Npnts+1)
+print('Shape of theta_Ps is {}, since the discrete points are {}'.format(theta_Ps.shape, Npnts))
+</code></pre>
+
+<pre><code>Shape of theta_Ps is (21,), since the discrete points are 20
+</code></pre>
+
+<h2 id="3-visualization-basics">3. Visualization basics</h2>
+
+<p>To draw these points in Matplotlib, we need the Cartesian coordinates <code>(x, y)</code>.
+We employ a <code>lambda</code> function to get the two coordinates from the <code>theta</code> variable.
+This is quite simple since we exploit the trigonometry theory:</p>
+
+<p>$$ x = r\cdot\cos\theta $$</p>
+
+<p>$$ y = r\cdot\sin\theta $$</p>
+
+<p>You can find further details <a href="https://en.wikipedia.org/wiki/Polar_coordinate_system#Converting_between_polar_and_Cartesian_coordinates" target="_blank">here</a>.</p>
+
+<p>We apply this function to the polar coordinates of A, B and the array of $P_k$.</p>
+
+<pre><code class="language-python">polar2cartesian = lambda theta, radius: (radius*np.cos(theta), radius*np.sin(theta))
+
+xPs, yPs = polar2cartesian(theta_Ps, radius)
+Pa = polar2cartesian(theta_A, radius)
+Pb = polar2cartesian(theta_B, radius)
+xA, yA = Pa
+xB, yB = Pb
+</code></pre>
+
+<p>We draw the circle, the <code>Npnts</code> points in blue and the two generators, <code>A</code> and <code>B</code>, in red.</p>
+
+<pre><code class="language-python">figSize = 4
+plt.figure(figsize=(figSize, figSize))
+circle = plt.Circle((0, 0), radius, color='b', fill=False)
+plt.plot(xPs, yPs, ls='', marker='o', markersize=10, color=&quot;blue&quot;)
+plt.plot([xA, xB], [yA, yB], ls='', marker='o', markersize=10, color=&quot;red&quot;)
+ax = plt.gca()
+ax.add_artist(circle)
+ax.get_xaxis().set_ticks([])
+ax.get_yaxis().set_ticks([])
+ax.axis('off')
+ax.axis('equal')
+ax.axis([-margin, margin, -margin, margin]);
+</code></pre>
+
+<p><img src="output_10_0.png" alt="png" /></p>
+
+<p>The next step is to draw the lines connecting the two generators, A and B, to each and every other blue point on the circle.
+We iterate over the $P_k$ coordinates, as the output of <code>zip</code>, and connect the current $P_k$ point to either A and B with a <code>.3</code> transparent, <code>2</code> point solid green line.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(figSize, figSize))
+circle = plt.Circle((0, 0), radius, color='b', fill=False)
+plt.plot(xPs, yPs, ls='', marker='o', markersize=10, color=&quot;blue&quot;)
+plt.plot([xA, xB], [yA, yB], ls='', marker='o', markersize=10, color=&quot;red&quot;)
+for xP, yP in zip(xPs, yPs):
+    plt.plot([xA, xP], [yA, yP], color=&quot;green&quot;, lw=2, alpha=.3)
+    plt.plot([xB, xP], [yB, yP], color=&quot;green&quot;, lw=2, alpha=.3)
+ax = plt.gca()
+ax.add_artist(circle)
+ax.get_xaxis().set_ticks([])
+ax.get_yaxis().set_ticks([])
+ax.axis('off')
+ax.axis('equal')
+ax.axis([-margin, margin, -margin, margin]);
+</code></pre>
+
+<p><img src="output_12_0.png" alt="png" /></p>
+
+<p>We connect <code>A</code> to two consecutive $P_k$ points (specified with the index <code>idxA=12</code>) by slicing the coordinates <code>xPs</code> and <code>xPs</code>.
+We repeat the same process for <code>B</code>, where index is <code>idxB=18</code>.
+You can see the 4-vertex polygon as a result of these four crossing lines.
+This is what we want to draw and eventually to colour (one every two polygons).</p>
+
+<p>Here it comes the main difference between a human being and a machine (and specifically Matplotlib!).
+You can easily spot the polygon and colour the inner area defined by the intersecting lines!
+Matplotlib needs the cartesian coordinates for the polygon itself.</p>
+
+<p>How can we get the 4 coordinates from 4 segments connecting 4 pairs of points?</p>
+
+<pre><code class="language-python">def fourLines(idxA, idxB):
+    plt.figure(figsize=(figSize, figSize))
+    circle = plt.Circle((0, 0), radius, color='b', fill=False)
+    plt.plot(xPs, yPs, ls='', marker='o', markersize=10, color=&quot;blue&quot;)
+    plt.plot([xA, xB], [yA, yB], ls='', marker='o', markersize=10, color=&quot;red&quot;)    
+    for xP, yP in zip(xPs[idxA:idxA+2], yPs[idxA:idxA+2]):
+        plt.plot([xA, xP], [yA, yP], color=&quot;green&quot;, lw=2, alpha=.3)
+    for xP, yP in zip(xPs[idxB:idxB+2], yPs[idxB:idxB+2]):
+        plt.plot([xB, xP], [yB, yP], color=&quot;green&quot;, lw=2, alpha=.3)
+    ax = plt.gca()
+    ax.add_artist(circle)
+    ax.get_xaxis().set_ticks([])
+    ax.get_yaxis().set_ticks([])
+    ax.axis('off')
+    ax.axis('equal')
+    ax.axis([-margin, margin, -margin, margin]);
+
+idxA, idxB = 12, 18
+fourLines(idxA, idxB)
+</code></pre>
+
+<p><img src="output_14_0.png" alt="png" /></p>
+
+<h2 id="4-special-cases">4. Special cases</h2>
+
+<p>Before diving into that, let&rsquo;s just have a look at some extreme cases where the 4 intersecting lines do not create the standard 4-vertex polygon.</p>
+
+<p>The <em>first</em> case shows an example of 4 lines intersecting into a 4-vertex polygon, which is however <strong>outside</strong> the circle.</p>
+
+<pre><code class="language-python">idxA, idxB = 12, 11
+fourLines(idxA, idxB)
+</code></pre>
+
+<p><img src="output_16_0.png" alt="png" /></p>
+
+<p>The <em>second</em> case shows an example of 4 lines intersecting into a 4-vertex polygon, which is however cropped by the circumference into two <strong>3-vertex</strong> polygons, one of which is internal to the circle.</p>
+
+<pre><code class="language-python">idxA, idxB = 12, 12
+fourLines(idxA, idxB)
+</code></pre>
+
+<p><img src="output_18_0.png" alt="png" /></p>
+
+<p>The <em>third</em> case shows an example of 4 lines intersecting into a <strong>3-vertex</strong> internal polygon, where two segments overlap each other.</p>
+
+<pre><code class="language-python">idxA, idxB = 6, 0
+fourLines(idxA, idxB)
+</code></pre>
+
+<p><img src="output_20_0.png" alt="png" /></p>
+
+<p>The <em>fourth</em> and last case shows an example of 4 lines intersecting into an empty polygon, since two segments overlap each other while the other two segments are parallel.</p>
+
+<pre><code class="language-python">idxA, idxB = 7, 0
+fourLines(idxA, idxB)
+</code></pre>
+
+<p><img src="output_22_0.png" alt="png" /></p>
+
+<h2 id="reference">Reference</h2>
+
+<ol>
+<li><a href="https://www.youtube.com/watch?v=VMOGIaS0GaE" target="_blank">Inspiring video</a></li>
+<li><a href="https://stackoverflow.com/questions/44725201/set-polygon-colors-matplotlib" target="_blank">Set polygon colours in matplotlib</a></li>
+<li><a href="https://stackoverflow.com/questions/40984564/sort-numpy-array-elements-by-the-value-of-a-condition-on-the-elements" target="_blank">Sort numpy array elements with specific conditions</a></li>
+<li><a href="https://stackoverflow.com/questions/10846431/ordering-shuffled-points-that-can-be-joined-to-form-a-polygon-in-python" target="_blank">Ordering shuffled points of a polygon</a></li>
+<li><a href="https://matplotlib.org/3.1.0/gallery/shapes_and_collections/patch_collection.html#sphx-glr-gallery-shapes-and-collections-patch-collection-py" target="_blank">Patch collection in Matplotlib</a></li>
+<li><a href="https://stackoverflow.com/questions/1953194/permutations-of-two-lists-in-python" target="_blank">Permutations of two lists in Python</a></li>
+<li><a href="https://stackoverflow.com/questions/27779845/how-to-plot-one-single-data-point" target="_blank">How to plot one single data point</a></li>
+<li><a href="https://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect#565282" target="_blank">How do you detect where two line segments intersect</a></li>
+</ol>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/kata/kata5/" style="color: #4ABDAC; font-size: 18px; "> Learning Python by doing - Part 5</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/codeart/codeart2/" style="color: #4ABDAC; font-size: 18px; ">Code art in Python - Spirograph pattern in circle - Part 2</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

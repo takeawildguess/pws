@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Learning Python by doing - Part 1 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Learning Python by doing - Part 1">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/kata/kata1/" style="font-size: 16px; ">Coding kata</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/kataHead.png" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Learning Python by doing - Part 1</h1>
+          <h5 class="card-title text-center">Coding kata</h5>
+          <h6 class="card-text text-center">June 9, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 10 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/coding"><kbd class="item-tag">coding</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts where I intend to face the challenge of learning a new programming language, such as Python, <strong>by doing</strong>. There are tons of material about Python tutorials for every level of expertise.
+It has been quite a while now that platforms such as <a href="https://www.codewars.com/" target="_blank">codewars</a>, <a href="https://www.topcoder.com/" target="_blank">topcoders</a> and similar have been around.
+The nice thing that I like about these platforms is that the trainee is faced with many tasks or challenges of increasing difficulty.
+The same task is often proposed for multiple languages (Python, Javascript, C++ and many others).
+<em>Learn by doing</em> is gaining popularity in recent years as it helps the trainee to figure out how and where he/she can get stacked.
+Solutions of other members are accessible only when an admissible solution has been successfully submitted to the automatic testing process.</p>
+
+<p>So why should I write a blog post to show how to solve such kinds of tasks and how could it be useful to any extend to you?
+In line with the philosophical view of the above-mentioned platforms, I encourage you to read each single example description, step out of the blog post, try to work it out by yourself (without surfing Stack-overflow too much!) and coming back to the post to go through the proposed solution (something I tend to provide more than one) and the related comments.
+I have indeed struggled sometimes to fully capture other members&rsquo; solutions with no comments or details of the logic behind the code.</p>
+
+<p>I will use the following structure for every example:</p>
+
+<ol>
+<li>statement of the task to solve.</li>
+<li>generating the input data to be fed to the function that we need to develop.</li>
+<li>write down a rudimental but surely valid function, <code>F</code>, which should be our reference case.</li>
+<li>generate the function output data using the reference function <code>F</code>.</li>
+<li>develop one or more solutions that would have different pros and cons.</li>
+<li>assess each function&rsquo;s correctness by its results to the <code>F</code> results on the dataset.</li>
+</ol>
+
+<p>In this post we develop a Python code from scratch to determine how many kilometers a bike rider will cover in a given time span.</p>
+
+<h2 id="2-description">2. Description</h2>
+
+<p>James is a bike rider who challenges himself to cover a very long distance along a river path every year, as part of a life ritual. Some days he rides more than others depending on the weather, his energy and the road conditions. He is curious how many km might be covered over the next 10 years. He has spent a year marking down his daily progress.</p>
+
+<p>The monthly data are grouped into four seasonal lists.</p>
+
+<p>The total distance of all the trips over a year will be used for estimating the number he might cover in 10 years, as:</p>
+
+<p>$$ D_{tot} = 10\cdot D_{year} $$</p>
+
+<p>Input data structure is a list of the four seasons, each containing covered distance of every month within that season.</p>
+
+<p>We need to make sure our solution considers all of the nested steps within the input array.</p>
+
+<h2 id="3-input-data">3. Input data</h2>
+
+<p>Here one example of season data. It reads that James has riden for 737 km for the first <code>winter</code> month.</p>
+
+<pre><code class="language-python">import sys
+import numpy as np
+</code></pre>
+
+<pre><code class="language-python">winter = [737, 1244, 776]
+spring = [1175, 883, 1596]
+summer = [1646, 945, 1364]
+autumn = [1353, 605, 1464]
+</code></pre>
+
+<pre><code class="language-python">distance = [winter, spring, summer, autumn]
+print('distance data for the first year, over the 12 months, grouped into the four seasons:')
+print(distance)
+</code></pre>
+
+<pre><code>distance data for the first year, over the 12 months, grouped into the four seasons:
+[[737, 1244, 776], [1175, 883, 1596], [1646, 945, 1364], [1353, 605, 1464]]
+</code></pre>
+
+<p>The next step is to generate a set of randomly generated test units and test the different developed functions on it.</p>
+
+<p>We use the integer random generator from the Numpy library.
+It returns random integers from low (inclusive) to high (exclusive), stored in an array whose size can be specified as an additional attribute.
+We convert the Numpy 2D array to a nested list with the attribute <code>tolist()</code>.</p>
+
+<pre><code class="language-python">np.random.randint(600, 1200, size=(4, 3)).tolist()
+</code></pre>
+
+<pre><code>[[692, 1028, 841], [791, 1165, 901], [1063, 645, 926], [1199, 830, 906]]
+</code></pre>
+
+<p>We generate <code>Ncases = 10</code> test cases and place them into <code>testSet</code>.
+Since it is an entry-level post, I propose two methods to generate such a dataset:
+1. a more verbose procedure, where list is initialized, the <code>append</code> method is used within a for-loop.
+2. a more concise process, where the same logic is compressed into a single line of code, referred to as <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions" target="_blank"><em>list comprehension</em></a>.</p>
+
+<p>In both cases, the for-loop is just used to generate multiple instances, but the current iteration step is useless. We use the underscore <code>_</code> to say to Python not to allocate that value, which is coming from the <code>range</code> generator in this case, into any variable.</p>
+
+<h3 id="3-1-method-1">3.1 Method 1</h3>
+
+<pre><code class="language-python">testSet = [] # list inizialiation
+for _ in range(10):
+    inputExample = np.random.randint(600, 1200, size=(4, 3)).tolist()
+    testSet.append(inputExample)
+
+print('Test set length is {}, while each example length is {}'.format(len(testSet), len(inputExample)))
+</code></pre>
+
+<pre><code>Test set length is 10, while each example length is 4
+</code></pre>
+
+<h3 id="3-2-method-2">3.2 Method 2</h3>
+
+<p>Let&rsquo;s implement the same concept in a more concise way.</p>
+
+<pre><code class="language-python">testSet = [np.random.randint(600, 1200, size=(4, 3)).tolist() for _ in range(10)]
+
+print('Test set length is {}, while each example length is {}'.format(len(testSet), len(testSet[0])))
+</code></pre>
+
+<pre><code>Test set length is 10, while each example length is 4
+</code></pre>
+
+<p>A short note concerns the Python <code>format</code> method.
+In this tutorial, this method is used to take some variable values as arguments and replace the curly brackets within the string input to the <code>print</code> function, with such values. Further advanced results and string formatting can be achieved. Please refer to <a href="https://docs.python.org/3.4/library/string.html#string-formatting" target="_blank">the</a> official documentation and <a href="https://pyformat.info/" target="_blank">this</a> super nice guide.</p>
+
+<h2 id="4-reference-function">4. Reference function</h2>
+
+<p>This section is meant to define the procedure to calculate the output in the most basic Pythonic way, to be readable and 100% correct.</p>
+
+<p>We take the first example, we use the powerful Python syntax to <a href="https://docs.python.org/2/tutorial/datastructures.html#tuples-and-sequences" target="_blank">unpack</a> a N-long list into N distinct variables, we concatenate all these lists into one (<code>year</code>), sum all the elements of the <code>year</code> list, multiply the year distance by 10 (years) and print it out.</p>
+
+<p>Concatenating lists is as simple as using the <code>+</code> operator.
+Increasing a given variable <code>var</code> by some value <code>val</code> can be performed as:</p>
+
+<pre><code class="language-python">var = var + val
+</code></pre>
+
+<p>but can be shortened to</p>
+
+<pre><code class="language-python">var += val
+</code></pre>
+
+<p>Similar syntax is available for other operators, such as <code>-</code>, <code>*</code> and <code>/</code>.</p>
+
+<pre><code class="language-python">example = testSet[0]
+winter, spring, summer, autumn = example
+year = winter + spring + summer + autumn
+distance = 0
+for month in year:
+    distance += month
+totDistance = 10*distance
+print('Total distance travelled in the first example is {} km.'.format(totDistance))
+</code></pre>
+
+<pre><code>Total distance travelled in the first example is 110310 km.
+</code></pre>
+
+<p>We embed this code into the reference function <code>refFun()</code>.
+The output function variable has to be declared within the <code>return</code> statement.</p>
+
+<pre><code class="language-python">def refFun(example):
+    winter, spring, summer, autumn = example
+    year = winter + spring + summer + autumn
+    distance = 0
+    for month in year:
+        distance += month
+    totDistance = 10*distance
+    return totDistance
+</code></pre>
+
+<h2 id="5-output-data">5. Output data</h2>
+
+<p>We need to repeat the process defined in the above function to get the output for the entire <code>testSet</code>.</p>
+
+<pre><code class="language-python">testResults = []
+
+for example in testSet:
+    testResults.append(refFun(example))
+</code></pre>
+
+<p>We show the results for the dataset.</p>
+
+<pre><code class="language-python">for example, result in zip(testSet, testResults):
+    print('='*60 + '\nYear data')
+    print(example)
+    print('Total distance travelled in the first example is {} km.'.format(result))
+</code></pre>
+
+<pre><code>============================================================
+Year data
+[[687, 604, 1075], [827, 960, 1165], [917, 1199, 666], [993, 1055, 883]]
+Total distance travelled in the first example is 110310 km.
+============================================================
+Year data
+[[1035, 921, 1077], [1074, 761, 1057], [638, 1066, 1128], [797, 869, 966]]
+Total distance travelled in the first example is 113890 km.
+============================================================
+Year data
+[[624, 793, 1179], [833, 1195, 1105], [826, 709, 622], [669, 1048, 1089]]
+Total distance travelled in the first example is 106920 km.
+============================================================
+Year data
+[[1152, 802, 816], [941, 794, 980], [650, 822, 1026], [1146, 986, 1006]]
+Total distance travelled in the first example is 111210 km.
+============================================================
+Year data
+[[858, 698, 945], [828, 628, 938], [616, 730, 727], [1160, 665, 742]]
+Total distance travelled in the first example is 95350 km.
+============================================================
+Year data
+[[1170, 746, 1192], [1095, 852, 867], [836, 661, 914], [932, 670, 1193]]
+Total distance travelled in the first example is 111280 km.
+============================================================
+Year data
+[[833, 989, 722], [1079, 957, 860], [790, 801, 667], [1193, 979, 954]]
+Total distance travelled in the first example is 108240 km.
+============================================================
+Year data
+[[768, 787, 1040], [1021, 745, 1172], [703, 693, 1017], [931, 846, 816]]
+Total distance travelled in the first example is 105390 km.
+============================================================
+Year data
+[[726, 860, 1182], [1088, 1117, 1177], [822, 805, 633], [940, 1199, 988]]
+Total distance travelled in the first example is 115370 km.
+============================================================
+Year data
+[[606, 1136, 739], [1101, 828, 1043], [981, 984, 1050], [743, 906, 1109]]
+Total distance travelled in the first example is 112260 km.
+</code></pre>
+
+<h2 id="6-function-development">6. Function development</h2>
+
+<p>Since the input is a nested list, we can use two nested for-loops to process the overall distance.</p>
+
+<pre><code class="language-python">def fun1(example):
+    distance = 0
+    for season in example:
+        for month in season:
+            distance += month
+    totDistance = distance*10
+    return totDistance
+</code></pre>
+
+<pre><code class="language-python">print('Total distance, calculated with method 1, is {} km (ground-truth is {}).'.format(fun1(example), result))
+</code></pre>
+
+<pre><code>Total distance, calculated with method 1, is 112260 km (ground-truth is 112260).
+</code></pre>
+
+<p>The solution can be re-written to be more compact and, in a long-term perspective, easier to maintain.
+We use the <code>sum</code> operator, which returns the sum of the numerical elements of a list.
+The nested list can be flattened into a standard list.
+The top-down order of original for-loop becomes a left-right process in the list comprehension.</p>
+
+<pre><code class="language-python">year = [month for season in example for month in season]
+print('Year data in a single list:\n{}'.format(year))
+</code></pre>
+
+<pre><code>Year data in a single list:
+[606, 1136, 739, 1101, 828, 1043, 981, 984, 1050, 743, 906, 1109]
+</code></pre>
+
+<pre><code class="language-python">totDistance = sum(year)*10
+print('Total 10-year distance is {} km'.format(totDistance))
+</code></pre>
+
+<pre><code>Total 10-year distance is 112260 km
+</code></pre>
+
+<pre><code class="language-python">def fun2(example):
+    year = [month for season in example for month in season]
+    totDistance = sum(year)*10
+    return totDistance
+</code></pre>
+
+<pre><code class="language-python">print('Total distance, calculated with method 2, is {} km (ground-truth is {}).'.format(fun2(example), result))
+</code></pre>
+
+<pre><code>Total distance, calculated with method 2, is 112260 km (ground-truth is 112260).
+</code></pre>
+
+<p>A further step into the single-line-of-code benchmark is to feed the year list into the sum, without saving it to any intermediate variable to reduce computational time (no writing).</p>
+
+<p>Please, make sure to get the difference between the two following lines.</p>
+
+<pre><code class="language-python">distance = sum([month for season in example for month in season])
+distance = sum(month for season in example for month in season)
+</code></pre>
+
+<p>They return the same value, but the first code defines a list before feeding it to the <code>sum</code> operator, while the second code defines a generator.
+IMHO, the second approach is way much better.
+We can either save the total distance to a temporary variable and then return it, or directly return the single-line expression outcome.</p>
+
+<pre><code class="language-python">def fun3(example):
+    return sum(month for season in example for month in season)*10
+</code></pre>
+
+<pre><code class="language-python">print('Total distance, calculated with method 3, is {} km (ground-truth is {}).'.format(fun3(example), result))
+</code></pre>
+
+<pre><code>Total distance, calculated with method 3, is 112260 km (ground-truth is 112260).
+</code></pre>
+
+<p>A slightly different way to perform this calculation would be to sum the distance for every season and then sum their contribution to get the annual distance.</p>
+
+<pre><code class="language-python">def fun4(example):
+    return sum(sum(season) for season in example)*10
+</code></pre>
+
+<pre><code class="language-python">print('Total distance, calculated with method 4, is {} km (ground-truth is {}).'.format(fun4(example), result))
+</code></pre>
+
+<pre><code>Total distance, calculated with method 4, is 112260 km (ground-truth is 112260).
+</code></pre>
+
+<h2 id="7-function-assessment">7. Function assessment</h2>
+
+<p>In this last section of the very first task, we compare the performance of every developed function with the benchmark results.
+The final score is the percentage of successful tests obtained with that function.</p>
+
+<p>As always, I do propose two methods to get the score, with and without list comprehension.</p>
+
+<pre><code class="language-python">score = 0
+for example, result in zip(testSet, testResults):
+    if fun1(example) == result:
+        score += 1
+
+score /= len(testSet)/100
+print('Final score for function 1 is {}%.'.format(score))
+</code></pre>
+
+<pre><code>Final score for function 1 is 100.0%.
+</code></pre>
+
+<pre><code class="language-python">score = sum(1 for example, result in zip(testSet, testResults) if fun1(example) == result)/len(testSet)*100
+print('Final score for function 1 is {}%.'.format(score))
+</code></pre>
+
+<pre><code>Final score for function 1 is 100.0%.
+</code></pre>
+
+<p>We define an in-place scoring function using the powerful <a href="https://docs.python.org/3/reference/expressions.html#lambda" target="_blank"><code>lambda</code></a> operator to create it anonymously.</p>
+
+<p>This <code>scoring</code> function takes a function as input and returns its score over the test set.</p>
+
+<pre><code class="language-python">scoring = lambda fun: sum(1 for example, result in zip(testSet, testResults) if fun(example) == result)/len(testSet)*100
+</code></pre>
+
+<p>We finally place the 4 developed functions into a list and prints the score associated with each of them.
+The <a href="https://docs.python.org/3/library/functions.html#enumerate" target="_blank"><code>enumerate</code></a> iterator gives the 0-based index and the corresponding element of the input list.</p>
+
+<pre><code class="language-python">funs = [fun1, fun2, fun3, fun4]
+for kk, fun in enumerate(funs):
+    print('Final score for function {} is {}%.'.format(str(kk+1), scoring(fun)))
+</code></pre>
+
+<pre><code>Final score for function 1 is 0.0%.
+Final score for function 2 is 0.0%.
+Final score for function 3 is 0.0%.
+Final score for function 4 is 0.0%.
+</code></pre>
+
+<p>We finally compare the performance of each function in terms of computational time.
+We use one of the <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html" target="_blank">built-in magic commands</a> available in the Jupyter notebook, <code>timeit</code>, which estimates the execution time of a Python statement or expression.
+One (<code>%timeit</code>) or two (<code>%%timeit</code>) percent signs are required to evaluate one-line statement or one cell, respectively.</p>
+
+<p>The first and fourth attempts are as fast as the reference function.</p>
+
+<pre><code class="language-python">%%timeit
+for example in testSet:
+    fun1(example)
+</code></pre>
+
+<pre><code>12.9 µs ± 544 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+</code></pre>
+
+<pre><code class="language-python">%%timeit
+for example in testSet:
+    fun4(example)
+</code></pre>
+
+<pre><code>14.9 µs ± 317 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+</code></pre>
+
+<pre><code class="language-python">%%timeit
+for example in testSet:
+    refFun(example)
+</code></pre>
+
+<pre><code>13.6 µs ± 489 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+</code></pre>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/mdlsel/mdlsel8/" style="color: #4ABDAC; font-size: 18px; "> Do not overlearn your data too much, learn to generalize - Part 8</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/kata/kata2/" style="color: #4ABDAC; font-size: 18px; ">Learning Python by doing - Part 2</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

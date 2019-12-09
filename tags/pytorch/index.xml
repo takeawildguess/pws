@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pytorch on take a wild guess</title>
+    <link>https://takeawildguess.net/tags/pytorch/</link>
+    <description>Recent content in pytorch on take a wild guess</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 20 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://takeawildguess.net/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How neural networks learn basic features with Pytorch</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn09/</link>
+      <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn09/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to analyze how to train a neural network on toy examples with Pytorch.</description>
+    </item>
+    
+    <item>
+      <title>Key notions of Pytorch</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn08/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn08/</guid>
+      <description>1. Introduction This post belongs to a new series of posts related to a huge and popular topic in machine learning: fully connected neural networks.
+The general series scope is three-fold:
+ visualize the model features and characteristics with schematic pictures and charts learn to implement the model with different levels of abstraction, given by the framework used have some fun with one of the hottest topics right now!  In this new post, we are going to introduce the key components and modules of Pytorch, while we are going to use and apply to a neural network in the next one.</description>
+    </item>
+    
+  </channel>
+</rss>

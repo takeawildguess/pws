@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on take a wild guess</title>
@@ -6,85 +6,202 @@
     <description>Recent content in Tags on take a wild guess</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://takeawildguess.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Ai Enthusiast</title>
-      <link>https://takeawildguess.net/tags/ai-enthusiast/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>hyperparameter</title>
+      <link>https://takeawildguess.net/tags/hyperparameter/</link>
+      <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.net/tags/ai-enthusiast/</guid>
+      <guid>https://takeawildguess.net/tags/hyperparameter/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Algorithm</title>
+      <title>meta-learning</title>
+      <link>https://takeawildguess.net/tags/meta-learning/</link>
+      <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/meta-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>neural network</title>
+      <link>https://takeawildguess.net/tags/neural-network/</link>
+      <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/neural-network/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://takeawildguess.net/tags/python/</link>
+      <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>matplotlib</title>
+      <link>https://takeawildguess.net/tags/matplotlib/</link>
+      <pubDate>Sun, 24 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/matplotlib/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>visualization</title>
+      <link>https://takeawildguess.net/tags/visualization/</link>
+      <pubDate>Sun, 24 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/visualization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pytorch</title>
+      <link>https://takeawildguess.net/tags/pytorch/</link>
+      <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/pytorch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tensorflow</title>
+      <link>https://takeawildguess.net/tags/tensorflow/</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/tensorflow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>keras</title>
+      <link>https://takeawildguess.net/tags/keras/</link>
+      <pubDate>Sun, 29 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/keras/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>code-art</title>
+      <link>https://takeawildguess.net/tags/code-art/</link>
+      <pubDate>Sun, 18 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/code-art/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>coding</title>
+      <link>https://takeawildguess.net/tags/coding/</link>
+      <pubDate>Sun, 18 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/coding/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>learning curve</title>
+      <link>https://takeawildguess.net/tags/learning-curve/</link>
+      <pubDate>Sun, 02 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/learning-curve/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>machine learning</title>
+      <link>https://takeawildguess.net/tags/machine-learning/</link>
+      <pubDate>Sun, 02 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>model selection</title>
+      <link>https://takeawildguess.net/tags/model-selection/</link>
+      <pubDate>Sun, 02 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/model-selection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>numpy</title>
+      <link>https://takeawildguess.net/tags/numpy/</link>
+      <pubDate>Sun, 02 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/numpy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>overfitting</title>
+      <link>https://takeawildguess.net/tags/overfitting/</link>
+      <pubDate>Sun, 02 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/overfitting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>regularization</title>
+      <link>https://takeawildguess.net/tags/regularization/</link>
+      <pubDate>Sun, 02 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/regularization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scikit-learn</title>
+      <link>https://takeawildguess.net/tags/scikit-learn/</link>
+      <pubDate>Sun, 02 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/scikit-learn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>algorithm</title>
       <link>https://takeawildguess.net/tags/algorithm/</link>
-      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 28 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/tags/algorithm/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Blogger</title>
-      <link>https://takeawildguess.net/tags/blogger/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>logistic-regression</title>
+      <link>https://takeawildguess.net/tags/logistic-regression/</link>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.net/tags/blogger/</guid>
+      <guid>https://takeawildguess.net/tags/logistic-regression/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Bootstrap</title>
-      <link>https://takeawildguess.net/tags/bootstrap/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>linear-regression</title>
+      <link>https://takeawildguess.net/tags/linear-regression/</link>
+      <pubDate>Sun, 10 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://takeawildguess.net/tags/bootstrap/</guid>
+      <guid>https://takeawildguess.net/tags/linear-regression/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Css</title>
-      <link>https://takeawildguess.net/tags/css/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/css/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Development Engineer</title>
-      <link>https://takeawildguess.net/tags/development-engineer/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/development-engineer/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Go</title>
-      <link>https://takeawildguess.net/tags/go/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Golang</title>
-      <link>https://takeawildguess.net/tags/golang/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gradient Descent</title>
+      <title>gradient descent</title>
       <link>https://takeawildguess.net/tags/gradient-descent/</link>
       <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
       
@@ -93,70 +210,7 @@
     </item>
     
     <item>
-      <title>Highlight Js</title>
-      <link>https://takeawildguess.net/tags/highlight-js/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/highlight-js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Html</title>
-      <link>https://takeawildguess.net/tags/html/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/html/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hugo</title>
-      <link>https://takeawildguess.net/tags/hugo/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Js</title>
-      <link>https://takeawildguess.net/tags/js/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linear Regression</title>
-      <link>https://takeawildguess.net/tags/linear-regression/</link>
-      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/linear-regression/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Logistic Regression</title>
-      <link>https://takeawildguess.net/tags/logistic-regression/</link>
-      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/logistic-regression/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Machine Learning</title>
-      <link>https://takeawildguess.net/tags/machine-learning/</link>
-      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/machine-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Maximum Likelihood</title>
+      <title>maximum likelihood</title>
       <link>https://takeawildguess.net/tags/maximum-likelihood/</link>
       <pubDate>Sun, 13 Jan 2019 00:00:00 +0000</pubDate>
       
@@ -165,7 +219,106 @@
     </item>
     
     <item>
-      <title>Meetup Speaker</title>
+      <title>AI enthusiast</title>
+      <link>https://takeawildguess.net/tags/ai-enthusiast/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/ai-enthusiast/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blogger</title>
+      <link>https://takeawildguess.net/tags/blogger/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/blogger/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bootstrap</title>
+      <link>https://takeawildguess.net/tags/bootstrap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/bootstrap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>css</title>
+      <link>https://takeawildguess.net/tags/css/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/css/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>development engineer</title>
+      <link>https://takeawildguess.net/tags/development-engineer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/development-engineer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go</title>
+      <link>https://takeawildguess.net/tags/go/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang</title>
+      <link>https://takeawildguess.net/tags/golang/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>highlight-js</title>
+      <link>https://takeawildguess.net/tags/highlight-js/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/highlight-js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>html</title>
+      <link>https://takeawildguess.net/tags/html/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/html/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://takeawildguess.net/tags/hugo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>js</title>
+      <link>https://takeawildguess.net/tags/js/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/tags/js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>meetup speaker</title>
       <link>https://takeawildguess.net/tags/meetup-speaker/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -174,25 +327,7 @@
     </item>
     
     <item>
-      <title>Numpy</title>
-      <link>https://takeawildguess.net/tags/numpy/</link>
-      <pubDate>Sun, 24 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/numpy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://takeawildguess.net/tags/python/</link>
-      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Responsive</title>
+      <title>responsive</title>
       <link>https://takeawildguess.net/tags/responsive/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -201,16 +336,7 @@
     </item>
     
     <item>
-      <title>Scikit Learn</title>
-      <link>https://takeawildguess.net/tags/scikit-learn/</link>
-      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/scikit-learn/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Software Developer</title>
+      <title>software developer</title>
       <link>https://takeawildguess.net/tags/software-developer/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -219,20 +345,11 @@
     </item>
     
     <item>
-      <title>Syntax Highlighting</title>
+      <title>syntax-highlighting</title>
       <link>https://takeawildguess.net/tags/syntax-highlighting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://takeawildguess.net/tags/syntax-highlighting/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tensorflow</title>
-      <link>https://takeawildguess.net/tags/tensorflow/</link>
-      <pubDate>Sun, 03 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://takeawildguess.net/tags/tensorflow/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>take a wild guess</title>
+    <link>https://takeawildguess.net/blog/codeart/</link>
+    <description>Recent content on take a wild guess</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://takeawildguess.net/blog/codeart/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Code art in Python - Spirograph pattern in a rectangle - Part 2</title>
+      <link>https://takeawildguess.net/blog/codeart/codeart6/</link>
+      <pubDate>Sun, 18 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/codeart/codeart6/</guid>
+      <description>1. Introduction This post belongs to the code art series, where art is built with code. The previous post and this one will aim at defining a function to create a geometric pattern, a spirograph pattern in a rectangle, inspired by this video, with Python libraries.
+We will follow these steps:
+ Grid definition, parametric equation of the rectangle in Part1. Polygon vertex detection, postprocessing of intersection points, colour scheme definition, global function implementation and final drawings in Part2.</description>
+    </item>
+    
+    <item>
+      <title>Code art in Python - Spirograph pattern in a rectangle - Part 1</title>
+      <link>https://takeawildguess.net/blog/codeart/codeart5/</link>
+      <pubDate>Sun, 11 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/codeart/codeart5/</guid>
+      <description>1. Introduction This post belongs to a new series of posts where I intend to face the challenge of drawing both static and dynamic pictures with a programming language. This practice is commonly referred to as code art, where art is built with code.
+This post and the next one will aim at defining a function to create a geometric pattern, a spirograph pattern in a rectangle, inspired by this video, with Python libraries.</description>
+    </item>
+    
+    <item>
+      <title>Code art in Python - Spirograph pattern in circle - Part 4</title>
+      <link>https://takeawildguess.net/blog/codeart/codeart4/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/codeart/codeart4/</guid>
+      <description>1. Introduction This post belongs to a new series of posts where I intend to face the challenge of drawing both static and dynamic pictures with a programming language. This practise is commonly referred to as code art, where art is built with code.
+The first four posts will aim at defining a function to create a geometric pattern, a spirograph pattern in circle, inspired by this video, with Python libraries.</description>
+    </item>
+    
+    <item>
+      <title>Code art in Python - Spirograph pattern in circle - Part 3</title>
+      <link>https://takeawildguess.net/blog/codeart/codeart3/</link>
+      <pubDate>Sun, 28 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/codeart/codeart3/</guid>
+      <description>1. Introduction This post belongs to a new series of posts where I intend to face the challenge of drawing both static and dynamic pictures with a programming language. This practise is commonly referred to as code art, where art is built with code.
+The first four posts will aim at defining a function to create a geometric pattern, a spirograph pattern in circle, inspired by this video, with Python libraries.</description>
+    </item>
+    
+    <item>
+      <title>Code art in Python - Spirograph pattern in circle - Part 2</title>
+      <link>https://takeawildguess.net/blog/codeart/codeart2/</link>
+      <pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/codeart/codeart2/</guid>
+      <description>1. Introduction This post belongs to a new series of posts where I intend to face the challenge of drawing both static and dynamic pictures with a programming language. This practise is commonly referred to as code art, where art is built with code.
+The first four posts will aim at defining a function to create a geometric pattern, a spirograph pattern in circle, inspired by this video, with Python libraries.</description>
+    </item>
+    
+    <item>
+      <title>Code art in Python - Spirograph pattern in circle - Part 1</title>
+      <link>https://takeawildguess.net/blog/codeart/codeart1/</link>
+      <pubDate>Sun, 14 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/codeart/codeart1/</guid>
+      <description>1. Introduction This post belongs to a new series of posts where I intend to face the challenge of drawing both static and dynamic pictures with a programming language. This practise is commonly referred to as code art, where art is built with code.
+One of the most popular languages I have seen so far to create some code art is Javascript, but I wish to investigate how Python libraries to reach the same goal.</description>
+    </item>
+    
+  </channel>
+</rss>

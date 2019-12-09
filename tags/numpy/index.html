@@ -11,12 +11,13 @@
    <meta name="author" content="Your name"> 
   
 
-  <meta name="generator" content="Hugo 0.49" />
-  <title>Numpy &middot; take a wild guess</title>
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>numpy &middot; take a wild guess</title>
 
   
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 
 
  <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
@@ -31,7 +32,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
-<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
 
   
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -40,6 +41,8 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
 
 
 
@@ -54,9 +57,6 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
 
-
-
-<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
 
 
 <script type="text/javascript">
@@ -103,10 +103,11 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
   <![endif]-->
 
   
-  
-  
-  
-  
+    
+    
+    
+    
+    
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -118,6 +119,7 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+    
   
 
   
@@ -163,7 +165,7 @@ if (!doNotTrack) {
 <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
   
     <a class="navbar-brand abs" href="https://takeawildguess.net/">
-      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Numpy">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="numpy">
     </a>
   
   <a class="navbar-brand" href="/tags/numpy/" style="font-size: 16px; "></a>
@@ -197,11 +199,11 @@ if (!doNotTrack) {
       
       <ul class="navbar-nav navbar-right">
         
-          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
         
       </ul>
       
@@ -214,7 +216,7 @@ if (!doNotTrack) {
     <header class="tagHead">
   <div class="container-fluid overlay">
     <div class="descr">
-      <h1 class="text-center">Numpy</h1>
+      <h1 class="text-center">numpy</h1>
     </div>
   </div>
 </header>
@@ -228,25 +230,29 @@ if (!doNotTrack) {
           <div class="col-md-4 col-lg-4 col-sm-12 cardbox">
             <div class="card">
               <div class="card-img">
-                <img src="https://takeawildguess.net/blog/images/coffee_cappuccino.jpeg" class="img-fluid" alt="__">
+                <img src="https://takeawildguess.net/blog/images/mdlselHead.jpeg" class="img-fluid" alt="__">
               </div>
               <div class="card-body">
                 <hr style="border: 3px solid #4ABDAC; min-width: 200px; border-radius: 3px; " />
-                <h4 class="card-title"><a class="" href="/blog/logreg/logreg2/">Learning to classify coffee from cappuccino - Part 2</a></h4>
-                <h6>February 24, 2019</h6>
-                <p class="card-text">This post implements a logistic regression algorithm from scratch with Python and Numpy, using gradient descent and Iteratively reweighted least squares (IRLS) methods.</p>
+                <h4 class="card-title"><a class="" href="/blog/mdlsel/mdlsel8/">Do not overlearn your data too much, learn to generalize - Part 8</a></h4>
+                <h6>June 2, 2019</h6>
+                <p class="card-text">This post analyses the effects of regularization on a non-linear binary classification problem.</p>
               </div>
               <div class="card-footer">
                 
-                  <a href="https://takeawildguess.net/tags/logistic-regression"><kbd class="item-tag">logistic-regression</kbd></a>
+                  <a href="https://takeawildguess.net/tags/model-selection"><kbd class="item-tag">model selection</kbd></a>
                 
-                  <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a>
+                  <a href="https://takeawildguess.net/tags/overfitting"><kbd class="item-tag">overfitting</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/numpy"><kbd class="item-tag">numpy</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/regularization"><kbd class="item-tag">regularization</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a>
                 
                   <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a>
                 
-                  <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a>
-                
-                  <a href="https://takeawildguess.net/tags/numpy"><kbd class="item-tag">numpy</kbd></a>
+                  <a href="https://takeawildguess.net/tags/learning-curve"><kbd class="item-tag">learning curve</kbd></a>
                 
               </div>
             </div>
@@ -257,27 +263,29 @@ if (!doNotTrack) {
           <div class="col-md-4 col-lg-4 col-sm-12 cardbox">
             <div class="card">
               <div class="card-img">
-                <img src="https://takeawildguess.net/blog/images/hello.jpeg" class="img-fluid" alt="__">
+                <img src="https://takeawildguess.net/blog/images/mdlselHead.jpeg" class="img-fluid" alt="__">
               </div>
               <div class="card-body">
                 <hr style="border: 3px solid #4ABDAC; min-width: 200px; border-radius: 3px; " />
-                <h4 class="card-title"><a class="" href="/blog/linreg/linreg3/">Hello world for Machine learning - Part 3</a></h4>
-                <h6>January 27, 2019</h6>
-                <p class="card-text">This post applies the linear regression theory to a multi-input linear case from scratch in Numpy.</p>
+                <h4 class="card-title"><a class="" href="/blog/mdlsel/mdlsel7/">Do not overlearn your data too much, learn to generalize - Part 7</a></h4>
+                <h6>May 26, 2019</h6>
+                <p class="card-text">This post analyses the effects of regularization on a non-linear binary classification problem.</p>
               </div>
               <div class="card-footer">
                 
-                  <a href="https://takeawildguess.net/tags/linear-regression"><kbd class="item-tag">linear-regression</kbd></a>
+                  <a href="https://takeawildguess.net/tags/model-selection"><kbd class="item-tag">model selection</kbd></a>
                 
-                  <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a>
-                
-                  <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a>
-                
-                  <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a>
+                  <a href="https://takeawildguess.net/tags/overfitting"><kbd class="item-tag">overfitting</kbd></a>
                 
                   <a href="https://takeawildguess.net/tags/numpy"><kbd class="item-tag">numpy</kbd></a>
                 
-                  <a href="https://takeawildguess.net/tags/gradient-descent"><kbd class="item-tag">gradient descent</kbd></a>
+                  <a href="https://takeawildguess.net/tags/regularization"><kbd class="item-tag">regularization</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/learning-curve"><kbd class="item-tag">learning curve</kbd></a>
                 
               </div>
             </div>
@@ -288,27 +296,95 @@ if (!doNotTrack) {
           <div class="col-md-4 col-lg-4 col-sm-12 cardbox">
             <div class="card">
               <div class="card-img">
-                <img src="https://takeawildguess.net/blog/images/hello.jpeg" class="img-fluid" alt="__">
+                <img src="https://takeawildguess.net/blog/images/mdlselHead.jpeg" class="img-fluid" alt="__">
               </div>
               <div class="card-body">
                 <hr style="border: 3px solid #4ABDAC; min-width: 200px; border-radius: 3px; " />
-                <h4 class="card-title"><a class="" href="/blog/linreg/linreg2/">Hello world for Machine learning - Part 2</a></h4>
-                <h6>January 20, 2019</h6>
-                <p class="card-text">This post applies the linear regression theory to a single-input case from scratch in Numpy.</p>
+                <h4 class="card-title"><a class="" href="/blog/mdlsel/mdlsel6/">Do not overlearn your data too much, learn to generalize - Part 6</a></h4>
+                <h6>May 19, 2019</h6>
+                <p class="card-text">This post analyses the effects of regularization on a linear binary classification problem.</p>
               </div>
               <div class="card-footer">
                 
-                  <a href="https://takeawildguess.net/tags/linear-regression"><kbd class="item-tag">linear-regression</kbd></a>
+                  <a href="https://takeawildguess.net/tags/model-selection"><kbd class="item-tag">model selection</kbd></a>
                 
-                  <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a>
-                
-                  <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a>
-                
-                  <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a>
+                  <a href="https://takeawildguess.net/tags/overfitting"><kbd class="item-tag">overfitting</kbd></a>
                 
                   <a href="https://takeawildguess.net/tags/numpy"><kbd class="item-tag">numpy</kbd></a>
                 
-                  <a href="https://takeawildguess.net/tags/gradient-descent"><kbd class="item-tag">gradient descent</kbd></a>
+                  <a href="https://takeawildguess.net/tags/regularization"><kbd class="item-tag">regularization</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/learning-curve"><kbd class="item-tag">learning curve</kbd></a>
+                
+              </div>
+            </div>
+          </div>
+          
+        
+          
+          <div class="col-md-4 col-lg-4 col-sm-12 cardbox">
+            <div class="card">
+              <div class="card-img">
+                <img src="https://takeawildguess.net/blog/images/mdlselHead.jpeg" class="img-fluid" alt="__">
+              </div>
+              <div class="card-body">
+                <hr style="border: 3px solid #4ABDAC; min-width: 200px; border-radius: 3px; " />
+                <h4 class="card-title"><a class="" href="/blog/mdlsel/mdlsel5/">Do not overlearn your data too much, learn to generalize - Part 5</a></h4>
+                <h6>May 12, 2019</h6>
+                <p class="card-text">This post analyses the effects of regularization on a linear binary classification problem.</p>
+              </div>
+              <div class="card-footer">
+                
+                  <a href="https://takeawildguess.net/tags/model-selection"><kbd class="item-tag">model selection</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/overfitting"><kbd class="item-tag">overfitting</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/numpy"><kbd class="item-tag">numpy</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/regularization"><kbd class="item-tag">regularization</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/learning-curve"><kbd class="item-tag">learning curve</kbd></a>
+                
+              </div>
+            </div>
+          </div>
+          
+        
+          
+          <div class="col-md-4 col-lg-4 col-sm-12 cardbox">
+            <div class="card">
+              <div class="card-img">
+                <img src="https://takeawildguess.net/blog/images/mdlselHead.jpeg" class="img-fluid" alt="__">
+              </div>
+              <div class="card-body">
+                <hr style="border: 3px solid #4ABDAC; min-width: 200px; border-radius: 3px; " />
+                <h4 class="card-title"><a class="" href="/blog/mdlsel/mdlsel4/">Do not overlearn your data too much, learn to generalize - Part 4</a></h4>
+                <h6>May 5, 2019</h6>
+                <p class="card-text">This post implements the Ridge regression in Python from scratch. It is applied to a low-degree and high-degree model, compared to a non-regularized model and it is optimized on the validation set.</p>
+              </div>
+              <div class="card-footer">
+                
+                  <a href="https://takeawildguess.net/tags/model-selection"><kbd class="item-tag">model selection</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/overfitting"><kbd class="item-tag">overfitting</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/numpy"><kbd class="item-tag">numpy</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/regularization"><kbd class="item-tag">regularization</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a>
+                
+                  <a href="https://takeawildguess.net/tags/learning-curve"><kbd class="item-tag">learning curve</kbd></a>
                 
               </div>
             </div>

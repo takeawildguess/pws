@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Code art in Python - Spirograph pattern in a rectangle - Part 1 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Code art in Python - Spirograph pattern in a rectangle - Part 1">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/codeart/codeart5/" style="font-size: 16px; ">Code art</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/codeartHead1.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Code art in Python - Spirograph pattern in a rectangle - Part 1</h1>
+          <h5 class="card-title text-center">Code art</h5>
+          <h6 class="card-text text-center">August 11, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 11.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/coding"><kbd class="item-tag">coding</kbd></a> <a href="https://takeawildguess.net/tags/code-art"><kbd class="item-tag">code-art</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts where I intend to face the challenge of drawing both static and dynamic pictures with a programming language.
+This practice is commonly referred to as <strong>code art</strong>, where art is built with code.</p>
+
+<p>This post and the next one will aim at defining a function to create a geometric pattern, a <strong>spirograph</strong> pattern in a rectangle, inspired by this <a href="https://www.youtube.com/watch?v=XUnnW7_wmrI" target="_blank">video</a>, with Python libraries.</p>
+
+<p>We will follow these steps:</p>
+
+<ol>
+<li>Grid definition, parametric equation of the rectangle in <a href="/blog/codeart/codeart5">Part1</a>.</li>
+<li>Polygon vertex detection, postprocessing of intersection points, colour scheme definition, global function implementation and final drawings in <a href="/blog/codeart/codeart6">Part2</a>.</li>
+</ol>
+
+<h2 id="2-description">2. Description</h2>
+
+<p>We develop the general function which is responsible to draw the spirograph pattern art in a rectangle.</p>
+
+<p>We define the same pattern as we did in the previous post-series (from <a href="/blog/codeart/codeart1">Part1</a> to <a href="/blog/codeart/codeart4">Part4</a>).
+The only difference is that the pattern is based on a rectangular grid, rather than a circle.</p>
+
+<p>The hyperparameters are:</p>
+
+<ol>
+<li><code>Nh</code>, the number of points over the rectangle height.</li>
+<li><code>height</code>, the rectangle height.</li>
+<li><code>width</code>, the rectangle width.</li>
+<li><code>genLocs</code>, the relative distance of the two generators, <code>A</code> and <code>B</code>, from the leftmost rectangle side. Both generators lie on the horizontal sides. The <code>A</code> generator lies on the bottom side, while <code>B</code> lies on the top side.</li>
+<li><code>kind</code>, the kind of color scheme, which can be one among generator-distance based <code>genDist</code>, fix-color <code>fix-(green|red|blue|gray|black)</code>, polygon-area-based <code>area</code> and origin-distance-based <code>origiDist</code> schemes.</li>
+<li><code>figSize</code>, the figure size</li>
+<li><code>palette</code>, the <a href="https://matplotlib.org/3.1.1/tutorials/colors/colormaps.html" target="_blank">colour palette</a> from Matplotlib.</li>
+<li><code>patchAlpha</code>, the polygon colour transparency.</li>
+</ol>
+
+<h2 id="3-rectangular-grid">3. Rectangular grid</h2>
+
+<p>Let a segment be a fraction of the rectangle height ($h$), whose length <code>Lseg</code> ($L$) is defined as follows:</p>
+
+<p>$$ L = \frac{h}{N_h} $$</p>
+
+<p>where $N_h$ is the number of points <code>Nh</code>.</p>
+
+<p>For the sake of generality, we let the user define the width as an independent parameter.
+We therefore need to estimate the actual <code>width</code> ($w$) once again, as the product of the segment length and the least integer greater than or equal to the ratio between the original width and the segment length itself:</p>
+
+<p>$$ w = L\cdot ceil\Big(\frac{w}{L}\Big) $$</p>
+
+<p>Recall the <a href="https://en.wikipedia.org/wiki/Floor_and_ceiling_functions" target="_blank">ceiling</a> function definition, as the least integer greater than or equal to the input.</p>
+
+<p>We also ask the user to specify where to place the two generators, <code>A</code> and <code>B</code>.
+The parameter <code>genLocs</code> ($\delta$) is a tuple of two values ranging from 0 to 1.
+The coordinates of the two generators are thus defined:</p>
+
+<p>$$ A = (x, y) = (w\cdot \delta_0, 0) $$</p>
+
+<p>$$ B = (x, y) = (w\cdot \delta_1, h) $$</p>
+
+<p>where the expression $\delta_j$ is the <code>j</code>-th element of the tuple.</p>
+
+<p>However, the two generators have to be placed exactly on any of the grid nodes of the two horizontal sides.
+We introduce the function <code>coord2index</code> to convert the general coordinates of the two generators into grid coordinates.
+The nearest node is selected with the <code>round</code> function as the new generator location.</p>
+
+<pre><code class="language-python">coord2index = lambda xx, Lseg: np.round(xx/Lseg)
+</code></pre>
+
+<p>Figure 1 explains how we can discretize the rectangle with a grid.
+In this case, the height is split into 4 segments, or units, while the width is the 8-unit long.</p>
+
+<p><img src="/blog/codeart/codeart5/rectangle_grid.png" alt="pngM" title="Rectangle grid and indexing scheme" />
+<center><em>Figure 1 - Rectangle grid and indexing scheme</em></center></p>
+
+<p>We use the following snippet of code to determine the actual width, the indexes and the coordinates of the two generators.</p>
+
+<pre><code class="language-python">width, height, Nh = 8, 4, 4
+genLocs=(3/8, 5/8)
+
+Lseg = height/Nh
+Nw = coord2index(width, Lseg)
+Ntot = int(2*(Nw + Nh))
+width = Nw*Lseg
+
+kA = coord2index(genLocs[0]*width, Lseg)
+kB_ = coord2index(genLocs[1]*width, Lseg)
+kB = 2*Nw + Nh - kB_
+AA = np.r_[kA*Lseg, 0]
+BB = np.r_[kB_*Lseg, height]
+AAs = np.tile(AA, (4,1))
+BBs = np.tile(BB, (4,1))
+idxAB = kB - kA - 1
+print('The coordinates of the two generators A and B are {} and {}, respectively'.format(AA, BB))
+print('The index distance between these two generators is {}'.format(idxAB))
+</code></pre>
+
+<pre><code>The coordinates of the two generators A and B are [3. 0.] and [5. 4.], respectively
+The index distance between these two generators is 11.0
+</code></pre>
+
+<p>According to the distance of the two generators from the left side of the rectangle, we end up with any of these two different cases (and shapes):</p>
+
+<ol>
+<li><code>A</code> is on the left- or right-hand side of the vertical line crossing <code>B</code>, so the central line is inclined.</li>
+<li>They are equally distant from the leftmost vertical side of the rectangle, so the central line is vertical.</li>
+</ol>
+
+<h2 id="4-converting-grid-index-into-time">4. Converting grid index into time</h2>
+
+<p>Let&rsquo;s start the actual process of generating polygons by connecting <code>A</code> and <code>B</code> to any two consecutive nodes on the grid.
+This means that we have two pairs of lines that are going to potentially intersect and give birth to several polygons.</p>
+
+<p>The process is managed by counter-clockwise indexing the nodes on the rectangular grid from the bottom-leftmost node, $(0,0)$.
+We want to have two increasing indexes, <code>dka</code> and <code>dkb</code>, to progressively pick a pair of consecutive nodes to connect to the generator, A and B, respectively, within two nested for-loops, one per generator, as you can see in the main function <a href="/blog/codeart/codeart6/">code</a> <code>drawingSpirograph</code>.</p>
+
+<p>We need to find a way to convert the monotonic increasing index into a specific position within the four sides of the rectangle and then finally got the coordinates.
+When we have the coordinates of the four lines, we can execute the function that returns the coordinates of the intersecting points for the four lines.</p>
+
+<p>With respect to Figure 1, we observe that <code>k</code> goes from 0, which is the origin, to $N_w=8$, which is in general the bottom rightmost corner, to $N_w+N_h=12$, which is the top rightmost point, until it comes back to the origin when it equals $2\cdot(N_w+N_h)=24$.
+$N_w$ is the number of intervals of units for the width, while $N_h$ is the number of intervals of units for the height.</p>
+
+<p>The index specifies where the point to select is and in which side of the rectangle it is.
+But we need a second approach to identify what&rsquo;s the correlation between the position and the actual coordinates.</p>
+
+<p>To visualize the following approach, we just imagine to draw the rectangle with a pencil, one side at a time.
+Each side is drawn in one unit of time.
+We start from the origin, we draw the bottom line in 1 second to end up being in point $(w,0)$.
+After one second more, we complete the second side to reach $(w, h)$.
+We draw the top line during the third second and close the shape in the fourth unit of time.</p>
+
+<p>That means that, since the time to draw every side is constant but its length is in principle different, we have a different speed of drawing.
+We are therefore faster when we draw the horizontal lines and slower for vertical ones, which is pretty acceptable because, to some extent, we only care about the final shape but we don&rsquo;t consider any kinematics/dynamics aspects in this particular occasion.</p>
+
+<p>The below chart correlates the grid index to the time at which the indexed point is drawn.
+The below function implements this conversion from <code>k</code> to time <code>t</code>.
+It is a piecewise-linear function combined with a powerful interpolation function in numpy.
+We can just give the input <code>k</code>, get rid of extra-lap gap <code>Ntot</code> with the modulus operator <code>%</code> and interpolate the function to get the time.</p>
+
+<p><img src="/blog/codeart/codeart5/rectangle_index2time.png" alt="pngM" title="Rectangle index-to-time conversion" />
+<center><em>Figure 2 - Rectangle index-to-time conversion</em></center></p>
+
+<pre><code class="language-python">def rectIndex2Time(kk, Nw, Nh, Ntot):
+    kk = kk%(Ntot)
+    return np.interp(kk, [0, Nw, Nw+Nh, 2*Nw+Nh, Ntot], list(range(5)))
+</code></pre>
+
+<h2 id="5-converting-time-into-coordinates">5. Converting time into coordinates</h2>
+
+<p>We need a function that specifies how the position of the point with respect to the x-axis changes over time from 0 to 4 seconds.
+This would give the parametric equation of the first coordinate of the point.
+Similarly, we introduce an additional function for the y-axis.
+Altogether, we have a system of parametric equations, that is, the parametric equation of the rectangle.</p>
+
+<p>Let&rsquo;s just summarize the idea!
+From the grid, we have a specific position.
+We are able to convert the grid index to the corresponding time at which we pass by while drawing the rectangle.
+We need a second step to convert this time variable into a cartesian coordinate variable.</p>
+
+<p>While we imagine drawing the rectangle, we observe how the $x$ coordinate changes.
+It first increases from 0 to $w$ over the first second, it is constant for one second, it decreases down to zero in the third second and it finally doesn&rsquo;t change any more.</p>
+
+<p>The $y$ coordinate is 0 for one second, increases to $h$ in one second, it maintains this value for one second and it drops to 0 during the last second.</p>
+
+<p>How can we define a function that converts time to the two coordinates, <code>x</code> and <code>y</code>?</p>
+
+<p>We have two different approaches.
+The former is what we use for the <em>index-to-time</em> conversion, i.e., a piecewise-linear function combined with a powerful interpolation function in numpy.
+This <em>time-to-coordinate</em> conversion requires two piecewise-linear functions, one per coordinate, <code>x</code> and <code>y</code>.
+But just to get a broad scope, we can use an alternative method that combines the equation of every segment and then uses a combination of the <code>min</code> and <code>max</code> operators, to end up having the overall piecewise-linear function.</p>
+
+<p><img src="/blog/codeart/codeart5/rectangle_time2Xcoord.png" alt="pngM" title="Rectangle time-to-coordinate conversion, x-axis only" />
+<center><em>Figure 3 - Rectangle time-to-coordinate conversion, x-axis only</em></center></p>
+
+<p>With reference to Figure 3, let&rsquo;s start realizing that the first segment equation is the line $x=t$ (green), the second segment is $x=1$ (yellow), the third one is $3-t$ (blue) and the last one is $x=0$.</p>
+
+<p>How to combine these four equations into a single one?
+If we take the minimum between the green and blue lines we have a kind of roof, $x = min(t, 3-t)$.
+The actual roof is <em>capped</em>, it has a trapezoid shape.
+So we take again the minimum between the <em>roof</em> and the yellow line, $x = min(1, min(t, 3-t))$.
+The <code>x</code> coordinate would however be negative for $t&gt;3$, so we use the <code>max</code> operator as:</p>
+
+<p>$$ x(t) = max\big(0, min(1, min(t, 3-t)\big) $$</p>
+
+<p><img src="/blog/codeart/codeart5/rectangle_time2XYcoord.png" alt="pngM" title="Rectangle time-to-coordinate conversion, x- and y-axis" />
+<center><em>Figure 4 - Rectangle time-to-coordinate conversion, x- and y-axis</em></center></p>
+
+<p>To determine the <code>y</code> coordinate parametric equation, we can simply apply a trick (see Figure 4).
+Since its shape is exactly identical to <code>x</code> but shifted by one unit of time, we can take the same function $f(t)$ that describes <code>x</code> and gives the shifted time $t-1$ as input.</p>
+
+<p>The overall system is as compact as:</p>
+
+<p>$$ x(t) = f(t) $$</p>
+
+<p>$$ y(t) = f(t-1) $$</p>
+
+<p>The below function implements this conversion from <code>time</code> to coordinates, <code>xx</code> and <code>yy</code>.</p>
+
+<pre><code class="language-python">def rectTime2Coord(time, width, height):
+    roof = lambda time: np.minimum(time, 3-time)
+    xx = width*np.maximum(np.zeros_like(time), np.minimum(roof(time), np.ones_like(time)))
+    yy = height*np.maximum(np.zeros_like(time), np.minimum(roof(time-1), np.ones_like(time)))
+    return np.array((xx, yy)).T
+</code></pre>
+
+<h2 id="6-full-conversion-from-index-to-coordinates">6. Full conversion from index to coordinates</h2>
+
+<p>From the indexes <code>ka</code> and <code>kb</code>, which are the indexes of the two generators, we get the coordinates of the two pairs of adjacent points that are then connected to the two generators to design the polygon.</p>
+
+<p>We first get the temporal instant for the <code>C</code>-points pair, whose indexes are <code>dka+1</code> and <code>dka+2</code> away from <code>A</code>, by using <code>rectIndex2Time</code>.
+The second step is to get the coordinates of the <code>C</code>-points pair with <code>rectTime2Coord</code>.
+We repeat these two steps for the <code>D</code>-points pair.
+To get the full combination of the two pairs of <code>C</code> and <code>D</code>, we <code>repeat</code> the <code>C</code> coordinates and we <code>tile</code> the <code>D</code> coordinates.
+This logic is in <code>rectIndex2coords</code>.</p>
+
+<pre><code class="language-python">dka, dkb = 3, 5
+tCs = rectIndex2Time(kA + (np.r_[dka, dka+1]+1), Nw, Nh, Ntot)
+Pcs = rectTime2Coord(tCs, width, height)
+print('The temporal instants for the C-points pair are {} and {}'.format(*tCs))
+print('The coordinates are {} and {}'.format(*Pcs))
+</code></pre>
+
+<pre><code>The temporal instants for the C-points pair are 0.875 and 1.0
+The coordinates are [7. 0.] and [8. 0.]
+</code></pre>
+
+<pre><code class="language-python">def rectIndex2coords(kA, kB, width, height, dka, dkb, Nw, Nh, Ntot):
+    tCs = rectIndex2Time(kA + (np.r_[dka, dka+1]+1), Nw, Nh, Ntot)
+    Pcs = rectTime2Coord(tCs, width, height)
+    CCs = np.repeat(Pcs, 2, axis=0)
+    tDs = rectIndex2Time(kB + (np.r_[dkb, dkb+1]+1), Nw, Nh, Ntot)
+    Pds = rectTime2Coord(tDs, width, height)
+    DDs = np.tile(Pds, (2,1))
+    return CCs, DDs
+</code></pre>
+
+<pre><code class="language-python">CCs, DDs = rectIndex2coords(kA, kB, width, height, dka, dkb, Nw, Nh, Ntot)
+</code></pre>
+
+<p>The set of the four points&rsquo; coordinates that gives the vertexes of the polygon is printed as a Pandas dataframe, where column names combine the double point name (from A to D) with one of the two axes.</p>
+
+<pre><code class="language-python">import pandas as pd
+colNames = [point*2+'-'+axisType for point in 'ABCD' for axisType in 'xy']
+pd.DataFrame(np.c_[AAs, BBs, CCs, DDs], columns=colNames)
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AA-x</th>
+      <th>AA-y</th>
+      <th>BB-x</th>
+      <th>BB-y</th>
+      <th>CC-x</th>
+      <th>CC-y</th>
+      <th>DD-x</th>
+      <th>DD-y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>7.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>7.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>8.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>8.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/codeart/codeart4/" style="color: #4ABDAC; font-size: 18px; "> Code art in Python - Spirograph pattern in circle - Part 4</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/codeart/codeart6/" style="color: #4ABDAC; font-size: 18px; ">Code art in Python - Spirograph pattern in a rectangle - Part 2</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

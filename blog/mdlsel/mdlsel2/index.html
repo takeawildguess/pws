@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Do not overlearn your data too much, learn to generalize - Part 2 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Do not overlearn your data too much, learn to generalize - Part 2">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/mdlsel/mdlsel2/" style="font-size: 16px; ">Learning to learn your data</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/mdlselHead.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Do not overlearn your data too much, learn to generalize - Part 2</h1>
+          <h5 class="card-title text-center">Learning to learn your data</h5>
+          <h6 class="card-text text-center">April 21, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 12.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/model-selection"><kbd class="item-tag">model selection</kbd></a> <a href="https://takeawildguess.net/tags/overfitting"><kbd class="item-tag">overfitting</kbd></a> <a href="https://takeawildguess.net/tags/regularization"><kbd class="item-tag">regularization</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/learning-curve"><kbd class="item-tag">learning curve</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>After two introductory post-series (<a href="/blog/linreg/linreg1/">linear</a> and <a href="/blog/logreg/logreg1/">logistic</a> regression), we dive into a crucial topic that every machine-learning practitioner should be at least aware of: <strong>model selection</strong>.</p>
+
+<p>Basically, we do not want our models to learn our data by heart and then to struggle to handle new unseen data samples.
+We want them to be great at generalizing.</p>
+
+<p>We have <a href="/blog/mdlsel/mdlsel1/">already</a> introduced the two key terms that we need to deal with: <em>bias</em> and <em>variance</em>.
+We now visualize the bias-variance dilemma, understand how the model capacity relates to its performance and why it is common practice to split the dataset into training and testing, create some learning curves that should clarify whether gathering additional data might be worthy.
+Every code snippet runs Python, Numpy and Scikit-learn code and the visualization parts are achieved with Matplotlib.</p>
+
+<h2 id="2-importing-the-required-libraries">2. Importing the required libraries</h2>
+
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from mpl_toolkits import mplot3d
+</code></pre>
+
+<pre><code class="language-python">from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn import metrics
+from sklearn.model_selection import train_test_split, learning_curve, validation_curve, cross_val_score
+from sklearn.pipeline import make_pipeline
+from sklearn.datasets import make_circles
+</code></pre>
+
+<h2 id="3-the-bias-variance-dilemma">3. The bias-variance dilemma</h2>
+
+<p>Usually, the bias decreases as the model complexity, or capacity, increases, while the variance is an increasing function of the complexity.
+The best capacity choice is a compromise between bias and variance.</p>
+
+<p>Here we create a function to get the bias, variance and MSE for a given model complexity (polynomial degree of input features) and show the trend of the two terms as a function of model complexity that usually helps to select the optimal model.</p>
+
+<p>The model complexity is controlled by the variable <code>degree</code> that defines the polynomial degree of input features via the scikit-learn method <code>PolynomialFeatures</code>.</p>
+
+<pre><code class="language-python">Npnts = 250 # number of points
+xBase = np.linspace(0, 6, Npnts)
+yTruth = groundTruth(xBase)
+
+Nsim, Ndgr = 100, 11
+errs, yExps = [], []
+for degree in range(1,Ndgr):
+    Ys = []
+    for kk in range(Nsim):
+        xx, yy = genData()
+        PF = PolynomialFeatures(degree)
+        Xpf = PF.fit_transform(xx)
+        lr = LinearRegression()
+        lr.fit(Xpf, yy)
+        ypred = lr.predict(PF.fit_transform(xBase.reshape(-1,1)))
+        Ys.append(ypred)
+    estimates = np.array(Ys)
+
+    yexp = np.mean(estimates, axis=0)
+    sqBiases = (yexp - yTruth)**2
+    meanSqBias = np.mean(sqBiases)
+    maxSqBias = np.max(sqBiases)
+
+    variances = np.mean((estimates-yexp)**2, axis=0)
+    meanVar = np.mean(variances)
+    maxVar = np.max(variances)
+    
+    mse = np.mean((yTruth + getNoise(Npnts) - yexp)**2)
+    mse2 = np.mean((yTruth + getNoise(Npnts) - estimates)**2)
+    errs.append([meanSqBias, maxSqBias, meanVar, maxVar, mse, mse2])
+    yExps.append(yexp)
+
+yExps = np.array(yExps).T
+errs = np.array(errs)
+</code></pre>
+
+<p>The figure shows the trends of the three error terms with a logarithmic scale for the sake of readability.</p>
+
+<pre><code class="language-python">complexity = np.arange(1, Ndgr)
+errsL = np.log(errs)
+
+plt.figure(figsize=(10, 10))
+plt.subplot(3,1,1)
+plt.plot(complexity, errsL[:,:1], '--', lw=2, alpha=0.95)
+plt.xlabel(&quot;model complexity&quot;)
+plt.ylabel(&quot;Squared bias&quot;)
+plt.legend(['meanSqBias', 'maxSqBias'])
+plt.subplot(3,1,2)
+plt.plot(complexity, errsL[:,2:3], '--', lw=2, alpha=0.95)
+plt.xlabel(&quot;model complexity&quot;)
+plt.ylabel(&quot;Variance&quot;)
+plt.legend(['meanVar', 'maxVar'])
+plt.subplot(3,1,3)
+plt.plot(complexity, errsL[:,-1], '--', lw=2, alpha=0.95)
+plt.xlabel(&quot;model complexity&quot;)
+plt.ylabel(&quot;MSE&quot;)
+plt.show()
+</code></pre>
+
+<p><img src="output_7_0.png" alt="png" /></p>
+
+<p>The figure below illustrates the usual correlations between squared bias, variance and total error with the model complexity.</p>
+
+<p>Our results somehow match these trends, but of course they are not that clean, due to the noise and randomness of the data generation process.</p>
+
+<p><img src="/blog/mdlsel/mdlsel2/tradeoff.png" alt="pngM" title="Bias-variance tradeoff" />
+<center><em>Figure 1 - Bias-variance tradeoff</em> - <a href="https://www.datacamp.com/community/tutorials/tutorial-ridge-lasso-elastic-net" target="_blank">source</a></center></p>
+
+<p>The figure compares the generated data with red dots, the ground-truth profile with a dashed blue line and the expected output with a dotted green line, for five different model complexity cases.
+The complexity is defined with the polynomial degree of the input features, which ranges from 1 to 10.</p>
+
+<p>The <code>3</code> and <code>5</code> cases are a good compromise for the bias-variance tradeoff.</p>
+
+<pre><code class="language-python">degrees = [1, 3, 5, 7, 10]
+plt.figure(figsize=(15, 4*len(degrees)))
+for kk, kdgr in enumerate(degrees):
+    plt.subplot(len(degrees),1, kk+1)
+    plt.scatter(xTrain, yTrain, c='r', alpha=0.75)
+    plt.plot(xTruth, yTruth, ':b', lw=2, alpha=0.75)
+    plt.plot(xTruth, yExps[:,kdgr-1], '-g', lw=3, alpha=0.5)
+    plt.title('Model degree: {}'.format(str(kdgr)))
+    plt.xlabel(&quot;X&quot;)
+    plt.ylabel(&quot;Y&quot;)
+
+plt.tight_layout()
+plt.show()
+</code></pre>
+
+<p><img src="output_11_0.png" alt="png" /></p>
+
+<h2 id="4-model-capacity">4. Model capacity</h2>
+
+<p>In my earlier posts, we focused on the model performance on the entire dataset.
+That means that we use each and every available sample to choose the model parameters.
+However the main challenge in machine learning is to build a model that can perform well on <strong>new unseen</strong> samples, ideally as good as on those used to train the model.
+This ability to keep performing well on unseen samples is referred to as <strong>generalization</strong>.</p>
+
+<p>This is the reason behind the introduction of the dataset split practise in the community, namely the <strong>training</strong> and <strong>testing</strong> datasets.
+The model parameters are optimized with respect to the samples of the training set and its capability of generalizing is measured on different unseen samples of the testing set, where the model is used to perform its predictions with a fixed structure and parameter set of values.
+Here we assume that the model error on the testing set (test error) might represent the generalization error, since the testing samples are drawn from the distribution of the samples that the model should be supposed to encounter in practice.</p>
+
+<p>The first critics that should come to mind is that we have control only on the model performance on the training set, while the final goal is to maximize the performance on test set.
+We need two assumptions to handle the data generation process:</p>
+
+<ol>
+<li>the examples in each dataset are independent from each other.</li>
+<li>training and test sets are identically distributed, drawn from the same data distribution.</li>
+</ol>
+
+<p>That means that if you had a fixed-parameter model and two identically distributed datasets (training and testing), the model expected performance would be equal for the two sets.
+In practice, we first draw the training set, we choose the model parameters to reduce the training error and then draw the test samples.
+The expected test error is therefore greater or equal to the expected training error.
+The new goal to define the <em>optimal model</em> is to minimize the training error while reducing the gap between testing and training error as much as possible.</p>
+
+<p>We introduce two crucial terms of machine learning theory:</p>
+
+<ol>
+<li><strong>underfitting</strong>: it occurs when the model performance on the training set is too large. The corresponding bias of an underfit model is high.</li>
+<li><strong>overfitting</strong>: it occurs when the model performance on test samples is much worse than that on training set. The variance is high.</li>
+</ol>
+
+<p>Both an underfit and overfit models will not be able to generalize well to the test samples.</p>
+
+<p>Since the &ldquo;too large&rdquo; and &ldquo;much worse&rdquo; expressions are not strictly quantifiable objectives, it is sometimes not trivial to recognise such scenarios.
+One idea is to understand and visualize the <strong>capacity</strong> of the model and wonder whether:</p>
+
+<ol>
+<li>the capacity is too low to handle the task at hand, i.e., the model is too simple. One solution to prevent underfitting would be to increase the model capacity.</li>
+<li>the capacity is too high that the model can memorize specific properties of the task at hand that are not present in the testing set, i.e., the model is too complex. One solution to prevent overfitting would be to reduce the model capacity.</li>
+</ol>
+
+<p>One simple example to fully understand an overfitting model or procedure is related to students.
+Say there is a math student that spend several weeks to get ready for the final super-challenging calculus exam.
+One situation that represents the overfitting scenario is that the student builds a huge key-value table, where the key is the quiz question text and the value is the numeric outcome of the right solution.
+At the exam (inference step) he instead implements a &ldquo;closest matching string comparison&rdquo; algorithm to select the closest case from his huge table, the training set, to the test query, and returns the corresponding numeric value as his final answer to the test query.
+If he faces the two queries:</p>
+
+<p>$$ \frac{d(x^2+2)}{dx}|_{(x=3)} $$</p>
+
+<p>$$ \displaystyle{\lim_{x \to 1} (x^2+2)} $$</p>
+
+<p>he will select the following two examples as the closest one:</p>
+
+<p>$$ \frac{d(x^2+1)}{dx}|_{(x=3)} = 6 $$</p>
+
+<p>$$ \displaystyle{\lim_{x \to 1} (x^2+1)} = 2$$</p>
+
+<p>where the former is correct due to the null effect of the bias term into the derivation operator, while the latter is wrong due to the slightly different intercept of the second-order polynomial function.
+This strategy would however guarantee the highest mark possible, but it would very likely fail dramatically at the exam, on the test set.</p>
+
+<p>A different situation of model failure (or learning approach for the student) would be that he has only focused on the limit theory while the exam is about the integral theory.
+The student failure is not related to the overfitting learning strategy but instead to the <strong>non-identically distributed</strong> training and test sets.</p>
+
+<h2 id="learnCurve">5. Learning curves</h2>
+
+<p>The idea behind learning curves is to identify how the learning procedure might improve by increasing the number of training instances.
+We start with <strong>one</strong> single training sample to build the model out of it, we test it to the fixed testing set (say 20 samples) and we record both the training and test errors.
+The training error results to be 0 by definition, while the test error is very likely to be huge.
+Step by step, we expect to have an increasing training error for increasing training samples. If they are independently drawn and uniformly distributed, it is way more challenging for the same model to &ldquo;overfit&rdquo; to all of them.
+Simultaneously, the test error would reduce since the model is learning more properties from the data distribution that help to better generalize.</p>
+
+<p>The learning curves are thus the trend of the training and test errors over the axis of increasing training set size.</p>
+
+<pre><code class="language-python">def learningCurves(trainSize=50, degree=1):
+    xTest, yTest = genData()
+    
+    errs = []
+    for kk in range(1, trainSize, 5):
+        xTrain, yTrain = genData(Npnts=kk)
+        PF = PolynomialFeatures(degree)
+        lr = LinearRegression()
+        lr.fit(PF.fit_transform(xTrain), yTrain)
+        errTrain = np.mean((lr.predict(PF.fit_transform(xTrain))-yTrain)**2)
+        errTest = np.mean((lr.predict(PF.fit_transform(xTest))-yTest)**2)
+        errs.append([errTrain, errTest])
+    return np.array(errs)
+</code></pre>
+
+<p>This chart shows that it is not worthy to keep adding training data from around 10 training samples onward, because it will improve neither training nor test error.
+This result helps us to identify the weak link of the learning algorithm: the model structure.
+A relatively high value of the model training error highlights high bias in the model.
+Instead, almost identical error at the convergence of the training and test sets shows the model variance is very low.</p>
+
+<pre><code class="language-python">trainSize = 50
+errs0 = learningCurves(trainSize, 1)
+
+errs = np.log10(errs0+1e-4)
+errMeans = np.mean(errs[-5:,:], axis=0)
+errMean = np.mean(errMeans)
+
+plt.figure(figsize=(10, 5))
+plt.plot(np.arange(1, trainSize, 5), errs, lw=2, alpha=0.75)
+plt.plot([1, trainSize], [errMean, errMean], 'g--')
+plt.title('Final training and test errors: {:.3f}, {:.3f}'.format(*errMeans))
+plt.xlabel(&quot;Training size&quot;)
+plt.ylabel(&quot;Model error&quot;)
+plt.show()
+</code></pre>
+
+<p><img src="output_17_0.png" alt="png" /></p>
+
+<p>This chart shows the same analysis for a much more complex model (the polynomial degree has been set to 10).
+The training error becomes somehow steady for much more samples.
+The test error is also very noise and greater than training error even at full training set size, which represents 75% of the entire generated dataset.</p>
+
+<p>This result helps us to identify the weak link of the learning algorithm: again it is the model structure.
+The relatively high gap between the training and test errors for high training set size suggests a high variance in the model.</p>
+
+<pre><code class="language-python">trainSize = 50
+errs0 = learningCurves(trainSize, 8)
+errs = np.log10(errs0+1e-4)
+errMeans = np.mean(errs[-5:,:], axis=0)
+errMean = np.mean(errMeans)
+
+plt.figure(figsize=(10, 5))
+plt.plot(np.arange(1, trainSize, 5), errs, lw=2, alpha=0.75)
+plt.plot([1, trainSize], [errMean, errMean], 'g--')
+plt.title('Final training and test errors: {:.3f}, {:.3f}'.format(*errMeans))
+plt.xlabel(&quot;Training size&quot;)
+plt.ylabel(&quot;Model error&quot;)
+#plt.ylim([0, 100])
+plt.show()
+</code></pre>
+
+<p><img src="output_19_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/mdlsel/mdlsel1/" style="color: #4ABDAC; font-size: 18px; "> Do not overlearn your data too much, learn to generalize - Part 1</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/mdlsel/mdlsel3/" style="color: #4ABDAC; font-size: 18px; ">Do not overlearn your data too much, learn to generalize - Part 3</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Do not overlearn your data too much, learn to generalize - Part 4 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Do not overlearn your data too much, learn to generalize - Part 4">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/mdlsel/mdlsel4/" style="font-size: 16px; ">Learning to learn your data</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/mdlselHead.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Do not overlearn your data too much, learn to generalize - Part 4</h1>
+          <h5 class="card-title text-center">Learning to learn your data</h5>
+          <h6 class="card-text text-center">May 5, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 19 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/model-selection"><kbd class="item-tag">model selection</kbd></a> <a href="https://takeawildguess.net/tags/overfitting"><kbd class="item-tag">overfitting</kbd></a> <a href="https://takeawildguess.net/tags/numpy"><kbd class="item-tag">numpy</kbd></a> <a href="https://takeawildguess.net/tags/regularization"><kbd class="item-tag">regularization</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/learning-curve"><kbd class="item-tag">learning curve</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>After two introductory post-series (<a href="/blog/linreg/linreg1/">linear</a> and <a href="/blog/logreg/logreg1/">logistic</a> regression), we dive into a crucial topic that every machine-learning practitioner should be at least aware of: <strong>model selection</strong>.</p>
+
+<p>Basically, we do not want our models to learn our data by heart and then to struggle to handle new unseen data samples.
+We want them to be great at generalizing.</p>
+
+<p>We have introduced the <em>bias</em> and <em>variance</em> concepts in <a href="/blog/mdlsel/mdlsel1/">Part1</a> and the bias-variance dilemma, the model capacity, the training/testing split practice and learning curves analysis in <a href="/blog/mdlsel/mdlsel2/">Part2</a>.
+We moved to the cross-validation and regularization techniques in <a href="/blog/mdlsel/mdlsel3/">Part3</a>.</p>
+
+<p>We now go through the Ridge regression implementation in Python from scratch (loss function and gradient descent algorithm), its application to a low-degree and high-degree model and its weight optimization with the validation curves.</p>
+
+<h2 id="2-dataset-generation">2. Dataset generation</h2>
+
+<p>We first generate some data (<code>Npnts=40</code>) drawn from a 3-degree polynomial and add some noise controlled by the <code>scale</code> factor.
+Please note that the input array <code>xx</code> does not contain equispaced points, but they have been randomly generated within the <code>(-4, 4)</code> interval.</p>
+
+<pre><code class="language-python">def groundTruth(xx, scale=2):
+    ww = np.array([[-1, 8, -2, -1]]).T
+    xxPF = PolynomialFeatures(3).fit_transform(xx)
+    yy = xxPF.dot(ww) + scale*(np.random.randn(xx.shape[0], 1)-1)
+    return xxPF, yy
+</code></pre>
+
+<pre><code class="language-python">Npnts = 40
+xx = np.sort(np.random.rand(Npnts,1)*8-4, axis=0)
+xPF, yy = groundTruth(xx)
+</code></pre>
+
+<pre><code class="language-python">plt.figure()
+plt.scatter(xx, yy, c='g', alpha=0.6)
+plt.ylim([-40, 20])
+</code></pre>
+
+<pre><code>(-40, 20)
+</code></pre>
+
+<p><img src="output_5_1.png" alt="png" /></p>
+
+<p>We set the matrix-shaped polynomial terms <code>xPF</code> and the ground-truth output <code>yy</code> as the training dataset and create test and validation sets drawn from the same distribution.</p>
+
+<pre><code class="language-python">xTrain, yTrain = xPF.copy(), yy.copy()
+xTest0 = np.sort(np.random.rand(int(Npnts/4),1)*10-5, axis=0)
+xTest, yTest = groundTruth(xTest0)
+
+xVal0 = np.sort(np.random.rand(int(Npnts/4),1)*10-5, axis=0)
+xVal, yVal = groundTruth(xVal0)
+</code></pre>
+
+<p>The dataset consists of <code>40</code> data-points.
+Each input has four components (one term per degree plus the bias).</p>
+
+<pre><code class="language-python">xTrain.shape, yTrain.shape
+</code></pre>
+
+<pre><code>((40, 4), (40, 1))
+</code></pre>
+
+<h2 id="3-ridge-loss-function-and-gradient-descent-algorithm">3. Ridge loss function and gradient descent algorithm</h2>
+
+<p>We implement the Ridge loss function with a vectorized structure.
+Have a look at <a href="/blog/mdlsel/mdlsel3/#reg_ridge">this</a> section of the series&rsquo;s previous post for more details about the theory.
+The loss <code>J</code> is the sum of two terms:</p>
+
+<ol>
+<li>the actual error of the model, as the sum of the squared error of each example (along the first axis, <code>axis=0</code>).</li>
+<li>the Ridge regularization term, weighted by the $\lambda$ factor, <code>lmbd</code>, that sums up all the squared parameters&rsquo; values, but the biases. That&rsquo;s why it starts indexing the parameter array <code>ww</code> from <code>1</code>.</li>
+</ol>
+
+<p>Let&rsquo;s initialize the weights and calculate the Ridge loss on the training set.</p>
+
+<pre><code class="language-python">def lossRidge(XX, YY, ww, lmbd=0):
+    Npnt = XX.shape[0]
+    J = (np.sum((np.dot(XX, ww) - YY)**2, axis=0) + lmbd*np.sum(ww[1:]**2))/2/Npnt
+    return J
+</code></pre>
+
+<pre><code class="language-python">wInit = np.array([1, 1, 1, 1]).reshape(-1, 1)
+loss = lossRidge(xTrain, yTrain, wInit)[0]
+print('The loss of the regularized model for the initial parameters ({}) is {}'.format(wInit.T, loss))
+</code></pre>
+
+<pre><code>The loss of the regularized model for the initial parameters ([[1 1 1 1]]) is 791.5828825701652
+</code></pre>
+
+<p>We update the gradient descent algorithm by adding the second term related to the penalty.</p>
+
+<p>Please note the first element is set to 0 due to the penalty definition that ranges from 1 to the end of the parameter vector.</p>
+
+<pre><code class="language-python">def gradDescRidge(XX, YY, ww, lmbd=0, lr=0.001, Nepoch=1500):
+    Npnt = XX.shape[0]
+    degree = wInit.size-1
+    Jevol, wevol = [], []
+    for _ in range(Nepoch):
+        Jevol.append(lossRidge(XX, YY, ww, lmbd))
+        wevol.append(ww[:,0])
+        ww = ww - lr*(np.mean((np.dot(XX, ww) - YY) * XX, axis=0).reshape(-1,1) + lmbd/Npnt*np.vstack(([0],ww[1:])))
+    
+    return np.array(wevol), np.array(Jevol)
+</code></pre>
+
+<p>We apply the gradient descent algorithm for <code>Nepoch=50000</code> steps, with a quite small learning rate <code>lr</code> and inactive regularization (<code>lmbd=0</code>).
+The weights used to generate the ground-truth are <code>[-1, 8, -2, -1]</code>.
+The bias is not that accurate, but the total loss is within the scale of the generated-data noise.</p>
+
+<pre><code class="language-python">Nepoch, lr, lmbd = 50000, 0.0001, 0
+wEvol, Jevol = gradDescRidge(xTrain, yTrain, wInit, lmbd, lr, Nepoch)
+wOpt, Jopt = wEvol[-1,:], Jevol[-1]
+print(wOpt)
+print(Jopt)
+</code></pre>
+
+<pre><code>[-2.73715234  7.41367214 -2.0984889  -0.954944  ]
+[ 1.94347173]
+</code></pre>
+
+<p>The figure shows the evolution of the four weights (left chart) and the loss function (right) along the log axis of the epochs.
+It is worthy to note that when the orange weight (second term) starts converging to the final value <code>7.41</code>, the loss function drops again toward the final minimum.</p>
+
+<pre><code class="language-python">epochs = np.log(np.arange(Nepoch)+1)
+plt.figure()
+plt.subplot(121)
+plt.plot(epochs, wEvol)
+plt.subplot(122)
+plt.plot(epochs, np.log(Jevol));
+</code></pre>
+
+<p><img src="output_18_0.png" alt="png" /></p>
+
+<p>We compare the training data points (green dots) and the predicted outcome of the model (red line).
+The model matches the polynomial trend of the points perfectly and ignores the noise.</p>
+
+<pre><code class="language-python">ypred = np.dot(xPF, wOpt)
+
+plt.figure()
+plt.scatter(xx, yy, c='g', alpha=0.6)
+plt.plot(xx, ypred, 'r', alpha=0.4)
+</code></pre>
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x1c41c915cc0&gt;]
+</code></pre>
+
+<p><img src="output_20_1.png" alt="png" /></p>
+
+<h3 id="3-1-no-regularization-to-a-simpler-model">3.1 No regularization to a simpler model</h3>
+
+<p>We simplify the model to a 1-degree polynomial by setting <code>xTrain</code> equal to the first-degree polynomial features&rsquo; output for the same input array <code>xx</code>.
+We do <em>not</em> change the ground-truth output <code>yTrain</code>.
+It means the training data still contain the previous 3-degree trend (green dots) but the gradient descent algorithm is going to adjust only two weights (see the <code>wInit</code> shape), as we have two input features (see the second dimension of <code>xTrain</code>).</p>
+
+<pre><code class="language-python">x2PF = PolynomialFeatures(1).fit_transform(xx)
+wInit = np.zeros((x2PF.shape[-1], 1))
+xTrain = x2PF.copy()
+x2PF.shape, wInit.shape
+</code></pre>
+
+<pre><code>((40, 2), (2, 1))
+</code></pre>
+
+<p>We apply the gradient descent algorithm for <code>Nepoch=20000</code> steps, with a quite small learning rate <code>lr</code> and inactive regularization (<code>lmbd=0</code>).
+The bias shifts the line in the negative region, the second weight gives the negative slope to the line.</p>
+
+<pre><code class="language-python">Nepoch, lr, lmbd = 20000, 0.0001, 0
+wEvol, Jevol = gradDescRidge(xTrain, yTrain, wInit, lmbd, lr, Nepoch)
+wOpt, Jopt = wEvol[-1,:], Jevol[-1]
+print(wOpt)
+</code></pre>
+
+<pre><code>[-10.64118324  -1.52204685]
+</code></pre>
+
+<p>We compare the training data points (green dots) and the predicted outcome of the model (red line).
+The model clearly underfits the polynomial trend of the points perfectly.</p>
+
+<pre><code class="language-python">ypred = np.dot(x2PF, wOpt)
+plt.figure()
+plt.scatter(xx, yy, c='g', alpha=0.6)
+plt.plot(xx, ypred, 'r', alpha=0.4)
+</code></pre>
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x1c41c82e668&gt;]
+</code></pre>
+
+<p><img src="output_26_1.png" alt="png" /></p>
+
+<h3 id="3-2-no-regularization-to-a-more-complex-model">3.2 No regularization to a more complex model</h3>
+
+<p>We apply a higher degree model to the dataset without and with regularization.
+We analyze the training and test errors over increasing model complexity, which is controlled by decreasing values of $\lambda$.</p>
+
+<h4 id="preventing-overflow-with-scaling">Preventing overflow with scaling</h4>
+
+<p>If we apply the polynomial feature transformation to the single input <code>xx</code> and the learning process directly to the new 2D array <code>xHPF</code> we have extremely high values for some columns of the input array. Since the parameter update equation used in the gradient descent algorithm requires the product of the model error with the input array itself, the parameter value will soon diverge to finally exceed the floating limit and thus the overflow.
+The final parameter array <code>wOpt</code> will store only <code>NaN</code> values.</p>
+
+<pre><code class="language-python">xHPF = PolynomialFeatures(8).fit_transform(xx)
+wInit = np.zeros((xHPF.shape[-1], 1))
+xTrain = xHPF.copy()
+
+Nepoch, lr, lmbd = 20000, 0.001, 0
+wEvol, Jevol = gradDescRidge(xTrain, yTrain, wInit, lmbd, lr, Nepoch)
+wOpt, Jopt = wEvol[-1,:], Jevol[-1]
+</code></pre>
+
+<h4 id="scaling-the-entire-polynomial-feature-set">Scaling the entire polynomial feature set</h4>
+
+<p>To prevent the system to overflow due to very high polynomial degree, one could drastically reduce the learning rate, with the drawback of massively increasing the number of epochs to converge to the optimal solution.
+One much better idea is to normalize the input features.
+To this end, we use the class provided in Scikit-learn, the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html" target="_blank">standard scaler</a>.</p>
+
+<p>If we apply the scaling operation to the entire polynomial function, ranging from 0 to the maximum degree, the model will learn the function shape only, but there will be a shift due to the missing bias information.
+We set the polynomial degree to 8, scale the entire input feature set (bias included), use the Ridge gradient descent algorithm to identify the optimal parameters, <code>wOpt</code>, display the trend of the 9 model parameters and the loss function and show the comparison of the model response (red line) to the actual data response (green dots).</p>
+
+<p>There is a clear gap between the model curve and the data points, due to the scaling of the bias term, which collapses to 0 and does not allow the corresponding parameter to affect the model response in any way.
+The loss is indeed very high.</p>
+
+<pre><code class="language-python">xHPF = PolynomialFeatures(8).fit_transform(xx)
+wInit = np.zeros((xHPF.shape[-1], 1))
+xTrain = xHPF.copy()
+scaler = StandardScaler()
+xTrain = scaler.fit_transform(xTrain)
+
+Nepoch, lr, lmbd = 20000, 0.001, 0
+wEvol, Jevol = gradDescRidge(xTrain, yTrain, wInit, lmbd, lr, Nepoch)
+wOpt, Jopt = wEvol[-1,:], Jevol[-1]
+
+epochs = np.log10(np.arange(0, Nepoch, 10)+1)
+plt.figure()
+plt.subplot(121)
+plt.plot(epochs, wEvol[::10]);
+plt.subplot(122)
+plt.plot(epochs, np.log(Jevol[::10]));
+
+ypred = np.dot(xTrain, wOpt)
+plt.figure()
+plt.scatter(xx, yy, c='g', alpha=0.6)
+plt.plot(xx, ypred, 'r', alpha=0.4)
+</code></pre>
+
+<pre><code>[ 0.          9.24279639 -6.48522172 -3.53771229 -2.22419323 -5.90080951
+ -0.65511474 -6.14563291 -0.18569706]
+
+
+
+
+
+[&lt;matplotlib.lines.Line2D at 0x1c41cc36d68&gt;]
+</code></pre>
+
+<p><img src="output_30_2.png" alt="png" /></p>
+
+<p><img src="output_30_3.png" alt="png" /></p>
+
+<h4 id="scaling-the-input-features-only">Scaling the input features only</h4>
+
+<p>We scale the input features with the Scikit-learn class <code>StandardScaler</code>.
+The bias term, $x^0$, is transformed to 0 by the <code>fit_transform()</code> method within <code>scaler</code>.
+After the scaling step, we therefore need to reset the first column to 1.</p>
+
+<pre><code class="language-python">xHPF = PolynomialFeatures(8).fit_transform(xx)
+wInit = np.zeros((xHPF.shape[-1], 1))
+xTrain = xHPF.copy()
+scaler = StandardScaler()
+xTrain = scaler.fit_transform(xTrain)
+xTrain[:, 0] = 1
+</code></pre>
+
+<p>We apply the gradient descent algorithm for <code>Nepoch=20000</code> steps, with a quite small learning rate <code>lr</code> and inactive regularization (<code>lmbd=0</code>).</p>
+
+<pre><code class="language-python">Nepoch, lr, lmbd = 20000, 0.001, 0
+wEvol, Jevol = gradDescRidge(xTrain, yTrain, wInit, lmbd, lr, Nepoch)
+wOpt, Jopt = wEvol[-1,:], Jevol[-1]
+print(wOpt)
+</code></pre>
+
+<pre><code>[-12.38143236   9.24279639  -6.48522172  -3.53771229  -2.22419323
+  -5.90080951  -0.65511474  -6.14563291  -0.18569706]
+</code></pre>
+
+<p>The figure shows the evolution of the nine weights (left chart) and the loss function (right) along the log axis of the epochs.</p>
+
+<pre><code class="language-python">epochs = np.log10(np.arange(0, Nepoch, 10)+1)
+plt.figure()
+plt.subplot(121)
+plt.plot(epochs, wEvol[::10])
+plt.subplot(122)
+plt.plot(epochs, np.log(Jevol[::10]));
+</code></pre>
+
+<p><img src="output_36_0.png" alt="png" /></p>
+
+<p>We compare the training data points (green dots) and the predicted outcome of the model (red line).
+The model matches the data points&rsquo; trend but it looks like to be more sensitive to the noise.</p>
+
+<pre><code class="language-python">ypred = np.dot(xTrain, wOpt)
+plt.figure()
+plt.scatter(xx, yy, c='g', alpha=0.6)
+plt.plot(xx, ypred, 'r', alpha=0.4)
+</code></pre>
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x1c41c954710&gt;]
+</code></pre>
+
+<p><img src="output_38_1.png" alt="png" /></p>
+
+<p>This is confirmed by the test loss, which is very high.
+We need to apply the same procedure to the test set inputs <code>xTest</code>, i.e., the polynomial and the scaling transformations and the bias resetting to 1.</p>
+
+<pre><code class="language-python">xTestH = scaler.transform(PolynomialFeatures(8).fit_transform(xTest[:,1:2]))
+xTestH[:, 0] = 1
+lossRidge(xTestH, yTest, wOpt.reshape(-1, 1), lmbd=0)
+</code></pre>
+
+<pre><code>array([ 914.21643086])
+</code></pre>
+
+<h2 id="4-applying-regularization">4. Applying regularization</h2>
+
+<p>We apply the gradient descent algorithm for <code>Nepoch=20000</code> steps, with a quite small learning rate <code>lr</code> and <em>active</em> regularization (<code>lmbd=1</code>).</p>
+
+<pre><code class="language-python">Nepoch, lr, lmbd = 20000, 0.001, 1
+wEvol, Jevol = gradDescRidge(xTrain, yTrain, wInit, lmbd, lr, Nepoch)
+wOpt, Jopt = wEvol[-1,:], Jevol[-1]
+print(wOpt)
+</code></pre>
+
+<pre><code>[-12.38143236   8.09977188  -5.80688968  -3.0680384   -2.32260366
+  -5.44053601  -0.95948615  -5.9094414   -0.48547816]
+</code></pre>
+
+<p>The model weights&rsquo; seem to be still too high.</p>
+
+<p>The below figure shows the evolution of the nine weights (left chart) and the loss function (right) along the log axis of the epochs.</p>
+
+<pre><code class="language-python">epochs = np.log10(np.arange(0, Nepoch, 10)+1)
+plt.figure()
+plt.subplot(121)
+plt.plot(epochs, wEvol[::10])
+plt.subplot(122)
+plt.plot(epochs, np.log(Jevol[::10]));
+</code></pre>
+
+<p><img src="output_44_0.png" alt="png" /></p>
+
+<p>We compare the training data points (green dots) and the predicted outcome of the model (red line).</p>
+
+<p>The model seems to be a bit simpler, as its response moves upward from the data points for <code>x=-2</code>.</p>
+
+<pre><code class="language-python">ypred = np.dot(xTrain, wOpt)
+plt.figure()
+plt.scatter(xx, yy, c='g', alpha=0.6)
+plt.plot(xx, ypred, 'r', alpha=0.4)
+</code></pre>
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x1c41d044f28&gt;]
+</code></pre>
+
+<p><img src="output_46_1.png" alt="png" /></p>
+
+<p>The test loss is less, but it is still not enough.
+To this end, we need a process to automatically seek the best $\lambda$ value.</p>
+
+<pre><code class="language-python">xTestH = scaler.transform(PolynomialFeatures(8).fit_transform(xTest[:,1:2]))
+xTestH[:, 0] = 1
+lossRidge(xTestH, yTest, wOpt.reshape(-1, 1), lmbd=0)
+</code></pre>
+
+<pre><code>array([ 830.47233908])
+</code></pre>
+
+<h2 id="5-learning-curves-for-different-lambda">5. Learning curves for different lambda</h2>
+
+<p>We use the method explained in <a href="/blog/mdlsel/mdlsel2/#learnCurve">this</a> post to seek for the best $\lambda$ value.
+We create a 7-degree polynomial function of the input <code>xx</code> for the training set and of the input <code>xVal</code> for the validation set.
+We scale those sets, based on the training set statistics only.
+That&rsquo;s why we first use <code>fit_transform</code> and then <code>transform</code>.
+Biases need to be reset to 1.
+The Ridge gradient descent algorithm is applied for each regularization factor <code>lmbd</code> and for increasing sizes of the training set.
+Recall that the learning curves are built by training and assessing the model performance for increasing sizes of the training set.</p>
+
+<pre><code class="language-python">degree = 7
+xHPF = PolynomialFeatures(degree).fit_transform(xx)
+xVal1 = PolynomialFeatures(degree).fit_transform(xVal[:, 1:2])
+
+wInit = np.zeros((xHPF.shape[-1], 1))
+xTrain = xHPF.copy()
+scaler = StandardScaler()
+xTrain = scaler.fit_transform(xTrain)
+xVal1 = scaler.transform(xVal1)
+xTrain[:, 0] = 1
+xVal1[:, 0] = 1
+
+lmbds = [0, 1, 5, 10]
+Ntrain = xTrain.shape[0]
+Nepoch, lr = 20000, 0.001
+Jtrain, Jval = [], []
+wOpts = []
+for lmbd in lmbds:
+    for kk in range(1, Ntrain+1):
+        xTrain_, yTrain_ = xTrain[:kk, :], yTrain[:kk, :]
+        wEvol, Jevol = gradDescRidge(xTrain_, yTrain_, wInit, lmbd, lr, Nepoch)
+        wOpt, Jopt = wEvol[-1:,:], Jevol[-1]
+        Jtrain.append(Jopt)
+        Jval.append(lossRidge(xVal1, yVal, wOpt.T, 0))
+    wOpts.append(wOpt)
+</code></pre>
+
+<p>We take the logarithm of the train/validation losses and plot the learning curves for four different $\lambda$ values in subplots.</p>
+
+<pre><code class="language-python">trainSizes = np.arange(1, Ntrain+1)
+Jtrains = np.log10(np.array(Jtrain).reshape(len(lmbds), -1))
+Jvals = np.log10(np.array(Jval).reshape(len(lmbds), -1))
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(10,8))
+for kk, lmbd in enumerate(lmbds):
+    plt.subplot(2, 2, kk+1)
+    plt.plot(trainSizes, Jtrains[kk, :], 'r', lw=2, label='training')
+    plt.plot(trainSizes, Jvals[kk, :], 'g', lw=2, label='validation')
+    plt.ylim([-5, 5])
+    plt.title('Lambda: {}'.format(lmbd))
+    plt.legend()
+plt.show();
+</code></pre>
+
+<p><img src="output_53_0.png" alt="png" /></p>
+
+<p>The following figure, instead, compares the training and validation points as blue and green dots, respectively, and the model outcome as a red line for the four cases.
+The main difference between the first and the last two cases concerns the boundaries of the domain.
+The regularized models <em>sacrifice</em> the accuracy for those points.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10,8))
+for kk, (wOpt, lmbd) in enumerate(zip(wOpts, lmbds)):
+    plt.subplot(2, 2, kk+1)
+    ypred = np.dot(xVal1, wOpt.T)
+    plt.scatter(xVal[:,1], yVal, c='g', alpha=0.6, label='actual-validation')
+    plt.scatter(xx, yy, c='b', alpha=0.6, label='actual-training')
+    plt.plot(xVal[:,1], ypred, 'r', lw=2, alpha=0.9, label='model')
+    plt.title('Lambda: {}'.format(lmbd))
+    plt.legend()
+plt.show();
+</code></pre>
+
+<p><img src="output_55_0.png" alt="png" /></p>
+
+<h2 id="6-validation-curve">6. Validation curve</h2>
+
+<p>We now test various values of the regularization parameter $\lambda$ on the validation set.
+We select the optimal $\lambda$ value from the validation curve chart.</p>
+
+<p>We use the same procedure as before: define a 7-degree polynomial function, create the training and validation sets, scale the sets and reset the biases to 1, apply the Ridge gradient descent algorithm for each regularization factor <code>lmbd</code>.</p>
+
+<pre><code class="language-python">degree = 7
+xHPF = PolynomialFeatures(degree).fit_transform(xx)
+xVal1 = PolynomialFeatures(degree).fit_transform(xVal[:, 1:2])
+
+wInit = np.zeros((xHPF.shape[-1], 1))
+xTrain = xHPF.copy()
+scaler = StandardScaler()
+xTrain = scaler.fit_transform(xTrain)
+xVal1 = scaler.transform(xVal1)
+xTrain[:, 0] = 1
+xVal1[:, 0] = 1
+
+lmbds = [0, 1e-2, 1e-1, 1, 5, 10, 20, 40, 60, 80, 100, 150, 300]
+Ntrain = xTrain.shape[0]
+Nepoch, lr = 20000, 0.001
+Jtrain, Jval, wOpts = [], [], []
+for lmbd in lmbds:
+    wEvol, Jevol = gradDescRidge(xTrain, yTrain, wInit, lmbd, lr, Nepoch)
+    wOpt, Jopt = wEvol[-1:,:], Jevol[-1]
+    Jtrain.append(Jopt)
+    Jval.append(lossRidge(xVal1, yVal, wOpt.T, 0))
+    wOpts.append(wOpt)
+</code></pre>
+
+<p>We take the logarithm of the train/validation losses and plot these two trends as a function of $\lambda$.</p>
+
+<pre><code class="language-python">Nlmbd = len(lmbds)
+lambdas = np.arange(Nlmbd)
+Jtrains = np.log10(np.array(Jtrain))
+Jvals = np.log10(np.array(Jval))
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(10,6))
+plt.plot(lambdas, Jtrains, 'r', lw=2, label='training')
+plt.plot(lambdas, Jvals, 'g', lw=2, label='validation')
+plt.ylabel('Error')
+plt.xlabel('$\lambda$')
+plt.xticks(lambdas, lmbds)
+plt.legend()
+plt.show();
+</code></pre>
+
+<p><img src="output_60_0.png" alt="png" /></p>
+
+<p>We compare the model curve on the validation set for three values of $\lambda$: <code>(0, 40, 300)</code>.
+The first value implies no regularization, the second value is optimal in terms of the validation error, the last one is too aggressive, thus deteriorating both training and validation errors.
+We select the three model parameter sets associated with the three $\lambda$ values, by using two powerful Pyhtonian techniques: <a href="https://docs.python.org/3.3/library/functions.html#zip" target="_blank">zipping</a> and <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions" target="_blank">list comprehension</a>.</p>
+
+<pre><code class="language-python">lmbds_ = [0, 40, 300]
+wOpts_ = [wOpt for wOpt, lmbd in zip(wOpts, lmbds) if lmbd in lmbds_]
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(10,8))
+for kk, (wOpt, lmbd) in enumerate(zip(wOpts_, lmbds_)):
+    plt.subplot(2, 2, kk+1)
+    ypred = np.dot(xVal1, wOpt.T)
+    plt.scatter(xTest[:,1], yTest, c='r', alpha=0.6, label='actual-test')
+    plt.scatter(xVal[:,1], yVal, c='g', alpha=0.6, label='actual-validation')
+    plt.scatter(xx, yy, c='b', alpha=0.6, label='actual-training')
+    plt.plot(xVal[:,1], ypred, 'y', lw=2, alpha=0.9, label='model')
+    plt.title('Lambda: {}'.format(lmbd))
+    plt.legend()
+plt.show();
+</code></pre>
+
+<p><img src="output_63_0.png" alt="png" /></p>
+
+<p>The final test error of the regularized model, whose regularization parameter $\lambda = 40$ has been chosen with respect to the validation set, is here calculated.</p>
+
+<pre><code class="language-python">xTest1 = PolynomialFeatures(degree).fit_transform(xTest[:, 1:2])
+xTest1 = scaler.transform(xTest1)
+xTest1[:, 0] = 1
+wOpt = [wOpt for wOpt, lmbd in zip(wOpts, lmbds) if lmbd==40][0]
+testLoss = lossRidge(xTest1, yTest, wOpt.T, 0)[0]
+valLoss = lossRidge(xVal1, yVal, wOpt.T, 0)[0]
+print('Log test/validation errors: {:.2f}, {:.2f}'.format(np.log10(testLoss), np.log10(valLoss)))
+</code></pre>
+
+<pre><code>Log test/validation errors: 2.08, 2.06
+</code></pre>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/mdlsel/mdlsel3/" style="color: #4ABDAC; font-size: 18px; "> Do not overlearn your data too much, learn to generalize - Part 3</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/mdlsel/mdlsel5/" style="color: #4ABDAC; font-size: 18px; ">Do not overlearn your data too much, learn to generalize - Part 5</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Learning to classify coffee from cappuccino - Part 5 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Learning to classify coffee from cappuccino - Part 5">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/logreg/logreg5/" style="font-size: 16px; ">Coffee or cappuccino?</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/coffee_cappuccino.jpeg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Learning to classify coffee from cappuccino - Part 5</h1>
+          <h5 class="card-title text-center">Coffee or cappuccino?</h5>
+          <h6 class="card-text text-center">March 17, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 9.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/logistic-regression"><kbd class="item-tag">logistic-regression</kbd></a> <a href="https://takeawildguess.net/tags/algorithm"><kbd class="item-tag">algorithm</kbd></a> <a href="https://takeawildguess.net/tags/machine-learning"><kbd class="item-tag">machine learning</kbd></a> <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/scikit-learn"><kbd class="item-tag">scikit-learn</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction-and-assumptions">1. Introduction and assumptions</h2>
+
+<p>In this post-series, we are going to study the very basic modelling for classification problems, the logistic regression.
+<strong>Classification</strong> entails that the output is a discrete variable taking values on a pre-defined limited set, where the set dimension is the number of classes. Some examples are <em>spam detection</em>, <em>object recognition</em> and <em>topic identification</em>.</p>
+
+<p>We have analyzed the theory in the <a href="/blog/logreg/logreg1/">first post</a>, implement the algorithm with Numpy in <a href="/blog/logreg/logreg2/">Part 2</a> and using Sklearn and Tensorflow in <a href="/blog/logreg/logreg3/">Part 3</a>.
+We solved a binary classification problem for multivariate non-linear logistic regression in Scikit-learn in <a href="/blog/logreg/logreg4/">Part 4</a>.
+We extend the analysis to <strong>Multinomial classification</strong>, where both softmax function and one-vs-all method are applied and compared.</p>
+
+<p>In this series, we do not split the dataset into training and testing sets, but we assess every model on the training set only.
+A dedicated post on model selection, overfitting/underfitting problem and regularization will be published soon.</p>
+
+<p>Let&rsquo;s get started!</p>
+
+<h2 id="2-definition-of-multinomial-classification">2. Definition of multinomial classification</h2>
+
+<p>Binary classification entails that the outcome can belong to either one class or the other one, such as <em>spam detection</em>, where the outcome can belong to either the <code>spam</code> class or the <code>ham</code>.
+To this end, we have introduced the sigmoid function that shrinks the entire real domain to the (0, 1) interval, which is suitable to describe the probabilistic domain of one of the two classes.
+The probability of the other one is then the complement to 1.</p>
+
+<p>What happens when the outcome can belong to more than two classes?
+We face the <strong>multinomial (or multi-class) classification</strong> problem.
+There are two ways to solve this problem:</p>
+
+<ol>
+<li><strong>one-vs-all</strong>, where one logistic regression classifier for each of the K classes of the dataset. Each separate classifier will aim at identifying one specific class, for which it returns 1 while 0 otherwise. At prediction time, the class that receives the highest probability from the K classifiers is selected as the winner.</li>
+<li><strong>softmax</strong>, where entire probability distribution over the K classes is return as the output of the model by means of the <em>softmax</em> function.</li>
+</ol>
+
+<h2 id="3-data-generation">3. Data generation</h2>
+
+<p>We create the dataset by applying the same procedure used for the binary classification in <a href="/blog/logreg/logreg4/">Part 4</a> and combining the two distributions to get the response taking values from the set (0, 1, 2, 3).
+In fact, the first temporary variable <code>Y1cls</code> is a dichotomous variable whose values belong to (0, 2) due to the <code>2</code> factor; the second temporary variable <code>Y2cls</code> ranges in <code>(1, 2)</code> due to the <code>1</code> bias.
+In that way, if we sum the two variables we can only get <code>(1, 2)</code> and <code>(3, 4)</code> values.
+The final <code>-1</code> bias shifts the set to the desired one.</p>
+
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from mpl_toolkits import mplot3d
+</code></pre>
+
+<pre><code class="language-python">Nx, Ny = 30, 20
+Npnt = 1000
+xy = 5*(2*np.random.rand(Npnt, 2)-1)
+xx1, xx2 = xy[:,0], xy[:,1]
+w10, w11, w12 = 2, 3, -1
+w20, w21, w22 = -2, -1, 2
+noise = 0.05*(np.random.randn(Npnt)-1)
+hh1 = w10 + w11*xx1 + w12*xx2 + noise
+hh2 = w20 + w21*xx1 + w22*xx2 + noise
+Y1noise = 1/(1+np.exp(-hh1))
+Y2noise = 1/(1+np.exp(-hh2))
+Y1cls = np.random.binomial(1., Y1noise)*2 # dichotomous variable, n_trial=1 =&gt; Bernoulli distribution
+Y2cls = np.random.binomial(1., Y2noise)+1
+Ycls = Y1cls + Y2cls - 1
+XX = xy.copy()
+Ycls = Ycls.flatten().reshape(-1,1)
+print([XX.shape, Ycls.shape])
+</code></pre>
+
+<pre><code>[(1000, 2), (1000, 1)]
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+plt.scatter(xx1, xx2, c=Ycls, cmap='viridis')
+plt.xlabel(&quot;X1&quot;)
+plt.ylabel(&quot;X2&quot;);
+</code></pre>
+
+<p><img src="output_6_0.png" alt="png" /></p>
+
+<h2 id="4-multinomial-classification">4. Multinomial classification</h2>
+
+<p>In Scikit-learn, we need to change the solver to <code>sag</code> when we want to define the classification task as multinomial, where the intermediate response variable is the probability distribution over the set of discrete classes.</p>
+
+<pre><code class="language-python">from sklearn.linear_model import LogisticRegression
+from sklearn import metrics
+# multi-nomial
+lgr = LogisticRegression(C=1e5, solver='sag', multi_class='multinomial') # we want to ignore regularization
+YY = Ycls[:, 0]
+lgr.fit(XX, YY)
+Ypred = lgr.predict(XX)
+Ypred_prob = lgr.predict_proba(XX)
+Ypred.shape, Ypred_prob.shape
+</code></pre>
+
+<pre><code>((1000,), (1000, 4))
+</code></pre>
+
+<p>We also need to specify how the precision and recall can be calculated due to multiple classes.
+In other words, the false-positive definition does not fit to the non-binary case per se.
+Here we set the <code>average</code> attribute to <code>weighted</code>, so that it calculates the metrics for each label and finds their average weighted by support (the number of true instances for each label). See Scikit-learn <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html" target="_blank">doc</a>.</p>
+
+<pre><code class="language-python">print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(Ycls, Ypred)))
+print(&quot;Precision: {}&quot;.format(metrics.precision_score(Ycls, Ypred, average='weighted')))
+print(&quot;Recall: {}&quot;.format(metrics.recall_score(Ycls, Ypred, average='weighted')))
+</code></pre>
+
+<pre><code>Accuracy: 0.905
+Precision: 0.9047666713801842
+Recall: 0.905
+</code></pre>
+
+<p>The size of the response domain (number of classes) is derived from the parameter size itself.
+The coefficient 2D array has two columns as the number of predictors.</p>
+
+<pre><code class="language-python">print(&quot;Intercept size: {}&quot;.format(lgr.intercept_.shape))
+print(&quot;Weight array size: {}&quot;.format(lgr.coef_.shape))
+</code></pre>
+
+<pre><code>Intercept size: (4,)
+Weight array size: (4, 2)
+</code></pre>
+
+<p>We define the two dimensional grid for the two predictors and determine the model predicted class by using the <code>predict</code> method.
+The <code>y</code> grid is then reshaped to match the <code>x1</code> grid size.</p>
+
+<pre><code class="language-python">Npnt = 50  # number of points of the mesh
+mrg = .5
+x1min, x1max = xx1.min() - mrg, xx1.max() + mrg
+x2min, x2max = xx2.min() - mrg, xx2.max() + mrg
+x1grd, x2grd = np.meshgrid(np.linspace(x1min, x1max, Npnt), np.linspace(x2min, x2max, Npnt))
+ygrd = lgr.predict(np.vstack((x1grd.ravel(), x2grd.ravel())).T)
+ygrd = ygrd.reshape(x1grd.shape)
+</code></pre>
+
+<pre><code class="language-python">x1line = np.linspace(x1min, x1max, Npnt).reshape(-1, 1)
+x2line = -(x1line*lgr.coef_[:,0] + lgr.intercept_)/lgr.coef_[:,1]
+</code></pre>
+
+<p>We want also to get the decision boundaries, one for each class.
+The line equation is set with the <code>x1</code> predictor as the input and the <code>x2</code> predictor as the output.
+Due to multiple parameter array, we obtain a 2-dimensional <code>x2line</code> array with 4 columns, one for each class.
+Here the summary of the four decision boundaries:
+1. The blue dashed line delimits the <code>Y=0</code> class (purple dots within the light blue area).
+2. The orange dashed line delimits the <code>Y=1</code> class (blue dots within the light green area).
+3. The green dashed line delimits the <code>Y=2</code> class (green dots within the light yellow area).
+4. The red dashed line delimits the <code>Y=3</code> class (yellow dots within the light brown area).</p>
+
+<p>The <code>0/3</code> class decision boundaries almost coincide with each other, as much as the <code>1/2</code> class boundaries do.
+This proves that the four classes have been generated by the combination of two simple Bernoulli distributions, each with a specific decision boundary.</p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+# contour
+plt.contourf(x1grd, x2grd, ygrd, cmap=plt.cm.Paired, alpha=0.4)
+plt.title(&quot;Decision surface of Multinomial classification with Logistic Regression&quot;)
+plt.axis('tight')
+# dataset
+plt.scatter(xx1, xx2, c=Ycls, cmap='viridis')
+plt.xlabel(&quot;X1&quot;)
+plt.ylabel(&quot;X2&quot;)
+# decision boundary
+plt.plot(x1line, x2line[:,:], ls=&quot;--&quot;);
+</code></pre>
+
+<p><img src="output_17_0.png" alt="png" /></p>
+
+<h2 id="5-one-vs-all-classification">5. One-vs-all classification</h2>
+
+<p>The one-vs-all classification paradigm states the multi-class problem as multiple binary classification problems.
+In other words, if we need to build an N-class classifier (with $N&gt;2$), we treat the process as follows:
+1. we build N separate binary classifiers
+2. we train the <code>j</code>-th classifier to classify class j as positive class and everything else as negative class.
+3. at inference stage, we feed the input to every classifier and define as the final response the class <code>j</code> whose corresponding classifier has returned the highest probability.</p>
+
+<p>In practice, it is accomplished by setting the <code>multi_class</code> attribute to <code>ovr</code>, which stands for <strong>One-Versus-Rest</strong>.</p>
+
+<pre><code class="language-python"># one versus rest
+lgr = LogisticRegression(C=1e5, solver='sag', multi_class='ovr') # we want to ignore regularization
+YY = Ycls[:, 0]
+lgr.fit(XX, YY)
+Ypred = lgr.predict(XX)
+Ypred_prob = lgr.predict_proba(XX)
+Ypred.shape, Ypred_prob.shape
+</code></pre>
+
+<pre><code>((1000,), (1000, 4))
+</code></pre>
+
+<p>We apply the same code to get the model metrics.</p>
+
+<pre><code class="language-python">print(&quot;Accuracy: {}&quot;.format(metrics.accuracy_score(YY, Ypred)))
+print(&quot;Precision: {}&quot;.format(metrics.precision_score(YY, Ypred, average='weighted')))
+print(&quot;Recall: {}&quot;.format(metrics.recall_score(YY, Ypred, average='weighted')))
+</code></pre>
+
+<pre><code>Accuracy: 0.893
+Precision: 0.8941398474348617
+Recall: 0.893
+</code></pre>
+
+<p>We also want to get the decision boundaries, one for each class.
+Here the summary of the four decision boundaries:
+1. The blue dashed line delimits the <code>Y=0</code> class (purple dots within the light blue area).
+2. The orange dashed line delimits the <code>Y=1</code> class (blue dots within the light green area).
+3. The green dashed line delimits the <code>Y=2</code> class (green dots within the light yellow area).
+4. The red dashed line delimits the <code>Y=3</code> class (yellow dots within the light brown area).</p>
+
+<p>The <code>0/3</code> class and the <code>1/2</code> class decision boundaries do no longer match each other.
+Indeed, the decision boundary of class <code>j</code> is still &ldquo;parallel&rdquo; to the opposite class&rsquo;s boundary, but it is shifted towards the class centroid to separate its class to the rest as much as possible.</p>
+
+<pre><code class="language-python">ygrd = lgr.predict(np.vstack((x1grd.ravel(), x2grd.ravel())).T)
+ygrd = ygrd.reshape(x1grd.shape)
+
+x1line = np.linspace(x1min, x1max, Npnt).reshape(-1, 1)
+x2line = -(x1line*lgr.coef_[:,0] + lgr.intercept_)/lgr.coef_[:,1]
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+# contour
+plt.contourf(x1grd, x2grd, ygrd, cmap=plt.cm.Paired, alpha=0.4)
+plt.title(&quot;Decision surface of LogisticRegression&quot;)
+plt.axis('tight')
+# dataset
+#plt.scatter(xx1, xx2, c=Ycls, cmap='viridis')
+plt.scatter(xx1[YY==0], xx2[YY==0], cmap='viridis')
+plt.xlabel(&quot;X1&quot;)
+plt.ylabel(&quot;X2&quot;)
+# decision boundary
+plt.plot(x1line, x2line[:,0], ls=&quot;--&quot;);
+</code></pre>
+
+<p><img src="output_24_0.png" alt="png" /></p>
+
+<pre><code class="language-python">plt.figure(figsize=(10, 5))
+# contour
+plt.contourf(x1grd, x2grd, ygrd, cmap=plt.cm.Paired, alpha=0.4)
+plt.title(&quot;Decision surface of LogisticRegression&quot;)
+plt.axis('tight')
+# dataset
+plt.scatter(xx1, xx2, c=Ycls, cmap='viridis')
+plt.xlabel(&quot;X1&quot;)
+plt.ylabel(&quot;X2&quot;)
+# decision boundary
+plt.plot(x1line, x2line, ls=&quot;--&quot;);
+</code></pre>
+
+<p><img src="output_25_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/logreg/logreg4/" style="color: #4ABDAC; font-size: 18px; "> Learning to classify coffee from cappuccino - Part 4</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/logreg/logreg6/" style="color: #4ABDAC; font-size: 18px; ">Learning to classify coffee from cappuccino - Part 6</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Code art in Python - Spirograph pattern in a rectangle - Part 2 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Code art in Python - Spirograph pattern in a rectangle - Part 2">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/codeart/codeart6/" style="font-size: 16px; ">Code art</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/codeartHead1.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Code art in Python - Spirograph pattern in a rectangle - Part 2</h1>
+          <h5 class="card-title text-center">Code art</h5>
+          <h6 class="card-text text-center">August 18, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 8.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/coding"><kbd class="item-tag">coding</kbd></a> <a href="https://takeawildguess.net/tags/code-art"><kbd class="item-tag">code-art</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to the <strong>code art</strong> series, where art is built with code.
+The previous post and this one will aim at defining a function to create a geometric pattern, a <strong>spirograph</strong> pattern in a rectangle, inspired by this <a href="https://www.youtube.com/watch?v=XUnnW7_wmrI" target="_blank">video</a>, with Python libraries.</p>
+
+<p>We will follow these steps:</p>
+
+<ol>
+<li>Grid definition, parametric equation of the rectangle in <a href="/blog/codeart/codeart5">Part1</a>.</li>
+<li>Polygon vertex detection, postprocessing of intersection points, colour scheme definition, global function implementation and final drawings in <a href="/blog/codeart/codeart6">Part2</a>.</li>
+</ol>
+
+<h2 id="2-point-coordinates-of-the-four-intersecting-segments">2. Point coordinates of the four intersecting segments</h2>
+
+<p>We use some functions to make the drawing code more compact.</p>
+
+<p>When we have the coordinates of the 4 points (A, B, C, D) we calculate the coordinates of the intersecting points with <code>seg2intersection</code>.</p>
+
+<p>The homogeneous method to get the coordinates of the intersecting points has been proved to be faster in <a href="/blog/codeart/codeart3/">this</a> post.</p>
+
+<pre><code class="language-python">def seg2intersection(AAs, BBs, CCs, DDs):
+    toHomCoords = lambda pnts: np.hstack((pnts, np.ones((4, 1))))
+    AHs = toHomCoords(AAs)
+    BHs = toHomCoords(BBs)
+    CHs = toHomCoords(CCs)
+    DHs = toHomCoords(DDs)
+    L1 = np.cross(AHs, CHs)
+    L2 = np.cross(BHs, DHs)
+    PIHs = np.cross(L1, L2) # homogeneous coordinates for intersecting point
+    xIHs, yIHs, zIHs = np.split(PIHs, 3, axis=1)
+    paralSeg = np.abs(zIHs)&lt;1e-5
+    zIHs[paralSeg] = 1
+    xIs, yIs = xIHs/zIHs, yIHs/zIHs
+    xIs, yIs = xIs[paralSeg==0], yIs[paralSeg==0]
+    polygonalPoints = np.vstack((xIs, yIs)).T
+    return polygonalPoints
+</code></pre>
+
+<pre><code class="language-python">polygonalPoints = seg2intersection(AAs, BBs, CCs, DDs)
+print('The coordinates of the 4-point polygon are\n{}'.format(polygonalPoints))
+</code></pre>
+
+<pre><code>The coordinates of the 4-point polygon are
+[[-15.  -0.]
+ [ -5.  -0.]
+ [-15.  -0.]
+ [ -5.  -0.]]
+</code></pre>
+
+<h2 id="3-polygon-cleaning">3. Polygon cleaning</h2>
+
+<p>The filtering process to get rid of duplicates and points outside the rectangle, is in <code>rectPointFiltering</code>.
+It basically checks that the intersecting-points set is unique and that these points lie within the rectangle.</p>
+
+<p>The polygon is anticlockwise sorted in <code>polygonSorting</code>.</p>
+
+<pre><code class="language-python">def rectPointFiltering(polygonalPoints, width, height):
+    polygonalPoints1 = np.unique(np.around(polygonalPoints, decimals=6), axis=0)
+    criteria = np.logical_and(np.all(polygonalPoints1&gt;=0, axis=1),\
+                              np.logical_and(polygonalPoints1[:,0]&lt;=width, polygonalPoints1[:,1]&lt;=height))
+    return polygonalPoints1[criteria, :]
+
+def polygonSorting(polygonalPoints):
+    centroid = np.mean(polygonalPoints, axis=0)
+    polygCoord_ = list(polygonalPoints)
+    polygCoord_.sort(key=lambda pnt: math.atan2(pnt[1]-centroid[1], pnt[0]-centroid[0]))
+    return np.array(polygCoord_), centroid
+</code></pre>
+
+<h2 id="4-colour-definition">4. Colour definition</h2>
+
+<p>The patch colour can be defined with many criteria:</p>
+
+<ol>
+<li><code>fix-(green|red|blue|gray|black)</code>, where every polygon colour is same and equal to what the user selects in the available list.</li>
+<li><code>area</code>, where the colour is related to the polygon area.</li>
+<li><code>genDist</code>, where the colour is proportional to the minimum distance from any of the two generators.</li>
+<li><code>origiDist</code>, where the colour is proportional to the distance from the origin.</li>
+</ol>
+
+<p>For cases 2-4, the colour is chosen from a palette by Matplotlib, according to the polygon <code>score</code> that is assigned with the function <code>colorCriteria</code>.</p>
+
+<pre><code class="language-python">def colorCriteria(polygs, centroid, kind, width, height):
+    if kind=='area':
+        area = poly3area(polygs) if polygs.shape[0]==3 else poly4area(polygs) # polygon area
+        score = np.log(area)
+    elif kind=='originDist':
+        score = np.sum(centroid**2) # square distance from origin
+    elif kind=='centrDist':
+        score = np.sum((centroid-np.r_[width, height]/2)**2) # square distance from center
+    elif kind=='genDist':
+        distGenerA = np.sum((centroid-np.array(Pa))**2)
+        distGenerB = np.sum((centroid-np.array(Pb))**2)
+        score = min(distGenerA, distGenerB) # minimum square distance from any of the two generators
+    else:
+        score = 0
+    return score
+</code></pre>
+
+<p>Its area is determined with <code>poly3area</code> if it has 3 vertexes or with <code>poly4area</code> if it has 4 vertexes.</p>
+
+<p>If you want to read more about the area of a 3-point polygon from its points&rsquo; coordinates, visit this <a href="/blog/codeart/codeart2/">page</a> post.
+What <code>poly4area</code> does is simply to split a 4-point polygon into two 3-point polygons, get the area of each with <code>poly3area</code> and sum them together.</p>
+
+<pre><code class="language-python">def poly3area(poly3vert):
+    AB = np.diff(poly3vert[:2,:], axis=0)
+    AC = np.diff(poly3vert[[0, 2],:], axis=0)
+    return np.cross(AB, AC)[0]/2
+
+def poly4area(poly4vert):
+    areaABD = poly3area(poly4vert[[0, 1, -1], :])
+    areaBCD = poly3area(poly4vert[[1, 2, -1], :])
+    return areaABD + areaBCD
+</code></pre>
+
+<h2 id="5-global-function">5. Global function</h2>
+
+<p>The final drawing logic is placed in <code>drawingSpirograph</code>, where the 4 hyperparameters are assigned.</p>
+
+<p>Here a list of different <a href="https://matplotlib.org/users/colormaps.html" target="_blank">colormaps</a> available in Matplotlib.</p>
+
+<pre><code class="language-python">import sys, random, math
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Circle, Wedge, Polygon, Rectangle
+from matplotlib.collections import PatchCollection
+%matplotlib inline
+import itertools
+</code></pre>
+
+<pre><code class="language-python">def drawingSpirograph(Nh=16, width=6, height=4, genLocs=(.3, .3), kind = 'centrDist',\
+                      figSize = 10, palette='gist_rainbow', patchAlpha=.5):
+    colDict = {'green': [0, 1, 0], 'red': [1, 0, 0], 'blue': [0, 0, 1], 'gray': [.5, .5, .5], 'black': [0, 0, 0]}
+    
+    Lseg = height/Nh
+    Nw = coord2index(width, Lseg)
+    Ntot = int(2*(Nw + Nh))
+    width = Nw*Lseg
+
+    kA = coord2index(genLocs[0]*width, Lseg)
+    kB_ = coord2index(genLocs[1]*width, Lseg)
+    kB = 2*Nw + Nh - kB_
+    AA = np.r_[kA*Lseg, 0]
+    BB = np.r_[kB_*Lseg, height]
+    AAs = np.tile(AA, (4,1))
+    BBs = np.tile(BB, (4,1))
+    idxAB = kB - kA - 1
+
+    plt.figure(figsize=(figSize, figSize))
+    rect = Rectangle((0, 0), width, height)
+    patches, patchColors = [], []
+    for dka in range(Ntot-2):
+        for dkb in range(Ntot-2):
+            chessOrder = 1 if dka&gt;=idxAB else 0
+            isDraw = (dkb-(dka%2)+chessOrder)%2 == 0
+            if isDraw:
+                CCs, DDs = rectIndex2coords(kA, kB, width, height, dka, dkb, Nw, Nh, Ntot)
+                polygonalPoints = seg2intersection(AAs, BBs, CCs, DDs)
+                if polygonalPoints.shape[0]&gt;0:
+                    polygonalPoints2 = rectPointFiltering(polygonalPoints, width, height)
+                    if polygonalPoints2.shape[0]&gt;=3:
+                        polygonalPoints3, centroid = polygonSorting(polygonalPoints2)
+                        centrDist = np.sum(centroid**2)*100
+                        polygon = Polygon(np.array(polygonalPoints3), True)
+                        patches.append(polygon)
+                        if not kind.startswith('fix'):
+                            score = colorCriteria(polygonalPoints3, centroid, kind, width, height)
+                            patchColors.append(score)
+
+    pc = PatchCollection(patches, alpha=patchAlpha, cmap=getattr(plt.cm, palette)) #plt.cm.RdYlBu
+    if kind.startswith('fix'):
+        fixColor = colDict[kind.split('-')[-1]]
+        pc.set_color(fixColor)
+    else:
+        pc.set_array(np.array(patchColors))
+
+    ax = plt.gca()
+    ax.add_collection(pc)
+    ax.get_xaxis().set_ticks([])
+    ax.get_yaxis().set_ticks([])
+    ax.axis('off')
+    ax.axis('equal')
+    ax.axis([0, width, 0, height]);
+</code></pre>
+
+<h2 id="6-let-s-draw">6. Let&rsquo;s draw</h2>
+
+<p>We list here some examples of spirograph patterns in a circle with our Python function.</p>
+
+<pre><code class="language-python">drawingSpirograph()
+</code></pre>
+
+<p><img src="output_15_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(Npnts=16, width=4, height=4, genLocs=(.5, .5), figSize=6)
+</code></pre>
+
+<p><img src="output_16_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(Npnts=16, width=4, height=4, genLocs=(.0, 1.), figSize=6)
+</code></pre>
+
+<p><img src="output_17_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(Npnts=16, width=4, height=4, genLocs=(.0, 1.), figSize=6, kind='fix-green')
+</code></pre>
+
+<p><img src="output_18_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(Npnts=16, width=4, height=4, genLocs=(.0, 1.), figSize=6, kind='fix-black')
+</code></pre>
+
+<p><img src="output_19_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(Npnts=16, width=4, height=4, genLocs=(.0, 1.), figSize=6, kind='fix-blue')
+</code></pre>
+
+<p><img src="output_20_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(Npnts=16, width=4, height=4, genLocs=(.5, .5), figSize=6, kind='fix-blue')
+</code></pre>
+
+<p><img src="output_21_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(Npnts=16, width=4, height=4, genLocs=(.3, .7), figSize=6, kind='fix-blue')
+</code></pre>
+
+<p><img src="output_22_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(Npnts=16, width=4, height=4, genLocs=(.3, .7), figSize=6, kind='originDist')
+</code></pre>
+
+<p><img src="output_23_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(Npnts=16, width=4, height=4, genLocs=(.3, .7), figSize=6, kind='originDist', palette='rainbow')
+</code></pre>
+
+<p><img src="output_24_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(Npnts=16, width=4, height=4, genLocs=(.3, .7), figSize=6, kind='area', palette='Set3')
+</code></pre>
+
+<p><img src="output_25_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(Npnts=16, width=4, height=4, genLocs=(.3, .7), figSize=6, kind='centrDist', palette='cool')
+</code></pre>
+
+<p><img src="output_26_0.png" alt="png" /></p>
+
+<pre><code class="language-python">drawingSpirograph(Npnts=32, width=8, height=8, genLocs=(.0, 1.), figSize=6, kind='originDist', palette='rainbow')
+</code></pre>
+
+<p><img src="output_27_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/codeart/codeart5/" style="color: #4ABDAC; font-size: 18px; "> Code art in Python - Spirograph pattern in a rectangle - Part 1</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/fcnn/fcnn01/" style="color: #4ABDAC; font-size: 18px; ">Fully connected neural networks - cheat sheet</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

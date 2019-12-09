@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>FCNN - Geometric intuition behind neural networks &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="FCNN - Geometric intuition behind neural networks">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/fcnn/fcnn03/" style="font-size: 16px; ">FCNN intuition</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/fcnnHead.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">FCNN - Geometric intuition behind neural networks</h1>
+          <h5 class="card-title text-center">FCNN intuition</h5>
+          <h6 class="card-text text-center">September 8, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 9.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/neural-network"><kbd class="item-tag">neural network</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts related to a huge and popular topic in machine learning: <strong>fully connected neural networks</strong>.</p>
+
+<p>The series scope is three-fold:</p>
+
+<ol>
+<li>visualize the model features and characteristics with schematic pictures and charts</li>
+<li>learn to implement the model with different levels of abstraction, given by the framework used</li>
+<li>have some fun with one of the hottest topics right now!</li>
+</ol>
+
+<p>In the previous <a href="/blog/fcnn/fcnn02/">post</a>, we gave some geometric insight into what occurs in a single neuron.
+In this post, we extend this geometric intuition to what occurs in a neuron network.</p>
+
+<h2 id="2-description">2. Description</h2>
+
+<p>Let&rsquo;s tackle the classification problem that we saw at the beginning of the previous <a href="/blog/fcnn/fcnn02/">post</a>, where we have the 9-point grid.
+We first draw the first decision boundary, which is the green line.
+This line shall be perpendicular to the connection between A and the origin, so weight vector is something like $(k, -k) \forall k \in \mathbf{R}$.
+Since point A is $2\cdot\sqrt{2}$ far away from the origin, as you can see in the chart below, we want the distance of the decision line from the origin to be $\frac{1}{4}\cdot 2\cdot\sqrt{2} = \frac{\sqrt{2}}{2}$, so that it precisely separates blue points B and D from red points C, E and G.</p>
+
+<h2 id="3-narrow-uncertain-area">3. Narrow uncertain area</h2>
+
+<p>The uncertain area should be really narrow to see how the model behaves when it is <em>super</em> confident!
+The area width is $\beta = 2\cdot \frac{5}{w}$.
+So if we choose $k=10$, weight vector is $\vec{w} = (10, -10)$, its module is $10\cdot\sqrt{2}$ and the uncertain area is $\sqrt{2}/2$.
+The line distance is used then to get the bias:</p>
+
+<p>$$ \frac{|b|}{w} = \frac{|b|}{10\cdot\sqrt{2}} = $$</p>
+
+<p>$$ =\sqrt{2}/2 \rightarrow |b| = 10\cdot\sqrt{2}\cdot\sqrt{2}/2 = 10 $$</p>
+
+<p>This step is going to return the input $z_1$ of the first activation function, which in turn gives $a_1$ as the output of the sigmoid function.
+Any point on the right-hand side of this green area will come with the first activation being 1, $a_1 = 1$, the activation of whatever point on the left side, instead, is equal to 0, $a_1 = 0$, and for any point that lies on this green area, it is between 0 and 1.
+However, in this case, we build this decision boundary to make sure that nothing is going to lie in this uncertain area.</p>
+
+<p>In a similar fashion, we are going to build a second area, which is the purple area in the figure, that defines a second activation.
+Its purpose is to separate the central red dots from the southeast blue points.</p>
+
+<p>We can use the same weights because the direction has not changed and we know that we just need to change the bias sign to get the opposite location of such a line with respect to the origin.
+Distance will be the same because it&rsquo;s $b/w$.</p>
+
+<p><img src="/blog/fcnn/fcnn03/fcnn1_activationSpaceTight.png" alt="pngM" title="NN activation output space is narrow" />
+<center><em>Figure 1 - NN activation output space is narrow</em></center></p>
+
+<p>Now we use the below code to get the grid of nine points (points from A to G) and to transform them to the new 2D space via those two logistic regression functions.</p>
+
+<p>The weights are shared for the two logistic regression transformations, $\vec{w} = (10, -10)$, and bias is $10$ for the first one and $-10$ for the second one.</p>
+
+<p>We can apply this first step as the affine transformation and feed it to the activation function, which is a sigmoid here, and realize that we nearly get either 0s or 1s as output coordinates.
+That makes sense because we defined the uncertain area as narrow as possible to be pretty sure about every point classification.</p>
+
+<p>In details, points $A$, $B$, $D$ are on the left-hand side of both the green and purple areas.
+That&rsquo;s why we got 0 for both the new coordinates $a_1 = a_2 = 0$.
+Points $F$, $H$, $I$ are instead on the right-hand side of both green and purple areas, so we get 1 for both the new coordinates.</p>
+
+<p>We draw these two sets of points onto the right-hand side of the chart.</p>
+
+<p>Any red point is instead on the right-hand side of the green area, thus we get 1 for $a_1$, and on the left-hand side of the purple area, thus we get 0 for $a_2$.
+It means that the new coordinates of points $C$, $E$, $G$ are $(1, 0)$.</p>
+
+<p>Now we can see that we have two sets of points, 6 blue points and 3 red points, that we can separate pretty easily with just one line and that means we can apply now a single logistic regression as we applied in the previous cases to separate these two regions.</p>
+
+<pre><code class="language-python"># weights and biases
+ww, bb1, bb2 = np.r_[10, -10].reshape(2, -1), 10, -10
+
+# activation function
+sigmoid = lambda xx: 1/(1+np.exp(-xx))
+
+# grid points
+PP = np.array([[x1, x2] for x2 in range(2, -3, -2) for x1 in range(-2, 3, 2)])
+
+# affine transformation
+z1 = np.dot(PP, ww) + bb1
+z2 = np.dot(PP, ww) + bb2
+
+# activation neurons
+a1 = sigmoid(z1)
+a2 = sigmoid(z2)
+
+# point coordinates in the new 2D space
+QQ = np.round(np.hstack((a1, a2)), decimals=4)
+
+# print
+for label, pcoord, qcoord in zip(list('ABCDEFGHI'), PP.tolist(), QQ.tolist()):
+    print(&quot;Point {} = ({}, {}) is now located to ({}, {})&quot;.format(label, *pcoord, *qcoord))
+</code></pre>
+
+<pre><code>Point A = (-2, 2) is now located to (0.0, 0.0)
+Point B = (0, 2) is now located to (0.0, 0.0)
+Point C = (2, 2) is now located to (1.0, 0.0)
+Point D = (-2, 0) is now located to (0.0, 0.0)
+Point E = (0, 0) is now located to (1.0, 0.0)
+Point F = (2, 0) is now located to (1.0, 1.0)
+Point G = (-2, -2) is now located to (1.0, 0.0)
+Point H = (0, -2) is now located to (1.0, 1.0)
+Point I = (2, -2) is now located to (1.0, 1.0)
+</code></pre>
+
+<p>We apply the same tricks as before.</p>
+
+<p>The decision line shall be parallel to <em>identity line</em> (or $45°$ line), so weight vector is still something like $(k, -k) \forall k \in \mathbf{R}$.
+Since red points are $\sqrt{2}/2$ far away from the line crossing the blue points, we need the decision line distance to be half of it, $d = \sqrt{2}/4$.
+The uncertain area should be narrow enough not to cross any of those points.
+The area width could be then as equal as the distance, $\beta = \sqrt{2}/4$.</p>
+
+<p>The final transformation is:</p>
+
+<p>$$ \vec{w}\cdot \vec{a} + b = (20, -20)\cdot \vec{a} + 10 $$</p>
+
+<p>What is on the left-hand side of the yellow area is associated with $y=0$ and whatever on the right-hand side to $y=1$.</p>
+
+<p>We are able to properly classify blue/red points as belonging to class zero/one, respectively.
+Since we are pretty confident about that, the model loss would be nearly 0 and accuracy would be 100%.</p>
+
+<p>The point here is that we force the system to really overfit over such those 9 points.
+The model would always be prone to overfit, for any new given set of points, as we can stem from the quite large weights in any of the three affine transformations (10 for the first 2s, 20 for the last one).</p>
+
+<h2 id="4-let-s-relax-the-uncertain-area-a-bit">4. Let&rsquo;s relax the uncertain area a bit</h2>
+
+<p>What if the model needs to be less confident?
+What if we reduce the weights&rsquo; magnitude?
+The next step is to analyse what is going to happen if we just draw the same decision boundaries, so the two green and purple lines don&rsquo;t change, but we make the uncertain area much wider by relaxing weights (keep them small).</p>
+
+<p><img src="/blog/fcnn/fcnn03/fcnn1_activationSpaceRelax.png" alt="pngM" title="NN activation output space is wider" />
+<center><em>Figure 2 - NN activation output space is wider</em></center></p>
+
+<p>In this new case, point A is still on the left-hand side of both green and purple areas, so its new coordinates would be still $a_1 = a_2 = 0$.</p>
+
+<p>There is a new situation for B and D.
+They are on the left-hand side of the green decision line so we still believe they belong to class zero of the first logistic regression, but they also lie on the uncertain area so we are no longer 100% sure about that.
+Same is happening for $F$, $H$ and the three red points.</p>
+
+<p>If we apply the same methodology as before, but just with different weights, we end up with new coordinates for all the points but $A$.
+Still, we are able to linearly separate them.</p>
+
+<p>That&rsquo;s why the problem can again be solved in the same fashion but we try to prevent the model to overfit.</p>
+
+<p>We can solve the problem since we can definitely find a line to separate those points, but that can be achieved with different magnitudes of weights.</p>
+
+<p>Every point of the grid is going to lie on the yellow area, so we are going to assign to any of those points a probability of belonging to one of the two classes, ranging from 0 to 1, but none of them would be strictly either 0 or 1.</p>
+
+<p>It means that the accuracy would be 100% because we are properly classifying all of those points, but the loss is not 0 anymore.</p>
+
+<p>In other words, because the model still returns probability between 0 and 50% for blue points to belong to class one (in the previous case, it gave 0%) and between 50% and 100% for red points to belong to class one (it previously gave 100%).</p>
+
+<p>The model accuracy is 100% since probability $P(y=1)$ is less than 50% for blue points and $P(y=1)$ is greater than 50% for red points, but loss is not 0 since $P(y=1)&gt;0$ for blue points and $P(y=1)&lt;1$ for red points.</p>
+
+<pre><code class="language-python">import numpy as np
+%matplotlib inline
+import matplotlib.pyplot as plt
+</code></pre>
+
+<pre><code class="language-python"># new set of weights and biases
+ww, bb1, bb2 = np.r_[2, -2].reshape(2, -1), 2, -2
+
+# affine and activation transformation
+z1 = np.dot(PP, ww) + bb1
+z2 = np.dot(PP, ww) + bb2
+a1 = sigmoid(z1)
+a2 = sigmoid(z2)
+
+# point coordinates in the new 2D space
+RR = np.round(np.hstack((a1, a2)), decimals=4)
+
+# print
+for label, pcoord, qcoord in zip(list('ABCDEFGHI'), PP.tolist(), RR.tolist()):
+    print(&quot;Point {} = ({}, {}) is now located to ({:0.3f}, {:0.3f})&quot;.format(label, *pcoord, *qcoord))
+</code></pre>
+
+<pre><code>Point A = (-2, 2) is now located to (0.003, 0.000)
+Point B = (0, 2) is now located to (0.119, 0.003)
+Point C = (2, 2) is now located to (0.881, 0.119)
+Point D = (-2, 0) is now located to (0.119, 0.003)
+Point E = (0, 0) is now located to (0.881, 0.119)
+Point F = (2, 0) is now located to (0.998, 0.881)
+Point G = (-2, -2) is now located to (0.881, 0.119)
+Point H = (0, -2) is now located to (0.998, 0.881)
+Point I = (2, -2) is now located to (1.000, 0.998)
+</code></pre>
+
+<h2 id="5-final-transformation">5. Final transformation</h2>
+
+<p>The final step of this post is to try to apply a simple mathematical function of the two inputs and use this additional feature to classify the same grid of points.</p>
+
+<p>That feature takes the absolute difference of the two inputs and returns 1 if that absolute difference is less than 1, 0 otherwise.</p>
+
+<p>In the below picture, we see how all the points have been transformed into the new 1D space (right side) where we just have one feature.
+All the points lie either on the $f=0$ or $f=1$ locations.</p>
+
+<p>The classification task becomes extremely easy since $f=\frac{1}{2}$ separates the two sets of points.
+The model is 100% confident if the yellow area width is something like $\beta = \frac{1}{2}$.</p>
+
+<p><img src="/blog/fcnn/fcnn03/fcnn1_activationSpaceExtraFeat.png" alt="pngM" title="NN activation output space as features for the next layer" />
+<center><em>Figure 3 - NN activation output space as features for the next layer</em></center></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/fcnn/fcnn02/" style="color: #4ABDAC; font-size: 18px; "> FCNN - Geometric intuition behind a neuron</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/fcnn/fcnn04/" style="color: #4ABDAC; font-size: 18px; ">How neural networks learn basic features - Create datasets</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Learning Python by doing - Part 4 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Learning Python by doing - Part 4">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/kata/kata4/" style="font-size: 16px; ">Coding kata</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/kataHead2.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Learning Python by doing - Part 4</h1>
+          <h5 class="card-title text-center">Coding kata</h5>
+          <h6 class="card-text text-center">June 30, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 13.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/coding"><kbd class="item-tag">coding</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts where I intend to face the challenge of learning a new programming language, such as Python, <strong>by doing</strong>. There are tons of material about Python tutorials for every level of expertise. It has been quite a while now that platforms such as <a href="https://www.codewars.com/" target="_blank">codewars</a>, <a href="https://www.topcoder.com/" target="_blank">topcoders</a> and similar have been around.
+The nice thing that I like about these platforms is that the trainee is faced with many tasks or challenges of increasing difficulty. The same task is often proposed for multiple languages (Python, Javascript, C++ and many others).
+<em>Learn by doing</em> is gaining popularity in recent years as it helps the trainee to figure out how and where he/she can get stacked.
+Solutions of other members are accessible only when an admissible solution has been successfully submitted to the automatic testing process.</p>
+
+<p>So why should I write a blog post to show how to solve such kinds of tasks and how could it be useful to any extend to you?
+In line with the philosophical view of the above-mentioned platforms, I encourage you to read each single example description, step out of the blog post, try to work it out by yourself (without surfing Stack-overflow too much!) and coming back to the post to go through the proposed solution (something I tend to provide more than one) and the related comments.
+I have indeed struggled sometimes to fully capture other members&rsquo; solutions with no comments or details of the logic behind the code.</p>
+
+<p>In the first two posts (<a href="/blog/kata/kata1/">Part1</a> and <a href="/blog/kata/kata2/">Part2</a>), we develop a Python code from scratch to determine the travelled distance of a bike rider in a given time span, for a fixed and increasing annual distance target.
+We started to play with some text processing tasks in <a href="/blog/kata/kata3/">Part3</a>.</p>
+
+<p>The new challenge aims at identifying the highest wages from a company employee&rsquo;s salary list in Python.
+We actually develop three different functions to return:</p>
+
+<ol>
+<li>the largest wage</li>
+<li>the second largest wage</li>
+<li>the N-th largest wage of the list.</li>
+</ol>
+
+<p>We split this post into two sections.
+This post focuses on the function definition and the reference output, while the <a href="/blog/kata/kata4">next</a> will tackle the implementation of other methods and the comparison in terms of computational performance.</p>
+
+<h2 id="2-description">2. Description</h2>
+
+<p>James has been told to develop a function for a customer that takes a list of employees&rsquo; wages and automatically extract the largest salary in the company.
+A further step is to retrieve the 2-nd largest salary and then in general the n-th largest salary.
+A second argument, <code>duplicates</code>, to the function is required to handle duplicates:</p>
+
+<ol>
+<li>if it is <code>True</code>, duplicates have to be kept. The second largest amount of input <code>[100, 50, 100]</code> is therefore 100.</li>
+<li>if it is <code>False</code>, duplicates have to be drop and unique values only are kept. The second largest amount of input <code>[100, 50, 100]</code> is therefore 50.</li>
+</ol>
+
+<p>The wage recording file, however, contains also some text inputs, since whenever the salary amount of an employee was not available, the string value <code>None</code> has been recorded.
+The developer needs then to remove string elements from the list before searching for the largest amounts
+If the request for the n-th largest salary exceeds the size of available salary values, the textual input <code>'Not available'</code> has to be returned.</p>
+
+<p>Please, note that the salary amounts are stored as k€.
+For instance, a salary record of <code>[95, 'None', 95, 40, 50, 60, 150, 'None']</code> should return <code>150</code> as the largest amount, <code>95</code> as the 2-nd largest amount, <code>60</code> as the 3-rd largest amount if <code>duplicates=False</code>, <code>'Not available'</code> as 7-th largest amount.</p>
+
+<h2 id="3-input-data">3. Input data</h2>
+
+<p>Here we generate one example of wage data.
+First we create a list of 5 integers, ranging from 30k€ to 150k€.
+We can use two methods to introduce some <code>None</code> values into the <code>wages</code> list:</p>
+
+<ol>
+<li>iterate through the list, generate a random number from 0 to 1 for each value, if it is less than a given threshold (say 0.1), the numeric value is replaced with <code>None</code>, otherwise it is copied to the new <code>wages</code> list.</li>
+<li>choose a small integer value that defines the amount of <code>None</code> elements (say N), append this list of N <code>None</code> elements to the initial <code>wages</code> list and shuffle it. A way to choose N is to take the closest integer to the following ratio $ N = (\delta/(1-\delta)\cdot N_0) $, where $N_0$ is the initial number of integers and $\delta$ is the threshold. That would give a proportion of <code>None</code> values to the total final <code>wages</code> input equal to $\delta$.</li>
+</ol>
+
+<p>First, we import some libraries.</p>
+
+<pre><code class="language-python">import sys, random
+import numpy as np
+import pandas as pd
+import bisect
+import matplotlib.pyplot as plt
+%matplotlib inline
+</code></pre>
+
+<pre><code class="language-python">Nwage = 20
+wages = np.random.randint(30, 150, size=(Nwage,)).tolist()
+print(wages)
+</code></pre>
+
+<pre><code>[129, 124, 57, 83, 80, 100, 116, 94, 44, 138, 103, 55, 141, 105, 58, 106, 145, 92, 37, 85]
+</code></pre>
+
+<h3 id="3-1-single-sample-method-1">3.1 Single sample - method 1</h3>
+
+<p>Replace some values with <code>None</code> with probability $\delta = 0.2$.</p>
+
+<pre><code class="language-python">delta = .2
+rawWages = ['None' if random.random()&lt;delta else wage for wage in wages]
+print(rawWages)
+print('Ratio of None to whole list size is {}'.format(sum(1 for wage in rawWages if wage=='None')/len(rawWages)))
+</code></pre>
+
+<pre><code>[129, 124, 57, 83, 80, 100, 'None', 94, 44, 138, 103, 55, 141, 105, 58, 'None', 145, 'None', 37, 'None']
+Ratio of None to whole list size is 0.2
+</code></pre>
+
+<h3 id="3-2-single-sample-method-2">3.2 Single sample - method 2</h3>
+
+<p>Append some values with <code>None</code> with probability $\delta = 0.2$ and <a href="https://docs.python.org/2/library/random.html#random.shuffle" target="_blank">shuffle</a>.
+We need to append $\frac{0.2}{0.8}\cdot 20 = 5$ <code>None</code> elements.</p>
+
+<pre><code class="language-python">delta = .2
+Nnone = int(delta/(1-delta)*len(wages))
+rawWages = wages + ['None']*Nnone
+random.shuffle(rawWages)
+print(rawWages)
+print('Ratio of None to whole list size is {}'.format(sum(1 for wage in rawWages if wage=='None')/len(rawWages)))
+</code></pre>
+
+<pre><code>[145, 141, 103, 57, 44, 'None', 94, 92, 116, 129, 85, 55, 100, 105, 'None', 106, 'None', 58, 83, 'None', 80, 124, 'None', 138, 37]
+Ratio of None to whole list size is 0.2
+</code></pre>
+
+<p>To avoid the in-place feature of <code>shuffle</code>, we can also use <a href="https://docs.python.org/3/library/random.html#random.sample" target="_blank"><code>sample</code></a> from the same library by giving the length of the initial list as an additional argument.
+This is useful to implement the list-comprehension version of the test set generation.</p>
+
+<h3 id="3-3-sample-set">3.3 Sample set</h3>
+
+<p>We generate <code>Nsample = 10</code> test cases and place them into <code>testSet</code>.
+Since it is an entry-level post, I propose two methods to generate such a dataset:</p>
+
+<ol>
+<li>a more verbose procedure, where list is initialized, the <code>append</code> method is used within a for-loop.</li>
+<li>a more concise process, where the same logic is compressed into a single line of code, referred to as <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions" target="_blank"><em>list comprehension</em></a>.</li>
+</ol>
+
+<p>In both cases, the for-loop is just used to generate multiple instances, but the current iteration step is useless. We use the underscore <code>_</code> to say to Python not to allocate that value, which is coming from the <code>range</code> generator in this case, into any variable.</p>
+
+<h4 id="sample-set-method-1">Sample set - method 1</h4>
+
+<pre><code class="language-python">Nsample = 50
+testSet = [] # list inizialiation
+for _ in range(Nsample):
+    wages = np.random.randint(30, 150, size=(Nwage,)).tolist()
+    rawWages = wages + ['None']*Nnone
+    random.shuffle(rawWages)
+    testSet.append(rawWages)
+
+print('Test set length is {}, while each example length is {}'.format(len(testSet), len(testSet[0])))
+</code></pre>
+
+<pre><code>Test set length is 50, while each example length is 25
+</code></pre>
+
+<h4 id="sample-set-method-2">Sample set - method 2</h4>
+
+<p>The second method offers a more concise way.</p>
+
+<pre><code class="language-python">testSet = [random.sample(np.random.randint(30, 150, size=(Nwage,)).tolist()+['None']*Nnone, Nwage+Nnone) for _ in range(Nsample)]
+print('Test set length is {}, while each example length is {}'.format(len(testSet), len(testSet[0])))
+</code></pre>
+
+<pre><code>Test set length is 50, while each example length is 25
+</code></pre>
+
+<p>A short note concerns the Python <code>format</code> method.
+In this tutorial this method is used to take some variable values as arguments and replace the curly brackets within the string input to the <code>print</code> function, with such values. Further advanced results and string formatting can be achieved.
+Please refer to the official <a href="https://docs.python.org/3.4/library/string.html#string-formatting" target="_blank">documentation</a> and this super nice <a href="https://pyformat.info/" target="_blank">guide</a>.</p>
+
+<h2 id="4-reference-function">4. Reference function</h2>
+
+<p>This section is meant to define the procedure to calculate the output in the most basic Pythonic way, to be readable and 100% correct.</p>
+
+<p>We take the first example, we keep the wage instance in the list only if it is not the <code>None</code> string.
+We then can assign the first element of the list to the <code>maxVal</code> variable, which is meant to store the highest wage so far ever encountered.
+The next step is to iterate from second item on (index is <code>1</code>) in a for-loop and compare each list value to the current maximum value <code>maxVal</code> with a <code>if</code> statement.
+Whenever it is true, the <code>maxVal</code> variable is updated.
+This procedure is proportional to the list size. It means that doubling the list size requires double effort and time.
+The notation that is commonly used for the time complexity behaviour is the <a href="https://en.wikipedia.org/wiki/Time_complexity" target="_blank">big O</a>.
+In case of linear time, it becomes <code>O(n)</code>.</p>
+
+<h3 id="4-1-largest-wage-in-the-list">4.1 Largest wage in the list</h3>
+
+<pre><code class="language-python">example = testSet[0]
+example = [wage for wage in example if wage!='None']
+print(example)
+</code></pre>
+
+<pre><code>[56, 80, 98, 134, 53, 68, 148, 72, 49, 84, 52, 48, 110, 80, 129, 125, 138, 71, 135, 122]
+</code></pre>
+
+<pre><code class="language-python">maxVal = example[0]
+for val in example[1:]:
+    if val &gt; maxVal:
+        maxVal = val
+print('The largest integer in the first sample is {}'.format(maxVal))
+</code></pre>
+
+<pre><code>The largest integer in the first sample is 148
+</code></pre>
+
+<p>We embed this code into the reference function <code>largestRef()</code>.
+The output function variable has to be declared within the <code>return</code> statement.
+Since the first step is to clean the wage list from the <code>None</code> string, which is common for every reference function, we introduce a dedicated function for that as well.
+We need to add a second attribute, <code>duplicates</code>, also for this first case to make the function structure more general.
+However, it does not obviously affect the outcome even if it is set to <code>True</code>.</p>
+
+<p>In general, we need to make sure that the input is not empty to prevent Python returning an error when we index for the first element to initialize <code>maxVal</code>.
+In that case, we return <code>None</code>.</p>
+
+<pre><code class="language-python">def clean(example):
+    return [wage for wage in example if wage!='None']
+
+def refFun_largest(example, duplicates=False):
+    &quot;&quot;&quot;ref-linear&quot;&quot;&quot;
+    example = clean(example)
+    if not example:
+        return None
+    maxVal = example[0]
+    for val in example[1:]:
+        if val &gt; maxVal:
+            maxVal = val
+    return maxVal
+</code></pre>
+
+<h3 id="4-2-second-largest-wage-in-the-list">4.2 Second largest wage in the list</h3>
+
+<p>The second step is to search for the second largest wage.
+This task requires to specify how to handle duplicates.
+If the function argument <code>duplicates</code> is set to <code>True</code>, we use <code>set()</code> to create a set of unique wage values and convert it to list.
+Then we make sure the input list contains at least two values, otherwise we return <code>None</code>.
+Finally we implement the code to perform the actual task.
+To this end, we use two placeholders, <code>mv1</code> for the current largest item, <code>mv2</code> for the current 2nd largest item.
+We take the first two items of the input list, we sort in a reversed fashion and assign those values to <code>mv1</code> and <code>mv2</code>.
+We then iterate over the input list from the third element on.
+Whenever an element <code>val</code> is greater than <code>mv2</code>, we have two options:</p>
+
+<ol>
+<li>Such an element is also greater than <code>mv1</code>, so we have to overwrite <code>mv1</code> with the element <code>val</code> and <code>mv2</code> with <code>mv1</code> (what was previously stored in <code>mv1</code> becomes the second largest value).</li>
+<li>Such an element is less than <code>mv1</code>, so we have to simply overwrite <code>mv2</code> with the element <code>val</code>.</li>
+</ol>
+
+<p>This is implemented in the two below snippets.</p>
+
+<pre><code class="language-python">duplicates = True
+if duplicates:
+    values = list(set(example))
+
+print('Input list with no duplicates: {}'.format(values))
+</code></pre>
+
+<pre><code>Input list with no duplicates: [129, 98, 68, 134, 71, 72, 135, 138, 110, 80, 49, 48, 148, 53, 84, 52, 56, 122, 125]
+</code></pre>
+
+<pre><code class="language-python">mv1, mv2 = sorted(values[:2], reverse=True)
+for val in example[2:]:
+    if val &gt; mv2:
+        if val &gt;= mv1:
+            mv1, mv2 = val, mv1
+        else:
+            mv2 = val
+print('The 2nd largest integer in the first sample is {}'.format(mv2))
+</code></pre>
+
+<pre><code>The 2nd largest integer in the first sample is 138
+</code></pre>
+
+<p>We embed this code into the reference function <code>secondLargestRef()</code>.</p>
+
+<pre><code class="language-python">def refFun_secondLargest(example, duplicates=False):
+    &quot;&quot;&quot;ref-linear&quot;&quot;&quot;
+    example = clean(example)
+    if duplicates:
+        example = list(set(example))
+    if len(example) &lt; 2:
+        return None
+    
+    mv1, mv2 = sorted(example[:2], reverse=True)
+    for val in example[2:]:
+        if val &gt; mv2:
+            if val &gt;= mv1:
+                mv1, mv2 = val, mv1
+            else:
+                mv2 = val
+    
+    return mv2
+</code></pre>
+
+<h3 id="4-3-n-th-largest-wage-in-the-list">4.3 N-th largest wage in the list</h3>
+
+<p>The final step is to search for the n-th largest wage.
+This task requires to specify how to handle duplicates and <code>n</code> itself.</p>
+
+<p>Then we make sure the input list contains at least <code>n</code> values, otherwise we return <code>None</code>.
+Finally we implement the code to perform the actual task.
+To this end, we use the list <code>nLargestVals</code> as a container of the current n-th largest values encountered so far by the algorithm.</p>
+
+<p>We take the first <code>n</code> items of the input list, we <a href="https://docs.python.org/3/library/functions.html#sorted" target="_blank">sort</a> in an increasing fashion and assign those values to <code>nLargestVals</code>.
+We then iterate over the input list from the <code>n+1</code>-th element on.
+Whenever an element <code>val</code> is greater than the first element of <code>nLargestVals</code> (smallest value between the current n-th largest values), we insert this value into the sorted <code>nLargestVals</code> with <a href="https://docs.python.org/2/library/bisect.html#bisect.insort" target="_blank"><code>insort</code></a> method from the <code>bisect</code> library, which helps to keep the list sorted, and we delete the first element of the updated list.
+At the end of the for-loop, we return the first element of the <code>nLargestVals</code>.</p>
+
+<pre><code class="language-python">print('Input list with no duplicates: {}'.format(values))
+</code></pre>
+
+<pre><code>Input list with no duplicates: [129, 98, 68, 134, 71, 72, 135, 138, 110, 80, 49, 48, 148, 53, 84, 52, 56, 122, 125]
+</code></pre>
+
+<pre><code class="language-python">n = 4
+nLargestVals = sorted(values[:n])
+for val in values[n:]:
+    print(nLargestVals)
+    if val &gt; nLargestVals[0]:
+        bisect.insort(nLargestVals, val)
+        del nLargestVals[0]
+
+print('The first n largest integers are {}'.format(nLargestVals))
+print('The n-th largest integer in the first sample is {}'.format(nLargestVals[0]))
+</code></pre>
+
+<pre><code>[68, 98, 129, 134]
+[71, 98, 129, 134]
+[72, 98, 129, 134]
+[98, 129, 134, 135]
+[129, 134, 135, 138]
+[129, 134, 135, 138]
+[129, 134, 135, 138]
+[129, 134, 135, 138]
+[129, 134, 135, 138]
+[134, 135, 138, 148]
+[134, 135, 138, 148]
+[134, 135, 138, 148]
+[134, 135, 138, 148]
+[134, 135, 138, 148]
+[134, 135, 138, 148]
+The first n largest integers are [134, 135, 138, 148]
+The n-th largest integer in the first sample is 134
+</code></pre>
+
+<p>A short example of how <code>insort</code> works is shown here, where we append <code>101</code> to the sorted 5-integer list-</p>
+
+<pre><code class="language-python">tmp = sorted(np.random.randint(30, 150, size=(5,)).tolist())
+print(tmp)
+</code></pre>
+
+<pre><code>[43, 90, 125, 139, 142]
+</code></pre>
+
+<pre><code class="language-python">bisect.insort(tmp, 101)
+print(tmp)
+</code></pre>
+
+<pre><code>[43, 90, 101, 125, 139, 142]
+</code></pre>
+
+<p>We embed this code into the third reference function <code>nthLargestRef()</code>.</p>
+
+<pre><code class="language-python">def refFun_nthLargest(example, n=4, duplicates=False):
+    &quot;&quot;&quot;bisect-insort&quot;&quot;&quot;
+    example = clean(example)
+    if duplicates:
+        example = list(set(example))
+    if len(example) &lt; n:
+        return None
+    
+    nLargestVals = sorted(example[:n])
+    for val in example[n:]:
+        if val &gt; nLargestVals[0]:
+            bisect.insort(nLargestVals, val)
+            del nLargestVals[0]
+    
+    return nLargestVals[0]
+</code></pre>
+
+<h2 id="5-output-data">5. Output data</h2>
+
+<p>We need to repeat the process defined in the above function to get the output for the entire <code>testSet</code>.
+Since we have developed three concepts, namely the largest, the second largest and the n-th largest item in a list, we pass each input sample to the three functions and store the result to three separate lists.</p>
+
+<pre><code class="language-python">testResults1, testResults2, testResultsN = [], [], []
+
+for example in testSet:
+    testResults1.append(refFun_largest(example))
+    testResults2.append(refFun_secondLargest(example))
+    testResultsN.append(refFun_nthLargest(example))
+</code></pre>
+
+<p>We show the results for the first 10 dataset inputs.</p>
+
+<pre><code class="language-python">for kk in range(10):
+    example, result1, result2, resultN = testSet[kk], testResults1[kk], testResults2[kk], testResultsN[kk]
+    print('='*60)
+    print('In the following wage list\n{}\nthe largest, second largest and n={}-th largest wage are\n{}, {} and {}'\
+          .format(example, 4, result1, result2, resultN))
+</code></pre>
+
+<pre><code>============================================================
+In the following wage list
+[56, 80, 98, 134, 53, 68, 148, 72, 49, 'None', 'None', 84, 52, 48, 110, 80, 129, 125, 138, 71, 'None', 135, 'None', 122, 'None']
+the largest, second largest and n=4-th largest wage are
+148, 138 and 134
+============================================================
+In the following wage list
+[47, 'None', 138, 87, 78, 98, 105, 144, 36, 124, 129, 31, 'None', 71, 43, 'None', 'None', 50, 33, 90, 114, 'None', 60, 117, 66]
+the largest, second largest and n=4-th largest wage are
+144, 138 and 124
+============================================================
+In the following wage list
+[107, 32, 104, 56, 54, 95, 'None', 32, 68, 116, 'None', 148, 124, 74, 81, 62, 'None', 132, 'None', 144, 69, 127, 38, 122, 'None']
+the largest, second largest and n=4-th largest wage are
+148, 144 and 127
+============================================================
+In the following wage list
+['None', 100, 'None', 125, 42, 79, 119, 47, 'None', 47, 124, 148, 46, 'None', 100, 'None', 124, 109, 75, 36, 102, 133, 51, 76, 128]
+the largest, second largest and n=4-th largest wage are
+148, 133 and 125
+============================================================
+In the following wage list
+[85, 148, 112, 'None', 118, 114, 'None', 104, 120, 66, 89, 107, 132, 46, 50, 59, 'None', 31, 96, 'None', 'None', 49, 47, 94, 116]
+the largest, second largest and n=4-th largest wage are
+148, 132 and 118
+============================================================
+In the following wage list
+[87, 'None', 103, 148, 96, 101, 52, 'None', 63, 144, 64, 73, 82, 100, 31, 74, 'None', 79, 57, 'None', 44, 86, 68, 'None', 124]
+the largest, second largest and n=4-th largest wage are
+148, 144 and 103
+============================================================
+In the following wage list
+[83, 'None', 82, 114, 89, 70, 113, 135, 39, 123, 139, 53, 82, 84, 73, 139, 96, 'None', 52, 'None', 67, 131, 'None', 83, 'None']
+the largest, second largest and n=4-th largest wage are
+139, 139 and 131
+============================================================
+In the following wage list
+[40, 103, 54, 91, 'None', 'None', 111, 147, 73, 100, 109, 76, 'None', 77, 31, 32, 'None', 91, 68, 80, 72, 112, 103, 'None', 59]
+the largest, second largest and n=4-th largest wage are
+147, 112 and 109
+============================================================
+In the following wage list
+[94, 143, 139, 'None', 100, 30, 'None', 73, 'None', 'None', 'None', 94, 51, 101, 77, 131, 86, 62, 68, 121, 67, 87, 49, 59, 97]
+the largest, second largest and n=4-th largest wage are
+143, 139 and 121
+============================================================
+In the following wage list
+[84, 87, 140, 'None', 95, 128, 116, 44, 106, 100, 145, 'None', 143, 79, 'None', 99, 133, 91, 57, 114, 'None', 'None', 89, 107, 117]
+the largest, second largest and n=4-th largest wage are
+145, 143 and 133
+</code></pre>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/kata/kata3/" style="color: #4ABDAC; font-size: 18px; "> Learning Python by doing - Part 3</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/kata/kata5/" style="color: #4ABDAC; font-size: 18px; ">Learning Python by doing - Part 5</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

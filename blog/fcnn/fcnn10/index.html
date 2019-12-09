@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Meta-learning neural networks over basic tasks &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Meta-learning neural networks over basic tasks">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/fcnn/fcnn10/" style="font-size: 16px; ">Meta-learning NNs</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/fcnnHead1.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Meta-learning neural networks over basic tasks</h1>
+          <h5 class="card-title text-center">Meta-learning NNs</h5>
+          <h6 class="card-text text-center">October 27, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 7 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/neural-network"><kbd class="item-tag">neural network</kbd></a> <a href="https://takeawildguess.net/tags/meta-learning"><kbd class="item-tag">meta-learning</kbd></a> <a href="https://takeawildguess.net/tags/hyperparameter"><kbd class="item-tag">hyperparameter</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts related to a huge and popular topic in machine learning: <strong>fully connected neural networks</strong>.</p>
+
+<p>The general series scope is three-fold:</p>
+
+<ol>
+<li>visualize the model features and characteristics with schematic pictures and charts</li>
+<li>learn to implement the model with different levels of abstraction, given by the framework used</li>
+<li>have some fun with one of the hottest topics right now!</li>
+</ol>
+
+<p>In this new post, we are going to analyze the hyper-parameter space, which is referred to as <em>meta-learning</em>.
+We learn how to use our <code>trainFCNN</code> class that has been described and used in many previous posts.</p>
+
+<p>We follow these steps:</p>
+
+<ol>
+<li>meta-learning concept</li>
+<li>train a fully connected neural network for different settings</li>
+<li>compare the loss history for each case</li>
+<li>visualize the model response space for some cases</li>
+</ol>
+
+<p>The whole code to create a synthetic dataset and learn a neural network model with any of the four libraries mentioned above is wrapped into a Python class, <code>trainFCNN()</code>, and can be found in my Github <a href="https://github.com/takeawildguess/FCNNlib" target="_blank">repo</a>.</p>
+
+<h2 id="2-what-does-meta-learning-mean">2. What does meta-learning mean</h2>
+
+<p>This post wants to go through some steps that are required to make the <em>meta-learning</em> process clean, compact and neat.
+It helps both developers to keep control over the investigation and readers or whoever is going to benefit from the analysis itself afterwards.</p>
+
+<p><em>Meta-learning</em> refers to the optimization of the system hyper-parameters (HP).
+As one might find out by reading many research papers, the final performance of a given model is strongly affected by the HP choice.
+It is very often a common practice using a bunch of different models altogether to generate the output. The final model is called <em>ensemble model</em>, as explained <a href="https://www.sciencedirect.com/topics/computer-science/ensemble-modeling" target="_blank">here</a>.</p>
+
+<p><em>Learning</em> is often referred to as a process that changes the model parameters to minimize the model loss in a differentiable way.
+That&rsquo;s why the optimizer is a method derived from the gradient-descent family.</p>
+
+<p>Now, let&rsquo;s come back to the main topic of this post: <strong>exploring</strong> what impact a specific HP of a combination of them might have on the model performance and behaviour.
+Ready? Let&rsquo;s dive in!</p>
+
+<p>In real-world applications, researchers and engineers use specific techniques and tools to seek the optimal set of HPs.
+One clear but powerful method is the grid-search from Sklearn, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html" target="_blank">GridSearchCV</a>.</p>
+
+<p>However, this post&rsquo;s scope is to illustrate how the model loss evolves over epochs for different settings, rather than merely seeking for the final set of parameters.</p>
+
+<p>As a data scientist, it is very useful to gain knowledge and understanding of the actual behaviour of the model to certain settings.
+It might also very efficient to explore a bit the domain we are playing with since a brute force search of many parameters exponentially explodes.
+If we select <code>M</code> different values for each of the <code>N</code> HPs, we need to train the model $M^N$ times.</p>
+
+<h2 id="3-how-each-hyperparameter-affects-the-model">3. How each hyperparameter affects the model?</h2>
+
+<p>Here we define the list of HPs that are usually responsible to have an impact on the model performance:</p>
+
+<ol>
+<li>The number of neurons in hidden layer <code>j</code>, which we specify as an integer at <code>j</code> index of the <code>dims</code> attribute.</li>
+<li>The number of hidden layers, which is the <code>dims</code> length.</li>
+<li>Type of optimization, which could be any of <a href="http://ruder.io/optimizing-gradient-descent/index.html#stochasticgradientdescent" target="_blank">stochastic gradient descent</a> <code>sgd</code>, <a href="http://ruder.io/optimizing-gradient-descent/index.html#adam" target="_blank">Adam</a> <code>adam</code>, <a href="http://ruder.io/optimizing-gradient-descent/index.html#rmsprop" target="_blank">RMSProp</a> <code>rmsprop</code> or <a href="http://ruder.io/optimizing-gradient-descent/index.html#adagrad" target="_blank">AdamGrad</a> <code>adagrad</code>.</li>
+<li>Learning rate.</li>
+<li>Activation function, which could be any of <code>sigmoid</code>, <code>relu</code> or <code>tanh</code>.</li>
+<li>The number of epochs.</li>
+<li>Batch size.</li>
+</ol>
+
+<p>The final step would be to compare different neural-network libraries each other, but <code>lib</code> is quite an attribute rather than a hyperparameter in that case.
+Code-wise, we treat this actual attribute and every HP as attributes of a Pythonic class.</p>
+
+<p>Since any attribute is defined within the <code>train</code> method, it is enough to define an instance of the <code>trainFCNN</code> class and refer to it as many times as the combination of a set of HPs&rsquo; values.
+By default, after the training process is completed, its settings are saved into a <code>descriptions</code> dictionary, where each HP and its corresponding value are stored as key/value pair.</p>
+
+<p>However, when we visualize the model loss trends to varying of two HPs, we want the figure legend to report what pertains to the current analysis only.
+We need to extract those keys only from the dictionary and join into a <code>description</code> string.</p>
+
+<h2 id="4-model-performance">4. Model performance</h2>
+
+<p>We create the <code>tnn</code> instance for the <code>circles</code> dataset and visualize it with <code>plotPoints</code>.</p>
+
+<pre><code class="language-python">tnn = trainFCNN(nb_pnt=2500, dataset='circles')
+tnn.plotPoints()
+</code></pre>
+
+<p><img src="output_5_0.png" alt="png" /></p>
+
+<p>We train a simple model (one hidden layer with 2 neurons only) using Keras library, for a few epochs.</p>
+
+<pre><code class="language-python">tnn.train(nb_epochs=50, dims=[8], activation='relu', lr=.005, lib='ks', display=False)
+</code></pre>
+
+<p>We display this case description wrt the <code>units</code>, <code>optimizer</code> and <code>lib</code> keys only, the model loss history and the model prediction.
+As expected, the loss is high and the final prediction is poor.</p>
+
+<pre><code class="language-python">descr = ', '.join(['{}: {}'.format(kk, vv) for kk, vv in tnn.descrs.items() if kk in ['units', 'optimizer', 'lib']])
+print(descr)
+</code></pre>
+
+<pre><code>lib: ks, units: 2-8-4, optimizer: adam
+</code></pre>
+
+<pre><code class="language-python">plt.plot(tnn.lossHistory, label=descr)
+plt.legend()
+</code></pre>
+
+<pre><code>&lt;matplotlib.legend.Legend at 0x24c28069eb8&gt;
+</code></pre>
+
+<p><img src="output_10_1.png" alt="png" /></p>
+
+<pre><code class="language-python">tnn.plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_11_0.png" alt="png" /></p>
+
+<h2 id="5-let-s-visualize-what-meta-learning-means">5. Let&rsquo;s visualize what meta-learning means</h2>
+
+<p>We want to see the mutual impact of two hyperparameters, namely the number of epochs <code>nb_epochs</code> and the number of hidden layer neurons <code>dims</code>, on final loss and plot the final prediction for the worst and best cases.
+We create a cartesian product between two lists of values for each HP and iterate through each case to get different trained models.</p>
+
+<pre><code class="language-python">hp1s = [50, 100]
+hp2s = [2, 4, 8]
+Nhp2 = len(hp2s)
+mdls = []
+for hp1, hp2 in itertools.product(hp1s, hp2s):
+    #tf.reset_default_graph()
+    tnn.train(nb_epochs=hp1, dims=[hp2], activation='relu', lib='ks')
+    mdls.append(deepcopy(tnn))
+</code></pre>
+
+<p>We visualize the model loss history for each case, where we differentiate different values of first HP, <code>nb_epochs</code>, with colours and of second HP, <code>dims</code>, with markers.
+Since the iterator <code>kk</code> ranges through the cartesian product, we can retrieve the corresponding index for colour (HP1) and marker (HP2) by means of the two Python operations <code>kk // Nhp2</code> and <code>kk % Nhp2</code>, respectively.</p>
+
+<pre><code class="language-python">colors = ['b', 'g', 'r', 'c', 'k']
+markers = ['solid', 'dotted', 'dashed', 'dashdot']
+descrKeys = ['units', 'epochs', 'lib']
+</code></pre>
+
+<pre><code class="language-python">plt.figure(figsize=(15, 8))
+for kk, tnn in enumerate(mdls):
+    col, mark = colors[kk // Nhp2], markers[kk % Nhp2]
+    plt.plot(tnn.lossHistory, label=tnn.mdlDescription(descrKeys), lw=2, ls=mark, color=col, alpha=.75)
+plt.grid()
+plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+plt.xlabel('# of epochs')
+plt.ylabel('model loss')
+plt.show()
+</code></pre>
+
+<p><img src="output_16_0.png" alt="png" /></p>
+
+<p>We can appreciate how loss trends could change despite the model being the same, due to the stochastic nature of the default optimizer, stochastic gradient descent.
+Compare each pair of lines with the same marker, they share the same model architecture.
+The loss is different even after the same number of epochs.</p>
+
+<p>It is instead not surprising at all that increasing the number of neurons improves the model performance.</p>
+
+<p>Let&rsquo;s plot the model prediction for two extreme cases (fourth and last ones).</p>
+
+<pre><code class="language-python">mdls[3].plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_19_0.png" alt="png" /></p>
+
+<pre><code class="language-python">mdls[-1].plotModelEstimate(figsize=(16, 9))
+</code></pre>
+
+<p><img src="output_20_0.png" alt="png" /></p>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/fcnn/fcnn09/" style="color: #4ABDAC; font-size: 18px; "> How neural networks learn basic features with Pytorch</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/fcnn/fcnn11/" style="color: #4ABDAC; font-size: 18px; ">Hyperparameter analysis for multi-class classification</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

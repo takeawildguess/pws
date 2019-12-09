@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Key notions of Pytorch &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Key notions of Pytorch">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/fcnn/fcnn08/" style="font-size: 16px; ">Intro to Pytorch</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/fcnnHead.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Key notions of Pytorch</h1>
+          <h5 class="card-title text-center">Intro to Pytorch</h5>
+          <h6 class="card-text text-center">October 13, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 13 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/neural-network"><kbd class="item-tag">neural network</kbd></a> <a href="https://takeawildguess.net/tags/pytorch"><kbd class="item-tag">pytorch</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts related to a huge and popular topic in machine learning: <strong>fully connected neural networks</strong>.</p>
+
+<p>The general series scope is three-fold:</p>
+
+<ol>
+<li>visualize the model features and characteristics with schematic pictures and charts</li>
+<li>learn to implement the model with different levels of abstraction, given by the framework used</li>
+<li>have some fun with one of the hottest topics right now!</li>
+</ol>
+
+<p>In this new post, we are going to introduce the key components and modules of Pytorch, while we are going to use and apply to a neural network in the <a href="/blog/fcnn/fcnn09/">next one</a>.</p>
+
+<p>We are going through the following steps:</p>
+
+<ol>
+<li>Tensors, Pytorch core components</li>
+<li>Basic <code>torch</code> functionalities for a linear problem</li>
+<li><code>Autograd</code> package for a linear problem</li>
+<li><code>nn</code> package for a linear problem</li>
+<li><code>optim</code> package for a linear problem</li>
+</ol>
+
+<h2 id="2-installing-and-importing-pytorch">2. Installing and importing <code>PyTorch</code></h2>
+
+<p>The fourth library we analyze in this series is PyTorch (<code>PT</code> from now on).
+To install <code>PT</code> on your system, you can go to the official page and set your requirements.
+In this case, a CPU-only installation on Windows from Anaconda looks like this:</p>
+
+<p><img src="/blog/fcnn/fcnn08/pytorch.jpg" alt="pngS" title="PyTorch logo" />
+<center><em>Figure 1 - PyTorch logo</em></center></p>
+
+<pre><code class="language-python">conda install pytorch torchvision cpuonly -c pytorch
+</code></pre>
+
+<p>We import the main library <code>torch</code>, the <code>nn</code> module as <code>tnn</code> and the submodule <code>nn.functional</code> as <code>F</code>.</p>
+
+<pre><code class="language-python">import numpy as np
+%matplotlib inline
+import matplotlib.pyplot as plt
+import torch
+import torch.nn as tnn
+import torch.nn.functional as F
+</code></pre>
+
+<h2 id="3-the-key-component-in-pytorch-tensors">3. The key-component in Pytorch: tensors</h2>
+
+<p>A good starting point is, of course, the official <a href="https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html" target="_blank">docu</a>.</p>
+
+<p>As stated in this <a href="https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html" target="_blank">tutorial</a>, <code>torch.Tensor</code> is the central class of the package.
+A nice way to understand what tensors are is to figure out what an <em>n</em>-dimensional array looks like.
+A 1D array is a <em>list</em> of numbers, a 2D array is a <em>table</em> of numbers, a 3D array is a <em>box</em> of numbers, and so on.</p>
+
+<p>They are conceptually identical to an <em>n</em>-dimensional Numpy array, with many functions and operations that can be performed on these tensors. Any computation that can be performed with Numpy can also be accomplished with PyTorch tensors.
+So why create a new library for scientific computing instead of using Numpy?
+To make it faster!
+They have been indeed introduced in Tensorflow and Pytorch to overcome one shortcoming of Numpy: it cannot utilize GPUs to accelerate its numerical computations.
+To use GPUs, it is just enough to specify the <code>device=torch.device('cuda')</code> attribute when constructing a tensor to place it on a GPU.
+Otherwise, <code>device=torch.device('cpu')</code> can do the job if the model can run smoothly on a CPU only.</p>
+
+<p>A tensor can be created directly from a Python list using the same <code>torch.tensor()</code> constructor.
+To convert it back to Numpy, we can use the <code>numpy()</code> method.
+However, please make sure you pay attention to the <code>float()</code> option that is used in the third case in order to return a <code>Float32</code> array instead of a <code>Long=Float64</code>.
+That could cause issues afterwards if tensors&rsquo; type is not consistent with each other.
+<a href="https://discuss.pytorch.org/t/runtimeerror-expected-object-of-scalar-type-long-but-got-scalar-type-float-when-using-crossentropyloss/30542" target="_blank">This</a> discussion raises the problem and helps to understand it.</p>
+
+<pre><code class="language-python">xn = np.array([[1, 2, 3], [4, 5, 6]]).astype(float)
+xt = torch.tensor(xn)
+descrs = ['Numpy array', 'Torch tensor', 'Tensor converted to float array',\
+          'Tensor converted to array', 'Tensor single element converted to scalar']
+for descr, obj in zip(descrs, [xn, xt, xt.float().numpy(), xt.numpy(), xt[-1,-1].item()]):
+    print(&quot;{}:\n{}\n&quot;.format(descr, obj))
+</code></pre>
+
+<pre><code>Numpy array:
+[[1. 2. 3.]
+ [4. 5. 6.]]
+
+Torch tensor:
+tensor([[1., 2., 3.],
+        [4., 5., 6.]], dtype=torch.float64)
+
+Tensor converted to float array:
+[[1. 2. 3.]
+ [4. 5. 6.]]
+
+Tensor converted to array:
+[[1. 2. 3.]
+ [4. 5. 6.]]
+
+Tensor single element converted to scalar:
+6.0
+</code></pre>
+
+<p>However, if the tensor requires the gradient to be computed, we cannot move it to Numpy, without breaking the graph.
+If we do not need the gradients, we can explicitly detach the tensor from the graph to get a tensor with the same data content that does not need the gradient functionality anymore.
+The latter tensor can be thus converted to a Numpy array.</p>
+
+<pre><code class="language-python">xt_ = torch.tensor(xn, requires_grad=True)
+xt_.detach().numpy()
+descrs = ['Torch tensor with requires_grad', 'Tensor converted to float array']
+for descr, obj in zip(descrs, [xt_, xt_.detach().numpy()]):
+    print(&quot;{}:\n{}\n&quot;.format(descr, obj))
+</code></pre>
+
+<pre><code>Torch tensor with requires_grad:
+tensor([[1., 2., 3.],
+        [4., 5., 6.]], dtype=torch.float64, requires_grad=True)
+
+Tensor converted to float array:
+[[1. 2. 3.]
+ [4. 5. 6.]]
+</code></pre>
+
+<p>The <code>Variable</code> constructor has been deprecated since <code>Pytorch 0.4.0</code>.
+Variables are no longer necessary to perform gradient computation on tensors with <code>autograd()</code>.
+Instead of converting tensors to <em>trainable</em> tensors with the <code>Variable</code> constructor and feeding them to the model, we use the tensor constructor directly with the attribute <code>requires_grad</code> set to True.
+Autograd automatically supports such <code>Tensor</code>s.</p>
+
+<h2 id="4-basic-torch-functionalities-for-a-linear-problem">4. Basic <code>torch</code> functionalities for a linear problem</h2>
+
+<p>Let&rsquo;s define a super simple model to fit a linear function to some data.
+Here we introduce the key Pytorch constructors to achieve this simple goal.
+The data input/output are correlated with the following expression:</p>
+
+<p>$$ y = 2\cdot x^2 + 3 + \varepsilon $$</p>
+
+<p>where $\varepsilon$ is noise.
+The goal is to find <code>w0=2</code> and <code>w1=3</code>.</p>
+
+<p>We pack the <code>xn</code> values with the same amount of 1s, <code>np.ones_like(xn)</code>, to include the bias into the weight array, which give us a 2-element array.</p>
+
+<pre><code class="language-python">xn = np.linspace(-2, 2, 30).reshape(-1, 1)
+xxn = np.c_[xn**2, np.ones_like(xn)]
+Nx = xn.shape[0]
+yn = 2*xn**2 + 3 + np.random.randn(*xn.shape)*1e-1
+</code></pre>
+
+<pre><code class="language-python">plt.figure()
+plt.plot(xn, yn);
+</code></pre>
+
+<p><img src="output_14_0.png" alt="png" /></p>
+
+<p>We transform the input/output Numpy arrays <code>xxn</code> and <code>yn</code> into two Torch tensors, <code>xt</code> and <code>yt</code>.
+We set the CPU as the device to use and <code>float32</code> as the numerical type.</p>
+
+<pre><code class="language-python">device = torch.device('cpu')
+# Create random input and output data
+xt = torch.tensor(xxn, device=device, dtype=torch.float32)
+yt = torch.tensor(yn, device=device, dtype=torch.float32)
+print(&quot;Input tensor shape:\n{}&quot;.format(xt.shape))
+</code></pre>
+
+<p>We initialize the weights <code>ww</code> as random values.</p>
+
+<pre><code class="language-python"># Randomly initialize weights
+ww = torch.randn(2, 1, device=device)
+</code></pre>
+
+<p>The <em>training</em> process consists of four steps:</p>
+
+<ol>
+<li>Apply the linear model to the input <code>xt</code>. The <code>mm</code> function performs a matrix multiplication between the input and the weight array.</li>
+<li>Calculate the loss as the squared error between the prediction <code>y_pred</code> and the ground-truth <code>yt</code>. There is no need to compute the mean for the loss, so <code>sum()</code> will be enough.</li>
+<li>Backpropagate the error through the model <em>graph</em> to the weights. <code>grad_w</code> represents the gradient of the loss function wrt the weights. Please have a look at <a href="/blog/linreg/linreg2/#4-training">this</a> post section to recall the numerical implementation details.</li>
+<li>Update the weights with the <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent" target="_blank">SGD</a> strategy.</li>
+</ol>
+
+<p>We print the loss every 250 epochs. Since the loss is a tensor, we use <code>.item()</code> to convert it to Numpy.</p>
+
+<pre><code class="language-python">learning_rate = 1e-2
+for kk in range(1000+1):
+    # Forward pass: compute model output
+    y_pred = torch.mm(xt, ww)
+    # Compute model loss
+    loss = (y_pred - yt).pow(2).sum()
+    
+    # Backprop to compute loss gradients wrt model weight ww
+    grad_y_pred = 2.0 * (y_pred - yt)
+    grad_w = xt.t().mm(grad_y_pred)
+    
+    # Update weights using gradient descent
+    ww -= learning_rate * grad_w / Nx
+    if kk % 250 == 0:
+        print(kk, loss.item())
+</code></pre>
+
+<pre><code>0 2506.398681640625
+250 0.8108402490615845
+500 0.34340375661849976
+750 0.3330090343952179
+1000 0.33277806639671326
+</code></pre>
+
+<p>The final weights&rsquo; values are very close to the ground-truth values used to generate the synthetic data.</p>
+
+<pre><code class="language-python">print(&quot;Final weight values:\n{}&quot;.format(ww.numpy().flatten()))
+</code></pre>
+
+<pre><code>Final weight values:
+[2.0244894 2.9655566]
+</code></pre>
+
+<h2 id="5-autograd-package-for-a-linear-problem">5. <code>Autograd</code> package for a linear problem</h2>
+
+<p>We can use the power package from Pytorch to automatically differentiate the model loss with respect to its parameters, <code>ww</code> in this case, and perform the computation of the backward pass in one single step.
+This is convenient to maintain the code more compact, clean and, more importantly, bug-free.
+Even more crucial it becomes when the architecture is not a simple linear model or a small fully-connected neural network, but something more complex, such as CNNs or RNNs models.</p>
+
+<p>This Pytorch package is called <code>autograd</code>.
+It takes care of backpropagating through the graph to easily compute the gradient of the loss with respect to all tensors with <code>requires_grad=True</code>.
+After calling this operator with the <code>.backward()</code> method, <code>ww.grad</code> is going to be a tensor storing the loss gradient.
+The graph contains nodes and edges; the former are <code>Tensor</code>s, the latter are functions that produce new tensors from input tensors.</p>
+
+<p>When we need to update the model parameters, we use the <code>torch.no_grad()</code> context manager to prevent PyTorch from building a computational graph for this step.
+The final step requires to set the parameter gradient to 0s.</p>
+
+<p>This sounds complicated but it&rsquo;s actually quite simple in practice.
+Let&rsquo;s use PyTorch tensors and <code>autograd</code> to get the following gradient:</p>
+
+<p>$$ \frac{\partial y}{\partial x}|_{x=1},\quad\text{where}\quad y = 2\cdot x^2 + 3 $$</p>
+
+<p>$$ \frac{\partial y}{\partial x}|_{x=1} = 4 $$</p>
+
+<p>Since the input tensor is two-dimensional, the gradient is 2D as well.
+Note that the gradient is stored in the tensor property <code>xx.grad</code>.</p>
+
+<pre><code class="language-python">dims = [2, 3]
+xx = torch.ones(*dims).clone().detach().requires_grad_(True)
+yy = 2*(xx**2) + 3
+yy.backward(torch.ones(*dims))
+print(&quot;Gradient dy/dx@(x=1) is:\n{}&quot;.format(xx.grad))
+</code></pre>
+
+<pre><code>Gradient dy/dx@(x=1) is:
+tensor([[4., 4., 4.],
+        [4., 4., 4.]])
+</code></pre>
+
+<p>Let&rsquo;s dive in to employ this technique to the same linear model.</p>
+
+<pre><code class="language-python"># Randomly initialize weights
+ww = torch.randn(2, 1, device=device, requires_grad=True)
+
+learning_rate = 1e-2
+for kk in range(1000+1):
+    # Forward pass: compute model output
+    y_pred = torch.mm(xt, ww)
+    # Compute model loss
+    loss = (y_pred - yt).pow(2).sum()
+    
+    # backprop
+    loss.backward()
+
+    # Update weights using gradient descent
+    with torch.no_grad():
+        ww -= learning_rate * ww.grad / Nx
+        # Manually zero the gradients after running the backward pass
+        ww.grad.zero_()
+    
+    if kk % 250 == 0:
+        print(kk, loss.item())
+</code></pre>
+
+<pre><code>0 1706.532958984375
+250 5.554675579071045
+500 0.44889891147613525
+750 0.3353552222251892
+1000 0.33283016085624695
+</code></pre>
+
+<p>The final weights&rsquo; values are very close to the ground-truth values used to generate the synthetic data.
+Since we are using <code>Autograd</code> here, we need to detach the <code>ww</code> tensor from the graph before converting it to Numpy array.
+It makes sense since it was the only tensor we want to learn.</p>
+
+<pre><code class="language-python">print(&quot;Final weight values:\n{}&quot;.format(ww.detach().numpy().flatten()))
+</code></pre>
+
+<pre><code>Final weight values:
+[2.0251102 2.9641314]
+</code></pre>
+
+<h2 id="6-nn-package-for-a-linear-problem">6. <code>nn</code> package for a linear problem</h2>
+
+<p>PyTorch looks similar to TensorFlow since we define a computational graph and use automatic differentiation to compute gradients in both frameworks.</p>
+
+<p>However, how the computational graphs are built differs: TensorFlow uses static while PyTorch uses dynamic computational graphs.</p>
+
+<p>In TensorFlow, we first create the computational graph and then execute the same graph as many times as many data batches we want to feed to the graph itself.
+In PyTorch, each forward pass defines a new computational graph.</p>
+
+<p>Both structures (static and dynamic) come with their own pros and cons.
+A dedicated post on this topic will be released in the near future.
+At this point, keep in mind that static graphs let us optimize the model up front, while dynamic graphs are flexible to the actual data to build the model on-the-fly.</p>
+
+<p>Pytorch provides us with a powerful module, <code>nn</code>, to build the model in an even more compact way.
+This package offers high-level abstractions that are useful for building large and complex neural networks.
+It is equivalent to frameworks like Keras, TensorFlow-Slim and TFLearn.</p>
+
+<p>In this example, we just need the <code>Linear</code> module to transform the input using an affine function, where weights and biases are stored internally, and the <code>MSELoss</code> to compute the model loss (Mean Squared Error).
+Since the input tensor contains also a column of <code>1</code>s, we do not need the <code>bias</code> to be active in this linear transformation, therefore we set <code>bias=False</code>.
+Here we reduce the loss with <code>sum</code> as we did in the previous case, but in practice, we should use <code>mean</code>.</p>
+
+<pre><code class="language-python"># Create the model
+mdl = torch.nn.Linear(2, 1, bias=False)
+
+# Compute model loss
+lossFun = torch.nn.MSELoss(reduction='sum')
+
+learning_rate = 1e-3
+for kk in range(1000+1):
+    # Forward pass: compute model output
+    y_pred = mdl(xt)
+    # loss
+    loss = lossFun(y_pred, yt)
+    
+    # Zero the gradients before running the backward pass
+    mdl.zero_grad()
+    # backprop
+    loss.backward()
+    # Update weights using gradient descent
+    with torch.no_grad():
+        for param in mdl.parameters():
+            param.data -= learning_rate * param.grad
+    if kk % 250 == 0:
+        print(kk, loss.item())
+</code></pre>
+
+<pre><code>0 1037.19970703125
+250 0.3331485688686371
+500 0.332772433757782
+750 0.3327724039554596
+1000 0.3327724039554596
+</code></pre>
+
+<p>In this case, since we use the <code>Linear</code> module, we need to extract the weight tensor from the <code>mdl.parameters()</code> generator.
+For each tensor, we detach it and convert it to an array.
+In this simple model, we only have one tensor, so we pick the first element of the list.</p>
+
+<p>The final weights&rsquo; values are very close to the ground-truth values used to generate the synthetic data.</p>
+
+<pre><code class="language-python">wEnd = [prm.detach().numpy() for prm in mdl.parameters()][0].flatten()
+print(&quot;Final weight values:\n{}&quot;.format(wEnd))
+</code></pre>
+
+<pre><code>Final weight values:
+[2.0242224 2.96617  ]
+</code></pre>
+
+<h2 id="7-optim-package-for-a-linear-problem">7. <code>optim</code> package for a linear problem</h2>
+
+<p>We finally introduce the <code>optim</code> package that handles the optimization algorithm in a super-compact way, rather than manually updating the learnable parameters, tensor by tensor.
+Besides, we often want to employ more advanced optimizers such as AdaGrad, RMSProp or Adam.
+With <code>optim</code> it is always one single line to declare the type of optimizer and one line within the <em>training</em> for-loop to update the parameters.</p>
+
+<pre><code class="language-python"># Create the model
+mdl = torch.nn.Linear(2, 1, bias=False)
+
+# Compute model loss
+lossFun = torch.nn.MSELoss(reduction='sum')
+
+learning_rate = 1e-2
+optimizer = torch.optim.Adam(mdl.parameters(), lr=learning_rate)
+for kk in range(1000+1):
+    # Forward pass: compute model output
+    y_pred = mdl(xt)
+    # loss
+    loss = lossFun(y_pred, yt)
+    # Zero the gradients before running the backward pass
+    mdl.zero_grad()
+    # backprop
+    loss.backward()
+    # Update weights using selected optimizer
+    optimizer.step()
+    if kk % 250 == 0:
+        print(kk, loss.item())
+</code></pre>
+
+<pre><code>0 1616.8270263671875
+250 135.70327758789062
+500 6.169807434082031
+750 2.1447134017944336
+1000 1.1137772798538208
+</code></pre>
+
+<p>We need to extract the weight tensor from the <code>mdl.parameters()</code> generator also in this case.</p>
+
+<p>The final weights&rsquo; values are very close to the ground-truth values used to generate the synthetic data.</p>
+
+<pre><code class="language-python">wEnd = [prm.detach().numpy() for prm in mdl.parameters()][0].flatten()
+print(&quot;Final weight values:\n{}&quot;.format(wEnd))
+</code></pre>
+
+<pre><code>Final weight values:
+[2.1352127 2.7306306]
+</code></pre>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/fcnn/fcnn07/" style="color: #4ABDAC; font-size: 18px; "> How neural networks learn basic features with Tensorflow</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/fcnn/fcnn09/" style="color: #4ABDAC; font-size: 18px; ">How neural networks learn basic features with Pytorch</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

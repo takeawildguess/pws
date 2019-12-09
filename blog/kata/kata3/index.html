@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <title>Learning Python by doing - Part 3 &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Learning Python by doing - Part 3">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/kata/kata3/" style="font-size: 16px; ">Coding kata</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/kataHead.png" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Learning Python by doing - Part 3</h1>
+          <h5 class="card-title text-center">Coding kata</h5>
+          <h6 class="card-text text-center">June 23, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 10.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/coding"><kbd class="item-tag">coding</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This post belongs to a new series of posts where I intend to face the challenge of learning a new programming language, such as Python, <strong>by doing</strong>. There are tons of material about Python tutorials for every level of expertise. It has been quite a while now that platforms such as <a href="https://www.codewars.com/" target="_blank">codewars</a>, <a href="https://www.topcoder.com/" target="_blank">topcoders</a> and similar have been around.
+The nice thing that I like about these platforms is that the trainee is faced with many tasks or challenges of increasing difficulty. The same task is often proposed for multiple languages (Python, Javascript, C++ and many others).
+<em>Learn by doing</em> is gaining popularity in recent years as it helps the trainee to figure out how and where he/she can get stacked.
+Solutions of other members are accessible only when an admissible solution has been successfully submitted to the automatic testing process.</p>
+
+<p>So why should I write a blog post to show how to solve such kinds of tasks and how could it be useful to any extend to you?
+In line with the philosophical view of the above-mentioned platforms, I encourage you to read each single example description, step out of the blog post, try to work it out by yourself (without surfing Stack-overflow too much!) and coming back to the post to go through the proposed solution (something I tend to provide more than one) and the related comments.
+I have indeed struggled sometimes to fully capture other members&rsquo; solutions with no comments or details of the logic behind the code.</p>
+
+<p>In the previous two posts (<a href="/blog/kata/kata1/">Part1</a> and <a href="/blog/kata/kata2/">Part2</a>), we develop a Python code from scratch to determine the travelled distance of a bike rider in a given time span, for a fixed and increasing annual distance target.</p>
+
+<p>We now move to text processing: how to extract initials from a name string in Python?</p>
+
+<h2 id="2-description">2. Description</h2>
+
+<p>James is responsible to develop a function for a customer that takes any employee full name and automatically extract the initials to append to the signature of every email sent by that specific employee.
+To this end, he needs to write a function that takes two space-separated words the full name is made of and returns the two capital letters with a dot separating them.</p>
+
+<p>For instance, a full name <code>James Bond</code> input should be returned as <code>J.B</code>.</p>
+
+<h2 id="3-input-data">3. Input data</h2>
+
+<p>Here one example of character data.</p>
+
+<pre><code class="language-python">import sys, random
+import numpy as np
+import pandas as pd
+</code></pre>
+
+<pre><code class="language-python">fullNames = [&quot;James Bond&quot;, &quot;Bruce Wayne&quot;, &quot;Bruce Banner&quot;, &quot;Peter Parker&quot;, &quot;Mary Poppins&quot;]
+</code></pre>
+
+<pre><code class="language-python">print('It consists of {} characters'.format(len(fullNames)))
+</code></pre>
+
+<pre><code>It consists of 5 characters
+</code></pre>
+
+<p>The next step is to generate a set of randomly generated test units and test the different developed functions on it.</p>
+
+<p>We use the random selector <code>choice</code> from the <code>random</code> library (see the <a href="https://docs.python.org/3/library/random.html#random.choice" target="_blank">official site</a> and <a href="https://stackoverflow.com/a/40921801" target="_blank">this Stackoverflow answer</a>).</p>
+
+<p>It returns a random element from the non-empty input sequence <code>fullNames</code>.
+We convert the 2-word name to a list with <code>split()</code> and take the first element for the first name <code>firstName</code>.
+We repeat the same procedure one more time and take the last element as the last name <code>lastName</code>.</p>
+
+<pre><code class="language-python">Nsample = 50
+firstName = random.choice(fullNames).split()[0]
+lastName = random.choice(fullNames).split()[-1]
+firstName + &quot; &quot; + lastName
+</code></pre>
+
+<pre><code>'Bruce Parker'
+</code></pre>
+
+<p>We generate <code>Ncases = 10</code> test cases and place them into <code>testSet</code>.
+Since it is an entry-level post, I propose two methods to generate such a dataset:
+1. a more verbose procedure, where list is initialized, the <code>append</code> method is used within a for-loop.
+2. a more concise process, where the same logic is compressed into a single line of code, referred to as <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions" target="_blank"><em>list comprehension</em></a>.</p>
+
+<p>In both cases, the for-loop is just used to generate multiple instances, but the current iteration step is useless. We use the underscore <code>_</code> to say to Python not to allocate that value, which is coming from the <code>range</code> generator in this case, into any variable.</p>
+
+<h3 id="3-1-method-1">3.1 Method 1</h3>
+
+<pre><code class="language-python">testSet = [] # list inizialiation
+for _ in range(Nsample):
+    inputExample = random.choice(fullNames).split()[0] + &quot; &quot; + random.choice(fullNames).split()[-1]
+    testSet.append(inputExample)
+
+strLenMin = min(len(name) for name in testSet)
+strLenMax = max(len(name) for name in testSet)
+print('Test set length is {}, while the minimum/maximum example length is {}/{}, respectively'\
+      .format(len(testSet), strLenMin, strLenMax))
+</code></pre>
+
+<pre><code>Test set length is 50, while the minimum/maximum example length is 9/13, respectively
+</code></pre>
+
+<h3 id="3-2-method-2">3.2 Method 2</h3>
+
+<p>Let&rsquo;s implement the same concept in a more concise way.</p>
+
+<pre><code class="language-python">testSet = [random.choice(fullNames).split()[0] + &quot; &quot; + random.choice(fullNames).split()[-1] for _ in range(Nsample)]
+
+strLenMin = min(len(name) for name in testSet)
+strLenMax = max(len(name) for name in testSet)
+print('Test set length is {}, while the minimum/maximum example length is {}/{}, respectively'\
+      .format(len(testSet), strLenMin, strLenMax))
+</code></pre>
+
+<pre><code>Test set length is 50, while the minimum/maximum example length is 9/13, respectively
+</code></pre>
+
+<p>A short note concerns the Python <code>format</code> method.
+In this tutorial this method is used to take some variable values as arguments and replace the curly brackets within the string input to the <code>print</code> function, with such values. Further advanced results and string formatting can be achieved. Please refer to <a href="https://docs.python.org/3.4/library/string.html#string-formatting" target="_blank">the</a> official documentation and <a href="https://pyformat.info/" target="_blank">this</a> super nice guide.</p>
+
+<h2 id="4-real-data-names">4. Real data names</h2>
+
+<p>We get a more comprehensive list of names from <a href="https://www.census.gov/topics/population/genealogy/data/2000_surnames.html" target="_blank">here</a>.
+At this stage, we assume that a surname can be used as a first name as well.
+We read the CSV file in with the <a href="https://pandas.pydata.org/" target="_blank">Pandas</a> method <code>read_csv</code>.
+It returns a dataframe, <code>df</code>, which can be seen a table with as many rows as the file records and as many columns as the comma-separated text string variables stored in the CSV file itself.
+We can easily have a look at the first 5 rows of the dataframe with <code>head()</code>.</p>
+
+<pre><code class="language-python">df = pd.read_csv('names/app_c.csv')
+df.head()
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>rank</th>
+      <th>count</th>
+      <th>prop100k</th>
+      <th>cum_prop100k</th>
+      <th>pctwhite</th>
+      <th>pctblack</th>
+      <th>pctapi</th>
+      <th>pctaian</th>
+      <th>pct2prace</th>
+      <th>pcthispanic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SMITH</td>
+      <td>1</td>
+      <td>2376206</td>
+      <td>880.85</td>
+      <td>880.85</td>
+      <td>73.35</td>
+      <td>22.22</td>
+      <td>0.40</td>
+      <td>0.85</td>
+      <td>1.63</td>
+      <td>1.56</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>JOHNSON</td>
+      <td>2</td>
+      <td>1857160</td>
+      <td>688.44</td>
+      <td>1569.30</td>
+      <td>61.55</td>
+      <td>33.80</td>
+      <td>0.42</td>
+      <td>0.91</td>
+      <td>1.82</td>
+      <td>1.50</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>WILLIAMS</td>
+      <td>3</td>
+      <td>1534042</td>
+      <td>568.66</td>
+      <td>2137.96</td>
+      <td>48.52</td>
+      <td>46.72</td>
+      <td>0.37</td>
+      <td>0.78</td>
+      <td>2.01</td>
+      <td>1.60</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>BROWN</td>
+      <td>4</td>
+      <td>1380145</td>
+      <td>511.62</td>
+      <td>2649.58</td>
+      <td>60.71</td>
+      <td>34.54</td>
+      <td>0.41</td>
+      <td>0.83</td>
+      <td>1.86</td>
+      <td>1.64</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>JONES</td>
+      <td>5</td>
+      <td>1362755</td>
+      <td>505.17</td>
+      <td>3154.75</td>
+      <td>57.69</td>
+      <td>37.73</td>
+      <td>0.35</td>
+      <td>0.94</td>
+      <td>1.85</td>
+      <td>1.44</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>We are only interested in the actual names, each formatted with a capital letter for the first letter and lowercase for the second character on.
+We locally drop (<code>inplace=True</code>) each dataframe row where the column <code>name</code> is empty (see the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dropna.html" target="_blank">official site</a> and <a href="https://stackoverflow.com/a/29314880" target="_blank">this Stackoverflow answer</a>).</p>
+
+<p>The interested column <code>name</code> is extracted with either <code>df['name']</code> or <code>df.name</code> methods.
+The former method tends to be preferred in the community.
+This returns a <a href="https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.Series.html" target="_blank"><code>Series</code></a> object, which is a special object for one-single column data in Pandas.
+This can be converted to a Python list with <code>tolist()</code>.</p>
+
+<pre><code class="language-python">#names = df.name.tolist()
+df.dropna(subset=['name'], inplace=True)
+names = df['name'].tolist()
+</code></pre>
+
+<p>Now, the following list comprehension takes each name element and capitalizes it, i.e., it creates a new element with the first letter unchanged (uppercase) and the remaining letters (<code>[1:]</code>) as lowercase.</p>
+
+<pre><code class="language-python">longNameList = [name[0] + name[1:].lower() for name in names]
+name2show = 5
+print('The first {} names are: {}'.format(name2show, longNameList[:name2show]))
+print('Name list length: {}'.format(len(longNameList)))
+</code></pre>
+
+<pre><code>The first 5 names are: ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones']
+Name list length: 151670
+</code></pre>
+
+<p>We generate the final dataset by selecting names from the 151k name list.</p>
+
+<pre><code class="language-python">testSet = [random.choice(longNameList) + &quot; &quot; + random.choice(longNameList) for _ in range(Nsample)]
+
+strLenMin = min(len(name) for name in testSet)
+strLenMax = max(len(name) for name in testSet)
+print('Test set length is {}, while the minimum/maximum example length is {}/{}, respectively'\
+      .format(len(testSet), strLenMin, strLenMax))
+</code></pre>
+
+<pre><code>Test set length is 50, while the minimum/maximum example length is 10/21, respectively
+</code></pre>
+
+<h2 id="5-reference-function">5. Reference function</h2>
+
+<p>This section is meant to define the procedure to calculate the output in the most basic Pythonic way, to be readable and 100% correct.</p>
+
+<p>We take the first example, we convert the string characters into upper case with the <a href="https://docs.python.org/2/library/string.html#string.upper" target="_blank"><code>upper()</code></a> method, split the new string into a list containing the words that are separated by arbitrary strings of whitespace characters with <a href="https://docs.python.org/2/library/string.html#string.split" target="_blank"><code>split()</code></a> and <a href="https://docs.python.org/2/tutorial/datastructures.html#tuples-and-sequences" target="_blank">unpack</a> this 2-item list into the <code>first</code> and <code>last</code> variables, each of which is a string again.
+The last step is to get the first character of each name string and concatenate those strings with the dot character (<code>'.'</code>).
+Concatenating strings is as simple as using the <code>+</code> operator.</p>
+
+<pre><code class="language-python">example = testSet[0]
+uppercaseName = example.upper()
+names = uppercaseName.split(' ')
+first, last = names
+initials = first[0] + '.' + last[0]
+print('The initials of the full name {} are {}!'.format(example, initials))
+</code></pre>
+
+<pre><code>The initials of the full name Tinajero Rieg are T.R!
+</code></pre>
+
+<p>We embed this code into the reference function <code>refFun()</code>.
+The output function variable has to be declared within the <code>return</code> statement.</p>
+
+<pre><code class="language-python">def refFun(example):
+    uppercaseName = example.upper()
+    names = uppercaseName.split(' ')
+    first, last = names
+    initials = first[0] + '.' + last[0]
+    return initials
+</code></pre>
+
+<h2 id="6-output-data">6. Output data</h2>
+
+<p>We need to repeat the process defined in the above function to get the output for the entire <code>testSet</code>.</p>
+
+<pre><code class="language-python">testResults = []
+
+for example in testSet:
+    testResults.append(refFun(example))
+</code></pre>
+
+<p>We show the results for the first 10 dataset inputs.</p>
+
+<pre><code class="language-python">for kk in range(10):
+    example, result = testSet[kk], testResults[kk]
+    print('='*60)
+    print('The initials of the full name {} are {}!'.format(example, result))
+</code></pre>
+
+<pre><code>============================================================
+The initials of the full name Tinajero Rieg are T.R!
+============================================================
+The initials of the full name Ana Fengel are A.F!
+============================================================
+The initials of the full name Palenske Bruening are P.B!
+============================================================
+The initials of the full name Khatun Primrose are K.P!
+============================================================
+The initials of the full name Mackedanz Goranson are M.G!
+============================================================
+The initials of the full name Cure Kindoll are C.K!
+============================================================
+The initials of the full name Wynings Brautigan are W.B!
+============================================================
+The initials of the full name Hornick Wollam are H.W!
+============================================================
+The initials of the full name Tutino Schwertner are T.S!
+============================================================
+The initials of the full name Alvera Shehu are A.S!
+</code></pre>
+
+<h2 id="7-function-development">7. Function development</h2>
+
+<p>Since the input is a string, we can directly feed a white-space-separated word list (<code>example.split()</code>) to a list comprehension.
+For each word we take the first letter only, convert it to uppercase and give this generator as input to the <a href="https://docs.python.org/2/library/string.html#string.join" target="_blank"><code>join</code></a> method, which concatenates the generated words with intervening occurrences of <code>'.'</code>.
+This one-single line code is more practical for longer strings.
+The unpacking method instead implies the developer to define as many new variables as the number of words.</p>
+
+<pre><code class="language-python">initials = '.'.join(wd[0].upper() for wd in example.split())
+print('The initials of the full name {} are {}'.format(example, initials))
+</code></pre>
+
+<pre><code>The initials of the full name Alvera Shehu are A.S
+</code></pre>
+
+<pre><code class="language-python">def fun1(example):
+    return '.'.join(wd[0].upper() for wd in example.split())
+</code></pre>
+
+<p>A very similar approach would convert the final concatenated string to uppercase, instead of repeating this step for each character within the list comprehension step.</p>
+
+<pre><code class="language-python">initials = '.'.join(wd[0] for wd in example.split()).upper()
+print('The initials of the full name {} are {}'.format(example, initials))
+</code></pre>
+
+<pre><code>The initials of the full name Alvera Shehu are A.S
+</code></pre>
+
+<pre><code class="language-python">def fun2(example):
+    return '.'.join(wd[0] for wd in example.split()).upper()
+</code></pre>
+
+<h2 id="8-function-assessment">8. Function assessment</h2>
+
+<p>In this last section of the very first task, we compare the performance of every developed function with the benchmark results.
+The final score is the percentage of successful tests obtained with that function.</p>
+
+<p>As always, I do propose two methods to get the score, with and without list comprehension.</p>
+
+<pre><code class="language-python">score = 0
+for example, result in zip(testSet, testResults):
+    if fun1(example) == result:
+        score += 1
+
+score /= len(testSet)/100
+print('Final score for function 1 is {}%.'.format(score))
+</code></pre>
+
+<pre><code>Final score for function 1 is 100.0%.
+</code></pre>
+
+<pre><code class="language-python">score = sum(1 for example, result in zip(testSet, testResults) if fun1(example) == result)/len(testSet)*100
+print('Final score for function 1 is {}%.'.format(score))
+</code></pre>
+
+<pre><code>Final score for function 1 is 100.0%.
+</code></pre>
+
+<p>We define an in-place scoring function using the powerful <a href="https://docs.python.org/3/reference/expressions.html#lambda" target="_blank"><code>lambda</code></a> operator to create it anonymously.</p>
+
+<p>This <code>scoring</code> function takes a function as input and returns its score over the test set.</p>
+
+<pre><code class="language-python">scoring = lambda fun: sum(1 for example, result in zip(testSet, testResults) if fun(example) == result)/len(testSet)*100
+</code></pre>
+
+<p>We finally place the 4 developed functions into a list and prints the score associated with each of them.
+The <a href="https://docs.python.org/3/library/functions.html#enumerate" target="_blank"><code>enumerate</code></a> iterator gives the 0-based index and the corresponding element of the input list.</p>
+
+<pre><code class="language-python">funs = [fun1, fun2]
+for kk, fun in enumerate(funs):
+    print('Final score for function {} is {}%.'.format(str(kk+1), scoring(fun)))
+</code></pre>
+
+<pre><code>Final score for function 1 is 100.0%.
+Final score for function 2 is 100.0%.
+</code></pre>
+
+<p>We finally compare the performance of each function in terms of computational time.
+We use one of the <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html" target="_blank">built-in magic commands</a> available in the Jupyter notebook, <code>timeit</code>, which estimates the execution time of a Python statement or expression.
+One (<code>%timeit</code>) or two (<code>%%timeit</code>) percent signs are required to evaluate one-line statement or one cell, respectively.</p>
+
+<p>The two shorter functions are slower than the reference function.
+For names with a few words, some simple Python unpacking and concatenating can do the job nicely and faster.
+The advantage of the two other functions comes into play for longer names.
+We can also appreciate that applying the <code>upper()</code> method only once to the final string (<code>fun2</code>) reduces the computational time by $4\mu s$.</p>
+
+<pre><code class="language-python">%%timeit
+for example in testSet:
+    fun1(example)
+</code></pre>
+
+<pre><code>73.6 µs ± 1.1 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+</code></pre>
+
+<pre><code class="language-python">%%timeit
+for example in testSet:
+    fun2(example)
+</code></pre>
+
+<pre><code>69.4 µs ± 560 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+</code></pre>
+
+<pre><code class="language-python">%%timeit
+for example in testSet:
+    refFun(example)
+</code></pre>
+
+<pre><code>42.1 µs ± 965 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+</code></pre>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/kata/kata2/" style="color: #4ABDAC; font-size: 18px; "> Learning Python by doing - Part 2</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/blog/kata/kata4/" style="color: #4ABDAC; font-size: 18px; ">Learning Python by doing - Part 4</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>

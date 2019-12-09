@@ -11,12 +11,13 @@
    <meta name="author" content="Your name"> 
   
 
-  <meta name="generator" content="Hugo 0.49" />
+  <meta name="generator" content="Hugo 0.59.1" />
   <title>Hello world for Machine learning - Part 1 &middot; take a wild guess</title>
 
   
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 
 
  <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
@@ -31,7 +32,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
-<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
 
   
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -40,6 +41,8 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
 
 
 
@@ -54,9 +57,6 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
 
-
-
-<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
 
 
 <script type="text/javascript">
@@ -103,10 +103,11 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
   <![endif]-->
 
   
-  
-  
-  
-  
+    
+    
+    
+    
+    
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -118,6 +119,7 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+    
   
 
   
@@ -196,11 +198,11 @@ if (!doNotTrack) {
       
       <ul class="navbar-nav navbar-right">
         
-          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
         
-          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a></li>
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
         
       </ul>
       
@@ -268,7 +270,7 @@ How can the machine change its parameters to minimize the loss function? That is
 The <em>machine</em> uses the tools provided by the designer to improve its performance to represent the real-world scenario.</p>
 
 <p><img src="/blog/linreg/linreg1/learningFramework.png" alt="pngM" title="Machine learning general structure" />
-<em>Figure 1 - Machine learning general structure</em></p>
+<center><em>Figure 1 - Machine learning general structure</em></center></p>
 
 <h2 id="lossFun">3. Loss function</h2>
 
@@ -289,7 +291,7 @@ The <em>machine</em> uses the tools provided by the designer to improve its perf
 <p>where the displacement is the vertical distance between the mass (data point) and its projection to the bar (see Fig.2).</p>
 
 <p><img src="/blog/linreg/linreg1/energyModel.png" alt="pngM" title="Energy-based loss function scheme" />
-<em>Figure 2 - Energy-based loss function scheme</em></p>
+<center><em>Figure 2 - Energy-based loss function scheme</em></center></p>
 
 <p>The overall energy content of the system is the sum of the contribution of each spring. The system tends to reach equilibrium by minimizing its energy content. The equilibrium is identified by the least energy possible configuration. If every point is equally relevant, the stiffness value is constant for every spring (for simplicity we can set $ k_j = 1 $ for each $ j $). Otherwise, we can force the system either to be extremely precise to represent one point by increasing its associated spring&rsquo;s stiffness or to ignore one point by reducing the stiffness down to 0.</p>
 
@@ -305,7 +307,7 @@ If the error values are independently and identically distributed with a normal 
 <p>$$ p(\epsilon_j) = \frac{1}{\sqrt{2\pi}\cdot \sigma}\cdot \exp^{-\frac{\epsilon_j^2}{2\cdot\sigma^2}} $$</p>
 
 <p><img src="/blog/linreg/linreg1/likelihoodModel.png" alt="pngM" title="Likelihood-based loss function scheme" />
-<em>Figure 3 - Likelihood-based loss function scheme</em></p>
+<center><em>Figure 3 - Likelihood-based loss function scheme</em></center></p>
 
 <p>By combining the latter equation with the error-based linear regression expression (1), the output density given inputs and parameter estimation for point $P_j$ is:</p>
 
@@ -409,17 +411,16 @@ plt.show()
 <h2 id="reference">Reference</h2>
 
 <ol>
-<li><a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf">CS229 notes</a></li>
-<li><a href="https://www.coursera.org/learn/machine-learning">Machine Learning at Coursera</a></li>
-<li><a href="http://people.math.gatech.edu/~ecroot/3225/maximum_likelihood.pdf">Maximum likelihood estimators and least squares</a></li>
-<li><a href="https://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf">An Introduction to Statistical Learning</a></li>
+<li><a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf" target="_blank">CS229 notes</a></li>
+<li><a href="https://www.coursera.org/learn/machine-learning" target="_blank">Machine Learning at Coursera</a></li>
+<li><a href="http://people.math.gatech.edu/~ecroot/3225/maximum_likelihood.pdf" target="_blank">Maximum likelihood estimators and least squares</a></li>
+<li><a href="https://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf" target="_blank">An Introduction to Statistical Learning</a></li>
 </ol>
 
         </div>
         <div class="pgNav PageNavigation col-12 text-center">
           <span>
-          <p>&laquo; 
-
+          <p>&laquo; <a class="" href="/about/me/" style="color: #4ABDAC; font-size: 18px; "> About me</a>
           
           &nbsp;&nbsp; | &nbsp;&nbsp;
           <a class="" href="/blog/linreg/linreg2/" style="color: #4ABDAC; font-size: 18px; ">Hello world for Machine learning - Part 2</a>
@@ -427,8 +428,8 @@ plt.show()
           &raquo;</p>
           </span>
           
+          
         </div>
-
       </div>
     </div>
   </div>
