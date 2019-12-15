@@ -6,10 +6,21 @@
     <description>Recent content in neural network on take a wild guess</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://takeawildguess.net/tags/neural-network/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Can we visualize the flow of a multiclass neural network?</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn17/</link>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn17/</guid>
+      <description>1. Introduction Welcome back to the FCNN series!
+In this new post, we are going to use the Python visualization class, visFCNN(), developed in the two previous posts. We want to see what happens inside a feed-forward neural network, which has been trained on toy examples with Tensorflow with the previously-developed Python class, trainFCNN(), for a regression problem.
+The Python class, visFCNN(), takes as input a dictionary containing all the information required to visualize the network flow, namely the values of the network parameters and main nodes (inputs, linear outputs and activation outputs).</description>
+    </item>
     
     <item>
       <title>Can we visualize the flow of a regression neural network?</title>
