@@ -6,10 +6,21 @@
     <description>Recent content in neural network on take a wild guess</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://takeawildguess.net/tags/neural-network/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How does a neural network internally shape the space?</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn18/</link>
+      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn18/</guid>
+      <description>1. Introduction Welcome back to the FCNN series!
+In this new post, we are going to apply the same workflow used in the previous four posts (from this to that post) to visualise a 2D batch of inputs. We have defined and used this workflow to visualize a single-sample case. We refer to the single-sample case as 0D and to the batch case as 2D.
+The batch contains the whole input space, which will be transformed throughout each neuron till the final output, i.</description>
+    </item>
     
     <item>
       <title>Can we visualize the flow of a multiclass neural network?</title>
