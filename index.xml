@@ -6,7 +6,7 @@
     <description>Recent content on take a wild guess</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 29 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://takeawildguess.net/index.xml" rel="self" type="application/rss+xml" />
     
@@ -72,6 +72,16 @@
       
       <guid>https://takeawildguess.net/project/project4/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Building a Python class to visualize the internal process of a neural network</title>
+      <link>https://takeawildguess.net/blog/fcnn/fcnn19/</link>
+      <pubDate>Sun, 29 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://takeawildguess.net/blog/fcnn/fcnn19/</guid>
+      <description>1. Introduction Welcome back to the FCNN series!
+In this new post, we are going to develop a Python class to visualize what happens inside a feed-forward neural network, which has been trained on toy examples with Tensorflow with the previously-developed Python class, trainFCNN(). The Python class, visFCNN(), takes as input the instance of the trainFCNN() class after the training process has happened, which contains all the information required to visualize the network flow, namely the values of the network parameters and main nodes (inputs, linear outputs and activation outputs).</description>
     </item>
     
     <item>

@@ -12,6 +12,33 @@
   
 
   <meta name="generator" content="Hugo 0.59.1" />
+  <script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://takeawildguess.net/"
+    },
+    "articleSection" : "blog",
+    "name" : "How does a neural network internally shape the space?",
+    "headline" : "How does a neural network internally shape the space?",
+    "description" : "1. Introduction Welcome back to the FCNN series!\nIn this new post, we are going to apply the same workflow used in the previous four posts (from this to that post) to visualise a 2D batch of inputs. We have defined and used this workflow to visualize a single-sample case. We refer to the single-sample case as 0D and to the batch case as 2D.\nThe batch contains the whole input space, which will be transformed throughout each neuron till the final output, i.",
+    "inLanguage" : "en-US",
+    "author" : "Mattia Venditti",
+    "creator" : "Mattia Venditti",
+    "publisher" : "Mattia Venditti",
+    "accountablePerson" : "Mattia Venditti",
+    "copyrightHolder" : "Mattia Venditti",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-12-22T00:00:00Z",
+    "dateModified" : "2019-12-22T00:00:00Z",
+    "url" : "https://takeawildguess.net/blog/fcnn/fcnn18/",
+    "wordCount" : "1779",
+    "keywords" : [ "python","neural network","visualization","matplotlib","Blog" ]
+}
+</script>
+
   <title>How does a neural network internally shape the space? &middot; take a wild guess</title>
 
   
@@ -265,14 +292,13 @@ The whole code to create a synthetic dataset and learn a neural network model wi
 <p>We are going through the following steps:</p>
 
 <ol>
-<li>What do we want to achieve and how?</li>
 <li>Create a dataset, train the network and extract the final values of parameters and intermediate variables for a given set of inputs.</li>
 <li>Visualize two samples for a binary classification problem</li>
 <li>Describe the Python class, <code>visFCNN2D()</code>, step-by-step. The source code can be found in my Github <a href="https://github.com/takeawildguess/FCNNlib" target="_blank">repo</a>.</li>
 <li>Play a bit with the class to visualize different neural network architectures for some funny toy cases.</li>
 </ol>
 
-<p>Point 4 implies to create the dictionary <code>fcnn</code> containing what it is required to visualize the network, the initial settings, how to draw a neuron and a bias term, a line that represents a linear layer weight, how to define the colours of any object, how to draw the input layer, each hidden layer and the output layer.</p>
+<p>Check out also <a href="https://playground.tensorflow.org/" target="_blank">this</a> interactive application developed by the Tensorflow team.</p>
 
 <h2 id="2-what-do-we-want-to-achieve-and-how">2. What do we want to achieve and how?</h2>
 
@@ -499,7 +525,7 @@ It is the vertical stack of the <code>2x2</code> weight array and the <code>1x2<
           <p>&laquo; <a class="" href="/blog/fcnn/fcnn17/" style="color: #4ABDAC; font-size: 18px; "> Can we visualize the flow of a multiclass neural network?</a>
           
           &nbsp;&nbsp; | &nbsp;&nbsp;
-          <a class="" href="/project/project4/" style="color: #4ABDAC; font-size: 18px; ">Project 4</a>
+          <a class="" href="/blog/fcnn/fcnn19/" style="color: #4ABDAC; font-size: 18px; ">Building a Python class to visualize the internal process of a neural network</a>
           
           &raquo;</p>
           </span>

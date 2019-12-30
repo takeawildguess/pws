@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+   <meta name="description" content="Personal website"> 
+   <meta name="author" content="Your name"> 
+  
+
+  <meta name="generator" content="Hugo 0.59.1" />
+  <script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://takeawildguess.net/"
+    },
+    "articleSection" : "blog",
+    "name" : "Building a Python class to visualize the internal process of a neural network",
+    "headline" : "Building a Python class to visualize the internal process of a neural network",
+    "description" : "1. Introduction Welcome back to the FCNN series!\nIn this new post, we are going to develop a Python class to visualize what happens inside a feed-forward neural network, which has been trained on toy examples with Tensorflow with the previously-developed Python class, trainFCNN(). The Python class, visFCNN(), takes as input the instance of the trainFCNN() class after the training process has happened, which contains all the information required to visualize the network flow, namely the values of the network parameters and main nodes (inputs, linear outputs and activation outputs).",
+    "inLanguage" : "en-US",
+    "author" : "Mattia Venditti",
+    "creator" : "Mattia Venditti",
+    "publisher" : "Mattia Venditti",
+    "accountablePerson" : "Mattia Venditti",
+    "copyrightHolder" : "Mattia Venditti",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-12-29T00:00:00Z",
+    "dateModified" : "2019-12-29T00:00:00Z",
+    "url" : "https://takeawildguess.net/blog/fcnn/fcnn19/",
+    "wordCount" : "2386",
+    "keywords" : [ "python","neural network","visualization","matplotlib","Blog" ]
+}
+</script>
+
+  <title>Building a Python class to visualize the internal process of a neural network &middot; take a wild guess</title>
+
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+ <link rel="stylesheet" href="https://takeawildguess.net/css/main.css"> 
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script> 
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+
+<script type="text/javascript">
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+  }
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) { $('#back-to-top').fadeIn(); } else { $('#back-to-top').fadeOut(); }
+    });
+    
+    $('#back-to-top').click(function () {
+      $('#back-to-top').tooltip('hide');
+      $('body,html').animate({ scrollTop: 0 }, 800); return false; });
+    $('#back-to-top').tooltip('show');
+  })
+</script>
+
+
+  
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+  
+
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://takeawildguess.net/images/logo/twgLogo.png">
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  
+    
+    
+    
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151389132-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']],
+    processEscapes: true, processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }});
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+  
+
+</head>
+
+  <!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand abs" href="https://takeawildguess.net/">
+      <img src="https://takeawildguess.net/images/logo/twgLogo.png" class="img-responsive" id="nav-logo" alt="Building a Python class to visualize the internal process of a neural network">
+    </a>
+  
+  <a class="navbar-brand" href="/blog/fcnn/fcnn19/" style="font-size: 16px; ">See the 2D space inside a NN</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://takeawildguess.net/blog/">Blog</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://takeawildguess.net/about/" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://takeawildguess.net/about/">Main</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_twg">TWG</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_me">Me</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_skl">Skills</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_exp">Experience</a>
+            <a class="dropdown-item" href="https://takeawildguess.net/about/#a_pt">Talks</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takeawildguess.net/resume/">Resume</a>
+          </div>
+        </li>
+
+        
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        
+          <li class="nav-item navbar-icon"><a href="https://github.com/takeawildguess/" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://twitter.com/takeawildguess4/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        
+          <li class="nav-item navbar-icon"><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+      </ul>
+      
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+</nav>
+
+  <body data-spy="scroll" data-target="#toc">
+    <!-- Hero -->
+<header class="postHead">
+  <div class="container-fluid overlay">
+    <div class="descr">
+      <img src="https://takeawildguess.net/blog/images/fcnnHead2.jpg" class="img-fluid" alt="__">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Building a Python class to visualize the internal process of a neural network</h1>
+          <h5 class="card-title text-center">See the 2D space inside a NN</h5>
+          <h6 class="card-text text-center">December 29, 2019</h6>
+          <h6 class="card-text text-center"><span class="fa fa-clock-o"></span> 16.5 min read</h6>
+          <h6 class="card-text text-center">
+            <a href="https://takeawildguess.net/tags/python"><kbd class="item-tag">python</kbd></a> <a href="https://takeawildguess.net/tags/neural-network"><kbd class="item-tag">neural network</kbd></a> <a href="https://takeawildguess.net/tags/visualization"><kbd class="item-tag">visualization</kbd></a> <a href="https://takeawildguess.net/tags/matplotlib"><kbd class="item-tag">matplotlib</kbd></a> 
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <section class="postContent">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-sm-2 col-lg-2">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      
+      <div class="col-lg-10 col-sm-10">
+        <div class="container blogPost">
+          
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>Welcome back to the FCNN series!</p>
+
+<p>In this new post, we are going to develop a Python class to visualize what happens inside a feed-forward neural network, which has been trained on toy examples with Tensorflow with the previously-developed Python class, <code>trainFCNN()</code>.
+The Python class, <code>visFCNN()</code>, takes as input the instance of the <code>trainFCNN()</code> class after the training process has happened, which contains all the information required to visualize the network flow, namely the values of the network parameters and main nodes (inputs, linear outputs and activation outputs).</p>
+
+<p>This flow corresponds to a 2D batch of the whole input space, which will be transformed throughout each neuron till the final output, i.e. the model prediction.
+The structure of this post comes from the <a href="/blog/fcnn/fcnn15/">previous</a> post to build the single-sample flow visualization.</p>
+
+<p>This Python class also needs some initial settings (such as geometric parameters of the chart) and then it starts to draw a neuron and a bias term, a line that represents a linear layer weight, to assign the colours to any object, to draw the input layer, each hidden layer and the output layer.</p>
+
+<p>In the <a href="/blog/fcnn/fcnn20/">next post</a>, we will play a bit with the class to visualize different neural networks with different settings.</p>
+
+<p>The source code can be found in my Github <a href="https://github.com/takeawildguess/FCNNlib" target="_blank">repo</a>.</p>
+
+<p>Check out also <a href="https://playground.tensorflow.org/" target="_blank">this</a> interactive application developed by the Tensorflow team.</p>
+
+<h2 id="2-the-visualization-class-in-action">2. The visualization class in action</h2>
+
+<p>This post aims at illustrating and explaining how to build a Python class to visualize the transformation of the 2D space through the trained neural network.</p>
+
+<p>An example of what the class looks like in action is given below, where the network has been trained on the multi-class <code>quadrants</code> classification problem.</p>
+
+<pre><code class="language-python">vnn = visFCNN2D(tnn)
+vnn.visualize(palette='rainbow')
+</code></pre>
+
+<p><img src="output_3_0.png" alt="png" /></p>
+
+<p>Another example is the multi-class <code>squares</code> classification problem, where the network has got two hidden layers of 6 neurons each, and sigmoid as the activation function.</p>
+
+<pre><code class="language-python">vnn = visFCNN2D(tnn)
+vnn.visualize(palette='rainbow')
+</code></pre>
+
+<p><img src="output_5_0.png" alt="png" /></p>
+
+<p>Since the network is larger and quite complex, we exploit the <code>zoom</code> feature to dig deeper on the parameters&rsquo; values and the space of any of the neurons.</p>
+
+<pre><code class="language-python">vnn.zoom(what='parameters', level=[1], palette='rainbow')
+</code></pre>
+
+<p><img src="output_7_0.png" alt="png" /></p>
+
+<pre><code class="language-python">vnn.zoom(what='activations', level=[2, 1], palette='rainbow')
+</code></pre>
+
+<p><img src="output_8_0.png" alt="png" /></p>
+
+<h2 id="3-building-the-visualization-class-visfcnn">3. Building the visualization class <code>visFCNN</code></h2>
+
+<h3 id="3-1-initialization">3.1 Initialization</h3>
+
+<p>This section aims at initializing the class with the network data and the geometric parameters.
+We describe how to create the visualization class as a sequence of function-definition steps, rather than give the entire code into a single block that doesn&rsquo;t help very much.
+To this end, we use <code>classmethod</code> to assign a function to a class method.</p>
+
+<pre><code class="language-python">class visFCNN2D(object):
+    pass
+</code></pre>
+
+<p>We start by setting the geometric parameters that define the network chart layout.
+Every geometric parameter has been explained in the series <a href="/blog/fcnn/fcnn18/">intro</a>.
+We use a more compact way to assign multiple parameters to the class as a dictionary with the <code>__dict__</code> method.</p>
+
+<pre><code class="language-python">def init_class(self, tnn):
+    self.__dict__ = {'weight_size': 3, 'activation_size': 1.5, 'vert_mrg': 1.5,\
+                     'neuron_size': 6, 'bias_size': 1.5, 'title_size': 3,\
+                     'fsS': 20, 'fsM': 24, 'fsL': 30,}
+    self.layerDist = self.weight_size+self.activation_size+2*self.neuron_size
+    self.neurShift = self.vert_mrg+self.neuron_size
+    self.dataRetrieval(tnn)
+
+visFCNN2D.__init__ = classmethod(init_class)
+</code></pre>
+
+<p>We get the data from the trained network via the <code>tnn</code> object.
+Parameters and variables are stored in <code>nn_prms</code> and <code>nn_vars2D</code>, respectively.
+We treat the input as the output of a fictitious previous activation layer.
+The set of activation layers, $a^{(kk)}$, is retrieved from <code>tnn.nn_vars[1::2]</code>, while the set of dense layers, $z^{(kk)}$, is retrieved from <code>tnn.nn_vars[::2]</code>.
+In a similar fashion, we extract weights and biases from <code>tnn.nn_prms</code>.</p>
+
+<p>The layout of the network is given by the number of layers, the number of neurons in each layer, the maximum number of neurons that defines the figure height.
+For better visualization of the parameters&rsquo; intensity, we extract the maximum value for each of those objects, so that data (and therefore colours) can be normalized.</p>
+
+<pre><code class="language-python">def dataRetrieval(self, tnn):
+    self.__dict__.update({'actFun': tnn.activation, 'lastActFun': tnn.lastActFun,\
+        'activations': [tnn.XXgrd] + tnn.nn_vars2D[1::2],\
+        'linNeurons': tnn.nn_vars2D[::2], 'weights': tnn.nn_prms[::2],\
+        'biases': tnn.nn_prms[1::2], 'neurGrid': [tnn.Xgrd1, tnn.Xgrd2],})
+    self.layers = zip(self.linNeurons, self.activations[1:], self.weights, self.biases)
+    self.Nlayers = len(self.activations)-1 # no input layer
+    self.Dlayers = [aa.shape[-1] for aa in self.activations]
+    Nneuron_max = max(self.Dlayers)
+    self.bottomMargin = lambda Nneurons: (self.vert_mrg+self.neuron_size) * (Nneuron_max-Nneurons)/2
+    maxVal = lambda xxs: max(np.max(np.abs(xx)) for xx in xxs)
+    self.prm_max = max(maxVal(self.weights), maxVal(self.biases))
+    self.nn_height = Nneuron_max*(self.vert_mrg+self.neuron_size)
+    self.height = self.nn_height+self.title_size
+    self.width = self.neuron_size+self.Nlayers*self.layerDist
+
+visFCNN2D.dataRetrieval = classmethod(dataRetrieval)
+</code></pre>
+
+<h3 id="3-2-draw-a-neuron">3.2 Draw a neuron</h3>
+
+<p>We draw a dedicated <code>plt.axes()</code> object from <a href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.axes.html" target="_blank">Matplotlib</a> for each neuron, i.e., any variable in the network, namely inputs <code>x</code>, affine transformation outputs <code>z</code> and activation outputs <code>a</code>.</p>
+
+<p>The first step of the code calculates the coordinates and size of the axes with the <code>axisLocNorm</code> function, which normalize them to the figure size.
+The second step is to draw a contour plot of the neuron <code>intensity</code> array, get rid of the axis, define a 5-bin colorbar, place it horizontally to the bottom of the chart and write the bin values.</p>
+
+<pre><code class="language-python">def axisLocNorm(self, xx, yy, ww, hh):
+    return (np.r_[xx, yy, ww, hh]/np.r_[self.width, self.height, self.width, self.height]).tolist()
+
+def drawNeuron(self, xx, yy, intensity):
+    rax = plt.axes(self.axisLocNorm(xx, yy, self.neuron_size, self.neuron_size))
+    xgrid, ygrid = self.neurGrid
+    intensity = intensity.reshape(xgrid.shape)
+    cmap = 'binary' if self.palette=='2cols' else self.palette
+    cs = plt.contourf(xgrid, ygrid, intensity, 50, cmap=cm.get_cmap(cmap))
+    rax.axis('off')
+    cb_min, cb_max = np.min(intensity), np.max(intensity)
+    cbLabels = np.linspace(np.floor(cb_min), np.ceil(cb_max), num=5, endpoint=True)
+    cbar = plt.gcf().colorbar(cs, orientation='horizontal', pad=0)
+    cbar.set_ticks(cbLabels)
+    cbar.set_ticklabels(cbLabels)
+    cbar.ax.tick_params(labelsize=self.fsS)
+
+visFCNN2D.drawNeuron = classmethod(drawNeuron)
+visFCNN2D.axisLocNorm = classmethod(axisLocNorm)
+</code></pre>
+
+<h3 id="3-3-draw-a-bias">3.3 Draw a bias</h3>
+
+<p>We draw a dedicated axes for each bias, on top of any linear-neuron axes.
+Within this axes, the bias is represented as a rectangle with the built-in <code>plt.Rectangle</code> object from Matplotlib.
+The rectangle <code>plt.Rectangle</code> needs the left-bottom-most coordinates, width and height as attributes.
+The colour is defined within the <code>patchColor</code> function we will soon analyze.
+The geometric object <code>neuron</code> is then added to the current axis <code>gca()</code> with <code>add_patch</code>, we clear the axis, add its value as text at the right-hand side of the object in black.</p>
+
+<pre><code class="language-python">def drawBias(self, xx, yy, intensity, maxVal):
+    rax = plt.axes(self.axisLocNorm(xx, yy, self.neuron_size, self.bias_size))
+    neurCol = self.patchColor(intensity/maxVal)
+    biasBox = .8*self.bias_size
+    neuron = plt.Rectangle((self.bias_size/2, self.bias_size-biasBox), biasBox, biasBox, color=neurCol)
+    plt.xlim([0, self.neuron_size])
+    plt.ylim([0, self.bias_size])
+    plt.gca().add_patch(neuron)
+    rax.axis('off')
+    plt.text(self.bias_size+biasBox/2, self.bias_size-biasBox/2, '{:.2f}'.format(intensity),\
+            fontsize=self.fsM, va='center', ha='left', color='k')
+
+visFCNN2D.drawBias = classmethod(drawBias)
+</code></pre>
+
+<h3 id="3-4-draw-weights-lines">3.4 Draw weights&rsquo; lines</h3>
+
+<p>We draw a line <code>line</code> for each weight connecting a neuron of one layer to a neuron of the next layer.
+The first argument to the <code>plt.Line2D()</code> is the list of two x-coordinates, while the second one contains the y-coordinates.
+Colour is defined as a function of weight intensity with the <code>patchColor</code> method, as well as the line width.
+The line width is 1 for a 0 weight and it increases as a square function of the intensity.</p>
+
+<p>The geometric line <code>line</code> is then added to the current axis <code>gca()</code> with <code>add_line</code>.</p>
+
+<p>Some text is added at the centre of the object to report the corresponding weight value.
+Colour is set to white.
+The challenge here is to orientate the text along the weight line direction, for the sake of readability.</p>
+
+<p>We get the angle (in degrees) of the weight line from the connected neurons&rsquo; coordinates by means of a basic trigonometry rule:</p>
+
+<p>$$ \alpha = \arctan\big(\frac{\Delta y}{\Delta x}\big)\cdot\frac{180}{\pi} $$</p>
+
+<p>where $\Delta y = y_L - y_R$ is the vertical distance between the LHS and RHS neurons.
+You easily guess what $\Delta x = x_L - x_R$ might be.
+Its value is fed to the <code>rotation</code> attribute.</p>
+
+<p>The text location is shifted by 25% of the line length along its direction, from the left-side neuron.</p>
+
+<pre><code class="language-python">def drawLine(self, pL, pR, intensity, maxVal):
+    neurCol = self.patchColor(intensity/maxVal)
+    line = plt.Line2D(pL, pR, color=neurCol, linewidth=4+np.abs(intensity/maxVal)*3)
+    plt.gca().add_line(line)
+    plt.xlim([0, self.weight_size])
+    plt.ylim([0, self.nn_height])
+    scaling = .25
+    dx, dy = np.diff(pL), np.diff(pR)
+    alpha = np.arctan(dy/dx)*180/np.pi
+    xText = pL[0]+dx*scaling
+    yText = pR[0]+dy*scaling
+    plt.text(xText[0], yText[0], str(round(intensity, 2)), rotation=alpha[0],\
+            fontsize = self.fsM, va='top', ha='center')
+
+visFCNN2D.drawLine = classmethod(drawLine)
+</code></pre>
+
+<h3 id="3-5-draw-activation-arrows">3.5 Draw activation arrows</h3>
+
+<p>We use the <code>arrow</code> method to represent the activation function by connecting the linear output $z_j$ to the activation output $a_j$.</p>
+
+<p>The arrow text tells which activation function has been used.
+In general, the function used in a hidden layer can differ from the one used in the output layer.</p>
+
+<pre><code class="language-python">def drawArrow(self, kk):
+    rax = plt.axes(self.axisLocNorm(self.xx, 0, self.activation_size, self.nn_height))
+    for jj in range(self.Dlayer):
+        yy = self.y_bottom + jj*(self.vert_mrg+self.neuron_size)
+        plt.arrow(0, yy+self.neuron_size/2, self.activation_size, 0,
+            length_includes_head=True, head_width=0.2, fc='k', ec='k', lw=5)
+        actFunName = self.actFun if kk&lt;self.Nlayers-1 else self.lastActFun
+        plt.text(self.activation_size/2, yy+self.neuron_size*.6, actFunName,\
+                fontsize=self.fsM, va='bottom', ha='center', color='k', rotation=90)
+        plt.xlim([0, self.activation_size])
+        plt.ylim([0, self.nn_height])
+    rax.axis('off')
+
+visFCNN2D.drawArrow = classmethod(drawArrow)
+</code></pre>
+
+<h3 id="3-6-patch-and-line-colours">3.6 Patch and line colours</h3>
+
+<p>We assign colours to each component according to the <code>palette</code> attribute, which is one of the palette names that can be found in the main <a href="https://matplotlib.org/examples/color/colormaps_reference.html" target="_blank">docu</a>.</p>
+
+<p>The function is quite compact.
+However, if you want to have more details about the <code>colormap</code> attribute, please visit the relative section of <a href="/blog/fcnn/fcnn15/">this post</a>.</p>
+
+<pre><code class="language-python">def patchColor(self, intensity):
+    #
+    smap = cm.ScalarMappable(norm=mColNorm(vmin=-1, vmax=1), cmap=cm.get_cmap(self.palette))
+    neurCol = tuple(smap.to_rgba([intensity]).reshape(-1)[:3])
+    return neurCol
+
+visFCNN2D.patchColor = classmethod(patchColor)
+</code></pre>
+
+<h3 id="3-7-input-layer">3.7 Input layer</h3>
+
+<p>We draw a neuron for each input.
+The x-coordinate does not change, but the y-coordinate does. Each next input is upshifted by <code>neurShift</code>, which is the sum of the vertical margin and the neuron axes size.
+The first neuron starts from <code>x=0</code> and <code>y</code> set to the <code>bottomMargin</code>.
+See the introduction <a href="/blog/fcnn/fcnn18/">section</a> that helps visualize it with some schemes.</p>
+
+<pre><code class="language-python">def inputLayer(self,):
+    xx = kk = 0
+    for jj in range(self.Dlayers[0]):
+        self.y_bottom = self.bottomMargin(self.Dlayers[0])
+        yy = self.y_bottom + jj*(self.neurShift)
+        self.drawNeuron(xx, yy, self.activations[0][:, jj])
+    self.y_bottom_prev = self.y_bottom
+
+visFCNN2D.inputLayer = classmethod(inputLayer)
+</code></pre>
+
+<h3 id="3-8-draw-the-weights">3.8 Draw the weights</h3>
+
+<p>At layer <code>kk</code> we draw in a dedicated axes as many lines as the product of the number of neurons on each side, i.e., <code>Din</code> is the input dimension, the number of neurons and <code>Dout</code> is the output dimension, extracted from the <code>weights</code> shape.</p>
+
+<p>The horizontal offset is given by <code>weight_size</code>, while the vertical one by <code>neurShift</code>.
+The initial vertical offset changes from one layer (<code>y_bottom_prev</code>) to the next (<code>y_bottom</code>) according to the number of layer neurons.</p>
+
+<pre><code class="language-python">def drawWeights(self, weights, kk):
+    self.y_bottom = self.bottomMargin(self.Dlayer)
+    xx = kk*self.layerDist + self.neuron_size
+    rax = plt.axes(self.axisLocNorm(xx, 0, self.weight_size, self.nn_height))
+    Din, Dout = weights.shape
+    xL, xR = 0, self.weight_size
+    for kL in range(Din):
+        for kR in range(Dout):
+            yL = self.y_bottom_prev + (kL)*self.neurShift+self.neuron_size/2
+            yR = self.y_bottom + (kR)*self.neurShift+self.neuron_size/2
+            self.drawLine((xL, xR), (yL, yR), weights[kL, kR], self.prm_max)
+    rax.axis('off')
+    self.xx = xx
+
+visFCNN2D.drawWeights = classmethod(drawWeights)
+</code></pre>
+
+<h3 id="3-9-draw-linear-outputs-z-and-biases">3.9 Draw linear outputs <code>z</code> and biases</h3>
+
+<p>At layer <code>kk</code> we draw a neuron axes for each linear output <code>z</code> contained in <code>linNeurons</code> and a bias axes for each term in <code>biases</code>.</p>
+
+<pre><code class="language-python">def drawBiasesLinOutputs(self, linNeurons, biases):
+    self.xx += self.weight_size
+    for jj in range(self.Dlayer):
+        yy = self.y_bottom + jj*(self.vert_mrg+self.neuron_size)
+        self.drawNeuron(self.xx, yy, linNeurons[:, jj])
+        self.drawBias(self.xx, yy+self.neuron_size, biases[jj], self.prm_max)
+visFCNN2D.drawBiasesLinOutputs = classmethod(drawBiasesLinOutputs)
+</code></pre>
+
+<h3 id="3-10-draw-activation-outputs-a">3.10 Draw activation outputs <code>a</code></h3>
+
+<p>We use the arrow axes and the neuron axes for each activation output <code>a</code> contained in <code>activations</code>.</p>
+
+<pre><code class="language-python">def drawActivation(self, activations, kk):
+    self.xx += self.neuron_size
+    self.drawArrow(kk)
+    self.xx += self.activation_size
+    for jj in range(self.Dlayer):
+        yy = self.y_bottom + jj*(self.vert_mrg+self.neuron_size)
+        self.drawNeuron(self.xx, yy, activations[:, jj])
+    self.y_bottom_prev = self.y_bottom
+visFCNN2D.drawActivation = classmethod(drawActivation)
+</code></pre>
+
+<h3 id="3-11-title-and-layers-description">3.11 Title and layers&rsquo; description</h3>
+
+<p>On top of the network flow layout, we place the layer title from the input layer to any hidden layer to the output layer.</p>
+
+<pre><code class="language-python">def titles(self,):
+    # title and axis ratio
+    rax = plt.axes(self.axisLocNorm(0, self.nn_height, self.width, self.title_size))
+    plt.text(self.neuron_size/2, self.title_size/2, 'Input Layer', fontsize = self.fsL)
+    for kk in range(self.Nlayers):
+        xx = kk*self.layerDist + self.neuron_size*2 + self.weight_size+self.activation_size/2
+        layerTitle = 'Hidden Layer ' + str(kk+1) if kk&lt;self.Nlayers-1 else 'Output Layer'
+        plt.text(xx, self.title_size/2, layerTitle, fontsize = self.fsL, ha='center')
+    plt.xlim([0, self.width])
+    plt.ylim([0, self.title_size])
+    titleLine = plt.Line2D([0, self.width], [self.title_size]*2, color='k', linewidth=4)
+    plt.gca().add_line(titleLine)
+    plt.title('Neural Network architecture', fontsize=self.fsL)
+    rax.axis('off')
+visFCNN2D.titles = classmethod(titles)
+</code></pre>
+
+<h3 id="3-12-visualize-the-whole-network">3.12 Visualize the whole network</h3>
+
+<p>The main function, <code>visualize</code>, groups the whole process, from retrieving a sample of the dataset with <code>dataRetrieval()</code> to creating the input, hidden and output layers.
+The title of the network is created at the end.</p>
+
+<pre><code class="language-python">def visualize(self, palette='Blues'):
+    self.palette = palette
+    plt.figure(figsize=(self.width, self.height))
+    # input layer
+    self.inputLayer()
+    # hidden and output layers
+    for kk, layer in enumerate(self.layers):
+        self.Dlayer = self.Dlayers[kk+1]
+        linNeurons, activations, weights, biases = layer
+        self.drawWeights(weights, kk)
+        self.drawBiasesLinOutputs(linNeurons, biases)
+        self.drawActivation(activations, kk)
+    # title
+    self.titles()
+    plt.show()
+visFCNN2D.visualize = classmethod(visualize)
+</code></pre>
+
+<h3 id="3-13-zooming-into-a-component-of-the-network">3.13 Zooming into a component of the network</h3>
+
+<p>The second main function, <code>zoom</code>, let us inspect what is happening in a single neuron or a single weights&rsquo; layer.</p>
+
+<p>The <code>what</code> attribute can assume any of the three values:</p>
+
+<ol>
+<li><code>linNeurons</code>: the output of a linear transformation,</li>
+<li><code>activations</code>: the output of the activation function,</li>
+<li><code>parameters</code>: a stack of weights and biases of a layer.</li>
+</ol>
+
+<p>The <code>level</code> attribute defines which neuron or parameters&rsquo; layer to zoom.
+For the <code>linNeurons</code> and <code>activations</code> cases, this attribute requires a list of two values, where the former specifies the layer position from the left and the latter the neuron index from the bottom.
+In other words, <code>level=[0, 1]</code> selects the top neuron from the first hidden layer.
+Please consider that the input layer is stacked as the first element of the <code>activations</code> layer.</p>
+
+<p>The code for the <code>linNeurons</code> and <code>activations</code> cases is what is used to draw a neuron, with some changes related to the axis, the colorbar padding and the title.</p>
+
+<p>The code for the parameters is a matrix image of the parameter stack.
+Each parameter value is written in the corresponding cell with either a black <code>k</code> or white <code>w</code> text, for the sake of readability, according to whether this value is less or greater than the mean value of the whole parameter range.</p>
+
+<p>To prevent the library to squeeze our geometric shapes by using different scales for the two axes, we need to set equal scaling (i.e., make circles circular) by changing the dimensions of the plot box, as <code>plt.axis('scaled')</code>.</p>
+
+<pre><code class="language-python">def zoom(self, what='linNeurons', level=[0, 0], palette='Blues'):
+    plt.figure(figsize=(8, 6))
+    if what in ['linNeurons', 'activations']:
+        # data
+        intensity = getattr(self, what)[level[0]][:, level[-1]]
+        xgrid, ygrid = self.neurGrid
+        intensity = intensity.reshape(xgrid.shape)
+        neur_x, neur_y = level
+        # vis
+        cs = plt.contourf(xgrid, ygrid, intensity, 50, cmap=cm.get_cmap(palette))
+        #rax.axis('off')
+        cb_min, cb_max = np.min(intensity), np.max(intensity)
+        cbLabels = np.linspace(np.floor(cb_min), np.ceil(cb_max), num=5, endpoint=True)
+        cbar = plt.colorbar(cs, orientation='horizontal', pad=0.15)
+        cbar.set_ticks(cbLabels)
+        cbar.set_ticklabels(cbLabels)
+        cbar.ax.tick_params(labelsize=12)
+        ttlTxt = 'Zoom of the neuron-' + str(neur_y+1)+' (from bottom) from layer-'+str(neur_x+1)+' (from left)'
+    elif what == 'parameters':
+        # data
+        neur_x = level[0]
+        WW = self.weights[neur_x]
+        bb = self.biases[neur_x]
+        prm = np.vstack((WW, bb))
+        # vis
+        plt.imshow(prm, cmap=palette)
+        width, height = prm.shape
+        textColThreshold = (prm.max() + prm.min())/2
+        for x in range(width):
+            for y in range(self.biases):
+                val = prm[x,y]
+                txtCol = 'k' if val&lt;textColThreshold else 'w'
+                plt.annotate('{:.2f}'.format(val), xy=(y, x), ha='center', va='center',\
+                             color=txtCol, fontsize=14)
+        plt.axis('off')
+        ttlTxt = 'Layer-'+str(neur_x+1)+' parameters'
+    else:
+        ttlTxt = ''
+        print('zoom function available for linNeurons, activations or parameters options only.\
+            Please change the what attribute!')
+
+    plt.title(ttlTxt, size = 14)
+    plt.axis('scaled')
+    plt.tight_layout()
+    plt.show();
+
+visFCNN2D.zoom = classmethod(zoom)
+</code></pre>
+
+        </div>
+        <div class="pgNav PageNavigation col-12 text-center">
+          <span>
+          <p>&laquo; <a class="" href="/blog/fcnn/fcnn18/" style="color: #4ABDAC; font-size: 18px; "> How does a neural network internally shape the space?</a>
+          
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <a class="" href="/project/project4/" style="color: #4ABDAC; font-size: 18px; ">Project 4</a>
+          
+          &raquo;</p>
+          </span>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <div class="article-container">
+      <script src="https://utteranc.es/client.js"
+        repo="takeawildguess/pws"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-dark-orange"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    </div>
+
+    
+    
+
+    
+
+    <footer class="pgFoot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center icons">
+        
+        <span>
+          <a href="https://github.com/takeawildguess/"><i class="fa fa-github"></i></a><a href="https://twitter.com/takeawildguess4/"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/mattia-venditti-9137a124/"><i class="fa fa-linkedin"></i></a>
+        </span>
+        
+      </div>
+
+      <hr style="border: 2px solid #4ABDAC; min-width: 250px; border-radius: 2px; " />
+      <div class="col-12 text-center">
+        <p>
+          &bull; Copyright &copy; 2019, <a href="https://takeawildguess.net/">Mattia Venditti</a> &bull; All rights reserved. &bull;
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+          </a>
+          All blog posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+      
+
+      <div class="col-6 text-center">
+        <p>Disclaimer: The views and opinions on this website are my own and do not reflect or represent the views of my employer.</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>
+        Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://pages.github.com/">GitHub Pages</a>.
+        The favicon and logo were created by myself.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<a id="back-to-top" href="https://takeawildguess.net/" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page"
+data-toggle="tooltip" data-placement="left"><i class="fa fa-angle-up"></i></a>
+
+
+  </body>
+</html>
